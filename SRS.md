@@ -6,6 +6,8 @@ A place where people from different sides of the isle can come together and deba
 
 * There will be a way to create an account or play anonymously.
 
+* Accounts will require verification to prevent fake account creation.
+
 * There will be multiple different topics to discuss, each with different sides that can be joined.
 
 * There will be multiple game modes, and every topic will be able to be discussed in these modes.
@@ -48,7 +50,7 @@ Most Game Modes will be refereed by the Referee, and each game mode will have a 
   
   * There will be a timer.
 
-*  'Jury'
+* 'Jury'
   
   * A 'Debate' style chatroom that is spectated by other players, and a winner is selected by those spectators at the end of the match. The winner gains extra currency and the win is recorded in the person's profile statistics.
   
@@ -71,5 +73,3 @@ Most Game Modes will be refereed by the Referee, and each game mode will have a 
 * Seasonal challenges
 
 * "Topic of the Week" that is based on recent events in the news.
-
-
