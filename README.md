@@ -6,6 +6,7 @@ This is the repository for the PolitiFight web application.
 
 * Navigate to the `PolitiFight` folder.
 * Run `npm install`
+* Run `npm add vuetify@latest`
 * Run `npm run format`
 * Run `npm run dev`
 * Navigate to the displayed url
