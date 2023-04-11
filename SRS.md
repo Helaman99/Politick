@@ -4,9 +4,11 @@ A place where people from different sides of the isle can come together and deba
 
 ## Requirements
 
-* There will be a way to create an account or play anonymously.
+* There will be a way to create an account .
 
 * Accounts will require verification to prevent fake account creation.
+
+* An account is required to play.
 
 * There will be multiple different topics to discuss, each with different sides that can be joined.
 
@@ -25,6 +27,8 @@ A place where people from different sides of the isle can come together and deba
   
   * This Referee will scan every message for illegal behaviour such as insults, slander, language, or other indescent behaviour.
   * If an offense is detected, then the person will be penalized by not recieving the max amount of currency at the end of the match.
+  * No URLs will be allowed either.
+  * Repeated offences can lead to an account being banned. The email associated with the banned acount will be kept in the database to prevent use by future accounts.
 
 * There will be profile statistics that could include
   
@@ -33,10 +37,12 @@ A place where people from different sides of the isle can come together and deba
   * A person's typical political standing (left, right, center, etc.)
   
   * A person's total number of wins in the 'Jury' mode
+  
+  * Total credits earned since account creation
 
 ## Game Modes
 
-Most Game Modes will be refereed by the Referee, and each game mode will have a 1v1 and a 2v2 variation.
+Most Game Modes will be refereed by the Referee, and each game mode will have a 1v1 and a 2v2 variation. While playing, no person's username will be visible. The only aspects of a person's account that will be visible to other players will be their avatar and background.
 
 **Required Game Modes**:
 
