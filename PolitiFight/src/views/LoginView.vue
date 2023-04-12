@@ -1,16 +1,17 @@
 <template>
     <div class = "login">
 
-        <img src = "../assets/mainLogo.svg">
-        <br><br><br>
+      <img src = "../assets/mainLogo.svg">
+      <br><br><br>
 
-        <v-text-field type = "email" id = "email" variant = "solo" placeholder = "Email" />
-        <v-text-field type = "password" id = "password" variant = "solo" placeholder = "Password" />
-        <v-btn>Login</v-btn>
+      <v-text-field type = "email" id = "email" variant = "solo" placeholder = "Email" />
+      <v-text-field type = "password" id = "password" variant = "solo" placeholder = "Password" />
+      <v-btn>Login</v-btn>
 
-        <br><br>
-        <p>Don't have an account?</p>
-        <router-link to = "/signup">Sign Up</router-link>
+      <br><br>
+      <p>Don't have an account?</p>
+      <router-link to = "/signup">Sign Up</router-link>
+
     </div>
 </template>
 
@@ -38,7 +39,7 @@ img {
         width: 90%;
     }
     .v-input {
-        width: 90%;
+        width: 65%;
     }
 }
 

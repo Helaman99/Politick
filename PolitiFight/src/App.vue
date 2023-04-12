@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
 </script>
 
 <template>
   <center>
-    <RouterView />
+    <Transition name = "fade">
+      <RouterView />
+    </Transition>
   </center>
 </template>
 
@@ -43,6 +44,16 @@ nav a {
 
 nav a:first-of-type {
   border: 0;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 
 @media (min-width: 1024px) {
