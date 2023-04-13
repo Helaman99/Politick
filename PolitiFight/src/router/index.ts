@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 
-const routerExternal = createRouter({
+const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
@@ -30,16 +30,21 @@ const routerExternal = createRouter({
     {
       path: '/dashboard',
       name: 'dashboard',
-      component: () => import('../views/DashboardView.vue')
+      component: () => import('../views/DashboardView.vue'),
+      children: [
+        {
+          path: 'topics',
+          name: 'topics',
+          component: () => import('../views/TopicsView.vue')
+        },
+        {
+          path: 'gameModes',
+          name: 'gameModes',
+          component: () => import('../views/GameModesView.vue')
+        }
+      ]
     }
   ]
 })
 
-const routerInternal = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
-  routes: [
-    
-  ]
-})
-
-export default routerExternal
+export default router
