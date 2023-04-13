@@ -1,11 +1,11 @@
 <template>
     <div class = 'gameModes'>
         <div class = 'modeButtons'>
-            <v-btn>Battle Royal</v-btn>
-            <v-btn>Debate</v-btn>
-            <v-btn>Jury</v-btn>
+            <v-btn to = 'sides'>Battle Royal</v-btn>
+            <v-btn to = 'sides'>Debate</v-btn>
+            <v-btn to = 'sides'>Jury</v-btn>
         </div>
-        <router-link to = 'topics'>Back to Topics</router-link>
+        <router-link to = 'topics'>Back</router-link>
     </div>
 </template>
 
