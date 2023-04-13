@@ -5,7 +5,7 @@ import { RouterLink, RouterView } from 'vue-router'
 <template>
   <center>
     <Transition name = "fade">
-      <RouterView class = "routerExternal" />
+      <RouterView />
     </Transition>
   </center>
 </template>
@@ -48,7 +48,7 @@ nav a:first-of-type {
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.5s ease;
+  transition: opacity 1s ease;
 }
 
 .fade-enter-from,

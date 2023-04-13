@@ -1,6 +1,6 @@
 <template>
     <div class = "dashboard">
-        
+
         <header>
             <h1>Welcome back user!</h1>
             <div id = "userStats">
@@ -21,7 +21,7 @@
         </header>
 
         <Transition name = "fade">
-            <RouterView class = "routerInternal" />
+            <RouterView />
         </Transition>
     </div>
 </template>
@@ -34,6 +34,10 @@
     }
 }
 
+header {
+    margin-bottom: 4rem;
+}
+
 #userStats {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -44,7 +48,7 @@
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.5s ease;
+  transition: opacity 1.5s ease;
 }
 
 .fade-enter-from,
