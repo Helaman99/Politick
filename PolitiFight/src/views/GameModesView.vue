@@ -1,6 +1,6 @@
 <template>
     <div class = 'gameModes'>
-        <div class = 'buttons'>
+        <div class = 'modeButtons'>
             <v-btn>Battle Royal</v-btn>
             <v-btn>Debate</v-btn>
             <v-btn>Jury</v-btn>
@@ -11,16 +11,27 @@
 
 <style scoped>
 
-.buttons {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 4rem;
+.modeButtons {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+.modeButtons .v-btn {
+    font-size: larger;
+    height: 8rem;
 }
 
-.v-btn {
-    font-size: larger;
-    width: 25%;
-    height: 8rem;
+@media (max-width: 740px) {
+    .modeButtons {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 500px) {
+    .modeButtons {
+        grid-template-columns: 1fr;
+    }
 }
 
 </style>

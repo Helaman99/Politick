@@ -19,7 +19,7 @@
                 </div>
             </div>
         </header>
-
+        
         <Transition name = "fade">
             <RouterView />
         </Transition>
@@ -30,7 +30,7 @@
 @media (min-width: 1024px) {
     body {
         display: block;
-        padding: 2rem 0;
+        padding: 0.3rem 0;
     }
 }
 
