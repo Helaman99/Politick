@@ -41,6 +41,16 @@ const router = createRouter({
           path: 'gameModes',
           name: 'gameModes',
           component: () => import('../views/GameModesView.vue')
+        },
+        {
+          path: 'sides',
+          name: 'sides',
+          component: () => import('../views/SidesView.vue')
+        },
+        {
+          path: 'roomSize',
+          name: 'roomSize',
+          component: () => import('../views/RoomSizeView.vue')
         }
       ]
     }
