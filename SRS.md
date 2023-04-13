@@ -18,7 +18,7 @@ A place where people from different sides of the isle can come together and deba
 
 * There will be a currency type.
   
-  * The currency will be used to customize a person's profile, send emojis in the chat, amongst other things.
+  * The currency will be used to customize a person's profile, send emojis in the chat, extend a matches time limit, amongst other things.
   * The currency can be obtained by playing the game
   * The currency will also be obtainable by spending real money
   * A maximum currency amount will be awarded at the end of every match, but will decrease if insults, language, or other illegal behaviour is detected.
