@@ -5,7 +5,7 @@ import { RouterLink, RouterView } from 'vue-router'
 <template>
   <center>
     <Transition name = "fade">
-      <RouterView />
+      <RouterView class = "routerExternal" />
     </Transition>
   </center>
 </template>
