@@ -33,6 +33,11 @@ const router = createRouter({
       component: () => import('../views/DashboardView.vue'),
       children: [
         {
+          path: '',
+          name: 'rules',
+          component: () => import('../views/RulesView.vue')
+        },
+        {
           path: 'topics',
           name: 'topics',
           component: () => import('../views/TopicsView.vue')
