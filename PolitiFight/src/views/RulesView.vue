@@ -1,8 +1,10 @@
 <template>
     <div class = "rules">
+        
         <h3>Welcome to</h3>
-        <img src = "../assets/mainLogo.svg" />
+        <img src = "../assets/logos/mainLogo.svg" />
         <br><br>
+
         <p>
             This is a place for <b>debate</b>, and not just arguing... well, maybe a little
             bit of arguing. In any case, this game was built to encourage people of all
@@ -44,6 +46,7 @@
 
         <br>
         <v-btn to = 'topics'>Begin</v-btn>
+
     </div>
 </template>
 

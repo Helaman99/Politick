@@ -1,7 +1,7 @@
 <template>
     <div class = "login">
 
-      <img src = "../assets/mainLogo.svg">
+      <img src = "../assets/logos/mainLogo.svg">
       <br><br><br>
 
       <v-text-field type = "email" id = "email" variant = "solo" placeholder = "Email" />
