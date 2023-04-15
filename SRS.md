@@ -72,10 +72,56 @@ Most Game Modes will be refereed by the Referee, and each game mode will have a 
   
   * Player's will still select a topic and side before entering this mode. In other words, this isn't just a basic chatroom for people to chill-out in.
 
+## Game Currency
+
+"Coins" will be the currency of the game, and will be able to be obtained via playing the game or by purchasing them with real money.
+
+**Getting Coins**
+
+Players can get coins by
+
+* playing games --> 5 coins per match
+
+* referring other players --> 15 coins per referral
+
+* purchasing with real money --> Coins will only be buyable in certain amounts, but their worth will be 10 cents per coin i.e. \$2 for 20 coins, \$5 for 50 coins, and so on.
+
+**Using Coins**
+
+Players will be able to spend their coins on
+
+* avatars (scaling in price)
+
+* avatar items (like backgrounds, also scale in price)
+
+* mystery boxes for avatars and other items that are not directly purchasable
+  
+  * There will be a rarity tier system, and the more rare mystery box you choose to open, the more expensive it is but you can get more rare items.
+
+* sending an emoji in the chat --> 1 coin per emoji
+
+* purchasing emoji packs
+
+**Coin Penalties**
+
+Coins will also be one of the ways that players are penalized for bad behavior. Every rule infraction will result in a penalty, with different penalties for different offenses.
+
+* Profanity --> -2 coins
+
+* Other words that are not allowed --> -1 coin
+
+* Sending links --> -1 coin
+
+All offenses will be astericked out in the message, and a message will be sent into the chat notifying the players of which player lost some of their coins.
+
+If a player loses all of their coins, they are kicked out of the chat room and the win is given to the other player. If a player is out kicked of chat rooms 5 times within the last 3 months, then their account will be suspended for a week. After their account is reinstated, a player may play the game as usual, but if they are kicked out of chat rooms 5 times again, then their account will be permanently disabled. The email used to create that account will also be kept in the database to prevent it from being used again.
+
 ## Future/Desired Features
 
-* 3v3 variation for game modes
+- 3v3 variation for game modes
 
-* Seasonal challenges
+- Seasonal challenges
 
-* "Topic of the Week" that is based on recent events in the news.
+- "Topic of the Week" that is based on recent events in the news.
+
+- A PolitiFight blog
