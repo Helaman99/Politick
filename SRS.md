@@ -125,3 +125,9 @@ If a player loses all of their coins, they are kicked out of the chat room and t
 - "Topic of the Week" that is based on recent events in the news.
 
 - A PolitiFight blog
+
+## Player Object
+
+The Player object will be used to keep track of a player's account details, such as coin coint, purchased avatars, and other items.
+
+The items that a player owns will be kept track of in string arrays. The words that they have unlocked for their Titles will be kept in two arrays: one for the first word, and one for the second word. A string array containing the names of the files of the unlocked avatars will also be kept. This way, we just have to go to the folder with the avatars and display those.
