@@ -43,6 +43,11 @@ const router = createRouter({
           component: () => import('../views/AccountView.vue')
         },
         {
+          path: 'customize',
+          name: 'customize',
+          component: () => import('../views/CustomizeView.vue')
+        },
+        {
           path: 'topics',
           name: 'topics',
           component: () => import('../views/TopicsView.vue')
