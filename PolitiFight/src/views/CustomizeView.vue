@@ -6,8 +6,6 @@
             <div class = 'cardPreview'>
                 <playerCard title = 'Fluffy Helicopter' color = 'white' 
                 avatar = '/src/assets/avatars/astronaut.jpg' />
-                <br>
-                <v-btn>Save Changes</v-btn>
             </div>
 
             <div class = 'customizeOptions'>
@@ -27,6 +25,8 @@
 
         </div>
 
+        <v-btn>Save Changes</v-btn>
+
     </div>
 </template>
 
@@ -34,9 +34,12 @@
 
 .content {
     display: flex;
+    padding-bottom: 3rem;
 }
 .cardPreview {
-    width: 60%;
+    width: 50%;
+    padding-right: 3rem;
+    padding-left: 3rem;
 }
 .customizeOptions {
     display: flex;
@@ -45,24 +48,67 @@
 
 .avatarOptions {
     width: 50%;
+    height: 50%;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
+    justify-items: center;
+    align-items: center;
 }
 .avatarOptions .avatarImage {
-    width: 50%;
+    width: 80%;
+    padding: 3%;
+    transition-duration: 0.25s;
+}
+.avatarOptions .avatarImage:hover {
+    padding: 0;
+}
+.avatarOptions .avatarImage:active {
+    padding: 3%;
 }
 .avatarOptions .avatarImage img {
     width: 100%;
+    border-radius: 5%;
+    display: block;
+    transition-duration: 0.25s;
+}
+.avatarOptions .avatarImage img:hover {
+    box-shadow: 1px 1px 5px black;
 }
 
 .titleOptions {
     width: 50%;
     display: flex;
     align-items: center;
+    padding: 5%;
 }
 .titleOptions .v-select {
     height: fit-content;
     width: 50%;
+}
+
+@media (max-width: 1024px) {
+    .cardPreview {
+        width: 100%;
+    }
+    .customizeOptions {
+        flex-direction: column;
+    }
+    .avatarOptions {
+        width: 100%;
+        margin-bottom: 3rem;
+    }
+    .titleOptions {
+        width: 100%;
+    }
+}
+
+@media (max-width: 740px) {
+    .content {
+        flex-direction: column;
+    }
+    .cardPreview {
+        margin-bottom: 3rem;
+    }
 }
 
 </style>
