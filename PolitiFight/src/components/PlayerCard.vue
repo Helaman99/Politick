@@ -14,7 +14,6 @@ img {
 }
 
 .playerCard {
-    width: 50%;
     padding: 1rem 0;
 }
 
