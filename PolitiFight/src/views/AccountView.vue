@@ -3,12 +3,10 @@
         
         <div class = 'details'>
             <div class = 'avatar'>
-                <v-card class = 'avatarCard' elevation = '5'>
-                    <img src = '../assets/avatars/purple_dragon.jpeg' alt = 'avatar' />
-                    <v-card-title>Fluffy Helicopter</v-card-title>
-                </v-card>
+                <playerCard title = 'Fluffy Helicopter' color = 'white' 
+                    avatar = '/src/assets/avatars/astronaut.jpg' />
                 <br>
-                <v-btn>Customize Card</v-btn>
+                <v-btn to = 'customize'>Customize Card</v-btn>
             </div>
 
             <div class = 'accountStats'>
@@ -37,24 +35,12 @@
 
 <style scoped>
 
-img {
-    width: 75%;
-    border-radius: 2%;
-    box-shadow: 2px 2px 5px grey;
-}
-
 table {
     font-size: x-large;
     border-spacing: 1rem;
 }
 td {
     padding-right: 2rem;
-}
-
-.avatarCard {
-    width: fit-content;
-    padding: 1rem 0;
-    color: #0099ff;
 }
 
 .details {
@@ -68,10 +54,8 @@ td {
 
 .avatar {
     width: 50%;
-}
-
-.avatarCard {
-    width: 50%;
+    padding-right: 12%;
+    padding-left: 12%;
 }
 
 @media (max-width: 760px) {
@@ -83,7 +67,7 @@ td {
         width: 100%;
         margin-bottom: 2rem;
     }
-    .avatarCard {
+    .playerCard {
         width: auto;
     }
     .accountStats {
@@ -92,3 +76,12 @@ td {
 }
 
 </style>
+<script>
+import playerCard from '../components/PlayerCard.vue'
+
+export default {
+    components: {
+        playerCard
+    }
+}
+</script>
