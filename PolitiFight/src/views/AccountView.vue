@@ -54,6 +54,8 @@ td {
 
 .avatar {
     width: 50%;
+    padding-right: 12%;
+    padding-left: 12%;
 }
 
 @media (max-width: 760px) {
