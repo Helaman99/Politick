@@ -1,4 +1,4 @@
-export default class Player {
+export class Player {
     title: string = ''
     avatarPath: string = ''
     totalCoins: number = 0
@@ -10,11 +10,12 @@ export default class Player {
     unlockedTitleFirstWords: string[] = ['']
     unlockedTitleSecondWords: string[] = ['']
     unlockedAvatars: string[] = ['']
+    strikes: number = 0
 
     constructor (title: string, avatarPath: string, totalCoins: number, currentCoins: number,
                 totalGames: number, totalWins: number, modeChoices: number[], standingChoices: number[], 
                 unlockedTitleFirstWords: string[], unlockedTitleSecondWords: string[], 
-                unlockedAvatars: string[]) {
+                unlockedAvatars: string[], strikes: number) {
         this.title = title
         this.avatarPath = avatarPath
         this.totalCoins = totalCoins
@@ -26,6 +27,7 @@ export default class Player {
         this.unlockedTitleFirstWords = unlockedTitleFirstWords
         this.unlockedTitleSecondWords = unlockedTitleSecondWords
         this.unlockedAvatars = unlockedAvatars
+        this.strikes = strikes
     }
 
     /*
@@ -58,5 +60,23 @@ export default class Player {
             return "Centrist"
         }
         return "Play more games first!"
+    }
+
+    /*
+        modeChoices[0] = the number of times the player has played 'Battle Royal'
+        modeChoices[1] = the number of times the player has played 'Debate'
+        modeChoices[2] = the number of times the player has played 'Jury'
+    */
+    get favoriteMode () {
+        if (this.totalGames == 0)
+            return "Play a game first!"
+        if (this.modeChoices[0] > this.modeChoices[1] &&
+            this.modeChoices[0] > this.modeChoices[2])
+            return "Battle Royal"
+        else if (this.modeChoices[1] > this.modeChoices[0] && 
+            this.modeChoices[1] > this.modeChoices[2])
+            return "Debate"
+        else
+            return "Jury"
     }
 }
