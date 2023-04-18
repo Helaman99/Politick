@@ -3,8 +3,8 @@
         
         <div class = 'details'>
             <div class = 'avatar'>
-                <playerCard title = 'Fluffy Helicopter' color = 'white' 
-                    avatar = '/src/assets/avatars/astronaut.jpg' />
+                <playerCard title = '{{ player.title }}' color = 'white' 
+                    avatar = '{{ player.avatarPath }}' />
                 <br>
                 <v-btn to = 'customize'>Customize Card</v-btn>
             </div>
@@ -12,16 +12,16 @@
             <div class = 'accountStats'>
                 <table>
                     <tr>
-                        <td>Total Games Played:</td><td>17</td>
+                        <td>Total Games Played:</td><td>{{ player.totalGames }}</td>
                     </tr>
                     <tr>
-                        <td>Favorite Game Mode:</td><td>Battle Royal</td>
+                        <td>Favorite Game Mode:</td><td>{{ player.favoriteMode }}</td>
                     </tr>
                     <tr>
-                        <td>Total Coins Earned:</td><td>230</td>
+                        <td>Total Coins Earned:</td><td>{{ player.totalCoins }}</td>
                     </tr>
                     <tr>
-                        <td>Account Strikes:</td><td>0</td>
+                        <td>Account Strikes:</td><td>{{ player.strikes }}</td>
                     </tr>
                 </table>
             </div>
@@ -76,12 +76,14 @@ td {
 }
 
 </style>
-<script>
+<script lang = 'ts'>
 import playerCard from '../components/PlayerCard.vue'
+import { player } from '../scripts/playerController'
 
 export default {
     components: {
-        playerCard
+        playerCard,
+        player
     }
 }
 </script>
