@@ -1,16 +1,8 @@
 <template>
     <div class = "dashboard">
 
-        <header>
-            <h1>Welcome back user!</h1>
-            <div id = "userStats">
-                <p>Total Coins</p><p>Total Wins</p><p>Typical Standing</p>
-                <h1>{{ player.totalCoins }}</h1><h1>{{ player.totalWins }}</h1>
-                <div id = "standing">
-                    {{ player.standingActual }}
-                </div>
-            </div>
-        </header>
+        <headerBar :totalCoins = player.totalCoins :totalWins = player.totalWins
+            :standingActual = player.standingActual />
         
         <Transition name = "fade">
             <RouterView />
@@ -26,18 +18,6 @@
     }
 }
 
-header {
-    margin-bottom: 4rem;
-}
-
-#userStats {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-}
-#standing {
-    margin-top: 1rem;
-}
-
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 1.5s ease;
@@ -51,7 +31,12 @@ header {
 
 <script lang = 'ts'>
 import { player } from '../scripts/playerController'
+import headerBar from '../components/HeaderBar.vue'
+
 export default {
+    components: {
+        headerBar
+    },
     data() {
         return {
             player
