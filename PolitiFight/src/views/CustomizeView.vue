@@ -4,7 +4,7 @@
         <div class = 'content'>
         
             <div class = 'cardPreview'>
-                <playerCard :title = 'titleSplit.join(" ")' color = 'white' 
+                <playerCard :title = 'firstWord.concat(" ").concat(secondWord)' color = 'white' 
                     :avatarPath = pathToAvatars.concat(currAvatar) />
             </div>
 
@@ -18,9 +18,9 @@
 
                 <div class = 'titleOptions'>
                     <v-select id = 'first-word' :items = player.unlockedTitleFirstWords 
-                        :value = 'player.title.split(" ")[0]'></v-select>
+                        v-model = 'firstWord'></v-select>
                     <v-select id = 'second-word' :items = player.unlockedTitleSecondWords 
-                        :value = 'player.title.split(" ")[1]'></v-select>
+                        v-model = 'secondWord'></v-select>
                 </div>
             </div>
 
@@ -117,7 +117,7 @@
 import playerCard from '../components/PlayerCard.vue'
 import { player, updatePlayer, pathToAvatars } from '../scripts/playerController'
 
-let titleSplit = player.title.split(" ")
+let newTitle = player.title.split(" ")
 let currAvatar = player.avatar
 
 export default {
@@ -127,15 +127,17 @@ export default {
     methods: {
         save() {
             console.log("Saving new player data...")
-            updatePlayer(currAvatar, titleSplit.join(" "))
+            updatePlayer(currAvatar, newTitle.join(" "))
         }
     },
     data() {
         return {
             player,
             pathToAvatars,
-            titleSplit,
-            currAvatar
+            newTitle,
+            currAvatar,
+            firstWord: player.title.split(" ")[0],
+            secondWord: player.title.split(" ")[1]
         }
     }
 }
