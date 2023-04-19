@@ -1,6 +1,6 @@
 <template>
     <v-card class = 'playerCard' elevation = '5' :color = color>
-        <img :src = avatar alt = 'avatar' />
+        <img :src = avatarPath alt = 'avatar' />
         <v-card-title>{{ title }}</v-card-title>
     </v-card>
 </template>
@@ -18,8 +18,8 @@ img {
 }
 
 </style>
-<script>
+<script lang = 'ts'>
 export default {
-    props: ['avatar', 'title', 'color']
+    props: ['avatarPath', 'title', 'color']
 }
 </script>

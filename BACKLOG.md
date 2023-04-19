@@ -9,3 +9,5 @@
   with explanations for each before you're sent to the dashboard.
 
 * An about page
+
+* header component
