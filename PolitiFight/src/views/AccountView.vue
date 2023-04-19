@@ -3,8 +3,8 @@
         
         <div class = 'details'>
             <div class = 'avatar'>
-                <playerCard title = '{{ player.title }}' color = 'white' 
-                    avatar = '{{ player.avatarPath }}' />
+                <playerCard :title = player.title color = 'white' 
+                    :avatarPath = pathToAvatars.concat(player.avatar) />
                 <br>
                 <v-btn to = 'customize'>Customize Card</v-btn>
             </div>
@@ -78,12 +78,17 @@ td {
 </style>
 <script lang = 'ts'>
 import playerCard from '../components/PlayerCard.vue'
-import { player } from '../scripts/playerController'
+import { player, pathToAvatars } from '../scripts/playerController'
 
 export default {
     components: {
-        playerCard,
-        player
+        playerCard
+    },
+    data() {
+        return {
+            player,
+            pathToAvatars
+        }
     }
 }
 </script>
