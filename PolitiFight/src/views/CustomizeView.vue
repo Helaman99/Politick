@@ -28,6 +28,10 @@
 
         <v-btn @click = 'save()'>Save Changes</v-btn>
 
+        <v-card id = 'save-prompt' color = 'green'>
+            <v-card-title>Changes Saved!</v-card-title>
+        </v-card>
+
     </div>
 </template>
 
@@ -87,6 +91,15 @@
     width: 50%;
 }
 
+.save-prompt {
+    margin-top: 1.5rem;
+    opacity: 0;
+    transition-duration: 0.5;
+}
+.save-prompt:active {
+    opacity: 1;
+}
+
 @media (max-width: 1024px) {
     .cardPreview {
         width: 100%;
@@ -126,8 +139,12 @@ export default {
     },
     methods: {
         save() {
-            console.log("Saving new player data...")
             updatePlayer(currAvatar, newTitle.join(" "))
+            let prompt = document.getElementById('save-prompt')
+            if (prompt != null) {
+                prompt.classList.add('active')
+                setTimeout(() => { if (prompt != null) prompt.classList.remove('active') }, 3000)
+            }
         }
     },
     data() {
