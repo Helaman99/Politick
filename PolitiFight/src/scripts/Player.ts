@@ -1,33 +1,33 @@
 export class Player {
-    title: string = ''
-    avatarPath: string = ''
-    totalCoins: number = 0
-    currentCoins: number = 0
-    totalGames: number = 0
-    totalWins: number = 0
-    modeChoices: number[] = [0, 0, 0]
-    standingChoices: number[] = [0, 0, 0, 0]
-    unlockedTitleFirstWords: string[] = ['']
-    unlockedTitleSecondWords: string[] = ['']
-    unlockedAvatars: string[] = ['']
-    strikes: number = 0
+    title: string
+    avatar: string
+    totalCoins: number
+    currentCoins: number
+    totalGames: number
+    totalWins: number
+    modeChoices: number[]
+    standingChoices: number[]
+    unlockedTitleFirstWords: string[]
+    unlockedTitleSecondWords: string[]
+    unlockedAvatars: string[]
+    strikes: number
 
-    constructor (title: string, avatarPath: string, totalCoins: number, currentCoins: number,
+    constructor (title: string, avatar: string, totalCoins: number, currentCoins: number,
                 totalGames: number, totalWins: number, modeChoices: number[], standingChoices: number[], 
                 unlockedTitleFirstWords: string[], unlockedTitleSecondWords: string[], 
                 unlockedAvatars: string[], strikes: number) {
-        this.title = title
-        this.avatarPath = avatarPath
-        this.totalCoins = totalCoins
-        this.currentCoins = currentCoins
-        this.totalGames = totalGames
-        this.totalWins = totalWins
-        this.modeChoices = modeChoices
-        this.standingChoices = standingChoices
-        this.unlockedTitleFirstWords = unlockedTitleFirstWords
-        this.unlockedTitleSecondWords = unlockedTitleSecondWords
-        this.unlockedAvatars = unlockedAvatars
-        this.strikes = strikes
+        this.title = title || ''
+        this.avatar = avatar || ''
+        this.totalCoins = totalCoins || 0
+        this.currentCoins = currentCoins || 0
+        this.totalGames = totalGames || 0
+        this.totalWins = totalWins || 0
+        this.modeChoices = modeChoices || [0, 0, 0]
+        this.standingChoices = standingChoices || [0, 0, 0, 0]
+        this.unlockedTitleFirstWords = unlockedTitleFirstWords || ['']
+        this.unlockedTitleSecondWords = unlockedTitleSecondWords || ['']
+        this.unlockedAvatars = unlockedAvatars || ['']
+        this.strikes = strikes || 0
     }
 
     /*
