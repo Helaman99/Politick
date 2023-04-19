@@ -4,28 +4,29 @@
         <div class = 'content'>
         
             <div class = 'cardPreview'>
-                <playerCard title = 'Fluffy Helicopter' color = 'white' 
-                avatar = '/src/assets/avatars/astronaut.jpg' />
+                <playerCard :title = 'titleSplit.join(" ")' color = 'white' 
+                    :avatarPath = pathToAvatars.concat(currAvatar) />
             </div>
 
             <div class = 'customizeOptions'>
 
                 <div class = 'avatarOptions'>
-                    <div v-for = 'imageName in avatars' class = 'avatarImage'>
-                        <img :src = '"/src/assets/avatars/" + imageName' />
+                    <div v-for = 'imageName in player.unlockedAvatars' class = 'avatarImage'>
+                        <img :src = pathToAvatars.concat(imageName) @click = 'currAvatar = imageName' />
                     </div>
                 </div>
 
                 <div class = 'titleOptions'>
-                    <v-select :items = firstWords value = 'Fluffy'></v-select>
-                    <v-select :items = secondWords value = 'Helicopter'></v-select>
+                    <v-select id = 'first-word' :items = player.unlockedTitleFirstWords 
+                        :value = 'player.title.split(" ")[0]'></v-select>
+                    <v-select id = 'second-word' :items = player.unlockedTitleSecondWords 
+                        :value = 'player.title.split(" ")[1]'></v-select>
                 </div>
-
             </div>
 
         </div>
 
-        <v-btn>Save Changes</v-btn>
+        <v-btn @click = 'save()'>Save Changes</v-btn>
 
     </div>
 </template>
@@ -112,18 +113,30 @@
 }
 
 </style>
-<script>
+<script lang = 'ts'>
 import playerCard from '../components/PlayerCard.vue'
+import { player, updatePlayer, pathToAvatars } from '../scripts/playerController'
+
+let titleSplit = player.title.split(" ")
+let currAvatar = player.avatar
 
 export default {
     components: {
         playerCard
     },
-    data: () => ({
-        firstWords: ['Fluffy', 'Bright', 'Inquiring', 'Hopeful'],
-        secondWords: ['Helicopter', 'Bunny', 'Battleship', 'Platypus'],
-        avatars: ['astronaut.jpg', 'astronaut copy.jpg', 'astronaut copy 2.jpg', 
-                    'astronaut copy 3.jpg', 'astronaut copy 4.jpg']
-    })
+    methods: {
+        save() {
+            console.log("Saving new player data...")
+            updatePlayer(currAvatar, titleSplit.join(" "))
+        }
+    },
+    data() {
+        return {
+            player,
+            pathToAvatars,
+            titleSplit,
+            currAvatar
+        }
+    }
 }
 </script>
