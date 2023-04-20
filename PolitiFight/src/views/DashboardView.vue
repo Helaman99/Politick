@@ -2,15 +2,21 @@
     <div class = "dashboard">
 
         <headerBar :totalCoins = player.totalCoins :totalWins = player.totalWins
-            :standingActual = player.standingActual />
+            :standingActual = player.standingActual :avatarPath = pathToAvatars.concat(player.avatar) />
         
-        <Transition name = "fade">
-            <RouterView />
-        </Transition>
+        <div class = "dashboard-content">
+            <Transition name = "fade">
+                <RouterView />
+            </Transition>
+        </div>
     </div>
 </template>
 
 <style>
+.dashboard-content {
+    padding-top: 7rem;
+}
+
 @media (min-width: 1024px) {
     body {
         display: block;
@@ -30,7 +36,7 @@
 </style>
 
 <script lang = 'ts'>
-import { player } from '../scripts/playerController'
+import { player, pathToAvatars } from '../scripts/playerController'
 import headerBar from '../components/HeaderBar.vue'
 
 export default {
@@ -39,7 +45,8 @@ export default {
     },
     data() {
         return {
-            player
+            player,
+            pathToAvatars
         }
     }
 }
