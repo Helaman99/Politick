@@ -23,7 +23,11 @@ const pathToAvatars = '/src/assets/avatars/'
 export { player, pathToAvatars }
 export function updatePlayer(newAvatar: string, newTitle: string) {
     console.log("Updating player data in the database...")
+    console.log(player.avatar)
+    console.log(player.title)
     player.avatar = newAvatar
     player.title = newTitle
+    console.log(player.avatar)
+    console.log(player.title)
     // Code to tell the back-end to overwrite the data for this user with new data
 }
