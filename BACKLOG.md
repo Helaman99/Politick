@@ -10,4 +10,18 @@
 
 * An about page
 
-* header component
+* settings dialogue
+
+* Kudos system
+
+* Terms of Service and Privacy Policy
+
+* Card backgrounds (could just be colors for now)
+
+* An item store
+
+* The chat view
+
+* Database for players' accounts
+
+* backend
