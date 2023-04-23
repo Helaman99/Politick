@@ -91,13 +91,10 @@
     width: 50%;
 }
 
-.save-prompt {
+#save-prompt {
     margin-top: 1.5rem;
     opacity: 0;
-    transition-duration: 0.5;
-}
-.save-prompt:active {
-    opacity: 1;
+    transition-duration: 1s;
 }
 
 @media (max-width: 1024px) {
@@ -140,10 +137,10 @@ export default {
     methods: {
         save() {
             updatePlayer(currAvatar, newTitle.join(" "))
-            let prompt = document.getElementById('save-prompt')
+            const prompt = document.querySelector('#save-prompt')
             if (prompt != null) {
-                prompt.classList.add('active')
-                setTimeout(() => { if (prompt != null) prompt.classList.remove('active') }, 3000)
+                prompt.style.opacity = '1'
+                setTimeout(() => { if (prompt != null) prompt.style.opacity = '0' }, 3000)
             }
         }
     },
