@@ -6,23 +6,41 @@
                 <v-app-bar elevation = '3' density = 'prominent' color = 'white'>
                     
                     <template v-slot:prepend>
-                        <v-app-bar-nav-icon @click.stop="drawer = !drawer" elevation = '2'>
+                        <v-app-bar-nav-icon @click.stop="navigation = !navigation" elevation = '2'>
                             <img class = 'menu-icon' :src = avatarPath>
+                        </v-app-bar-nav-icon>
+                    </template>
+
+                    <template v-slot:append>
+                        <v-app-bar-nav-icon @click.stop="settings = !settings">
+                            <v-icon size = 'x-large'>mdi-cog-outline</v-icon>
                         </v-app-bar-nav-icon>
                     </template>
 
                 </v-app-bar>
 
-                <v-navigation-drawer style = "padding-top:0.5rem;" v-model="drawer" elevation = '1'>
+                <v-navigation-drawer style = "padding-top:0.5rem;" v-model="navigation" elevation = '1'>
                     <v-list-item-group>
                         <v-list-item>
-                            <router-link to = 'account' @click = 'drawer = false'>Account</router-link>
+                            <router-link to = 'account' @click = 'navigation = false'>Account</router-link>
                         </v-list-item>
                         <v-list-item>
-                            <router-link to = 'topics' @click = 'drawer = false'>Play</router-link>
+                            <router-link to = 'topics' @click = 'navigation = false'>Play</router-link>
                         </v-list-item>
                         <v-list-item>
-                            <router-link to = 'customize' @click = 'drawer = false'>Customize Player Card</router-link>
+                            <router-link to = 'customize' @click = 'navigation = false'>Customize Player Card</router-link>
+                        </v-list-item>
+                    </v-list-item-group>
+                </v-navigation-drawer>
+
+                <v-navigation-drawer location = 'right' style = "padding-top:0.5rem;" v-model="settings" elevation = '1'>
+                    <v-list-item-group>
+                        <v-list-item>
+                            <v-list-item-title>Theme</v-list-item-title>
+                            <div class = 'two-choices'>
+                                <v-btn color = 'white'>Light</v-btn>
+                                <v-btn color = 'black'>Dark</v-btn>
+                            </div>
                         </v-list-item>
                     </v-list-item-group>
                 </v-navigation-drawer>
@@ -51,21 +69,27 @@
     width: 100%;
     border-radius: 50%;
 }
+.two-choices {
+    display: flex;
+    justify-content: space-around;
+    padding: 1rem;
+}
 
 #user-stats {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     position: fixed;
-    width: 80%;
+    width: 75%;
+    left: 50%;
+    transform: translateX(-50%);
 }
 #standing {
     margin-top: 1rem;
 }
 
-@media (max-width: 1280px) {
+@media (max-width: 760px) {
     #user-stats {
-        left: 50%;
-        transform: translateX(-50%);
+        display: none;
     }
 }
 </style>
@@ -73,7 +97,8 @@
 export default {
     props: ['totalCoins', 'totalWins', 'standingActual', 'avatarPath'],
     data: () => ({
-        drawer: false
+        navigation: false,
+        settings: false
     })
 }
 </script>
