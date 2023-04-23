@@ -12,8 +12,6 @@
 
 * a dark theme
 
-* Kudos system
-
 * Terms of Service and Privacy Policy
 
 * Card backgrounds (could just be colors for now)
@@ -25,3 +23,5 @@
 * Database for players' accounts
 
 * backend
+
+* set the theme of the app to the player's preference when they login

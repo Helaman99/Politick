@@ -12,13 +12,13 @@
             <div class = 'accountStats'>
                 <table>
                     <tr>
-                        <td>Total Games Played:</td><td>{{ player.gamesTotal }}</td>
+                        <td>Total Games Played:</td><td>{{ player.lifetimeGames }}</td>
                     </tr>
                     <tr>
                         <td>Typical Standing:</td><td>{{ player.standingActual }}</td>
                     </tr>
                     <tr>
-                        <td>Lifetime Kudos Earned:</td><td>{{ player.kudosOverall }}</td>
+                        <td>Lifetime Kudos Earned:</td><td>{{ player.lifetimeKudos }}</td>
                     </tr>
                     <tr>
                         <td>Account Strikes:</td><td>{{ player.strikes }}</td>

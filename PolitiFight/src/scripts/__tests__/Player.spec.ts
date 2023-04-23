@@ -3,8 +3,8 @@ import { describe, it, expect } from 'vitest'
 import { Player } from '../Player'
 
 let player = new Player (
-    '',
-    '',
+    'avatarPath',
+    'title',
     0,
     0,
     0,
@@ -15,6 +15,7 @@ let player = new Player (
     [],
     [],
     0,
+    'light'
 )
 
 describe('Player', () => {
@@ -29,5 +30,13 @@ describe('Player title', () => {
         let titleExpected = "New Title"
         player.title = titleExpected
         expect(player.title).toEqual(titleExpected)
+    })
+})
+
+describe('Player title', () => {
+    it('cant be empty', () => {
+        let titleExpected = ""
+        player.title = titleExpected
+        expect(player.title).toEqual('New Title')
     })
 })

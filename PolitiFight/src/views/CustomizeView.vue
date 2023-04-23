@@ -26,7 +26,7 @@
 
         </div>
 
-        <v-btn @click = 'save()'>Save Changes</v-btn>
+        <v-btn @click = 'save(currAvatar, firstWord.concat(" ").concat(secondWord))'>Save Changes</v-btn>
 
         <v-card id = 'save-prompt' color = 'green'>
             <v-card-title>Changes Saved!</v-card-title>
@@ -91,13 +91,10 @@
     width: 50%;
 }
 
-.save-prompt {
+#save-prompt {
     margin-top: 1.5rem;
     opacity: 0;
-    transition-duration: 0.5;
-}
-.save-prompt:active {
-    opacity: 1;
+    transition-duration: 1s;
 }
 
 @media (max-width: 1024px) {
@@ -132,18 +129,20 @@ import { player, updatePlayer, pathToAvatars } from '../scripts/playerController
 
 let newTitle = player.title.split(" ")
 let currAvatar = player.avatar
+let firstWord = newTitle[0]
+let secondWord = newTitle[1]
 
 export default {
     components: {
         playerCard
     },
     methods: {
-        save() {
-            updatePlayer(currAvatar, newTitle.join(" "))
-            let prompt = document.getElementById('save-prompt')
+        save(newAvatar:string , newTitle: string) {
+            updatePlayer(newAvatar, newTitle)
+            const prompt = document.querySelector('#save-prompt')
             if (prompt != null) {
-                prompt.classList.add('active')
-                setTimeout(() => { if (prompt != null) prompt.classList.remove('active') }, 3000)
+                prompt.style.opacity = '1'
+                setTimeout(() => { if (prompt != null) prompt.style.opacity = '0' }, 3000)
             }
         }
     },
@@ -153,8 +152,8 @@ export default {
             pathToAvatars,
             newTitle,
             currAvatar,
-            firstWord: player.title.split(" ")[0],
-            secondWord: player.title.split(" ")[1]
+            firstWord,
+            secondWord
         }
     }
 }
