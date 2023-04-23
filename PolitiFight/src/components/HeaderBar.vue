@@ -7,11 +7,11 @@
                     
                     <template v-slot:prepend>
                         <v-app-bar-nav-icon @click.stop="navigation = !navigation" elevation = '2'>
-                            <img class = 'menu-icon' :src = avatarPath>
+                            <img class = 'menu-icon' :src = pathToAvatars.concat(player.avatar)>
                         </v-app-bar-nav-icon>
                         <div id = "user-stats">
-                            <p>Coins: {{ coinsTotal }}</p>
-                            <p>Kudos: {{ kudosTotal }}</p>
+                            <p>Coins: {{ player.coins }}</p>
+                            <p>Kudos: {{ player.kudos }}</p>
                         </div>
                     </template>
 
@@ -44,8 +44,8 @@
                         <v-list-item>
                             <v-list-item-title>Theme</v-list-item-title>
                             <div class = 'two-choices'>
-                                <v-btn color = 'white'>Light</v-btn>
-                                <v-btn color = 'black'>Dark</v-btn>
+                                <v-btn color = 'white' @click = 'setLight'>Light</v-btn>
+                                <v-btn color = 'black' @click = 'setDark'>Dark</v-btn>
                             </div>
                         </v-list-item>
                     </v-list-item-group>
@@ -79,11 +79,23 @@
 }
 </style>
 <script lang = 'ts'>
+import { player, pathToAvatars } from '../scripts/playerController'
 export default {
-    props: ['coinsTotal', 'kudosTotal', 'standingActual', 'avatarPath'],
     data: () => ({
         navigation: false,
-        settings: false
-    })
+        settings: false,
+        player,
+        pathToAvatars
+    }),
+    methods: {
+        setLight() {
+            // Set the theme to light
+            player.theme = 'light'
+        },
+        setDark() {
+            // Set the theme to dark
+            player.theme = 'dark'
+        }
+    }
 }
 </script>
