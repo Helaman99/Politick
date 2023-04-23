@@ -10,7 +10,7 @@
 
 * An about page
 
-* settings dialogue
+* a dark theme
 
 * Kudos system
 

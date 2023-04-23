@@ -53,7 +53,7 @@
 <style scoped>
 
 img {
-    width: 80%;
+    width: 90%;
 }
 
 p {
@@ -61,9 +61,7 @@ p {
 }
 
 .rules {
-    padding-left: 20rem;
-    padding-right: 20rem;
-    padding-bottom: 3rem;
+    width: 60%;
 }
 
 .ruleList {
@@ -72,4 +70,9 @@ p {
     margin-bottom: 1rem;
 }
 
+@media (max-width: 600px) {
+    .rules {
+        width: 85%;
+    }
+}
 </style>

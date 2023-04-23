@@ -1,33 +1,35 @@
 export class Player {
     title: string
     avatar: string
-    totalCoins: number
-    currentCoins: number
-    totalGames: number
-    totalWins: number
+    coinsTotal: number
+    kudosTotal: number
+    gamesTotal: number
+    kudosOverall: number
     modeChoices: number[]
     standingChoices: number[]
     unlockedTitleFirstWords: string[]
     unlockedTitleSecondWords: string[]
     unlockedAvatars: string[]
     strikes: number
+    theme: string
 
-    constructor (title: string, avatar: string, totalCoins: number, currentCoins: number,
-                totalGames: number, totalWins: number, modeChoices: number[], standingChoices: number[], 
+    constructor (title: string, avatar: string, coinsTotal: number, kudosTotal: number,
+                gamesTotal: number, kudosOverall: number, modeChoices: number[], standingChoices: number[], 
                 unlockedTitleFirstWords: string[], unlockedTitleSecondWords: string[], 
-                unlockedAvatars: string[], strikes: number) {
+                unlockedAvatars: string[], strikes: number, theme: string) {
         this.title = title || ''
         this.avatar = avatar || ''
-        this.totalCoins = totalCoins || 0
-        this.currentCoins = currentCoins || 0
-        this.totalGames = totalGames || 0
-        this.totalWins = totalWins || 0
+        this.coinsTotal = coinsTotal || 0
+        this.kudosTotal = kudosTotal || 0
+        this.gamesTotal = gamesTotal || 0
+        this.kudosOverall = kudosOverall || 0
         this.modeChoices = modeChoices || [0, 0, 0]
         this.standingChoices = standingChoices || [0, 0, 0, 0]
         this.unlockedTitleFirstWords = unlockedTitleFirstWords || ['']
         this.unlockedTitleSecondWords = unlockedTitleSecondWords || ['']
         this.unlockedAvatars = unlockedAvatars || ['']
         this.strikes = strikes || 0
+        this.theme = theme || 'light'
     }
 
     /*
