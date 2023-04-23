@@ -1,7 +1,7 @@
 <template>
     <div class = "dashboard">
 
-        <headerBar :totalCoins = player.totalCoins :totalWins = player.totalWins
+        <headerBar :coinsTotal = player.coinsTotal :kudosTotal = player.kudosTotal
             :standingActual = player.standingActual :avatarPath = pathToAvatars.concat(player.avatar) />
         
         <div class = "dashboard-content">
@@ -13,9 +13,6 @@
 </template>
 
 <style>
-.dashboard-content {
-    padding-top: 7rem;
-}
 
 @media (min-width: 1024px) {
     body {

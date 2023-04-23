@@ -3,13 +3,19 @@
 
         <v-card>
             <v-layout>
-                <v-app-bar elevation = '3' density = 'prominent' color = 'white'>
+                <v-app-bar elevation = '3' height = '75' color = 'white'>
                     
                     <template v-slot:prepend>
                         <v-app-bar-nav-icon @click.stop="navigation = !navigation" elevation = '2'>
                             <img class = 'menu-icon' :src = avatarPath>
                         </v-app-bar-nav-icon>
+                        <div id = "user-stats">
+                            <p>Coins: {{ coinsTotal }}</p>
+                            <p>Kudos: {{ kudosTotal }}</p>
+                        </div>
                     </template>
+
+                    
 
                     <template v-slot:append>
                         <v-app-bar-nav-icon @click.stop="settings = !settings">
@@ -46,19 +52,12 @@
                 </v-navigation-drawer>
             </v-layout>
         </v-card>
-
-        <div id = "user-stats">
-            <p>Total Coins</p><p>Total Wins</p><p>Typical Standing</p>
-            <h1>{{ totalCoins }}</h1><h1>{{ totalWins }}</h1>
-            <div id = "standing">
-                {{ standingActual }}
-            </div>
-        </div>
+        
     </div>
 </template>
 <style scoped>
 .headerBar {
-    margin-bottom: 4rem;
+    margin-bottom: 5rem;
     z-index: 1;
 }
 .v-app-bar-nav-icon {
@@ -75,27 +74,13 @@
     padding: 1rem;
 }
 
-#user-stats {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    position: fixed;
-    width: 75%;
-    left: 50%;
-    transform: translateX(-50%);
-}
 #standing {
     margin-top: 1rem;
-}
-
-@media (max-width: 760px) {
-    #user-stats {
-        display: none;
-    }
 }
 </style>
 <script lang = 'ts'>
 export default {
-    props: ['totalCoins', 'totalWins', 'standingActual', 'avatarPath'],
+    props: ['coinsTotal', 'kudosTotal', 'standingActual', 'avatarPath'],
     data: () => ({
         navigation: false,
         settings: false
