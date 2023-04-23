@@ -1,34 +1,34 @@
 export class Player {
-    title: string
-    avatar: string
-    coinsTotal: number
-    kudosTotal: number
-    gamesTotal: number
-    kudosOverall: number
-    modeChoices: number[]
-    standingChoices: number[]
-    unlockedTitleFirstWords: string[]
-    unlockedTitleSecondWords: string[]
-    unlockedAvatars: string[]
-    strikes: number
+    private _title: string
+    private _avatar: string
+    private _coinsTotal: number
+    private _kudosTotal: number
+    private _gamesTotal: number
+    private _kudosOverall: number
+    private _modeChoices: number[]
+    private _standingChoices: number[]
+    private _unlockedTitleFirstWords: string[]
+    private _unlockedTitleSecondWords: string[]
+    private _unlockedAvatars: string[]
+    private _strikes: number
     theme: string
 
     constructor (title: string, avatar: string, coinsTotal: number, kudosTotal: number,
                 gamesTotal: number, kudosOverall: number, modeChoices: number[], standingChoices: number[], 
                 unlockedTitleFirstWords: string[], unlockedTitleSecondWords: string[], 
                 unlockedAvatars: string[], strikes: number, theme: string) {
-        this.title = title || ''
-        this.avatar = avatar || ''
-        this.coinsTotal = coinsTotal || 0
-        this.kudosTotal = kudosTotal || 0
-        this.gamesTotal = gamesTotal || 0
-        this.kudosOverall = kudosOverall || 0
-        this.modeChoices = modeChoices || [0, 0, 0]
-        this.standingChoices = standingChoices || [0, 0, 0, 0]
-        this.unlockedTitleFirstWords = unlockedTitleFirstWords || ['']
-        this.unlockedTitleSecondWords = unlockedTitleSecondWords || ['']
-        this.unlockedAvatars = unlockedAvatars || ['']
-        this.strikes = strikes || 0
+        this._title = title || ''
+        this._avatar = avatar || ''
+        this._coinsTotal = coinsTotal || 0
+        this._kudosTotal = kudosTotal || 0
+        this._gamesTotal = gamesTotal || 0
+        this._kudosOverall = kudosOverall || 0
+        this._modeChoices = modeChoices || [0, 0, 0]
+        this._standingChoices = standingChoices || [0, 0, 0, 0]
+        this._unlockedTitleFirstWords = unlockedTitleFirstWords || ['']
+        this._unlockedTitleSecondWords = unlockedTitleSecondWords || ['']
+        this._unlockedAvatars = unlockedAvatars || ['']
+        this._strikes = strikes || 0
         this.theme = theme || 'light'
     }
 
@@ -40,24 +40,24 @@ export class Player {
     */
     get standingActual() {
 
-        if (this.totalGames > 9) {
-            if (this.standingChoices[1] > this.standingChoices[3]) {
-                if (this.standingChoices[0] > this.standingChoices[2])
+        if (this._gamesTotal > 9) {
+            if (this._standingChoices[1] > this._standingChoices[3]) {
+                if (this._standingChoices[0] > this._standingChoices[2])
                     return "Left Authoritarian"
-                if (this.standingChoices[2] > this.standingChoices[0])
+                if (this._standingChoices[2] > this._standingChoices[0])
                     return "Left Libertarian"
                 return "Left"
             }
-            else if (this.standingChoices[3] > this.standingChoices[1]) {
-                if (this.standingChoices[0] > this.standingChoices[2])
+            else if (this._standingChoices[3] > this._standingChoices[1]) {
+                if (this._standingChoices[0] > this._standingChoices[2])
                     return "Right Authoritarian"
-                if (this.standingChoices[2] > this.standingChoices[0])
+                if (this._standingChoices[2] > this._standingChoices[0])
                     return "Right Libertarian"
                 return "Right"
             }
-            else if (this.standingChoices[0] > this.standingChoices[2])
+            else if (this._standingChoices[0] > this._standingChoices[2])
                 return "Authoritarian"
-            else if (this.standingChoices[2] > this.standingChoices[0])
+            else if (this._standingChoices[2] > this._standingChoices[0])
                 return "Libertarian"
             return "Centrist"
         }
@@ -70,15 +70,82 @@ export class Player {
         modeChoices[2] = the number of times the player has played 'Jury'
     */
     get favoriteMode () {
-        if (this.totalGames == 0)
+        if (this._gamesTotal == 0)
             return "Play a game first!"
-        if (this.modeChoices[0] > this.modeChoices[1] &&
-            this.modeChoices[0] > this.modeChoices[2])
+        if (this._modeChoices[0] > this._modeChoices[1] &&
+            this._modeChoices[0] > this._modeChoices[2])
             return "Battle Royal"
-        else if (this.modeChoices[1] > this.modeChoices[0] && 
-            this.modeChoices[1] > this.modeChoices[2])
+        else if (this._modeChoices[1] > this._modeChoices[0] && 
+            this._modeChoices[1] > this._modeChoices[2])
             return "Debate"
         else
             return "Jury"
+    }
+
+    addTitleFirstWords(newWords: string[]) {
+        if (newWords.length != 0)
+            for (let word in newWords)
+                this._unlockedTitleFirstWords.push(word)
+    }
+
+    addTitleSecondWords(newWords: string[]) {
+        if (newWords.length != 0)
+            for (let word in newWords)
+                this._unlockedTitleSecondWords.push(word)
+    }
+
+    addAvatar(newAvatar: string) {
+        if (newAvatar != null && newAvatar != '')
+            this._unlockedAvatars.push(newAvatar)
+    }
+
+    get avatar() {
+        return this._avatar
+    }
+
+    get title() {
+        return this._title
+    }
+
+    get coins() {
+        return this._coinsTotal
+    }
+
+    get kudos() {
+        return this._kudosTotal
+    }
+
+    get lifetimeGames() {
+        return this._gamesTotal
+    }
+
+    get lifetimeKudos() {
+        return this._kudosOverall
+    }
+
+    get unlockedTitleFirstWords() {
+        return this._unlockedTitleFirstWords
+    }
+
+    get unlockedTitleSecondWords() {
+        return this._unlockedTitleSecondWords
+    }
+
+    get unlockedAvatars() {
+        return this._unlockedAvatars
+    }
+
+    get strikes() {
+        return this._strikes
+    }
+
+    set avatar(newAvatar: string) {
+        if (newAvatar != null && newAvatar != '')
+            this._avatar = newAvatar
+    }
+
+    set title(newTitle: string) {
+        if (newTitle != null && newTitle != '')
+            this._title = newTitle
     }
 }
