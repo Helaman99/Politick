@@ -16,6 +16,7 @@ let player: Player = new Player (
     ['Helicopter', 'Banana', 'Sasquatch', 'Bunny', 'Marshmallow', 'Tank', 'Goldfish'],
     ['astronaut.jpg', 'astronaut-synthwave.jpg'],
     0,
+    'light'
 )
 const pathToAvatars = '/src/assets/avatars/'
 

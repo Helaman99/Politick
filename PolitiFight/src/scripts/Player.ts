@@ -11,11 +11,12 @@ export class Player {
     unlockedTitleSecondWords: string[]
     unlockedAvatars: string[]
     strikes: number
+    theme: string
 
     constructor (title: string, avatar: string, totalCoins: number, currentCoins: number,
                 totalGames: number, totalWins: number, modeChoices: number[], standingChoices: number[], 
                 unlockedTitleFirstWords: string[], unlockedTitleSecondWords: string[], 
-                unlockedAvatars: string[], strikes: number) {
+                unlockedAvatars: string[], strikes: number, theme: string) {
         this.title = title || ''
         this.avatar = avatar || ''
         this.totalCoins = totalCoins || 0
@@ -28,6 +29,7 @@ export class Player {
         this.unlockedTitleSecondWords = unlockedTitleSecondWords || ['']
         this.unlockedAvatars = unlockedAvatars || ['']
         this.strikes = strikes || 0
+        this.theme = theme || 'light'
     }
 
     /*
