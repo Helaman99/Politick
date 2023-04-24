@@ -12,8 +12,6 @@
 
 * a dark theme
 
-* Terms of Service and Privacy Policy
-
 * Card backgrounds (could just be colors for now)
 
 * An item store
