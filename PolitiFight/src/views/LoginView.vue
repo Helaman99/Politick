@@ -19,7 +19,7 @@
 
 img {
   width: 100%;
-  transform-origin: bottom; /*don't forget this*/
+  transform-origin: bottom;
   animation-name: bounce;
   animation-fill-mode: both;
   animation-duration: 1.2s;

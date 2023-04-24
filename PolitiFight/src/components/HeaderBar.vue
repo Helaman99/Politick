@@ -15,8 +15,6 @@
                         </div>
                     </template>
 
-                    
-
                     <template v-slot:append>
                         <v-app-bar-nav-icon @click.stop="settings = !settings">
                             <v-icon size = 'x-large'>mdi-cog-outline</v-icon>
@@ -28,13 +26,29 @@
                 <v-navigation-drawer style = "padding-top:0.5rem;" v-model="navigation" elevation = '1'>
                     <v-list-item-group>
                         <v-list-item>
-                            <router-link to = 'account' @click = 'navigation = false'>Account</router-link>
+                            <router-link to = 'account' @click = 'navigation = false'>
+                                Account
+                            </router-link>
                         </v-list-item>
                         <v-list-item>
-                            <router-link to = 'topics' @click = 'navigation = false'>Play</router-link>
+                            <router-link to = 'topics' @click = 'navigation = false'>
+                                Play
+                            </router-link>
                         </v-list-item>
                         <v-list-item>
-                            <router-link to = 'customize' @click = 'navigation = false'>Customize Player Card</router-link>
+                            <router-link to = 'customize' @click = 'navigation = false'>
+                                Customize Player Card
+                            </router-link>
+                        </v-list-item>
+                        <v-list-item>
+                            <router-link to = '../privacy-policy' @click = 'navigation = false' target = '_blank'>
+                                Privacy Policy
+                            </router-link>
+                        </v-list-item>
+                        <v-list-item>
+                            <router-link to = '../terms-of-service' @click = 'navigation = false' target = '_blank'>
+                                Terms of Service
+                            </router-link>
                         </v-list-item>
                     </v-list-item-group>
                 </v-navigation-drawer>
@@ -50,6 +64,7 @@
                         </v-list-item>
                     </v-list-item-group>
                 </v-navigation-drawer>
+
             </v-layout>
         </v-card>
         
