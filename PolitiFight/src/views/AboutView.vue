@@ -1,15 +1,17 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
+    <h1>PolitiFight</h1>
+    <h4>A place for <strike>arguing</strike> discussion.</h4>
+    <!-- 
+      A cool animation simulating a chatroom, where two people debate
+      about what PolitiFight is.
+     -->
   </div>
 </template>
 
 <style>
-@media (min-width: 1024px) {
-  .about {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-  }
+.about {
+  display: flex;
+  flex-direction: column;
 }
 </style>
