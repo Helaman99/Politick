@@ -10,7 +10,7 @@
             <h1>Terms and Conditions</h1>
 
             <p>
-                Welcome to <b>PolitiFight</b>! Please read these terms and conditions carefully 
+                Welcome to <b>Politio</b>! Please read these terms and conditions carefully 
                 before using our website and application.
             </p>
 
@@ -66,7 +66,7 @@
             <h3>Intellectual Property</h3>
             <p>
                 All content on our website and application, including but not limited to text, graphics, 
-                logos, images, and software, is the property of PolitiFight or its licensors and is 
+                logos, images, and software, is the property of Politio or its licensors and is 
                 protected by applicable copyright, trademark, and other intellectual property laws. You 
                 may not reproduce, modify, distribute, or otherwise use any content on our website and 
                 application without our prior written consent.
@@ -74,7 +74,7 @@
 
             <h3>Disclaimer of Liability</h3>
             <p>
-                You agree that your use of our website and application is at your own risk. PolitiFight 
+                You agree that your use of our website and application is at your own risk. Politio 
                 shall not be liable for any damages or losses arising from your use of our website and 
                 application, including but not limited to direct, indirect, incidental, punitive, and 
                 consequential damages. We make no warranties or representations about the accuracy, 
@@ -83,7 +83,7 @@
 
             <h3>Indemnification</h3>
             <p>
-                You agree to indemnify and hold PolitiFight harmless from any and all claims, damages, 
+                You agree to indemnify and hold Politio harmless from any and all claims, damages, 
                 or losses arising from your use of our website and application, including but not limited 
                 to any violation of these terms and conditions, any infringement of any intellectual 
                 property rights, or any other use of our website and application.

@@ -7,10 +7,10 @@
 
         
         <div class = 'content'>
-            <h1>Privacy Policy for PolitiFight</h1>
+            <h1>Privacy Policy for Politio</h1>
 
             <p>
-                At [Game Name], we are committed to protecting your privacy. This Privacy 
+                At Politio, we are committed to protecting your privacy. This Privacy 
                 Policy describes how we collect, use, and share information about you when 
                 you use our website and services (collectively, the "Services").
             </p>

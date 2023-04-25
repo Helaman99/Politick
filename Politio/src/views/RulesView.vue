@@ -11,7 +11,7 @@
             kinds to come together to <i>discuss</i> and <i>share</i> their ideas and standings.
         </p>
         <p>
-            Before you delve into the <strike>hectic</strike> wonderful world of PolitiFight,
+            Before you delve into the <strike>hectic</strike> wonderful world of Politio,
             there are some things you should know about how this all works.
         </p>
 
