@@ -24,10 +24,6 @@ img {
   width: 100%;
 }
 
-.signup {
-    width: 60%;
-}
-
 .v-input {
     width: 60%;
 }

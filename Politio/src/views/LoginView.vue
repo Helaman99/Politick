@@ -25,10 +25,6 @@ img {
   animation-duration: 1.2s;
 }
 
-.login {
-    width: 60%;
-}
-
 .v-input {
     width: 60%;
 }
