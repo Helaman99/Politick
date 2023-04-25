@@ -1,10 +1,10 @@
 <template>
     <div class = 'sides'>
         <div class = 'sidesButtons'>
-            <v-btn to = 'roomSize'>Authoritarian</v-btn>
-            <v-btn to = 'roomSize'>Left</v-btn>
-            <v-btn to = 'roomSize'>Libertarian</v-btn>
-            <v-btn to = 'roomSize'>Right</v-btn>
+            <v-btn>Authoritarian</v-btn>
+            <v-btn>Left</v-btn>
+            <v-btn>Libertarian</v-btn>
+            <v-btn>Right</v-btn>
         </div>
         <router-link to = 'gameModes'>Back</router-link>
     </div>
