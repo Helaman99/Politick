@@ -77,8 +77,8 @@ td {
 
 </style>
 <script lang = 'ts'>
-import playerCard from '../components/PlayerCard.vue'
-import { player, pathToAvatars } from '../scripts/playerController'
+import playerCard from '@/components/PlayerCard.vue'
+import { player, pathToAvatars } from '@/scripts/playerController'
 
 export default {
     components: {

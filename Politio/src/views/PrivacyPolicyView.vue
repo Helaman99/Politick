@@ -2,7 +2,7 @@
     <div class = 'privacy-policy'>
 
         <div class = 'logo'>
-            <img src = '../assets/logos/mainLogo.svg' />
+            <img src = '@/assets/logos/mainLogo.svg' />
         </div>
 
         
