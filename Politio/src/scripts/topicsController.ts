@@ -17,3 +17,10 @@ export const topics: Topic[] = [
             { title: 'Side 2 Topic 3', description: 'Description 2 Side 2'}
         ] }
 ]
+
+let selectedTopic: Topic
+function selectTopic(topic: Topic) {
+    selectedTopic = topic
+}
+
+export { selectedTopic, selectTopic }
