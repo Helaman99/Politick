@@ -1,7 +1,7 @@
 <template>
     <div class = "signup">
 
-        <img src = "../assets/logos/mainLogo.svg">
+        <img src = "@/assets/logos/mainLogo.svg">
         <br><br><br>
 
         <label for = "email">Email</label>

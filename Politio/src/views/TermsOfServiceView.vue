@@ -2,7 +2,7 @@
     <div class = 'terms-of-service'>
 
         <div class = 'logo'>
-            <img src = '../assets/logos/mainLogo.svg' />
+            <img src = '@/assets/logos/mainLogo.svg' />
         </div>
 
         

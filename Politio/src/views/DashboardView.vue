@@ -33,8 +33,8 @@
 </style>
 
 <script lang = 'ts'>
-import { player, pathToAvatars } from '../scripts/playerController'
-import headerBar from '../components/HeaderBar.vue'
+import { player, pathToAvatars } from '@/scripts/playerController'
+import headerBar from '@/components/HeaderBar.vue'
 
 export default {
     components: {

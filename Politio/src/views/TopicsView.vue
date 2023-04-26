@@ -1,38 +1,51 @@
 <template>
     <div class = 'topics'>
-        <div class = 'topicButtons'>
-            <v-btn to = 'gameModes'>First Topic</v-btn>
-            <v-btn to = 'gameModes'>Second Topic</v-btn>
-            <v-btn to = 'gameModes'>Third Topic</v-btn>
-            <v-btn to = 'gameModes'>Fourth Topic</v-btn>
-            <v-btn to = 'gameModes'>Fifth Topic</v-btn>
+        <div class = 'topic-cards'>
+            <v-card class = 'topic-card' v-for = 'topic in topics' :img = topic.image
+                @click = selectTopic(topic) to = 'sides'>
+                <v-card-title>{{ topic.title }}</v-card-title>
+            </v-card>
         </div>
     </div>
 </template>
 
-<style scoped>
+<script lang = 'ts'>
+import { topics } from '@/scripts/topicsController'
+import { selectTopic } from '@/scripts/topicsController'
 
-.topicButtons {
+export default {
+    data: () => {
+        return {
+            topics
+        }
+    },
+    methods: {
+        selectTopic
+    }
+}
+</script>
+
+<style scoped>
+.topic-cards {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 2rem;
     margin-bottom: 2rem;
 }
-.topicButtons .v-btn {
+.topic-cards .topic-card {
     font-size: larger;
-    height: 8rem;
+    height: 12rem;
 }
 
 @media (max-width: 740px) {
-    .topicButtons {
+    .topic-cards {
         grid-template-columns: 1fr 1fr;
     }
 }
 
 @media (max-width: 500px) {
-    .topicButtons {
+    .topic-cards {
         grid-template-columns: 1fr;
     }
 }
-
 </style>

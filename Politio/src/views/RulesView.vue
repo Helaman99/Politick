@@ -2,7 +2,7 @@
     <div class = "rules">
         
         <h3>Welcome to</h3>
-        <img src = "../assets/logos/mainLogo.svg" />
+        <img src = "@/assets/logos/mainLogo.svg" />
         <br><br>
 
         <p>
