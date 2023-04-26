@@ -2,7 +2,7 @@
     <div class = 'topics'>
         <div class = 'topic-cards'>
             <v-card class = 'topic-card' v-for = 'topic in topics' :img = topic.image
-                @click = selectTopic(topic.title) to = 'sides'>
+                @click = selectTopic(topic) to = 'sides'>
                 <v-card-title>{{ topic.title }}</v-card-title>
             </v-card>
         </div>
@@ -10,7 +10,9 @@
 </template>
 
 <script lang = 'ts'>
-import { topics } from '../scripts/topicsController'
+import { topics } from '@/scripts/topicsController'
+import { selectTopic } from '@/scripts/topicsController'
+
 export default {
     data: () => {
         return {
@@ -18,9 +20,7 @@ export default {
         }
     },
     methods: {
-        selectTopic(topic: string) {
-            // Set the user's selected topic to the one passed in
-        }
+        selectTopic
     }
 }
 </script>
