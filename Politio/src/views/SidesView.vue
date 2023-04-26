@@ -1,17 +1,28 @@
 <template>
     <div class = 'sides'>
         <div class = 'sidesButtons'>
-            <v-btn>Authoritarian</v-btn>
-            <v-btn>Left</v-btn>
-            <v-btn>Libertarian</v-btn>
-            <v-btn>Right</v-btn>
+            <v-card v-for = 'side in selectedTopic.sides'>
+                <v-card-title>{{ side.title }}</v-card-title>
+                <v-card-text>{{ side.description }}</v-card-text>
+            </v-card>
         </div>
-        <router-link to = 'gameModes'>Back</router-link>
+        <router-link to = 'topics'>Back</router-link>
     </div>
 </template>
 
-<style scoped>
+<script lang = 'ts'>
+import { selectedTopic } from '@/scripts/topicsController'
 
+export default {
+  data: () => {
+    return {
+        selectedTopic
+    }
+  }
+}
+</script>
+
+<style scoped>
 .sidesButtons {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -34,5 +45,4 @@
         grid-template-columns: 1fr;
     }
 }
-
 </style>
