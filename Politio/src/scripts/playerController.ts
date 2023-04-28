@@ -1,9 +1,11 @@
 import { Player } from './Player'
+import Axios from 'axios'
 
 // Code to retrieve player data from backend/database
 
 // Create a player object with the player's data from the database
 let player: Player = new Player (
+    'email',
     'Happy Banana',
     'astronaut.jpg',
     0,
@@ -21,13 +23,34 @@ let player: Player = new Player (
 const pathToAvatars = '/src/assets/avatars/'
 
 export { player, pathToAvatars }
-export function updatePlayer(newAvatar: string, newTitle: string) {
+export function updateCard(newAvatar: string, newTitle: string) {
     console.log("Updating player data in the database...")
-    console.log(player.avatar)
-    console.log(player.title)
     player.avatar = newAvatar
     player.title = newTitle
-    console.log(player.avatar)
-    console.log(player.title)
     // Code to tell the back-end to overwrite the data for this user with new data
+}
+
+export function addCoins(coinCount: number) {
+    player.addCoins(coinCount)
+    // Code for backend
+}
+
+export function removeCoins(coinCount: number) {
+    player.removeCoins(coinCount)
+    // Code for backend
+}
+
+export function addTitleFirstWords(newWords: string[]) {
+    player.addTitleFirstWords(newWords)
+    // Code for backend
+}
+
+export function addTitleSecondWords(newWords: string[]) {
+    player.addTitleSecondWords(newWords)
+    // Code for backend
+}
+
+export function addAvatar(newAvatar: string) {
+    player.addAvatar(newAvatar)
+    // Code for backend
 }
