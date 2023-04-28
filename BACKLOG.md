@@ -1,5 +1,7 @@
 # Backlog
 
+* Ask professors for Player data solution... if we should request a person's data constantly or not
+
 * Better sign-up experience, where you are presented with
   
   * a page to choose your avatar
@@ -9,6 +11,8 @@
   with explanations for each before you're sent to the dashboard.
 
 * An about page
+
+* A disclaimer after choosing a side, right before a player goes into a chat room
 
 * a dark theme
 
