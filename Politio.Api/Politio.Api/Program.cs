@@ -1,3 +1,7 @@
+using Microsoft.EntityFrameworkCore;
+using Politio.Api.Data;
+using Politio.Api.Services;
+
 var MyAllowAllOrigins = "_myAllowAllOrigins";
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,7 +22,20 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<AppDbContext>(options =>
+{
+    options.UseSqlServer(connectionString);
+});
+builder.Services.AddScoped<PlayerService>();
+
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    db.Database.Migrate();
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
