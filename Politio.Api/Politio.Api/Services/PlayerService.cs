@@ -20,9 +20,17 @@ public class PlayerService
         return null;
     }
 
-    public string GetPlayerData(string email)
+    public async Task<Player> GetPlayer(int id)
     {
-        Player player = GetPlayer(email).Result;
+        List<Player> result = await _db.Players.Where(player => player.Id == id).ToListAsync();
+        if (!result.IsNullOrEmpty())
+            return result.First();
+        return null;
+    }
+
+    public string GetPlayerData(int id)
+    {
+        Player player = GetPlayer(id).Result;
         if (player is not null)
             return player.GetData();
         return "Null";
@@ -36,9 +44,9 @@ public class PlayerService
         return false;
     }
 
-    public void UpdateCard(string email, string avatar, string title)
+    public void UpdateCard(int id, string avatar, string title)
     {
-        Player player = GetPlayer(email).Result;
+        Player player = GetPlayer(id).Result;
         if (player is not null)
         {
             player.Avatar = avatar;
@@ -46,27 +54,27 @@ public class PlayerService
         }
     }
 
-    public void AddCoins(string email, int amount)
+    public void AddCoins(int id, int amount)
     {
-        Player player = GetPlayer(email).Result;
+        Player player = GetPlayer(id).Result;
         if (player is not null)
         {
             player.CoinsTotal += amount;
         }
     }
 
-    public void RemoveCoins(string email, int amount)
+    public void RemoveCoins(int id, int amount)
     {
-        Player player = GetPlayer(email).Result;
+        Player player = GetPlayer(id).Result;
         if (player is not null)
         {
             player.CoinsTotal -= amount;
         }
     }
 
-    public void UpdatePassword(string email, string password)
+    public void UpdatePassword(int id, string password)
     {
-        Player player = GetPlayer(email).Result;
+        Player player = GetPlayer(id).Result;
         if (player is not null)
             player.Password = password;
     }

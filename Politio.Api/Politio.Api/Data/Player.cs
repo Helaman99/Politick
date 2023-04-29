@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using static System.Runtime.InteropServices.JavaScript.JSType;
@@ -9,7 +10,10 @@ namespace Politio.Api.Data;
 
 public class Player
 {
-    [Key]public string Email { get; set; }
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int Id { get; set; }
+    [JsonIgnore]public string Email { get; set; }
     [JsonIgnore]public string Password { get; set; }
     public string Title { get; set; }
     public string Avatar { get; set; }

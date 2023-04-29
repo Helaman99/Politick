@@ -22,32 +22,32 @@ public class PlayerController
     }
 
     [HttpGet]
-    public string GetPlayerData(string email)
+    public string GetPlayerData(int id)
     {
-        return _playerService.GetPlayerData(email);
+        return _playerService.GetPlayerData(id);
     }
 
     [HttpPost]
-    public void UpdateCard(string email, string avatar, string title)
+    public void UpdateCard(int id, string avatar, string title)
     {
-        _playerService.UpdateCard(email, avatar, title);
+        _playerService.UpdateCard(id, avatar, title);
     }
 
     [HttpPost]
-    public void AddCoins(string email, int amount)
+    public void AddCoins(int id, int amount)
     {
-        _playerService.AddCoins(email, amount);
+        _playerService.AddCoins(id, amount);
     }
 
     [HttpPost]
-    public void RemoveCoins(string email, int amount)
+    public void RemoveCoins(int id, int amount)
     {
-        _playerService.RemoveCoins(email, amount);
+        _playerService.RemoveCoins(id, amount);
     }
 
     [HttpPost]
-    public void UpdatePassword(string email, string password)
+    public void UpdatePassword(int id, string password)
     {
-        _playerService.UpdatePassword(email, password);
+        _playerService.UpdatePassword(id, password);
     }
 }

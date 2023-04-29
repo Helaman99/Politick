@@ -5,7 +5,7 @@ import Axios from 'axios'
 
 // Create a player object with the player's data from the database
 let player: Player = new Player (
-    'email',
+    1,
     'Happy Banana',
     'astronaut.jpg',
     0,

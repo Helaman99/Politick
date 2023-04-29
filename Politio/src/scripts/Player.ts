@@ -1,5 +1,5 @@
 export class Player {
-    private _email: string
+    private _id: number
     private _title: string
     private _avatar: string
     private _coinsTotal: number
@@ -14,11 +14,11 @@ export class Player {
     private _strikes: number
     theme: string
 
-    constructor (email: string, title: string, avatar: string, coinsTotal: number, kudosTotal: number,
+    constructor (id: number, title: string, avatar: string, coinsTotal: number, kudosTotal: number,
                 gamesTotal: number, kudosOverall: number, modeChoices: number[], standingChoices: number[], 
                 unlockedTitleFirstWords: string[], unlockedTitleSecondWords: string[], 
                 unlockedAvatars: string[], strikes: number, theme: string) {
-        this._email = email
+        this._id = id
         this._title = title || ''
         this._avatar = avatar || ''
         this._coinsTotal = coinsTotal || 0
@@ -106,7 +106,7 @@ export class Player {
         this._coinsTotal -= coinCount
     }
 
-    get email() { return this._email; }
+    get id() { return this._id; }
 
     get avatar() { return this._avatar }
 
