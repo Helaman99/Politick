@@ -36,12 +36,12 @@ public class PlayerService
         return "Null";
     }
 
-    public bool Login(string email, string password)
+    public int Login(string email, string password)
     {
         Player player = GetPlayer(email).Result;
-        if (player is not null)
-            return player.CheckPassword(password);
-        return false;
+        if (player is not null && player.CheckPassword(password))
+            return player.Id;
+        return -1;
     }
 
     public void UpdateCard(int id, string avatar, string title)

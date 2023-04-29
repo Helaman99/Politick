@@ -16,7 +16,7 @@ public class PlayerController
     }
 
     [HttpGet]
-    public bool Login(string email, string password)
+    public int Login(string email, string password)
     {
         return _playerService.Login(email, password);
     }
