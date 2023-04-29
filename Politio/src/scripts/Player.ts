@@ -1,4 +1,5 @@
 export class Player {
+    private _id: number
     private _title: string
     private _avatar: string
     private _coinsTotal: number
@@ -13,10 +14,11 @@ export class Player {
     private _strikes: number
     theme: string
 
-    constructor (title: string, avatar: string, coinsTotal: number, kudosTotal: number,
+    constructor (id: number, title: string, avatar: string, coinsTotal: number, kudosTotal: number,
                 gamesTotal: number, kudosOverall: number, modeChoices: number[], standingChoices: number[], 
                 unlockedTitleFirstWords: string[], unlockedTitleSecondWords: string[], 
                 unlockedAvatars: string[], strikes: number, theme: string) {
+        this._id = id
         this._title = title || ''
         this._avatar = avatar || ''
         this._coinsTotal = coinsTotal || 0
@@ -40,29 +42,26 @@ export class Player {
     */
     get standingActual() {
 
-        if (this._gamesTotal > 9) {
-            if (this._standingChoices[1] > this._standingChoices[3]) {
-                if (this._standingChoices[0] > this._standingChoices[2])
-                    return "Left Authoritarian"
-                if (this._standingChoices[2] > this._standingChoices[0])
-                    return "Left Libertarian"
-                return "Left"
-            }
-            else if (this._standingChoices[3] > this._standingChoices[1]) {
-                if (this._standingChoices[0] > this._standingChoices[2])
-                    return "Right Authoritarian"
-                if (this._standingChoices[2] > this._standingChoices[0])
-                    return "Right Libertarian"
-                return "Right"
-            }
-            else if (this._standingChoices[0] > this._standingChoices[2])
-                return "Authoritarian"
-            else if (this._standingChoices[2] > this._standingChoices[0])
-                return "Libertarian"
-            return "Centrist"
-        }
-        return "Play more games first!"
+        let x = this._standingChoices[1] / this._standingChoices[3];
+        let y = this._standingChoices[0] / this._standingChoices[2];
+        let standing = "";
+
+        if (x > 1.3)
+            standing += "Left ";
+        else if (x < 0.7)
+            standing += "Right ";
+        if (y > 1.3)
+            standing += "Authoritarian";
+        else if (y < 0.7)
+            standing += "Libertarian";
+
+        return standing;
     }
+
+    incAuthoritarian() { this._standingChoices[0]++ }
+    incLeft() { this._standingChoices[1]++ }
+    incLibertarian() { this._standingChoices[2]++ }
+    incRight() { this._standingChoices[3]++ }
 
     /*
         modeChoices[0] = the number of times the player has played 'Battle Royal'
@@ -99,44 +98,39 @@ export class Player {
             this._unlockedAvatars.push(newAvatar)
     }
 
-    get avatar() {
-        return this._avatar
+    addCoins(coinCount: number) {
+        this._coinsTotal += coinCount
     }
 
-    get title() {
-        return this._title
+    removeCoins(coinCount: number) {
+        this._coinsTotal -= coinCount
     }
 
-    get coins() {
-        return this._coinsTotal
-    }
+    get id() { return this._id; }
 
-    get kudos() {
-        return this._kudosTotal
-    }
+    get avatar() { return this._avatar }
 
-    get lifetimeGames() {
-        return this._gamesTotal
-    }
+    get title() { return this._title }
 
-    get lifetimeKudos() {
-        return this._kudosOverall
-    }
+    get coins() { return this._coinsTotal }
 
-    get unlockedTitleFirstWords() {
-        return this._unlockedTitleFirstWords
-    }
+    get kudos() { return this._kudosTotal }
 
-    get unlockedTitleSecondWords() {
-        return this._unlockedTitleSecondWords
-    }
+    get lifetimeGames() { return this._gamesTotal }
 
-    get unlockedAvatars() {
-        return this._unlockedAvatars
-    }
+    get lifetimeKudos() { return this._kudosOverall }
 
-    get strikes() {
-        return this._strikes
+    get unlockedTitleFirstWords() { return this._unlockedTitleFirstWords }
+
+    get unlockedTitleSecondWords() { return this._unlockedTitleSecondWords }
+
+    get unlockedAvatars() { return this._unlockedAvatars }
+
+    get strikes() { return this._strikes }
+
+    set email(newEmail: string) {
+        if (newEmail != null && newEmail != '')
+            this._email = newEmail
     }
 
     set avatar(newAvatar: string) {

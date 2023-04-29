@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33414.496
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Politio.Api", "Politio.Api\Politio.Api.csproj", "{DA3C772A-20C7-4F7C-AFA6-2CD559DC6DBE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DA3C772A-20C7-4F7C-AFA6-2CD559DC6DBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA3C772A-20C7-4F7C-AFA6-2CD559DC6DBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA3C772A-20C7-4F7C-AFA6-2CD559DC6DBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA3C772A-20C7-4F7C-AFA6-2CD559DC6DBE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7CD6A706-68A0-4617-985A-328C2EA2CFC8}
+	EndGlobalSection
+EndGlobal
