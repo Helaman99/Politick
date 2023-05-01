@@ -7,8 +7,8 @@
             <v-card elevation = '3' class = 'shop-choice' to = 'titles'>
                 <v-card-title>Title Packs</v-card-title>
             </v-card>
-            <v-card elevation = '3' class = 'shop-choice' to = 'mystery-boxes'>
-                <v-card-title>Mystery Boxes</v-card-title>
+            <v-card elevation = '3' class = 'shop-choice' to = 'coins'>
+                <v-card-title>Coins</v-card-title>
             </v-card>
         </div>
     </div>

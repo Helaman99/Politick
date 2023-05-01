@@ -93,9 +93,9 @@ const router = createRouter({
               component: () => import('../views/ShopTitlesView.vue')
             },
             {
-              path: 'mystery-boxes',
-              name: 'mystery-boxes',
-              component: () => import('../views/MysteryBoxesView.vue')
+              path: 'coins',
+              name: 'coins',
+              component: () => import('../views/ShopCoinsView.vue')
             }
           ]
         }

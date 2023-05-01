@@ -1,6 +1,6 @@
 <template>
-    <div class = 'mystery-boxes'>
+    <div class = 'coins'>
         <router-link to = '/dashboard/shop/'>Back</router-link>
-        Mystery Boxes
+        Coins
     </div>
 </template>

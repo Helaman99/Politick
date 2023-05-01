@@ -41,7 +41,7 @@
                             </router-link>
                         </v-list-item>
                         <v-list-item>
-                            <router-link to = 'shop' @click = 'navigation = false'>
+                            <router-link to = 'shop/' @click = 'navigation = false'>
                                 Shop
                             </router-link>
                         </v-list-item>
