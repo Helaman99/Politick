@@ -1,25 +1,38 @@
 <template>
     <div class = 'sides'>
         <div class = 'sidesButtons'>
-            <v-card v-for = 'side in selectedTopic.sides'>
+            <v-card v-for = 'side in selectedTopic.sides' @click = 'disclaimer = true'>
                 <v-card-title>{{ side.title }}</v-card-title>
                 <v-card-text>{{ side.description }}</v-card-text>
             </v-card>
         </div>
         <router-link to = 'topics'>Back</router-link>
+        
+        <v-dialog v-model = 'disclaimer' persistent>
+            <v-card class = 'disclaimer-card'>
+                <v-card-title><h2 style = 'color:red;'>DISCLAIMER!!</h2></v-card-title>
+                <v-card-text>
+                    Interactions in these chatrooms may not be appropriate for all ages.
+                    We do everything we can to filter out inappropriate or offensive language. 
+                    However, we are not perfect and can't catch everything. By participating
+                    in this game, you may encounter things that are offensive. If this happens,
+                    <i>please</i> let us know at [contact info].
+                </v-card-text>
+                <v-card-actions>
+                    <v-btn elevation = '1'>I Understand</v-btn>
+                    <v-btn elevation = '1' @click = 'disclaimer = false'>Go Back</v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
+
     </div>
 </template>
 
-<script lang = 'ts'>
+<script setup lang = 'ts'>
 import { selectedTopic } from '@/scripts/topicsController'
+import { ref } from 'vue'
 
-export default {
-  data: () => {
-    return {
-        selectedTopic
-    }
-  }
-}
+let disclaimer = ref(false)
 </script>
 
 <style scoped>
@@ -33,16 +46,30 @@ export default {
     font-size: larger;
     height: 8rem;
 }
+.disclaimer-card {
+    align-items: center;
+    text-align: center;
+    padding: 1rem;
+}
+.v-dialog {
+    width: 50%;
+}
 
 @media (max-width: 870px) {
     .sidesButtons {
         grid-template-columns: 1fr 1fr;
+    }
+    .v-dialog {
+        width: 65%;
     }
 }
 
 @media (max-width: 500px) {
     .sidesButtons {
         grid-template-columns: 1fr;
+    }
+    .v-dialog {
+        width: 95%;
     }
 }
 </style>
