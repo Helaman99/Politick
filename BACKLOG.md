@@ -12,18 +12,14 @@
 
 * An about page
 
-* A disclaimer after choosing a side, right before a player goes into a chat room
-
 * a dark theme
 
 * Card backgrounds (could just be colors for now)
 
 * An item store
 
-* The chat view
+* The chatting engine/functionality
 
 * Database for players' accounts
-
-* backend
 
 * set the theme of the app to the player's preference when they login
