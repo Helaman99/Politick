@@ -1,10 +1,27 @@
-import type { Player } from './Player'
+import { Player } from './Player'
 import Axios from 'axios'
 
 // Code to retrieve player data from backend/database
 
 // Create a player object with the player's data from the database
 let player: Player;
+
+player = new Player (
+    1,
+    'Happy Banana',
+    'astronaut.jpg',
+    0,
+    0,
+    0,
+    0,
+    [0, 0, 0],
+    [0, 0, 0, 0],
+    ['Happy', 'Sad', 'Wrinkly', 'Bloated'],
+    ['Helicopter', 'Banana', 'Sasquatch', 'Bunny', 'Marshmallow', 'Tank', 'Goldfish'],
+    ['astronaut.jpg', 'astronaut-synthwave.jpg'],
+    0,
+    'light'
+)
 
 function initializePlayer(id: number) {
     /*
