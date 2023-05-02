@@ -1,7 +1,8 @@
 <template>
     <div class = 'shop'>
-        <h1>Shop</h1>
-        <br>
+        <div class = 'shop-header'>
+          <h1>Shop</h1>
+        </div>
         <Transition name = 'fade'>
             <RouterView />
         </Transition>
@@ -9,6 +10,9 @@
 </template>
 
 <style scoped>
+.shop-header {
+  margin-top: -2.5rem;
+}
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 1.5s ease;
