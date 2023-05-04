@@ -3,5 +3,9 @@ namespace Politio.Api.Services;
 
 public class MysteryBoxService
 {
-    public MysteryBox ThemedAvatarBox = new("Themed Avatars", new[] { "path1", "path2" });
+    public readonly MysteryBox[] MysteryBoxes = new MysteryBox[]
+    {
+        new("Themed Avatars", new[] { "path1", "path2" }),
+        new("Themed Avatars", new[] { "path1", "path2" }),
+    };
 }
