@@ -12,7 +12,7 @@ public class PlayerService
         _db = db;
     }
 
-    public async Task<Player> GetPlayer(string email)
+    public async Task<Player> GetPlayerAsync(string email)
     {
         List<Player> result = await _db.Players.Where(player => player.Email == email).ToListAsync();
         if (!result.IsNullOrEmpty())
@@ -20,7 +20,7 @@ public class PlayerService
         return null;
     }
 
-    public async Task<Player> GetPlayer(int id)
+    public async Task<Player> GetPlayerAsync(int id)
     {
         List<Player> result = await _db.Players.Where(player => player.Id == id).ToListAsync();
         if (!result.IsNullOrEmpty())
@@ -30,7 +30,7 @@ public class PlayerService
 
     public string GetPlayerData(int id)
     {
-        Player player = GetPlayer(id).Result;
+        Player player = GetPlayerAsync(id).Result;
         if (player is not null)
             return player.GetData();
         return "Null";
@@ -38,7 +38,7 @@ public class PlayerService
 
     public int Login(string email, string password)
     {
-        Player player = GetPlayer(email).Result;
+        Player player = GetPlayerAsync(email).Result;
         if (player is not null && player.CheckPassword(password))
             return player.Id;
         return -1;
@@ -46,36 +46,46 @@ public class PlayerService
 
     public void UpdateCard(int id, string avatar, string title)
     {
-        Player player = GetPlayer(id).Result;
+        Player player = GetPlayerAsync(id).Result;
         if (player is not null)
         {
             player.Avatar = avatar;
             player.Title = title;
+            _db.Players.Add(player);
+            _db.SaveChanges();
         }
     }
 
     public void AddCoins(int id, int amount)
     {
-        Player player = GetPlayer(id).Result;
+        Player player = GetPlayerAsync(id).Result;
         if (player is not null)
         {
             player.CoinsTotal += amount;
+            _db.Players.Add(player);
+            _db.SaveChanges();
         }
     }
 
     public void RemoveCoins(int id, int amount)
     {
-        Player player = GetPlayer(id).Result;
+        Player player = GetPlayerAsync(id).Result;
         if (player is not null)
         {
             player.CoinsTotal -= amount;
+            _db.Players.Add(player);
+            _db.SaveChanges();
         }
     }
 
     public void UpdatePassword(int id, string password)
     {
-        Player player = GetPlayer(id).Result;
+        Player player = GetPlayerAsync(id).Result;
         if (player is not null)
+        {
             player.Password = password;
+            _db.Players.Add(player);
+            _db.SaveChanges();
+        }
     }
 }

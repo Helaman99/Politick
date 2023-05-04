@@ -8,7 +8,7 @@ public class ShopController
 {
     public ShopController() { }
 
-    [HttpGet(Name = "GetAvatars")]
+    [HttpGet("GetAvatars")]
     public string[] GetAvatars()
     {
         return Directory.GetFiles("../../../Politio/src/assets/avatars/");

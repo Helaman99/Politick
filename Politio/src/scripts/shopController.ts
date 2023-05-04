@@ -1,7 +1,7 @@
 import Axios from 'axios'
 
 let avatarsList = Array<string>
-Axios.get('https://localhost:7060/GetAvatars')
+Axios.get('https://localhost:7060/Player/GetAvatars')
                     .then((response) => {
                         avatarsList(response.data)
                     })

@@ -15,37 +15,37 @@ public class PlayerController
         _playerService = playerService;
     }
 
-    [HttpGet]
+    [HttpGet("Login")]
     public int Login(string email, string password)
     {
         return _playerService.Login(email, password);
     }
 
-    [HttpGet]
+    [HttpGet("GetPlayer")]
     public string GetPlayerData(int id)
     {
         return _playerService.GetPlayerData(id);
     }
 
-    [HttpPost]
+    [HttpPost("UpdateCard")]
     public void UpdateCard(int id, string avatar, string title)
     {
         _playerService.UpdateCard(id, avatar, title);
     }
 
-    [HttpPost]
+    [HttpPost("Add")]
     public void AddCoins(int id, int amount)
     {
         _playerService.AddCoins(id, amount);
     }
 
-    [HttpPost]
+    [HttpPost("Remove")]
     public void RemoveCoins(int id, int amount)
     {
         _playerService.RemoveCoins(id, amount);
     }
 
-    [HttpPost]
+    [HttpPost("Update")]
     public void UpdatePassword(int id, string password)
     {
         _playerService.UpdatePassword(id, password);
