@@ -9,8 +9,8 @@ public class ShopController
     public ShopController() { }
 
     [HttpGet("GetAvatars")]
-    public string[] GetAvatars()
+    public IEnumerable<string> GetAvatars()
     {
-        return Directory.GetFiles("../../../Politio/src/assets/avatars/");
+        return Directory.EnumerateFiles("../../Politio/src/assets/avatars/").Select(f => Path.GetFileName(f)).ToList();
     }
 }
