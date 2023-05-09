@@ -41,6 +41,11 @@
                             </router-link>
                         </v-list-item>
                         <v-list-item>
+                            <router-link to = 'shop/' @click = 'navigation = false'>
+                                Shop
+                            </router-link>
+                        </v-list-item>
+                        <v-list-item>
                             <router-link to = '../privacy-policy' @click = 'navigation = false' target = '_blank'>
                                 Privacy Policy
                             </router-link>

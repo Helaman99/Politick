@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Politio.Api.Data;
 using Politio.Api.Services;
 
 namespace Politio.Api.Controllers;
@@ -15,39 +14,39 @@ public class PlayerController
         _playerService = playerService;
     }
 
-    [HttpGet]
-    public int Login(string email, string password)
-    {
-        return _playerService.Login(email, password);
-    }
+    [HttpGet("SignUp")]
+    public bool SignUp(string email, string password)
+        => _playerService.SignUp(email, password);
 
-    [HttpGet]
-    public string GetPlayerData(int id)
-    {
-        return _playerService.GetPlayerData(id);
-    }
+    [HttpGet("Login")]
+    public int Login(string email, string password) 
+        => _playerService.Login(email, password);
 
-    [HttpPost]
-    public void UpdateCard(int id, string avatar, string title)
-    {
-        _playerService.UpdateCard(id, avatar, title);
-    }
+    [HttpGet("GetPlayer")]
+    public string GetPlayerData(int id) 
+        => _playerService.GetPlayerData(id);
 
-    [HttpPost]
-    public void AddCoins(int id, int amount)
-    {
-        _playerService.AddCoins(id, amount);
-    }
+    [HttpGet("IsActivated")]
+    public bool IsActivated(int id) 
+        => _playerService.IsActivated(id);
 
-    [HttpPost]
-    public void RemoveCoins(int id, int amount)
-    {
-        _playerService.RemoveCoins(id, amount);
-    }
+    [HttpPost("UpdateCard")]
+    public void UpdateCard(int id, string avatar, string title) 
+        => _playerService.UpdateCard(id, avatar, title);
 
-    [HttpPost]
-    public void UpdatePassword(int id, string password)
-    {
-        _playerService.UpdatePassword(id, password);
-    }
+    [HttpPost("Add")]
+    public void AddCoins(int id, int amount) 
+        => _playerService.AddCoins(id, amount);
+
+    [HttpPost("Remove")]
+    public void RemoveCoins(int id, int amount) 
+        => _playerService.RemoveCoins(id, amount);
+
+    [HttpPost("Update")]
+    public void UpdatePassword(int id, string password) 
+        => _playerService.UpdatePassword(id, password);
+
+    [HttpPost("Activate")]
+    public bool ActivatePlayer(int id, int code) 
+        => _playerService.ActivatePlayer(id, code);
 }

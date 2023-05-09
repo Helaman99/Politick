@@ -9,20 +9,9 @@
     </div>
 </template>
 
-<script lang = 'ts'>
+<script setup lang = 'ts'>
 import { topics } from '@/scripts/topicsController'
 import { selectTopic } from '@/scripts/topicsController'
-
-export default {
-    data: () => {
-        return {
-            topics
-        }
-    },
-    methods: {
-        selectTopic
-    }
-}
 </script>
 
 <style scoped>

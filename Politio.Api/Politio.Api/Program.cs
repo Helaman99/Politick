@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Politio.Api.Data;
 using Politio.Api.Services;
@@ -14,6 +15,7 @@ builder.Services.AddCors(options =>
                           policy.WithOrigins("*");
                       });
 });
+
 
 // Add services to the container.
 
@@ -36,6 +38,8 @@ using (var scope = app.Services.CreateScope())
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
     db.Database.Migrate();
 }
+
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

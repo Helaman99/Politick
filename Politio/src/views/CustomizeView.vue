@@ -125,7 +125,7 @@
 </style>
 <script lang = 'ts'>
 import playerCard from '@/components/PlayerCard.vue'
-import { player, updatePlayer, pathToAvatars } from '@/scripts/playerController'
+import { player, updateCard, pathToAvatars } from '@/scripts/playerController'
 
 let newTitle = player.title.split(" ")
 let currAvatar = player.avatar
@@ -138,7 +138,7 @@ export default {
     },
     methods: {
         save(newAvatar:string , newTitle: string) {
-            updatePlayer(newAvatar, newTitle)
+            updateCard(newAvatar, newTitle)
             const prompt = document.querySelector('#save-prompt')
             if (prompt != null) {
                 prompt.style.opacity = '1'
