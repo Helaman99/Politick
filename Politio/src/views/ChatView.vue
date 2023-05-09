@@ -9,9 +9,10 @@
 
 <script setup lang = 'ts'>
 import * as signalR from '@microsoft/signalr';
+import { ref } from 'vue'
 
 let group = "Group1"
-let message: string
+let message = ref("")
 const messagesElement = document.getElementsByClassName("messages")[0]
 
 const connection = new signalR.HubConnectionBuilder()
@@ -34,15 +35,17 @@ connection.on('ReceiveMessage', (message: string) => {
 })
 
 function SendMessage() {
-    connection.invoke('SendMessageToGroup', group, message)
-    console.log("Sent message: " + message)
+    connection.invoke('SendMessageToGroup', group, message.value)
+    console.log("Sent message: " + message.value)
 
     const messageCard = document.createElement('v-card')
     messageCard.classList.add('sent-message')
 
     const cardText = document.createElement('v-card-text')
-    cardText.textContent = message
+    cardText.textContent = message.value
     messageCard.appendChild(cardText)
+
+    message.value = ""
 }
 </script>
 
