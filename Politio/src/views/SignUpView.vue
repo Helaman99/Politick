@@ -18,6 +18,10 @@
     </div>
 </template>
 
+<script lang = 'ts'>
+import Axios from 'axios'
+</script>
+
 <style scoped>
 
 img {
