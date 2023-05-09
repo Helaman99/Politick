@@ -42,7 +42,7 @@ public class Player
     public List<MyString> UnlockedAvatars { get; }
     public int Strikes { get; set; }
     public string Theme { get; set; }
-    public bool Activated { get; set; }
+    public int Activation { get; set; }
     public string ActualStanding { get; set; }
 
     public Player(string email, string password)
@@ -67,7 +67,7 @@ public class Player
                                                 new MyString(3, "starting_avatar_3.png"), new MyString(4, "starting_avatar_4.png") };
         Strikes = 0;
         Theme = "light";
-        Activated = false;
+        Activation = new Random().Next(10000, 99999);
         ActualStanding = "Unknown";
     }
 
@@ -109,5 +109,15 @@ public class Player
             UnlockedAvatars.Add(new MyString(UnlockedAvatars.Count + 1, avatar));
         
         throw new ArgumentNullException(nameof(avatar));
+    }
+
+    public bool Activate(int code)
+    {
+        if (code == Activation)
+        {
+            Activation = 0;
+            return true;
+        }
+        return false;
     }
 }

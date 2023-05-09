@@ -3,9 +3,15 @@
         <h2>Avatars</h2>
         <router-link to = '/dashboard/shop/'>Back</router-link>
 
-        <div class = 'avatarOptions'>
-            <div class = "avatarImage" v-for = 'name in avatarList'>
-                <img :src = pathToAvatars.concat(name)>
+        <div class = 'Options'>
+            <div class = "Option" v-for = 'name in avatarList'>
+                <img :src = pathToAvatars.concat(name) />
+            </div>
+        </div>
+        <div class = 'Options'>
+            <div class = 'Option' v-for = 'box in mysteryBoxes'>
+                <img :src = 'pathToMysteryBoxes.concat(box.name) + ".jpg"' />
+                <h3>{{ box.name }}</h3>
             </div>
         </div>
     </div>
@@ -16,12 +22,22 @@
 import Axios from 'axios'
 import { ref } from 'vue'
 import { pathToAvatars } from '@/scripts/playerController'
+import { pathToMysteryBoxes } from '@/scripts/shopController'
 
 const avatarList = ref<string[]>([])
+const mysteryBoxes = ref()
 
-Axios.get('https://localhost:7060/Shop/GetAvatars')
+Axios.get('https://localhost:7060/Shop/Avatars')
                     .then((response) => {
                         avatarList.value = response.data
+                        console.log(response.data)
+                    })
+                    .catch((err) => {
+                        console.log(err)
+                    })
+Axios.get('https://localhost:7060/Shop/AvatarMysteryBoxes')
+                    .then((response) => {
+                        mysteryBoxes.value = response.data
                         console.log(response.data)
                     })
                     .catch((err) => {
@@ -30,7 +46,7 @@ Axios.get('https://localhost:7060/Shop/GetAvatars')
 </script>
 
 <style scoped>
-.avatarOptions {
+.Options {
     width: 50%;
     height: 50%;
     display: grid;
@@ -38,24 +54,24 @@ Axios.get('https://localhost:7060/Shop/GetAvatars')
     justify-items: center;
     align-items: center;
 }
-.avatarOptions .avatarImage {
+.Options .Option {
     width: 80%;
     padding: 3%;
     transition-duration: 0.25s;
 }
-.avatarOptions .avatarImage:hover {
+.Options .Option:hover {
     padding: 0;
 }
-.avatarOptions .avatarImage:active {
+.Options .Option:active {
     padding: 3%;
 }
-.avatarOptions .avatarImage img {
+.Options .Option img {
     width: 100%;
     border-radius: 5%;
     display: block;
     transition-duration: 0.25s;
 }
-.avatarOptions .avatarImage img:hover {
+.Options .Option img:hover {
     box-shadow: 1px 1px 5px black;
 }
 </style>
