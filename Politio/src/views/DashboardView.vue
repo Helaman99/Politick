@@ -1,7 +1,7 @@
 <template>
     <div class = "dashboard">
 
-        <headerBar :coinsTotal = player.coinsTotal :kudosTotal = player.kudosTotal
+        <headerBar :coinsTotal = player.coins :kudosTotal = player.kudos
             :standingActual = player.standingActual :avatarPath = pathToAvatars.concat(player.avatar) />
         
         <div class = "dashboard-content">
@@ -32,19 +32,7 @@
 }
 </style>
 
-<script lang = 'ts'>
+<script setup lang = 'ts'>
 import { player, pathToAvatars } from '@/scripts/playerController'
 import headerBar from '@/components/HeaderBar.vue'
-
-export default {
-    components: {
-        headerBar
-    },
-    data() {
-        return {
-            player,
-            pathToAvatars
-        }
-    }
-}
 </script>
