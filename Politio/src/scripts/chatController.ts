@@ -1,4 +1,5 @@
 import type { Topic } from './Topic'
+import type { Side } from './Side'
 
 export const topics: Topic[] = [
     { title: 'Topic 1', description: 'Description 1', image: '/src/assets/topic_images/astronaut-synthwave.jpg',
@@ -19,8 +20,14 @@ export const topics: Topic[] = [
 ]
 
 let selectedTopic: Topic
+let selectedSide: Side
 function selectTopic(topic: Topic) {
     selectedTopic = topic
+    console.log(selectedTopic)
+}
+function selectSide(side: Side) {
+    selectedSide = side
+    console.log(selectedSide)
 }
 
-export { selectedTopic, selectTopic }
+export { selectedTopic, selectTopic, selectedSide, selectSide }

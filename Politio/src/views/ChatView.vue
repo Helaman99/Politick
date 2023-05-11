@@ -1,19 +1,29 @@
 <template>
-    <div class = 'chat'>
-        Chat view.
-        <div class = "messages"></div>
-        <input v-model = 'message' placeholder = "Message" />
-        <v-btn @click = "SendMessage()">Send</v-btn>
-    </div>
+    <v-app>
+        <div class = 'chat'>
+            <div class = "messages">
+                <messageBubble v-for = "message in messages" :class = message.class :text = message.text />
+            </div>
+            <chatFooter @send = SendMessage />
+        </div>
+    </v-app>
 </template>
 
 <script setup lang = 'ts'>
-import * as signalR from '@microsoft/signalr';
+import * as signalR from '@microsoft/signalr'
+import messageBubble from '@/components/MessageBubble.vue'
+import chatFooter from '@/components/ChatFooter.vue'
 import { ref } from 'vue'
 
 let group = "Group1"
-let message = ref("")
-const messagesElement = document.getElementsByClassName("messages")[0]
+
+interface Message {
+    class: string
+    text: string
+}
+const messages = ref<Message[]>([])
+const htmlElement = ref<HTMLElement | null>(document.querySelector("html"))
+let justSent = ""
 
 const connection = new signalR.HubConnectionBuilder()
     .withUrl('https://localhost:7060/ChatHub')
@@ -24,38 +34,46 @@ connection.start().then(() => {
 })
 
 connection.on('ReceiveMessage', (message: string) => {
-    console.log("Received message: " + message)
+    if (message != null && message != "" && message.trim() !== "") {
+        console.log("Received message: " + message)
 
-    const messageCard = document.createElement('v-card')
-    messageCard.classList.add('received-message')
-
-    const cardText = document.createElement('v-card-text')
-    cardText.textContent = message
-    messageCard.appendChild(cardText)
+        if (message != justSent) {
+            messages.value.push({ class: "received-message", text: message })
+            
+            if (htmlElement.value)
+                htmlElement.value.scrollTop = htmlElement.value.scrollHeight
+        }
+    }
 })
 
-function SendMessage() {
-    connection.invoke('SendMessageToGroup', group, message.value)
-    console.log("Sent message: " + message.value)
+function SendMessage(message: any) {
+    if (message != null && message != "" && message.trim() !== "") {
+        connection.invoke('SendMessageToGroup', group, message)
+        console.log("Sent message: " + message)
 
-    const messageCard = document.createElement('v-card')
-    messageCard.classList.add('sent-message')
+        messages.value.push({ class: "sent-message", text: message })
+        console.log(htmlElement.value)
+        
+        if (htmlElement.value) {
+            htmlElement.value.scrollTop = (htmlElement.value.scrollHeight + 64)
+            console.log(htmlElement.value.scrollTop)
+        }
 
-    const cardText = document.createElement('v-card-text')
-    cardText.textContent = message.value
-    messageCard.appendChild(cardText)
-
-    message.value = ""
+        justSent = message
+    }
 }
 </script>
 
-<style scoped>
-.received-message {
-    background-color: gainsboro;
-    color: black;
+<style>
+body {
+    display: block;
 }
-.sent-message {
-    background-color: lightskyblue;
-    color: black;
+#app {
+    width: 100%;
+    padding: 0;
+}
+.messages {
+    display: flex;
+    flex-direction: column;
 }
 </style>
