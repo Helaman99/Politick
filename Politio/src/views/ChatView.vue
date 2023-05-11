@@ -22,6 +22,8 @@ interface Message {
     text: string
 }
 const messages = ref<Message[]>([])
+const htmlElement = ref<HTMLElement | null>(document.querySelector("html"))
+let justSent = ""
 
 const connection = new signalR.HubConnectionBuilder()
     .withUrl('https://localhost:7060/ChatHub')
@@ -32,22 +34,44 @@ connection.start().then(() => {
 })
 
 connection.on('ReceiveMessage', (message: string) => {
-    console.log("Received message: " + message)
+    if (message != null && message != "" && message.trim() !== "") {
+        console.log("Received message: " + message)
 
-    messages.value.push({ class: "received-message", text: message })
+        if (message != justSent) {
+            messages.value.push({ class: "received-message", text: message })
+            
+            if (htmlElement.value)
+                htmlElement.value.scrollTop = htmlElement.value.scrollHeight
+        }
+    }
 })
 
-function SendMessage(message: string) {
-    connection.invoke('SendMessageToGroup', group, message)
-    console.log("Sent message: " + message)
+function SendMessage(message: any) {
+    if (message != null && message != "" && message.trim() !== "") {
+        connection.invoke('SendMessageToGroup', group, message)
+        console.log("Sent message: " + message)
 
-    messages.value.push({ class: "sent-message", text: message })
+        messages.value.push({ class: "sent-message", text: message })
+        console.log(htmlElement.value)
+        
+        if (htmlElement.value) {
+            htmlElement.value.scrollTop = (htmlElement.value.scrollHeight + 64)
+            console.log(htmlElement.value.scrollTop)
+        }
 
-    message = ""
+        justSent = message
+    }
 }
 </script>
 
-<style scoped>
+<style>
+body {
+    display: block;
+}
+#app {
+    width: 100%;
+    padding: 0;
+}
 .messages {
     display: flex;
     flex-direction: column;

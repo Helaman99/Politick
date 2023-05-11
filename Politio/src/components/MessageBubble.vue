@@ -12,15 +12,17 @@ export default {
 
 <style scoped>
 .v-card {
-    width: fit-content;
+    max-width: 49%;
     margin: 0.5rem;
 }
 .received-message {
     background-color: gainsboro;
     color: black;
+    align-self: flex-start;
 }
 .sent-message {
     background-color: lightskyblue;
     color: black;
+    align-self: flex-end;
 }
 </style>
