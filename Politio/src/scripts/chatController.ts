@@ -1,5 +1,15 @@
 import type { Topic } from './Topic'
 import type { Side } from './Side'
+import Axios from 'axios'
+
+Axios.get("https://localhost:7060/Topic/GetTopics")
+    .then((response) => {
+        const getTopics = response
+        console.log(getTopics)
+    })
+    .catch((error) => {
+        console.log(error)
+    })
 
 export const topics: Topic[] = [
     { title: 'Topic 1', description: 'Description 1', image: '/src/assets/topic_images/astronaut-synthwave.jpg',
