@@ -10,8 +10,8 @@
 </template>
 
 <script setup lang = 'ts'>
-import { topics } from '@/scripts/topicsController'
-import { selectTopic } from '@/scripts/topicsController'
+import { topics } from '@/scripts/chatController'
+import { selectTopic } from '@/scripts/chatController'
 </script>
 
 <style scoped>

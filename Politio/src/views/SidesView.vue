@@ -1,7 +1,7 @@
 <template>
     <div class = 'sides'>
         <div class = 'sidesButtons'>
-            <v-card v-for = 'side in selectedTopic.sides' @click = 'disclaimer = true'>
+            <v-card v-for = 'side in selectedTopic.sides' @click = 'disclaimer = true; selectSide(side)'>
                 <v-card-title>{{ side.title }}</v-card-title>
                 <v-card-text>{{ side.description }}</v-card-text>
             </v-card>
@@ -29,7 +29,7 @@
 </template>
 
 <script setup lang = 'ts'>
-import { selectedTopic } from '@/scripts/topicsController'
+import { selectedTopic, selectSide } from '@/scripts/chatController'
 import { ref } from 'vue'
 
 let disclaimer = ref(false)
