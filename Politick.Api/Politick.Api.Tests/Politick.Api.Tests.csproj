@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Politio.Api\Politio.Api.csproj" />
+    <ProjectReference Include="..\Politio.Api\Politick.Api.csproj" />
   </ItemGroup>
 
 </Project>

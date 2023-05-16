@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33414.496
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Politio.Api", "Politio.Api\Politio.Api.csproj", "{DA3C772A-20C7-4F7C-AFA6-2CD559DC6DBE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Politick.Api", "Politick.Api\Politick.Api.csproj", "{DA3C772A-20C7-4F7C-AFA6-2CD559DC6DBE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Politio.Api.Tests", "Politio.Api.Tests\Politio.Api.Tests.csproj", "{42174510-1A32-47F8-8979-AFBBCE33B288}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Politick.Api.Tests", "Politick.Api.Tests\Politick.Api.Tests.csproj", "{42174510-1A32-47F8-8979-AFBBCE33B288}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

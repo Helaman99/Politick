@@ -2,15 +2,15 @@
     <div class = 'privacy-policy'>
 
         <div class = 'logo'>
-            <img src = '@/assets/logos/mainLogo.svg' />
+            <img src = '@/assets/logos/politick.svg' />
         </div>
 
         
         <div class = 'content'>
-            <h1>Privacy Policy for Politio</h1>
+            <h1>Privacy Policy for Politick</h1>
 
             <p>
-                At Politio, we are committed to protecting your privacy. This Privacy 
+                At Politick, we are committed to protecting your privacy. This Privacy 
                 Policy describes how we collect, use, and share information about you when 
                 you use our website and services (collectively, the "Services").
             </p>

@@ -1,6 +1,6 @@
 <template>
   <div class="about">
-    <h1>Politio</h1>
+    <h1>Politick</h1>
     <h4>A place for <strike>arguing</strike> discussion.</h4>
     <!-- 
       A cool animation simulating a chatroom, where two people debate

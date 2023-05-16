@@ -1,7 +1,7 @@
 <template>
     <div class = "signup">
 
-        <img src = "@/assets/logos/mainLogo.svg">
+        <img src = "@/assets/logos/politick.svg">
         <br><br><br>
 
         <label for = "email">Email</label>
@@ -31,23 +31,20 @@ function checkCreds() {
 </script>
 
 <style scoped>
-
-img {
-  width: 100%;
+.signup {
+    width: 50%;
 }
-
 .v-input {
     width: 60%;
 }
 
 @media (max-width: 1024px) {
 
-    .login {
-        width: 90%;
+    .signup {
+        width: 100%;
     }
     .v-input {
-        width: 65%;
+        width: 75%;
     }
 }
-
 </style>
