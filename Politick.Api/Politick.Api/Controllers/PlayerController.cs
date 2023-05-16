@@ -32,6 +32,22 @@ public class PlayerController : ControllerBase
     public bool IsActivated(int id) 
         => _playerService.IsActivated(id);
 
+    [HttpPost("GetUnlockedAvatars")]
+    public IActionResult GetUnlockedAvatars()
+    {
+        string[] imagePaths = _playerService.GetAvatarImages();
+
+        List<string> imageUrls = new();
+        foreach (string imagePath in imagePaths)
+        {
+            string imageName = Path.GetFileName(imagePath);
+            var imageUrl = Url.Action("GetAvatarImage", new { imageName });
+            imageUrls.Add(imageUrl);
+        }
+
+        return Ok(imageUrls);
+    }
+
     [HttpPost("UpdateCard")]
     public void UpdateCard(int id, string avatar, string title) 
         => _playerService.UpdateCard(id, avatar, title);
