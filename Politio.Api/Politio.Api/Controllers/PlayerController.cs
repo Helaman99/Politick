@@ -36,11 +36,11 @@ public class PlayerController : ControllerBase
     public void UpdateCard(int id, string avatar, string title) 
         => _playerService.UpdateCard(id, avatar, title);
 
-    [HttpPost("Add")]
+    [HttpPost("AddCoins")]
     public void AddCoins(int id, int amount) 
         => _playerService.AddCoins(id, amount);
 
-    [HttpPost("Remove")]
+    [HttpPost("RemoveCoins")]
     public void RemoveCoins(int id, int amount) 
         => _playerService.RemoveCoins(id, amount);
 
@@ -51,4 +51,20 @@ public class PlayerController : ControllerBase
     [HttpPost("Activate")]
     public bool ActivatePlayer(int id, int code) 
         => _playerService.ActivatePlayer(id, code);
+
+    [HttpPost("AddTitleFirstWords")]
+    public void AddTitleFirstWords(int id, string[] newWords)
+        => _playerService.AddTitleFirstWords(id, newWords);
+
+    [HttpPost("AddTitleSecondWords")]
+    public void AddTitleSecondWords(int id, string[] newWords)
+        => _playerService.AddTitleSecondWords(id, newWords);
+
+    [HttpPost("UpdateStanding")]
+    public void UpdateStanding(int id, string newStanding)
+        => _playerService.UpdateStanding(id, newStanding);
+
+    [HttpPost("AddAvatar")]
+    public void AddAvatar(int id, string newAvatar)
+        => _playerService.AddAvatar(id, newAvatar);
 }

@@ -91,24 +91,21 @@ public class Player
         if (!newWords.IsNullOrEmpty())
             foreach (string word in newWords)
                 UnlockedTitleFirstWords.Add(new MyString(UnlockedTitleFirstWords.Count + 1, word));
-
-        throw new ArgumentNullException(nameof(newWords));
+        else throw new ArgumentNullException(nameof(newWords));
     }
     public void AddTitleSecondWords(string[] newWords)
     {
         if (!newWords.IsNullOrEmpty())
             foreach (string word in newWords)
                 UnlockedTitleSecondWords.Add(new MyString(UnlockedTitleSecondWords.Count + 1, word));
-
-        throw new ArgumentNullException(nameof(newWords));
+        else throw new ArgumentNullException(nameof(newWords));
     }
 
     public void AddAvatar(string avatar)
     {
         if (avatar is not null)
             UnlockedAvatars.Add(new MyString(UnlockedAvatars.Count + 1, avatar));
-        
-        throw new ArgumentNullException(nameof(avatar));
+        else throw new ArgumentNullException(nameof(avatar));
     }
 
     public bool Activate(int code)

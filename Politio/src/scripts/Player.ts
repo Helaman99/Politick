@@ -1,4 +1,5 @@
 export class Player {
+
     private _id: number
     private _title: string
     private _avatar: string
@@ -7,7 +8,10 @@ export class Player {
     private _gamesTotal: number
     private _kudosOverall: number
     private _modeChoices: number[]
-    private _standingChoices: number[]
+    private _authoritarian: number
+    private _left: number
+    private _libertarian: number
+    private _right: number
     private _unlockedTitleFirstWords: string[]
     private _unlockedTitleSecondWords: string[]
     private _unlockedAvatars: string[]
@@ -15,9 +19,10 @@ export class Player {
     theme: string
 
     constructor (id: number, title: string, avatar: string, coinsTotal: number, kudosTotal: number,
-                gamesTotal: number, kudosOverall: number, modeChoices: number[], standingChoices: number[], 
-                unlockedTitleFirstWords: string[], unlockedTitleSecondWords: string[], 
-                unlockedAvatars: string[], strikes: number, theme: string) {
+                gamesTotal: number, kudosOverall: number, modeChoices: number[], authoritarian: number,
+                left: number, libertarian: number, right: number, unlockedTitleFirstWords: string[], 
+                unlockedTitleSecondWords: string[], unlockedAvatars: string[], strikes: number, 
+                theme: string) {
         this._id = id
         this._title = title || ''
         this._avatar = avatar || ''
@@ -26,7 +31,10 @@ export class Player {
         this._gamesTotal = gamesTotal || 0
         this._kudosOverall = kudosOverall || 0
         this._modeChoices = modeChoices || [0, 0, 0]
-        this._standingChoices = standingChoices || [0, 0, 0, 0]
+        this._authoritarian = authoritarian || 0
+        this._left = left || 0
+        this._libertarian = libertarian || 0
+        this._right = right || 0
         this._unlockedTitleFirstWords = unlockedTitleFirstWords || ['']
         this._unlockedTitleSecondWords = unlockedTitleSecondWords || ['']
         this._unlockedAvatars = unlockedAvatars || ['']
@@ -42,8 +50,8 @@ export class Player {
     */
     get standingActual() {
 
-        let x = this._standingChoices[1] / this._standingChoices[3];
-        let y = this._standingChoices[0] / this._standingChoices[2];
+        let x = this._left / this._right;
+        let y = this._authoritarian / this._libertarian;
         let standing = "";
 
         if (x > 1.3)
@@ -58,10 +66,10 @@ export class Player {
         return standing;
     }
 
-    incAuthoritarian() { this._standingChoices[0]++ }
-    incLeft() { this._standingChoices[1]++ }
-    incLibertarian() { this._standingChoices[2]++ }
-    incRight() { this._standingChoices[3]++ }
+    incAuthoritarian() { this._authoritarian++ }
+    incLeft() { this._left++ }
+    incLibertarian() { this._libertarian++ }
+    incRight() { this._right++ }
 
     /*
         modeChoices[0] = the number of times the player has played 'Battle Royal'
@@ -127,11 +135,6 @@ export class Player {
     get unlockedAvatars() { return this._unlockedAvatars }
 
     get strikes() { return this._strikes }
-
-    set email(newEmail: string) {
-        if (newEmail != null && newEmail != '')
-            this._email = newEmail
-    }
 
     set avatar(newAvatar: string) {
         if (newAvatar != null && newAvatar != '')

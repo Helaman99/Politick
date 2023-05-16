@@ -15,7 +15,10 @@ player = new Player (
     0,
     0,
     [0, 0, 0],
-    [0, 0, 0, 0],
+    0,
+    0,
+    0,
+    0,
     ['Happy', 'Sad', 'Wrinkly', 'Bloated'],
     ['Helicopter', 'Banana', 'Sasquatch', 'Bunny', 'Marshmallow', 'Tank', 'Goldfish'],
     ['astronaut.jpg', 'astronaut-synthwave.jpg'],
@@ -101,30 +104,95 @@ export function updateCard(newAvatar: string, newTitle: string) {
     console.log("Updating player data in the database...")
     player.avatar = newAvatar
     player.title = newTitle
-    // Code to tell the back-end to overwrite the data for this user with new data
+    Axios.post("https://localhost:7060/Player/UpdateCard", {
+        id: player.id,
+        avatar: newAvatar,
+        title: newTitle
+    })
+    .catch((error) => {
+        console.log(error)
+    })
 }
 
 export function addCoins(coinCount: number) {
     player.addCoins(coinCount)
-    // Code for backend
+    Axios.post("https://localhost:7060/Player/AddCoins", {
+        id: player.id,
+        amount: coinCount
+    })
+    .catch((error) => {
+        console.log(error)
+    })
 }
 
 export function removeCoins(coinCount: number) {
     player.removeCoins(coinCount)
-    // Code for backend
+    Axios.post("https://localhost:7060/Player/RemoveCoins", {
+        id: player.id,
+        amount: coinCount
+    })
+    .catch((error) => {
+        console.log(error)
+    })
+}
+
+export function updateStanding(standing: string) {
+    switch (standing.toLowerCase()) {
+        case "authoritarian": {
+            player.incAuthoritarian()
+            break
+        }
+        case "left": {
+            player.incLeft()
+            break
+        }
+        case "libertarian": {
+            player.incLibertarian()
+            break
+        }
+        case "right": {
+            player.incRight()
+            break
+        }
+    }
+    Axios.post("https://localhost:7060/Player/UpdateStanding", {
+            id: player.id,
+            newStanding: standing
+        })
+        .catch((error) => {
+            console.log(error)
+        })
 }
 
 export function addTitleFirstWords(newWords: string[]) {
     player.addTitleFirstWords(newWords)
-    // Code for backend
+    Axios.post("https://localhost:7060/Player/AddTitleFirstWords", {
+        id: player.id,
+        newWords: newWords
+        })
+        .catch((error) => {
+            console.log(error)
+        })
 }
 
 export function addTitleSecondWords(newWords: string[]) {
     player.addTitleSecondWords(newWords)
-    // Code for backend
+    Axios.post("https://localhost:7060/Player/AddTitleSecondWords", {
+        id: player.id,
+        newWords: newWords
+        })
+        .catch((error) => {
+            console.log(error)
+        })
 }
 
 export function addAvatar(newAvatar: string) {
     player.addAvatar(newAvatar)
-    // Code for backend
+    Axios.post("https://localhost:7060/Player/AddAvatar", {
+        id: player.id,
+        newAvatar: newAvatar
+    })
+    .catch((error) => {
+        console.log(error)
+    })
 }

@@ -19,12 +19,14 @@ Axios.get("https://localhost:7060/Topic/GetTopics")
 
 let selectedTopic = -1
 let selectedSide = -1
+let sideStanding = ""
 export function selectTopic(index: number) {
     selectedTopic = index
     console.log(selectedTopic)
 }
-export function selectSide(index: number) {
+export function selectSide(index: number, standing: string) {
     selectedSide = index
+    sideStanding = standing
     console.log(selectedSide)
 }
 

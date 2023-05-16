@@ -4,9 +4,11 @@ public class Side
 {
     public string Title { get; set; }
     public string Description { get; set; }
-    public Side(string title, string description)
+    public string Standing { get; set; }
+    public Side(string title, string description, string standing)
     {
         Title = title;
         Description = description;
+        Standing = standing;
     }
 }

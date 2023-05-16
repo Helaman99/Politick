@@ -76,4 +76,41 @@ public class PlayerService
         _db.SaveChangesAsync();
     }
 
+    public void AddTitleFirstWords(int id, string[] newWords)
+    {
+        Player player = GetPlayerAsync(id).Result;
+        player.AddTitleFirstWords(newWords);
+        _db.SaveChangesAsync();
+    }
+
+    public void AddTitleSecondWords(int id, string[] newWords)
+    {
+        Player player = GetPlayerAsync(id).Result;
+        player.AddTitleSecondWords(newWords);
+        _db.SaveChangesAsync();
+    }
+
+    public void UpdateStanding(int id, string newStanding)
+    {
+        Player player = GetPlayerAsync(id).Result;
+        switch (newStanding.ToLower())
+        {
+            case "authoritarian":
+                    player.IncAuthoritarian(); break;
+            case "left":
+                    player.IncLeft(); break;
+            case "libertarian":
+                    player.IncLibertarian(); break;
+            case "right":
+                    player.IncRight(); break;
+        }
+        _db.SaveChangesAsync();
+    }
+
+    public void AddAvatar(int id, string avatar)
+    {
+        Player player = GetPlayerAsync(id).Result;
+        player.AddAvatar(avatar);
+        _db.SaveChangesAsync();
+    }
 }
