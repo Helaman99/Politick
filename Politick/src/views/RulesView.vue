@@ -2,7 +2,7 @@
     <div class = "rules">
         
         <h3>Welcome to</h3>
-        <img src = "@/assets/logos/mainLogo.svg" />
+        <img src = "@/assets/logos/politick.svg" />
         <br><br>
 
         <p>
@@ -11,7 +11,7 @@
             kinds to come together to <i>discuss</i> and <i>share</i> their ideas and standings.
         </p>
         <p>
-            Before you delve into the <strike>hectic</strike> wonderful world of Politio,
+            Before you delve into the <strike>hectic</strike> wonderful world of Politick,
             there are some things you should know about how this all works.
         </p>
 

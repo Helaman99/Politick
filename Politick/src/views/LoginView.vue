@@ -1,7 +1,7 @@
 <template>
     <div class = "login">
 
-      <img src = "@/assets/logos/mainLogo.svg">
+      <img src = "@/assets/logos/politick.svg" />
       <br><br><br>
 
       <v-text-field v-model = 'email' type = "email" id = "email" variant = "solo" placeholder = "Email" />
@@ -28,15 +28,16 @@ function checkCreds() {
 </script>
 
 <style scoped>
-
+.login {
+  margin-top: 5rem;
+  width: 50%;
+}
 img {
-  width: 100%;
   transform-origin: bottom;
   animation-name: bounce;
   animation-fill-mode: both;
   animation-duration: 1.2s;
 }
-
 .v-input {
     width: 60%;
 }
@@ -44,10 +45,10 @@ img {
 @media (max-width: 1024px) {
 
     .login {
-        width: 90%;
+        width: 100%;
     }
     .v-input {
-        width: 65%;
+        width: 75%;
     }
 }
 
