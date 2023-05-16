@@ -1,15 +1,38 @@
 ﻿using Microsoft.AspNetCore.SignalR;
+using Politio.Api.Controllers;
+using Politio.Api.Data;
+using Politio.Api.Services;
+
 namespace Politio.Api.Hubs;
 
 public class ChatHub : Hub
 {
-    public Task JoinGroup(string groupName)
+    private readonly ChatService _chatService;
+    public ChatHub(ChatService chatService)
     {
-        return Groups.AddToGroupAsync(Context.ConnectionId, groupName);
+        _chatService = chatService;
     }
 
-    public Task SendMessageToGroup(string groupName, string message)
+    public async Task<bool> JoinGroupAsync(string chatRoomId)
     {
-        return Clients.Group(groupName).SendAsync("ReceiveMessage", message);
+        Console.WriteLine(chatRoomId);
+        int playersJoined = _chatService.AddPlayerToRoom(chatRoomId);
+        if (playersJoined == 1 || playersJoined == 2)
+        {
+            await Groups.AddToGroupAsync(Context.ConnectionId, chatRoomId);
+            if (playersJoined == 2) await NotifyToStartGame(chatRoomId);
+            return true;
+        }
+        return false;
+    }
+
+    public Task SendMessageToGroup(string chatRoomId, string message)
+    {
+        return Clients.Group(chatRoomId).SendAsync("ReceiveMessage", message);
+    }
+
+    public Task NotifyToStartGame(string chatRoomId)
+    {
+        return Clients.Group(chatRoomId).SendAsync("StartGame");
     }
 }

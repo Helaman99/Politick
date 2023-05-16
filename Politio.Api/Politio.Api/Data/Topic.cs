@@ -2,10 +2,10 @@
 
 public class Topic
 {
-    public readonly string Title;
-    public readonly string Description;
-    public readonly string Image;
-    public readonly Side[] Sides;
+    public string Title { get; set; }
+    public string Description { get; set; }
+    public string Image { get; set; }
+    public Side[] Sides { get; set; }
 
     public Topic(string title, string description, string image, Side[] sides)
     {

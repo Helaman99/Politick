@@ -1,8 +1,8 @@
 <template>
     <div class = 'topics'>
         <div class = 'topic-cards'>
-            <v-card class = 'topic-card' v-for = 'topic in topics' :img = topic.image
-                @click = selectTopic(topic) to = 'sides'>
+            <v-card class = 'topic-card' v-for = '(topic, index) in topics' :img = topic.image
+                @click = selectTopic(index) to = 'sides'>
                 <v-card-title>{{ topic.title }}</v-card-title>
             </v-card>
         </div>
@@ -10,8 +10,7 @@
 </template>
 
 <script setup lang = 'ts'>
-import { topics } from '@/scripts/chatController'
-import { selectTopic } from '@/scripts/chatController'
+import { topics, selectTopic } from '@/scripts/roomController'
 </script>
 
 <style scoped>

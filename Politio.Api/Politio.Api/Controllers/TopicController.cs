@@ -6,8 +6,15 @@ namespace Politio.Api.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class TopicController
+public class TopicController : ControllerBase
 {
+    private readonly ILogger<TopicController> _logger;
+
+    public TopicController(ILogger<TopicController> logger)
+    {
+        _logger = logger;
+    }
+
     [HttpGet("GetTopics")]
     public Topic[] GetTopics()
         => TopicService.Topics;

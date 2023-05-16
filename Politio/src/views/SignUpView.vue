@@ -5,12 +5,12 @@
         <br><br><br>
 
         <label for = "email">Email</label>
-        <v-text-field type = "email" id = "email" variant = "solo" placeholder = "Email" />
+        <v-text-field v-model = 'email' type = "email" id = "email" variant = "solo" placeholder = "Email" />
         <label for = "password">Password</label>
-        <v-text-field type = "password" id = "password" variant = "solo" placeholder = "Password" />
+        <v-text-field v-model = 'password' type = "password" id = "password" variant = "solo" placeholder = "Password" />
         <label for = "password2">Repeat Password</label>
         <v-text-field type = "password" id = "password2" variant = "solo" placeholder = "Repeat Password" />
-        <v-btn>Sign Up</v-btn>
+        <v-btn @click = 'checkCreds()'>Sign Up</v-btn>
 
         <br><br>
         <p>Already have an account?</p>
@@ -18,8 +18,16 @@
     </div>
 </template>
 
-<script lang = 'ts'>
-import Axios from 'axios'
+<script setup lang = 'ts'>
+import { ref } from 'vue'
+import { signUp } from '@/scripts/playerController'
+
+const email = ref('')
+const password = ref('')
+
+function checkCreds() {
+    signUp(email.value, password.value)
+}
 </script>
 
 <style scoped>
