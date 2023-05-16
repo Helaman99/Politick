@@ -119,7 +119,7 @@ public class ChatServiceTests
 
         string player1Room = _chatService.GetRoomId(1, 0, 0);
         
-        Assert.IsTrue(_chatService.AddPlayerToRoom(player1Room) == 1);
+        Assert.IsTrue(_chatService.AddPlayerToRoom("ConnID", player1Room) == 1);
     }
 
     [TestMethod]
@@ -127,7 +127,7 @@ public class ChatServiceTests
     {
         _chatService = new();
 
-        Assert.IsTrue(_chatService.AddPlayerToRoom("1") == 0);
+        Assert.IsTrue(_chatService.AddPlayerToRoom("ConnID", "1") == 0);
     }
 
     [TestMethod]
@@ -138,10 +138,10 @@ public class ChatServiceTests
         string player1Room = _chatService.GetRoomId(1, 0, 0);
         string player2Room = _chatService.GetRoomId(2, 0, 1);
 
-        _chatService.AddPlayerToRoom(player1Room);
-        _chatService.AddPlayerToRoom(player2Room);
+        _chatService.AddPlayerToRoom("ConnID", player1Room);
+        _chatService.AddPlayerToRoom("ConnID", player2Room);
 
-        Assert.IsTrue(_chatService.AddPlayerToRoom((int.Parse(player2Room) - 1).ToString()) == 0);
+        Assert.IsTrue(_chatService.AddPlayerToRoom("ConnID", (int.Parse(player2Room) - 1).ToString()) == 0);
     }
 
     [TestMethod]
@@ -149,7 +149,7 @@ public class ChatServiceTests
     {
         _chatService = new();
 
-        string player1Room = _chatService.GetRoomId(1, 0, 0);
+        _chatService.GetRoomId(1, 0, 0);
 
         Assert.IsTrue(_chatService.DeleteRoom(1));
     }
@@ -160,5 +160,41 @@ public class ChatServiceTests
         _chatService = new();
 
         Assert.IsFalse(_chatService.DeleteRoom(1));
+    }
+
+    [TestMethod]
+    public void ValidateConnection_ValidIdSendsMessage_ReturnsTrue()
+    {
+        _chatService = new();
+
+        string player1RoomId = _chatService.GetRoomId(1, 0, 0);
+        string player2RoomId = _chatService.GetRoomId(2, 0, 1);
+        string player1ConnId = "Player1ConnId";
+        string player2ConnId = "Player2ConnId";
+        _chatService.AddPlayerToRoom(player1ConnId, player1RoomId);
+        _chatService.AddPlayerToRoom(player2ConnId, player2RoomId);
+
+        _chatService.StartRoom(player1RoomId);
+
+        Assert.IsTrue(_chatService.ValidateConnection(player1RoomId, player1ConnId));
+        Assert.IsTrue(_chatService.ValidateConnection(player2RoomId, player2ConnId));
+    }
+
+    [TestMethod]
+    public void ValidateConnection_InvalidIdSendsMessage_ReturnsFalse()
+    {
+        _chatService = new();
+
+        string player1RoomId = _chatService.GetRoomId(1, 0, 0);
+        string player2RoomId = _chatService.GetRoomId(2, 0, 1);
+        string player1ConnId = "Player1ConnId";
+        string player2ConnId = "Player2ConnId";
+        _chatService.AddPlayerToRoom(player1ConnId, player1RoomId);
+        _chatService.AddPlayerToRoom(player2ConnId, player2RoomId);
+
+        _chatService.StartRoom(player1RoomId);
+
+        Assert.IsFalse(_chatService.ValidateConnection("FakeConnId", player1RoomId));
+        Assert.IsFalse(_chatService.ValidateConnection("FakeConnId", player2RoomId));
     }
 }
