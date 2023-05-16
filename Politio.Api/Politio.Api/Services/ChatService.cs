@@ -59,23 +59,38 @@ public class ChatService
         return 0;
     }
 
-    public void StartRoom(string chatRoomId)
+    public bool StartRoom(string chatRoomId)
     {
         Room? room;
-        foreach (List<Room> list in TopicRoomsLists)
+        lock (_lock)
         {
-            room = list.Where(r => r.ChatRoomId == chatRoomId).SingleOrDefault();
-            if (room is not null)
+            foreach (List<Room> list in TopicRoomsLists)
             {
-                RoomsInProgress.Add(room);
-                list.Remove(room);
+                room = list.Where(r => r.ChatRoomId == chatRoomId).SingleOrDefault();
+                if (room is not null)
+                {
+                    RoomsInProgress.Add(room);
+                    list.Remove(room);
+                    return true;
+                }
             }
         }
+        return false;
     }
 
-    public void EndGame(string chatRoomId)
+    public bool EndGame(string chatRoomId)
     {
-        lock (_lock) { RoomsInProgress.RemoveAll(r => r.ChatRoomId == chatRoomId); }
+        Room? room;
+        lock (_lock) 
+        { 
+            room = RoomsInProgress.Find(r => r.ChatRoomId == chatRoomId);
+            if (room is not null)
+            {
+                RoomsInProgress.Remove(room);
+                return true;
+            }
+        }
+        return false;
     }
 
     public bool ValidateConnection(string chatRoomId, string connectionId)

@@ -33,6 +33,6 @@ public class ChatController : ControllerBase
         => _chatService.DeleteRoom(playerId);
 
     [HttpPost("EndGame")]
-    public void EndGame(int chatRoomId)
+    public void EndGame(string chatRoomId)
         => _chatService.EndGame(chatRoomId);
 }
