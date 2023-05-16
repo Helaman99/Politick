@@ -45,6 +45,9 @@ public class ChatHub : Hub
     public override async Task OnDisconnectedAsync(Exception? exception)
     {
         string connectionId = Context.ConnectionId;
+        string chatRoomId = _chatService.DisconnectRoom(connectionId);
+        if (chatRoomId != "-1")
+            await Clients.Group(chatRoomId).SendAsync("PlayerDisconnected");
 
         await base.OnDisconnectedAsync(exception);
     }

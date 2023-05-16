@@ -73,6 +73,11 @@ public class ChatService
         }
     }
 
+    public void EndGame(string chatRoomId)
+    {
+        lock (_lock) { RoomsInProgress.RemoveAll(r => r.ChatRoomId == chatRoomId); }
+    }
+
     public bool ValidateConnection(string chatRoomId, string connectionId)
     {
         Room? room = RoomsInProgress.Find(r => r.ChatRoomId == chatRoomId);
@@ -98,5 +103,29 @@ public class ChatService
             }
         }
         return false;
+    }
+
+    public string DisconnectRoom(string connectionId)
+    {
+        Room? room;
+        lock (_lock)
+        {
+            foreach (List<Room> list in TopicRoomsLists)
+            {
+                room = list.Find(p => p.ConnectionIds.Contains(connectionId));
+                if (room is not null)
+                {
+                    list.Remove(room);
+                    return room.ChatRoomId;
+                }
+            }
+            room = RoomsInProgress.Find(r => r.ConnectionIds.Contains(connectionId));
+            if (room is not null)
+            {
+                RoomsInProgress.Remove(room);
+                return room.ChatRoomId;
+            }
+            return "-1";
+        }
     }
 }
