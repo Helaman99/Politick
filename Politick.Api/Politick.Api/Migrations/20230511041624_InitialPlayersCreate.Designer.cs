@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Politio.Api.Data;
+using Politick.Api.Data;
 
 #nullable disable
 
-namespace Politio.Api.Migrations
+namespace Politick.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
     [Migration("20230511041624_InitialPlayersCreate")]

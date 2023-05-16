@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Politio.Api.Data;
+using Politick.Api.Data;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Mvc;
 using System;
 
-namespace Politio.Api.Services;
+namespace Politick.Api.Services;
 
 public class PlayerService
 {

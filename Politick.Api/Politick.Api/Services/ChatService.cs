@@ -1,7 +1,7 @@
-﻿using Politio.Api.Data;
+﻿using Politick.Api.Data;
 using System.Numerics;
 
-namespace Politio.Api.Services;
+namespace Politick.Api.Services;
 
 public class ChatService
 {

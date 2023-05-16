@@ -1,5 +1,5 @@
-﻿namespace Politio.Api.Services;
-using Politio.Api.Data;
+﻿namespace Politick.Api.Services;
+using Politick.Api.Data;
 
 public static class TopicService
 {

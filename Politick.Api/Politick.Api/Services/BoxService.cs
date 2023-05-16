@@ -1,5 +1,5 @@
-﻿using Politio.Api.Data;
-namespace Politio.Api.Services;
+﻿using Politick.Api.Data;
+namespace Politick.Api.Services;
 
 public static class BoxService
 {

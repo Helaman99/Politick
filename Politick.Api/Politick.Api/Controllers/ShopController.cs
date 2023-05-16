@@ -1,23 +1,37 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Politio.Api.Data;
-using Politio.Api.Services;
+using Politick.Api.Services;
+using Politick.Api.Data;
 
-namespace Politio.Api.Controllers;
+namespace Politick.Api.Controllers;
 
 [ApiController]
 [Route("[controller]")]
 public class ShopController : ControllerBase
 {
+    private readonly ShopService _shopService;
     private readonly ILogger<ShopController> _logger;
 
-    public ShopController(ILogger<ShopController> logger)
+    public ShopController(ShopService shopService, ILogger<ShopController> logger)
     {
+        _shopService = shopService;
         _logger = logger;
     }
 
     [HttpGet("Avatars")]
-    public IEnumerable<string> GetAvatars()
-        => Directory.EnumerateFiles("../../Politio/src/assets/avatars/").Select(f => Path.GetFileName(f)).ToList();
+    public IActionResult GetAvatars()
+    {
+        string[] imagePaths = _shopService.GetAvatarImages();
+
+        List<string> imageUrls = new();
+        foreach (string imagePath in imagePaths)
+        {
+            string imageName = Path.GetFileName(imagePath);
+            var imageUrl = Url.Action("GetAvatarImage", new { imageName });
+            imageUrls.Add(imageUrl);
+        }
+
+        return Ok(imageUrls);
+    }
 
     [HttpGet("AvatarMysteryBoxes")]
     public List<Box> GetAvatarMysteryBoxes()

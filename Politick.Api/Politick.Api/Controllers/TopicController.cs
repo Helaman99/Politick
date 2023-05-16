@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Politio.Api.Services;
-using Politio.Api.Data;
+using Politick.Api.Services;
+using Politick.Api.Data;
 
-namespace Politio.Api.Controllers;
+namespace Politick.Api.Controllers;
 
 [ApiController]
 [Route("[controller]")]

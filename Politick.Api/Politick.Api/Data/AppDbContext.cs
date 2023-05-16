@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-namespace Politio.Api.Data;
+namespace Politick.Api.Data;
 
 public class AppDbContext : DbContext
 {

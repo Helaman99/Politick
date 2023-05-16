@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace Politio.Api.Migrations
+namespace Politick.Api.Migrations
 {
     /// <inheritdoc />
     public partial class InitialPlayersCreate : Migration

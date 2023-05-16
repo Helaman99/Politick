@@ -1,15 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Politio.Api.Data;
-using Politio.Api.Services;
+using Politick.Api.Data;
+using Politick.Api.Services;
 
-namespace Politio.Api.Controllers;
+namespace Politick.Api.Controllers;
 
 [ApiController]
 [Route("[controller]")]
 public class ChatController : ControllerBase
 {
-    private readonly ILogger<ChatController> _logger;
     private readonly ChatService _chatService;
+    private readonly ILogger<ChatController> _logger;
 
     public ChatController(ChatService chatService, ILogger<ChatController> logger)
     {

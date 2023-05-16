@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Politio.Api.Data;
+namespace Politick.Api.Data;
 
 public class MyString
 {
