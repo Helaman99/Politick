@@ -1,4 +1,4 @@
-# "PolitiFight" Project
+# "Politick" Software Requirements and Specifications
 
 A place where people from different sides of the isle can come together and debate their sides.
 
@@ -124,10 +124,58 @@ If a player loses all of their coins, they are kicked out of the chat room and t
 
 - "Topic of the Week" that is based on recent events in the news.
 
-- A PolitiFight blog
+- A Politick blog
 
-## Player Object
 
-The Player object will be used to keep track of a player's account details, such as coin coint, purchased avatars, and other items.
+
+## Game Objects
+
+#### Player Object
+
+The `Player` object will be used to keep track of a player's account details, such as coin coint, purchased avatars, and other items.
 
 The items that a player owns will be kept track of in string arrays. The words that they have unlocked for their Titles will be kept in two arrays: one for the first word, and one for the second word. A string array containing the names of the files of the unlocked avatars will also be kept. This way, we just have to go to the folder with the avatars and display those.
+
+#### Topic Object
+
+The `Topic` object will keep track of which topics can be discussed, and will be used as a reference by the `ChatService` to determine how many queues of available rooms there needs to be.
+
+`Topic` objects will have 
+
+* A title
+
+* A description
+
+* An array of `Side` objects.
+
+#### Side Object
+
+The `Side` object will be used to determine what sides can be taken for any particular parent `Topic` object. `Side`s will not have a reference to their parent, however, but the `Topic` to which they are associated will have an array of choosable sides.
+
+`Side` objects will have
+
+* A title
+
+* A description
+
+* The political standing to which this particular side fits most (not shown to players)
+
+#### Box Object
+
+The `Box` object will be used to encapsulate purchasable items in the shop. Specifically, boes will keep track of two kinds of purchasable items:
+
+* Item bundles -- Where 2 or more items can be purchased together in a group
+
+* Random items -- Where 1 item will be randomly purchased from a group
+
+*This means that individual items will not be encapsulated within `box` objects.*
+
+`Box` objects will have
+
+* A name
+
+* A price
+
+* An array of strings that will be the purchasable items
+
+* A method that can be called to return a random item from the before-mentioned array.

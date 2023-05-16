@@ -21,13 +21,13 @@ public class PlayerService
     public string GetPlayerData(int id) 
         =>  GetPlayerAsync(id).Result.GetData();
 
-    public bool SignUp(string email, string password)
+    public async Task<bool> SignUp(string email, string password)
     {
         if (GetPlayerAsync(email) == null)
         {
-            Player newPlayer = new Player(email, password);
-            _db.AddAsync(newPlayer);
-            _db.SaveChangesAsync();
+            Player newPlayer = new (email, password);
+            await _db.AddAsync(newPlayer);
+            await _db.SaveChangesAsync();
             return true;
         }
         return false;
@@ -42,7 +42,7 @@ public class PlayerService
     }
 
     public bool IsActivated(int id) 
-        => GetPlayerAsync(id).Result.Activation == 0 ? true : false;
+        => GetPlayerAsync(id).Result.Activation == 0;
 
     public bool ActivatePlayer(int id, int code) 
         => GetPlayerAsync(id).Result.Activate(code);

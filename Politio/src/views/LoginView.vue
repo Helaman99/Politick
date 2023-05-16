@@ -4,9 +4,9 @@
       <img src = "@/assets/logos/mainLogo.svg">
       <br><br><br>
 
-      <v-text-field type = "email" id = "email" variant = "solo" placeholder = "Email" />
-      <v-text-field type = "password" id = "password" variant = "solo" placeholder = "Password" />
-      <v-btn>Login</v-btn>
+      <v-text-field v-model = 'email' type = "email" id = "email" variant = "solo" placeholder = "Email" />
+      <v-text-field v-model = 'password' type = "password" id = "password" variant = "solo" placeholder = "Password" />
+      <v-btn @click = checkCreds>Login</v-btn>
 
       <br><br>
       <p>Don't have an account?</p>
@@ -14,6 +14,18 @@
 
     </div>
 </template>
+
+<script setup lang = 'ts'>
+import { ref } from 'vue'
+import { login } from '@/scripts/playerController'
+
+const email = ref('')
+const password = ref('')
+
+function checkCreds() {
+    login(email.value, password.value)
+}
+</script>
 
 <style scoped>
 

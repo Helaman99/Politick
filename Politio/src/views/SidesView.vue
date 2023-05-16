@@ -1,14 +1,14 @@
 <template>
     <div class = 'sides'>
         <div class = 'sidesButtons'>
-            <v-card v-for = 'side in selectedTopic.sides' @click = 'disclaimer = true; selectSide(side)'>
+            <v-card v-for = '(side, index) in topics[selectedTopic].sides' @click = 'disclaimer = true; selectSide(index)'>
                 <v-card-title>{{ side.title }}</v-card-title>
                 <v-card-text>{{ side.description }}</v-card-text>
             </v-card>
         </div>
         <router-link to = 'topics'>Back</router-link>
         
-        <v-dialog v-model = 'disclaimer' persistent>
+        <v-dialog v-model = 'disclaimer' persistent transition = 'scale-transition'>
             <v-card class = 'disclaimer-card'>
                 <v-card-title><h2 style = 'color:red;'>DISCLAIMER!!</h2></v-card-title>
                 <v-card-text>
@@ -19,9 +19,27 @@
                     <i>please</i> let us know at [contact info].
                 </v-card-text>
                 <v-card-actions>
-                    <v-btn elevation = '1'>I Understand</v-btn>
+                    <v-btn elevation = '1' @click = 'FindRoom()'>I Understand</v-btn>
                     <v-btn elevation = '1' @click = 'disclaimer = false'>Go Back</v-btn>
                 </v-card-actions>
+            </v-card>
+        </v-dialog>
+
+        <v-dialog id = 'loading-dialog' v-model = 'loading' persistent transition = 'scale-transition'>
+            <v-card class = 'loading-card'>
+                <v-card-title>Creating room...</v-card-title>
+                <v-btn variant = 'text' loading />
+            </v-card>
+        </v-dialog>
+
+        <v-dialog id = 'failed-dialog' v-model = 'failed' transition = 'scale-transition'>
+            <v-card class = 'failed-card'>
+                <v-card-title color = 'red'>Huh, something went wrong!</v-card-title>
+                <v-card-text>
+                    Sorry about that, but there was a problem with joining a chat room.
+                    If this error persists, please contact support.
+                </v-card-text>
+                <v-btn @click = 'failed = false'>OK</v-btn>
             </v-card>
         </v-dialog>
 
@@ -29,10 +47,20 @@
 </template>
 
 <script setup lang = 'ts'>
-import { selectedTopic, selectSide } from '@/scripts/chatController'
+import { topics, selectedTopic, selectSide } from '@/scripts/roomController'
 import { ref } from 'vue'
+import { startConnection } from '@/scripts/roomController'
 
 let disclaimer = ref(false)
+let loading = ref(false)
+let failed = ref(false)
+
+function FindRoom() {
+    disclaimer.value = false
+    loading.value = true
+    if (!startConnection())
+        failed.value = true
+}
 </script>
 
 <style scoped>
@@ -53,6 +81,13 @@ let disclaimer = ref(false)
 }
 .v-dialog {
     width: 50%;
+}
+#loading-dialog {
+    width: 25%;
+    text-align: center;
+}
+#failed-dialog {
+    text-align: center;
 }
 
 @media (max-width: 870px) {

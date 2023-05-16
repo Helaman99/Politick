@@ -2,8 +2,8 @@
 
 public class Side
 {
-    public readonly string Title;
-    public readonly string Description;
+    public string Title { get; set; }
+    public string Description { get; set; }
     public Side(string title, string description)
     {
         Title = title;

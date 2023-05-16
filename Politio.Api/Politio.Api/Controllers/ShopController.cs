@@ -6,8 +6,15 @@ namespace Politio.Api.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class ShopController
+public class ShopController : ControllerBase
 {
+    private readonly ILogger<ShopController> _logger;
+
+    public ShopController(ILogger<ShopController> logger)
+    {
+        _logger = logger;
+    }
+
     [HttpGet("Avatars")]
     public IEnumerable<string> GetAvatars()
         => Directory.EnumerateFiles("../../Politio/src/assets/avatars/").Select(f => Path.GetFileName(f)).ToList();

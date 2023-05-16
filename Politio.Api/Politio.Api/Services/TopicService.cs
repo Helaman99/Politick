@@ -3,6 +3,7 @@ using Politio.Api.Data;
 
 public static class TopicService
 {
+    public static int TopicCount => Topics.Length;
     public static readonly Topic[] Topics = new Topic[]
     {
         new Topic("Topic 1", "This is topic 1", "/src/assets/topic_images/astronaut-synthwave.jpg", new Side[]

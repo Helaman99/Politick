@@ -10,12 +10,10 @@
 </template>
 
 <script setup lang = 'ts'>
-import * as signalR from '@microsoft/signalr'
 import messageBubble from '@/components/MessageBubble.vue'
 import chatFooter from '@/components/ChatFooter.vue'
+import { connectionRef, room } from '@/scripts/roomController'
 import { ref } from 'vue'
-
-let group = "Group1"
 
 interface Message {
     class: string
@@ -25,15 +23,9 @@ const messages = ref<Message[]>([])
 const htmlElement = ref<HTMLElement | null>(document.querySelector("html"))
 let justSent = ""
 
-const connection = new signalR.HubConnectionBuilder()
-    .withUrl('https://localhost:7060/ChatHub')
-    .build()
+const connection = connectionRef.value
 
-connection.start().then(() => {
-    connection.invoke('JoinGroup', group)
-})
-
-connection.on('ReceiveMessage', (message: string) => {
+connection?.on('ReceiveMessage', (message: string) => {
     if (message != null && message != "" && message.trim() !== "") {
         console.log("Received message: " + message)
 
@@ -48,7 +40,7 @@ connection.on('ReceiveMessage', (message: string) => {
 
 function SendMessage(message: any) {
     if (message != null && message != "" && message.trim() !== "") {
-        connection.invoke('SendMessageToGroup', group, message)
+        connection?.invoke('SendMessageToGroup', room.value, message)
         console.log("Sent message: " + message)
 
         messages.value.push({ class: "sent-message", text: message })

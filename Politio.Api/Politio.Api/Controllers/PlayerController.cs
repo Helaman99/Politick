@@ -5,18 +5,20 @@ namespace Politio.Api.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class PlayerController
+public class PlayerController : ControllerBase
 {
     private readonly PlayerService _playerService;
+    private readonly ILogger<PlayerController> _logger;
 
-    public PlayerController(PlayerService playerService)
+    public PlayerController(PlayerService playerService, ILogger<PlayerController> logger)
     {
         _playerService = playerService;
+        _logger = logger;
     }
 
     [HttpGet("SignUp")]
-    public bool SignUp(string email, string password)
-        => _playerService.SignUp(email, password);
+    public async Task<bool> SignUp(string email, string password)
+        => await _playerService.SignUp(email, password);
 
     [HttpGet("Login")]
     public int Login(string email, string password) 

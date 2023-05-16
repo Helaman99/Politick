@@ -25,22 +25,32 @@ player = new Player (
 
 function initializePlayer(id: number) {
     /*
-    playerData = axios call to backend GetPlayerData method
+    let playerData = ref()
+    Axios.get("https://localhost:7060/Player/GetPlayerData", {
+        id: id,
+    })
+    .then((response) => {
+        playerData.value = response.data
+    })
+    .catch((error) => {
+        console.log(error)
+    })
+
     player = new Player (
-        1,
-        'Happy Banana',
-        'astronaut.jpg',
-        0,
-        0,
-        0,
-        0,
-        [0, 0, 0],
-        [0, 0, 0, 0],
-        ['Happy', 'Sad', 'Wrinkly', 'Bloated'],
-        ['Helicopter', 'Banana', 'Sasquatch', 'Bunny', 'Marshmallow', 'Tank', 'Goldfish'],
-        ['astronaut.jpg', 'astronaut-synthwave.jpg'],
-        0,
-        'light'
+        playerData.id,
+        playerData.title,
+        playerData.avatar,
+        playerData.coinsTotal,
+        playerData.kudosTotal,
+        playerData.gamesTotal,
+        playerData.kudosOverall,
+        playerData.modeChoices,
+        playerData.standingChoices,
+        playerData.unlockedTitleFirstWords,
+        playerData.unlockedTitleSecondWords,
+        playerData.unlockedAvatars,
+        playerData.strikes,
+        playerData.theme
     )
     */
 }
@@ -51,10 +61,39 @@ export { player, pathToAvatars }
 
 export function login(email: string, password: string) {
     /* 
-    result = axios call to backend login method
+    let result: number
+    Axios.post("https://localhost:7060/Player/SignUp", {
+        email: email,
+        password: password
+    })
+    .then((response) => {
+        result = response.data
+    })
+    .catch((error) => {
+        console.log(error)
+    })
+
     if (result != -1)
-        initializePlayer(result);
-    return result;
+        initializePlayer(result)
+    */
+}
+
+export function signUp(email: string, password: string) {
+    /*
+    let result: number
+    Axios.post("https://localhost:7060/Player/SignUp", {
+        email: email,
+        password: password
+    })
+    .then((response) => {
+        result = response.data
+    })
+    .catch((error) => {
+        console.log(error)
+    })
+
+    if (result != -1)
+        initializePlayer(result)
     */
 }
 
