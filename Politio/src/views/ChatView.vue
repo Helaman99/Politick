@@ -1,9 +1,22 @@
 <template>
     <v-app>
         <div class = 'chat'>
+
             <div class = "messages">
                 <messageBubble v-for = "message in messages" :class = message.class :text = message.text />
             </div>
+
+            <v-dialog id = 'disconnected-dialog' v-model = 'disconnected' transition = 'scale-transition'>
+                <v-card class = 'disconnected-card'>
+                    <v-card-title color = 'red'>Oh no! Someone disconnected!</v-card-title>
+                    <v-card-text>
+                        Don't worry, you won't be penalized for this and will still receive your coins.
+                        Maybe the other person just had bad internet...
+                    </v-card-text>
+                    <v-btn @click = disconnect()>OK</v-btn>
+                </v-card>
+            </v-dialog>
+
             <chatFooter @send = SendMessage />
         </div>
     </v-app>
@@ -14,6 +27,7 @@ import messageBubble from '@/components/MessageBubble.vue'
 import chatFooter from '@/components/ChatFooter.vue'
 import { connectionRef, room } from '@/scripts/roomController'
 import { ref } from 'vue'
+import router from '@/router'
 
 interface Message {
     class: string
@@ -24,6 +38,7 @@ const htmlElement = ref<HTMLElement | null>(document.querySelector("html"))
 let justSent = ""
 
 const connection = connectionRef.value
+let disconnected = ref(false)
 
 connection?.on('ReceiveMessage', (message: string) => {
     if (message != null && message != "" && message.trim() !== "") {
@@ -54,6 +69,15 @@ function SendMessage(message: any) {
         justSent = message
     }
 }
+
+connectionRef.value?.on('PlayerDisconnected', () => {
+    disconnected.value = true
+})
+
+function disconnect() {
+    // Add coins to player
+    router.push('/dashboard/topics')
+}
 </script>
 
 <style>
@@ -67,5 +91,13 @@ body {
 .messages {
     display: flex;
     flex-direction: column;
+}
+.v-dialog {
+    width: 50%;
+}
+.disconnected-card {
+    align-items: center;
+    text-align: center;
+    padding: 1rem;
 }
 </style>

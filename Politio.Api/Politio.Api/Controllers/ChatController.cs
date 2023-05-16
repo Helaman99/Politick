@@ -31,4 +31,8 @@ public class ChatController : ControllerBase
     [HttpPost("DeleteRoom")]
     public bool DeleteRoom(int playerId)
         => _chatService.DeleteRoom(playerId);
+
+    [HttpPost("EndGame")]
+    public void EndGame(string chatRoomId)
+        => _chatService.EndGame(chatRoomId);
 }

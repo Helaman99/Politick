@@ -126,8 +126,6 @@ If a player loses all of their coins, they are kicked out of the chat room and t
 
 - A Politick blog
 
-
-
 ## Game Objects
 
 #### Player Object
