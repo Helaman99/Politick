@@ -8,7 +8,7 @@ public class ChatService
     private List<List<Room>> TopicRoomsLists { get; }
     private List<Room> RoomsInProgress { get; }
     private int NextRoomId { get; set; }
-    private readonly object _lock = new object();
+    private static readonly object _lock = new object();
 
     public ChatService()
     {

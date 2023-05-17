@@ -18,19 +18,18 @@ public class ShopController : ControllerBase
     }
 
     [HttpGet("Avatars")]
-    public IActionResult GetAvatars()
+    public List<string> GetAvatars()
+        => _shopService.GetAvatarImages();
+
+    [HttpGet("Avatar/{filename}")]
+    public IActionResult GetAvatarImage(string filename)
     {
-        string[] imagePaths = _shopService.GetAvatarImages();
+        string imagePath = _shopService.GetAvatarImage(filename);
+        if (!System.IO.File.Exists(imagePath))
+            return NotFound();
 
-        List<string> imageUrls = new();
-        foreach (string imagePath in imagePaths)
-        {
-            string imageName = Path.GetFileName(imagePath);
-            var imageUrl = Url.Action("GetAvatarImage", new { imageName });
-            imageUrls.Add(imageUrl);
-        }
-
-        return Ok(imageUrls);
+        byte[] imageData = System.IO.File.ReadAllBytes(imagePath);
+        return File(imageData, "image/png");
     }
 
     [HttpGet("AvatarMysteryBoxes")]

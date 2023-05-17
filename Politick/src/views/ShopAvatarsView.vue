@@ -4,45 +4,27 @@
         <router-link to = '/dashboard/shop/'>Back</router-link>
 
         <div class = 'Options'>
-            <div class = "Option" v-for = 'name in avatarList'>
-                <img :src = pathToAvatars.concat(name) />
+            <div class = "Option" v-for = 'avatar in avatarFileNames'>
+                <img :src = '"https://localhost:7060/Shop/Avatar/" + avatar' />
             </div>
         </div>
-        <div class = 'Options'>
+        <!-- <div class = 'Options'>
             <div class = 'Option' v-for = 'box in mysteryBoxes'>
                 <img :src = 'pathToMysteryBoxes.concat(box.name) + ".jpg"' />
                 <h3>{{ box.name }}</h3>
             </div>
-        </div>
+        </div> -->
     </div>
 </template>
 
 <script setup lang = 'ts'>
-//import shop from '@/scripts/shopController'
 import Axios from 'axios'
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { pathToAvatars } from '@/scripts/playerController'
-import { pathToMysteryBoxes } from '@/scripts/shopController'
+import { avatarFileNames } from '@/scripts/shopController'
 
-const avatarList = ref<string[]>([])
 const mysteryBoxes = ref()
-
-Axios.get('https://localhost:7060/Shop/Avatars')
-                    .then((response) => {
-                        avatarList.value = response.data
-                        console.log(response.data)
-                    })
-                    .catch((err) => {
-                        console.log(err)
-                    })
-Axios.get('https://localhost:7060/Shop/AvatarMysteryBoxes')
-                    .then((response) => {
-                        mysteryBoxes.value = response.data
-                        console.log(response.data)
-                    })
-                    .catch((err) => {
-                        console.log(err)
-                    })
+    
 </script>
 
 <style scoped>
