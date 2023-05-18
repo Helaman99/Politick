@@ -1,16 +1,22 @@
 <template>
     <v-card class = 'playerCard' elevation = '5' :color = color>
-        <img :src = avatarPath alt = 'avatar' />
+        <img :src = '"https://localhost:7060/Shop/Avatar" + avatarPath' alt = 'avatar' />
         <v-card-title>{{ title }}</v-card-title>
     </v-card>
 </template>
+
+<script lang = 'ts'>
+export default {
+    props: ['avatarPath', 'title', 'color']
+}
+</script>
 
 <style scoped>
 
 img {
     width: 75%;
     border-radius: 2%;
-    box-shadow: 2px 2px 10px black;
+    box-shadow: 1px 1px 4px gray;
 }
 
 .playerCard {
@@ -18,8 +24,3 @@ img {
 }
 
 </style>
-<script lang = 'ts'>
-export default {
-    props: ['avatarPath', 'title', 'color']
-}
-</script>

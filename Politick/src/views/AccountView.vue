@@ -4,7 +4,7 @@
         <div class = 'details'>
             <div class = 'avatar'>
                 <playerCard :title = player.title color = 'white' 
-                    :avatarPath = pathToAvatars.concat(player.avatar) />
+                    :avatarPath = player.avatar />
                 <br>
                 <v-btn to = 'customize'>Customize Card</v-btn>
             </div>
@@ -32,6 +32,11 @@
 
     </div>
 </template>
+
+<script setup lang = 'ts'>
+import playerCard from '@/components/PlayerCard.vue'
+import { player, pathToAvatars } from '@/scripts/playerController'
+</script>
 
 <style scoped>
 
@@ -76,19 +81,3 @@ td {
 }
 
 </style>
-<script lang = 'ts'>
-import playerCard from '@/components/PlayerCard.vue'
-import { player, pathToAvatars } from '@/scripts/playerController'
-
-export default {
-    components: {
-        playerCard
-    },
-    data() {
-        return {
-            player,
-            pathToAvatars
-        }
-    }
-}
-</script>
