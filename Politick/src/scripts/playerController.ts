@@ -9,8 +9,8 @@ let player: Player;
 player = new Player (
     1,
     'Happy Banana',
-    'astronaut.jpg',
-    0,
+    '/Premium/astronaut.jpg',
+    100,
     0,
     0,
     0,
@@ -21,7 +21,7 @@ player = new Player (
     0,
     ['Happy', 'Sad', 'Wrinkly', 'Bloated'],
     ['Helicopter', 'Banana', 'Sasquatch', 'Bunny', 'Marshmallow', 'Tank', 'Goldfish'],
-    ['astronaut.jpg', 'astronaut-synthwave.jpg'],
+    ['/Premium/astronaut.jpg'],
     0,
     'light'
 )
@@ -125,15 +125,18 @@ export function addCoins(coinCount: number) {
     })
 }
 
-export function removeCoins(coinCount: number) {
-    player.removeCoins(coinCount)
-    Axios.post("https://localhost:7060/Player/RemoveCoins", {
-        id: player.id,
-        amount: coinCount
-    })
-    .catch((error) => {
-        console.log(error)
-    })
+export function removeCoins(coinCount: number): boolean {
+    if (player.removeCoins(coinCount)) {
+        // Axios.post("https://localhost:7060/Player/RemoveCoins", {
+        //     id: player.id,
+        //     amount: coinCount
+        // })
+        // .catch((error) => {
+        //     console.log(error)
+        // })
+        return true
+    }
+    return false
 }
 
 export function updateStanding(standing: string) {

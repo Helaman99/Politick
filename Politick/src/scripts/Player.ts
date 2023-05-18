@@ -110,8 +110,12 @@ export class Player {
         this._coinsTotal += coinCount
     }
 
-    removeCoins(coinCount: number) {
-        this._coinsTotal -= coinCount
+    removeCoins(coinCount: number): boolean {
+        if (this._coinsTotal >= coinCount) {
+            this._coinsTotal -= coinCount
+            return true
+        }
+        return false
     }
 
     get id() { return this._id; }

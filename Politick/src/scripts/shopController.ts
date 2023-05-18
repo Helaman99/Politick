@@ -25,9 +25,12 @@ Axios.get("https://localhost:7060/Shop/PremiumAvatars")
         console.log(error)
     })
 
-export function purchaseAvatar(avatar: string, amount: number) {
-    // addAvatar(avatar)
-    // removeCoins(amount)
+export function purchaseAvatar(avatar: string, amount: number): boolean {
+    if (removeCoins(amount)) {
+        addAvatar(avatar)
+        return true
+    }
+    return false
 }
 
 export { basicAvatarFileNames, premiumAvatarFileNames }

@@ -63,8 +63,8 @@ public class Player
                                                         new MyString(4, "Scared") };
         UnlockedTitleSecondWords = new List<MyString> { new MyString(1, "Banana"), new MyString(2, "Explorer"), new MyString(3, "Marshmallow"), 
                                                          new MyString(4, "Racer") }; ;
-        UnlockedAvatars = new List<MyString> { new MyString(1, "starting_avatar_1.png"), new MyString(2, "starting_avatar_2.png"), 
-                                                new MyString(3, "starting_avatar_3.png"), new MyString(4, "starting_avatar_4.png") };
+        UnlockedAvatars = new List<MyString> { new MyString(1, "/Basic/starting_avatar_1.png"), new MyString(2, "/Basic/starting_avatar_2.png"), 
+                                                new MyString(3, "/Basic/starting_avatar_3.png"), new MyString(4, "/Basic/starting_avatar_4.png") };
         Strikes = 0;
         Theme = "light";
         Activation = new Random().Next(10000, 99999);

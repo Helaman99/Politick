@@ -7,7 +7,7 @@ public class ShopService
         List<string> fileNames = new();
         foreach (string path in Directory.GetFiles("./Assets/Avatars/Basic"))
         {
-            fileNames.Add(Path.GetFileName(path));
+            fileNames.Add("/Basic/" + Path.GetFileName(path));
         }
         return fileNames;
     }
@@ -17,15 +17,12 @@ public class ShopService
         List<string> fileNames = new();
         foreach (string path in Directory.GetFiles("./Assets/Avatars/Premium"))
         {
-            fileNames.Add(Path.GetFileName(path));
+            fileNames.Add("/Premium/" + Path.GetFileName(path));
         }
         return fileNames;
     }
 
 
-    public string GetBasicAvatarImage(string fileName)
-        => "./Assets/Avatars/Basic/" + fileName;
-
-    public string GetPremiumAvatarImage(string fileName)
-        => "./Assets/Avatars/Premium/" + fileName;
+    public string GetAvatarImage(string fileName)
+        => "./Assets/Avatars" + fileName;
 }

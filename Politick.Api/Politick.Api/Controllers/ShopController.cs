@@ -28,7 +28,7 @@ public class ShopController : ControllerBase
     [HttpGet("Avatar/Basic/{filename}")]
     public IActionResult GetBasicAvatarImage(string filename)
     {
-        string imagePath = _shopService.GetBasicAvatarImage(filename);
+        string imagePath = _shopService.GetAvatarImage("/Basic/" + filename);
         if (!System.IO.File.Exists(imagePath))
             return NotFound();
 
@@ -39,7 +39,7 @@ public class ShopController : ControllerBase
     [HttpGet("Avatar/Premium/{filename}")]
     public IActionResult GetPremiumAvatarImage(string filename)
     {
-        string imagePath = _shopService.GetPremiumAvatarImage(filename);
+        string imagePath = _shopService.GetAvatarImage("/Premium/" + filename);
         if (!System.IO.File.Exists(imagePath))
             return NotFound();
 
