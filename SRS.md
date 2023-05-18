@@ -80,7 +80,7 @@ Most Game Modes will be refereed by the Referee, and each game mode will have a 
 
 Players can get coins by
 
-* playing games --> 5 coins per match
+* playing games --> 5 coins per match, or 1 coin for every minute spent in the match (this is incase someone quits or is kicked).
 
 * referring other players --> 15 coins per referral
 

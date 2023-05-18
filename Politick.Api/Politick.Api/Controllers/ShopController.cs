@@ -17,14 +17,29 @@ public class ShopController : ControllerBase
         _logger = logger;
     }
 
-    [HttpGet("Avatars")]
-    public List<string> GetAvatars()
-        => _shopService.GetAvatarImages();
+    [HttpGet("BasicAvatars")]
+    public List<string> GetBasicAvatars()
+        => _shopService.GetBasicAvatarImages();
 
-    [HttpGet("Avatar/{filename}")]
-    public IActionResult GetAvatarImage(string filename)
+    [HttpGet("PremiumAvatars")]
+    public List<string> GetPremiumAvatars()
+        => _shopService.GetPremiumAvatarImages();
+
+    [HttpGet("Avatar/Basic/{filename}")]
+    public IActionResult GetBasicAvatarImage(string filename)
     {
-        string imagePath = _shopService.GetAvatarImage(filename);
+        string imagePath = _shopService.GetBasicAvatarImage(filename);
+        if (!System.IO.File.Exists(imagePath))
+            return NotFound();
+
+        byte[] imageData = System.IO.File.ReadAllBytes(imagePath);
+        return File(imageData, "image/png");
+    }
+
+    [HttpGet("Avatar/Premium/{filename}")]
+    public IActionResult GetPremiumAvatarImage(string filename)
+    {
+        string imagePath = _shopService.GetPremiumAvatarImage(filename);
         if (!System.IO.File.Exists(imagePath))
             return NotFound();
 
