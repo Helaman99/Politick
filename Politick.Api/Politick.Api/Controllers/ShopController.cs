@@ -55,9 +55,13 @@ public class ShopController : ControllerBase
     public List<Box> GetWordMysteryBoxes()
         => BoxService.WordMysteryBoxes;
 
-    [HttpGet("WordPacks")]
-    public List<Box> GetWordPacks()
-        => BoxService.WordPacks;
+    [HttpGet("FirstWordPacks")]
+    public List<Box> GetFirstWordPacks()
+        => BoxService.FirstWordPacks;
+
+    [HttpGet("SecondWordPacks")]
+    public List<Box> GetSecondWordPacks()
+        => BoxService.SecondWordPacks;
 
     [HttpGet("RandomAvatar")]
     public string GetRandomAvatar(string boxName)

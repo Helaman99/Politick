@@ -15,9 +15,15 @@ public static class BoxService
         new("Themed Words", new[] { "word1", "word2" }, 5),
     };
 
-    public static readonly List<Box> WordPacks = new()
+    public static readonly List<Box> FirstWordPacks = new()
     {
-        new("Themed Words", new[] { "word1", "word2" }, 5),
-        new("Themed Words", new[] { "word1", "word2" }, 5),
+        new("Military Ranks", new[] { "Colonel", "Captain", "Commander", "General" }, 4),
+        new("Gloomy", new[] { "Gloomy", "Unhappy", "Depressed", "Rainy", "Overcast" }, 5),
+    };
+
+    public static readonly List<Box> SecondWordPacks = new()
+    {
+        new("Fruit", new[] { "Orange", "Apple", "Grape", "Pineapple", "Strawberry" }, 5),
+        new("Military Equipment", new[] { "M1A1 Abrams", "Battleship", "Battlecruiser", "Missle", "Drone", "A-10 Warthog", "AC-130" }, 7),
     };
 }
