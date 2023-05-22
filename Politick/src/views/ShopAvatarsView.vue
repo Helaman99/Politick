@@ -89,10 +89,10 @@ function selectPremiumAvatar(avatar: string) {
 function attemptPurchase(amount: number) {
     if (purchaseAvatar(selectedAvatar.value, amount)) {
         success.value = true
+        basicPrompt.value = false
+        premiumPrompt.value = false
         setTimeout(() => { 
             success.value = false 
-            basicPrompt.value = false
-            premiumPrompt.value = false
         }, 3000)
     }
     else

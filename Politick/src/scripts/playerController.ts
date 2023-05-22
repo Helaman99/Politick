@@ -158,44 +158,44 @@ export function updateStanding(standing: string) {
             break
         }
     }
-    Axios.post("https://localhost:7060/Player/UpdateStanding", {
-            id: player.id,
-            newStanding: standing
-        })
-        .catch((error) => {
-            console.log(error)
-        })
+    // Axios.post("https://localhost:7060/Player/UpdateStanding", {
+    //         id: player.id,
+    //         newStanding: standing
+    //     })
+    //     .catch((error) => {
+    //         console.log(error)
+    //     })
 }
 
 export function addTitleFirstWords(newWords: string[]) {
     player.addTitleFirstWords(newWords)
-    Axios.post("https://localhost:7060/Player/AddTitleFirstWords", {
-        id: player.id,
-        newWords: newWords
-        })
-        .catch((error) => {
-            console.log(error)
-        })
+    // Axios.post("https://localhost:7060/Player/AddTitleFirstWords", {
+    //     id: player.id,
+    //     newWords: newWords
+    //     })
+    //     .catch((error) => {
+    //         console.log(error)
+    //     })
 }
 
 export function addTitleSecondWords(newWords: string[]) {
     player.addTitleSecondWords(newWords)
-    Axios.post("https://localhost:7060/Player/AddTitleSecondWords", {
-        id: player.id,
-        newWords: newWords
-        })
-        .catch((error) => {
-            console.log(error)
-        })
+    // Axios.post("https://localhost:7060/Player/AddTitleSecondWords", {
+    //     id: player.id,
+    //     newWords: newWords
+    //     })
+    //     .catch((error) => {
+    //         console.log(error)
+    //     })
 }
 
 export function addAvatar(newAvatar: string) {
     player.addAvatar(newAvatar)
-    Axios.post("https://localhost:7060/Player/AddAvatar", {
-        id: player.id,
-        newAvatar: newAvatar
-    })
-    .catch((error) => {
-        console.log(error)
-    })
+    // Axios.post("https://localhost:7060/Player/AddAvatar", {
+    //     id: player.id,
+    //     newAvatar: newAvatar
+    // })
+    // .catch((error) => {
+    //     console.log(error)
+    // })
 }
