@@ -40,8 +40,8 @@ import playerCard from '@/components/PlayerCard.vue'
 import { player, updateCard } from '@/scripts/playerController'
 import { ref } from 'vue'
 
-let newTitle = player.title.split(" ")
-const currAvatar = ref(player.avatar)
+let newTitle = player.value.title.split(" ")
+const currAvatar = ref(player.value.avatar)
 const firstWord = ref(newTitle[0])
 const secondWord = ref(newTitle[1])
 

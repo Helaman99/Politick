@@ -91,14 +91,14 @@ export class Player {
 
     addTitleFirstWords(newWords: string[]) {
         if (newWords.length != 0)
-            for (let word in newWords)
-                this._unlockedTitleFirstWords.push(word)
+            for (let i = 0; i < newWords.length; i++)
+                this._unlockedTitleFirstWords.push(newWords[i])
     }
 
     addTitleSecondWords(newWords: string[]) {
         if (newWords.length != 0)
-            for (let word in newWords)
-                this._unlockedTitleSecondWords.push(word)
+            for (let i = 0; i < newWords.length; i++)
+                this._unlockedTitleSecondWords.push(newWords[i])
     }
 
     addAvatar(newAvatar: string) {

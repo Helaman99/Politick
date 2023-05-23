@@ -76,25 +76,20 @@
     </div>
 </template>
 
-<script lang = 'ts'>
-import { player, pathToAvatars } from '../scripts/playerController'
-export default {
-    data: () => ({
-        navigation: false,
-        settings: false,
-        player,
-        pathToAvatars
-    }),
-    methods: {
-        setLight() {
-            // Set the theme to light
-            player.theme = 'light'
-        },
-        setDark() {
-            // Set the theme to dark
-            player.theme = 'dark'
-        }
-    }
+<script setup lang = 'ts'>
+import { player } from '../scripts/playerController'
+import { ref } from 'vue'
+
+const navigation = ref(false)
+const settings = ref(false)
+
+function setLight() {
+    // Set the theme to light
+    player.value.theme = 'light'
+}
+function setDark() {
+    // Set the theme to dark
+    player.value.theme = 'dark'
 }
 </script>
 
