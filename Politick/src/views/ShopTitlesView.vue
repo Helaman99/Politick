@@ -1,13 +1,17 @@
 <template>
     <div class = 'titles'>
-        <router-link to = '/dashboard/shop/'>Back</router-link>
-        Titles
+        <h2>Titles</h2>
 
         <div class = 'main-content'>
 
             <div class = 'side' id = 'left'>
                 <div class = 'top'>
-                    <v-btn variant = 'tonal' @click = 'changePacks()'>{{ packsDisplay }}</v-btn>
+                    <v-btn @click = 'changePacks(0)' :variant = 'whichDisplay == 0 ? "outlined" : "text"'>
+                        Title Packs - First Word
+                    </v-btn>
+                    <v-btn @click = 'changePacks(1)' :variant = 'whichDisplay == 1 ? "outlined" : "text"'>
+                        Title Packs - Second Word
+                    </v-btn>
                 </div>
                 <div class = 'pack-buttons'>
                     <v-btn v-for = 'wordPack in selectedPackList'
@@ -29,7 +33,7 @@
                     {{ word }}
                 </p>
                 <div class = 'bottom'>
-                    <v-btn @click = 'buyPrompt = true'>Buy Pack</v-btn>
+                    <v-btn :disabled = '!selectedPack' @click = 'buyPrompt = true'>Buy Pack</v-btn>
                 </div>
             </div>
 
@@ -68,6 +72,8 @@
             </v-dialog>
 
         </div>
+
+        <router-link to = '/dashboard/shop/'>Back</router-link>
     </div>
 </template>
 
@@ -97,18 +103,15 @@ Axios.get("https://localhost:7060/Shop/SecondWordPacks")
         console.log(error)
     })
 
-const packsDisplay = ref('Title Packs - First Word')
-let whichDisplay = 0
-function changePacks() {
-    if (whichDisplay == 0) {
-        whichDisplay = 1
-        packsDisplay.value = 'Title Packs - Second Word'
-        selectedPackList.value = secondWordPacks.value
+const whichDisplay = ref(0)
+function changePacks(value: number) {
+    if (value == 0) {
+        whichDisplay.value = 0
+        selectedPackList.value = firstWordPacks.value
     }
     else {
-        whichDisplay = 0
-        packsDisplay.value = 'Title Packs - First Word'
-        selectedPackList.value = firstWordPacks.value
+        whichDisplay.value = 1
+        selectedPackList.value = secondWordPacks.value
     }
 }
 
@@ -116,7 +119,7 @@ const buyPrompt = ref(false)
 const success = ref(false)
 const failed = ref(false)
 function attemptPurchase() {
-    switch (whichDisplay) {
+    switch (whichDisplay.value) {
         case 0: {
             if (purchaseFirstWordPack(selectedPack.value.contents, selectedPack.value.price)) {
                 success.value = true
@@ -124,6 +127,7 @@ function attemptPurchase() {
                 setTimeout(() => { 
                     success.value = false 
                 }, 3000)
+                break
             }
             else
                 failed.value = true
@@ -135,6 +139,7 @@ function attemptPurchase() {
                 setTimeout(() => { 
                     success.value = false 
                 }, 3000)
+                break
             }
             else
                 failed.value = true
@@ -147,6 +152,7 @@ function attemptPurchase() {
 .main-content{
     display: flex;
     place-content: center;
+    margin: 2rem 0;
 }
 .side {
     display: flex;
@@ -158,6 +164,15 @@ function attemptPurchase() {
 }
 .side .bottom {
     margin-top: 2rem;
+}
+#left .pack-buttons {
+    display: grid;
+    justify-content: space-around;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+}
+.v-divider {
+    margin: 0 1rem;
 }
 
 .prompt {
@@ -186,6 +201,9 @@ function attemptPurchase() {
 }
 
 @media (max-width: 920px) {
+    #left .pack-buttons {
+        grid-template-columns: 1fr 1fr;
+    }
     .prompt {
         width: 75%;
     }
