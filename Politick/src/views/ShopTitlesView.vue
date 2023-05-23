@@ -5,8 +5,10 @@
 
         <div class = 'main-content'>
 
-            <div class = 'left-side'>
-                <v-btn @click = 'changePacks()'>{{ packsDisplay }}</v-btn>
+            <div class = 'side' id = 'left'>
+                <div class = 'top'>
+                    <v-btn variant = 'tonal' @click = 'changePacks()'>{{ packsDisplay }}</v-btn>
+                </div>
                 <div class = 'pack-buttons'>
                     <v-btn v-for = 'wordPack in selectedPackList'
                     @click = 'selectedPack = wordPack'
@@ -17,11 +19,18 @@
                 </div>
             </div>
 
-            <div class = 'right-side'>
-                <v-btn @click = 'buyPrompt = true'>Buy Pack</v-btn>
+            <v-divider vertical />
+
+            <div class = 'side' id = 'right'>
+                <div class = 'top'>
+                    <p v-if = 'selectedPack'>"{{ selectedPack.name }}" Word Pack</p>
+                </div>
                 <p v-if = 'selectedPack' v-for = 'word in selectedPack.contents'>
                     {{ word }}
                 </p>
+                <div class = 'bottom'>
+                    <v-btn @click = 'buyPrompt = true'>Buy Pack</v-btn>
+                </div>
             </div>
 
             <v-dialog class = 'prompt' v-model = 'buyPrompt'>
@@ -32,14 +41,15 @@
                             {{ word }}
                         </p>
                     </div>
+                    <v-divider vertical />
                     <div class = 'prompt-right'>
                         <p>
-                            Are you sure you would like to buy the {{ selectedPack.name }} word 
+                            Are you sure you would like to buy the "{{ selectedPack.name }}" word 
                             pack for {{ selectedPack.price }} coins?</p>
-                        <v-card-cations>
+                        <v-card-actions>
                             <v-btn @click = 'attemptPurchase()'>Yes</v-btn>
                             <v-btn @click = 'buyPrompt = false'>No</v-btn>
-                        </v-card-cations>
+                        </v-card-actions>
                     </div>
                 </v-card>
             </v-dialog>
@@ -138,11 +148,16 @@ function attemptPurchase() {
     display: flex;
     place-content: center;
 }
-.left-side {
+.side {
+    display: flex;
+    flex-direction: column;
     width: 50%;
 }
-.right-side {
-    width: 50%;
+.side .top {
+    margin-bottom: 1rem;
+}
+.side .bottom {
+    margin-top: 2rem;
 }
 
 .prompt {
@@ -156,16 +171,35 @@ function attemptPurchase() {
 }
 .prompt-card .prompt-left {
     min-width: 50%;
-    margin-right: 1rem;
-    border-right: 1px solid lightgray;
     text-align: center;
     padding: 1rem;
 }
 .prompt-card .prompt-right {
+    display: flex;
+    flex-direction: column;
     text-align: center;
+    place-items: center;
     padding: 1rem;
 }
 .confirmation {
     text-align: center;
+}
+
+@media (max-width: 920px) {
+    .prompt {
+        width: 75%;
+    }
+}
+@media (max-width: 615px) {
+    .main-content {
+        flex-direction: column;
+    }
+    .side {
+        width: auto;
+        margin-top: 2rem;
+    }
+    .prompt .prompt-card {
+        flex-direction: column;
+    }
 }
 </style>
