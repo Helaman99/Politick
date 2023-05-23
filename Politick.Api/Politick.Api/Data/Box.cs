@@ -1,4 +1,4 @@
-﻿namespace Politio.Api.Data;
+﻿namespace Politick.Api.Data;
 
 public class Box
 {

@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.SignalR;
-using Politio.Api.Controllers;
-using Politio.Api.Data;
-using Politio.Api.Services;
+using Politick.Api.Controllers;
+using Politick.Api.Data;
+using Politick.Api.Services;
 
-namespace Politio.Api.Hubs;
+namespace Politick.Api.Hubs;
 
 public class ChatHub : Hub
 {

@@ -7,7 +7,7 @@
                     
                     <template v-slot:prepend>
                         <v-app-bar-nav-icon @click.stop="navigation = !navigation" elevation = '2'>
-                            <img class = 'menu-icon' :src = pathToAvatars.concat(player.avatar)>
+                            <img class = 'menu-icon' :src = '"https://localhost:7060/Shop/Avatar" + player.avatar'>
                         </v-app-bar-nav-icon>
                         <div id = "user-stats">
                             <p>Coins: {{ player.coins }}</p>
@@ -26,22 +26,22 @@
                 <v-navigation-drawer style = "padding-top:0.5rem;" v-model="navigation" elevation = '1'>
                     <v-list-item-group>
                         <v-list-item>
-                            <router-link to = 'account' @click = 'navigation = false'>
+                            <router-link to = '/dashboard/account' @click = 'navigation = false'>
                                 Account
                             </router-link>
                         </v-list-item>
                         <v-list-item>
-                            <router-link to = 'topics' @click = 'navigation = false'>
+                            <router-link to = '/dashboard/topics/' @click = 'navigation = false'>
                                 Play
                             </router-link>
                         </v-list-item>
                         <v-list-item>
-                            <router-link to = 'customize' @click = 'navigation = false'>
+                            <router-link to = '/dashboard/customize' @click = 'navigation = false'>
                                 Customize Player Card
                             </router-link>
                         </v-list-item>
                         <v-list-item>
-                            <router-link to = 'shop/' @click = 'navigation = false'>
+                            <router-link to = '/dashboard/shop/' @click = 'navigation = false'>
                                 Shop
                             </router-link>
                         </v-list-item>
@@ -75,6 +75,24 @@
         
     </div>
 </template>
+
+<script setup lang = 'ts'>
+import { player } from '../scripts/playerController'
+import { ref } from 'vue'
+
+const navigation = ref(false)
+const settings = ref(false)
+
+function setLight() {
+    // Set the theme to light
+    player.value.theme = 'light'
+}
+function setDark() {
+    // Set the theme to dark
+    player.value.theme = 'dark'
+}
+</script>
+
 <style scoped>
 .headerBar {
     margin-bottom: 5rem;
@@ -98,24 +116,3 @@
     margin-top: 1rem;
 }
 </style>
-<script lang = 'ts'>
-import { player, pathToAvatars } from '../scripts/playerController'
-export default {
-    data: () => ({
-        navigation: false,
-        settings: false,
-        player,
-        pathToAvatars
-    }),
-    methods: {
-        setLight() {
-            // Set the theme to light
-            player.theme = 'light'
-        },
-        setDark() {
-            // Set the theme to dark
-            player.theme = 'dark'
-        }
-    }
-}
-</script>

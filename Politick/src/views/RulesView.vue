@@ -31,8 +31,7 @@
             If you do not break any of the rules, you will leave every match with 5 additional coins
             that you can spend on in-game items. However, if you do break the rules, you will lose 
             one coin <i>per infraction</i>. If you lose all of your coins, <b>you will be kicked out 
-            of the chatroom</b>, and if you were playing the Jury game mode the win will be given to 
-            your opponent.
+            of the chatroom</b>.
         </p>
         <p>
             If you are kicked out of too many chat rooms, <b>your account will be suspended.</b>
@@ -45,7 +44,7 @@
         </p>
 
         <br>
-        <v-btn to = 'topics'>Begin</v-btn>
+        <v-btn to = '/dashboard/topics'>Begin</v-btn>
 
     </div>
 </template>

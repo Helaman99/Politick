@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Politio.Api\Politick.Api.csproj" />
+    <ProjectReference Include="..\Politick.Api\Politick.Api.csproj" />
   </ItemGroup>
 
 </Project>

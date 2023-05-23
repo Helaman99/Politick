@@ -5,14 +5,14 @@
         
             <div class = 'cardPreview'>
                 <playerCard :title = 'firstWord.concat(" ").concat(secondWord)' color = 'white' 
-                    :avatarPath = pathToAvatars.concat(currAvatar) />
+                    :avatarPath = currAvatar />
             </div>
 
             <div class = 'customizeOptions'>
 
                 <div class = 'avatarOptions'>
-                    <div v-for = 'imageName in player.unlockedAvatars' class = 'avatarImage'>
-                        <img :src = pathToAvatars.concat(imageName) @click = 'currAvatar = imageName' />
+                    <div v-for = 'image in player.unlockedAvatars' class = 'avatarImage'>
+                        <img :src = '"https://localhost:7060/Shop/Avatar" + image' @click = 'currAvatar = image' />
                     </div>
                 </div>
 
@@ -26,7 +26,7 @@
 
         </div>
 
-        <v-btn @click = 'save(currAvatar, firstWord.concat(" ").concat(secondWord))'>Save Changes</v-btn>
+        <v-btn @click = 'save()'>Save Changes</v-btn>
 
         <v-card id = 'save-prompt' color = 'green'>
             <v-card-title>Changes Saved!</v-card-title>
@@ -34,6 +34,26 @@
 
     </div>
 </template>
+
+<script setup lang = 'ts'>
+import playerCard from '@/components/PlayerCard.vue'
+import { player, updateCard } from '@/scripts/playerController'
+import { ref } from 'vue'
+
+let newTitle = player.value.title.split(" ")
+const currAvatar = ref(player.value.avatar)
+const firstWord = ref(newTitle[0])
+const secondWord = ref(newTitle[1])
+
+function save() {
+    updateCard(currAvatar.value, firstWord.value.concat(" ").concat(secondWord.value))
+    const prompt = document.querySelector('#save-prompt') as HTMLElement
+    if (prompt != null) {
+        prompt.style.opacity = '1'
+        setTimeout(() => { if (prompt != null) prompt.style.opacity = '0' }, 3000)
+    }
+}
+</script>
 
 <style scoped>
 
@@ -123,38 +143,3 @@
 }
 
 </style>
-<script lang = 'ts'>
-import playerCard from '@/components/PlayerCard.vue'
-import { player, updateCard, pathToAvatars } from '@/scripts/playerController'
-
-let newTitle = player.title.split(" ")
-let currAvatar = player.avatar
-let firstWord = newTitle[0]
-let secondWord = newTitle[1]
-
-export default {
-    components: {
-        playerCard
-    },
-    methods: {
-        save(newAvatar:string , newTitle: string) {
-            updateCard(newAvatar, newTitle)
-            const prompt = document.querySelector('#save-prompt')
-            if (prompt != null) {
-                prompt.style.opacity = '1'
-                setTimeout(() => { if (prompt != null) prompt.style.opacity = '0' }, 3000)
-            }
-        }
-    },
-    data() {
-        return {
-            player,
-            pathToAvatars,
-            newTitle,
-            currAvatar,
-            firstWord,
-            secondWord
-        }
-    }
-}
-</script>

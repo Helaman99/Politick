@@ -1,16 +1,16 @@
 import { Player } from './Player'
+import { ref } from 'vue'
 import Axios from 'axios'
 
 // Code to retrieve player data from backend/database
 
 // Create a player object with the player's data from the database
-let player: Player;
 
-player = new Player (
+const player = ref<Player>(new Player(
     1,
     'Happy Banana',
-    'astronaut.jpg',
-    0,
+    '/Premium/astronaut.jpg',
+    100,
     0,
     0,
     0,
@@ -21,9 +21,10 @@ player = new Player (
     0,
     ['Happy', 'Sad', 'Wrinkly', 'Bloated'],
     ['Helicopter', 'Banana', 'Sasquatch', 'Bunny', 'Marshmallow', 'Tank', 'Goldfish'],
-    ['astronaut.jpg', 'astronaut-synthwave.jpg'],
+    ['/Premium/astronaut.jpg'],
     0,
     'light'
+    )
 )
 
 function initializePlayer(id: number) {
@@ -101,98 +102,100 @@ export function signUp(email: string, password: string) {
 }
 
 export function updateCard(newAvatar: string, newTitle: string) {
-    console.log("Updating player data in the database...")
-    player.avatar = newAvatar
-    player.title = newTitle
-    Axios.post("https://localhost:7060/Player/UpdateCard", {
-        id: player.id,
-        avatar: newAvatar,
-        title: newTitle
-    })
-    .catch((error) => {
-        console.log(error)
-    })
+    player.value.avatar = newAvatar
+    player.value.title = newTitle
+    // Axios.post("https://localhost:7060/Player/UpdateCard", {
+    //     id: player.id,
+    //     avatar: newAvatar,
+    //     title: newTitle
+    // })
+    // .catch((error) => {
+    //     console.log(error)
+    // })
 }
 
 export function addCoins(coinCount: number) {
-    player.addCoins(coinCount)
-    Axios.post("https://localhost:7060/Player/AddCoins", {
-        id: player.id,
-        amount: coinCount
-    })
-    .catch((error) => {
-        console.log(error)
-    })
+    player.value.addCoins(coinCount)
+    // Axios.post("https://localhost:7060/Player/AddCoins", {
+    //     id: player.id,
+    //     amount: coinCount
+    // })
+    // .catch((error) => {
+    //     console.log(error)
+    // })
 }
 
-export function removeCoins(coinCount: number) {
-    player.removeCoins(coinCount)
-    Axios.post("https://localhost:7060/Player/RemoveCoins", {
-        id: player.id,
-        amount: coinCount
-    })
-    .catch((error) => {
-        console.log(error)
-    })
+export function removeCoins(coinCount: number): boolean {
+    if (player.value.removeCoins(coinCount)) {
+        // Axios.post("https://localhost:7060/Player/RemoveCoins", {
+        //     id: player.id,
+        //     amount: coinCount
+        // })
+        // .catch((error) => {
+        //     console.log(error)
+        // })
+        return true
+    }
+    return false
 }
 
 export function updateStanding(standing: string) {
     switch (standing.toLowerCase()) {
         case "authoritarian": {
-            player.incAuthoritarian()
+            player.value.incAuthoritarian()
             break
         }
         case "left": {
-            player.incLeft()
+            player.value.incLeft()
             break
         }
         case "libertarian": {
-            player.incLibertarian()
+            player.value.incLibertarian()
             break
         }
         case "right": {
-            player.incRight()
+            player.value.incRight()
             break
         }
     }
-    Axios.post("https://localhost:7060/Player/UpdateStanding", {
-            id: player.id,
-            newStanding: standing
-        })
-        .catch((error) => {
-            console.log(error)
-        })
+    // Axios.post("https://localhost:7060/Player/UpdateStanding", {
+    //         id: player.id,
+    //         newStanding: standing
+    //     })
+    //     .catch((error) => {
+    //         console.log(error)
+    //     })
 }
 
 export function addTitleFirstWords(newWords: string[]) {
-    player.addTitleFirstWords(newWords)
-    Axios.post("https://localhost:7060/Player/AddTitleFirstWords", {
-        id: player.id,
-        newWords: newWords
-        })
-        .catch((error) => {
-            console.log(error)
-        })
+    player.value.addTitleFirstWords(newWords)
+    // Axios.post("https://localhost:7060/Player/AddTitleFirstWords", {
+    //     id: player.id,
+    //     newWords: newWords
+    //     })
+    //     .catch((error) => {
+    //         console.log(error)
+    //     })
 }
 
 export function addTitleSecondWords(newWords: string[]) {
-    player.addTitleSecondWords(newWords)
-    Axios.post("https://localhost:7060/Player/AddTitleSecondWords", {
-        id: player.id,
-        newWords: newWords
-        })
-        .catch((error) => {
-            console.log(error)
-        })
+    player.value.addTitleSecondWords(newWords)
+    // Axios.post("https://localhost:7060/Player/AddTitleSecondWords", {
+    //     id: player.id,
+    //     newWords: newWords
+    //     })
+    //     .catch((error) => {
+    //         console.log(error)
+    //     })
 }
 
 export function addAvatar(newAvatar: string) {
-    player.addAvatar(newAvatar)
-    Axios.post("https://localhost:7060/Player/AddAvatar", {
-        id: player.id,
-        newAvatar: newAvatar
-    })
-    .catch((error) => {
-        console.log(error)
-    })
+    player.value.addAvatar(newAvatar)
+    // Axios.post("https://localhost:7060/Player/AddAvatar", {
+    //     id: player.id,
+    //     newAvatar: newAvatar
+    // })
+    // .catch((error) => {
+    //     console.log(error)
+    // })
 }

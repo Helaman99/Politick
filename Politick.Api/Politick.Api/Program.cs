@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.EntityFrameworkCore;
-using Politio.Api.Data;
-using Politio.Api.Hubs;
-using Politio.Api.Services;
+using Politick.Api.Services;
+using Politick.Api.Data;
+using Politick.Api.Hubs;
 
 var MyAllowAllOrigins = "_myAllowAllOrigins";
 
@@ -38,6 +38,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(connectionString);
 });
 builder.Services.AddScoped<PlayerService>();
+builder.Services.AddScoped<ShopService>();
 builder.Services.AddSingleton<ChatService>();
 
 var app = builder.Build();
