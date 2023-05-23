@@ -1,9 +1,9 @@
 <template>
     <div class = 'avatars'>
         <h2>Avatars</h2>
-        <router-link to = '/dashboard/shop/'>Back</router-link>
 
         <h4>Basic Avatars</h4>
+        <v-divider />
         <div class = 'Options'>
             <v-btn class = "Option" v-for = 'avatar in basicAvatarFileNames' 
                 @click = selectBasicAvatar(avatar) :disabled = 'player.unlockedAvatars.includes(avatar)'>
@@ -13,6 +13,7 @@
         </div>
         <br><br>
         <h4>Premium Avatars</h4>
+        <v-divider />
         <div class = 'Options'>
             <v-btn class = "Option" v-for = 'avatar in premiumAvatarFileNames' 
                 @click = selectPremiumAvatar(avatar) :disabled = 'player.unlockedAvatars.includes(avatar)'
@@ -63,6 +64,9 @@
                 <v-card-text>If this issue persists, please contact support.</v-card-text>
             </v-card>
         </v-dialog>
+
+        <br>
+        <router-link to = '/dashboard/shop/'>Back</router-link>
     </div>
 </template>
 
@@ -107,6 +111,7 @@ function attemptPurchase(amount: number) {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     place-items: center;
+    gap: 1rem;
 }
 .Options .Option {
     width: 80%;
@@ -117,6 +122,10 @@ function attemptPurchase(amount: number) {
 .Options .Option img {
     width: 100%;
     border-radius: 5%;
+}
+
+.v-divider {
+    margin-bottom: 0.5rem;
 }
 
 .prompt {
