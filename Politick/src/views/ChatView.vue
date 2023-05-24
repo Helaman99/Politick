@@ -6,7 +6,22 @@
                 <messageBubble v-for = "message in messages" :class = message.class :text = message.text />
             </div>
 
-            <v-dialog id = 'disconnected-dialog' v-model = 'disconnected' transition = 'scale-transition'>
+            <v-dialog class = 'versus-dialog' v-model = 'versus' persistent fullscreen 
+                transition = 'dialog-top-transition'>
+                <v-card class = 'versus-card'>
+                    <div>
+                        <PlayerCard :avatar-path = player.avatar :title = player.title color = 'white' />
+                        <h3>You</h3>
+                    </div>
+                    <h1>VS</h1>
+                    <div>
+                        <PlayerCard :avatar-path = opponent?.avatar :title = opponent?.title color = 'white' />
+                        <h3>Opponent</h3>
+                    </div>
+                </v-card>
+            </v-dialog>
+
+            <v-dialog class = 'disconnected-dialog' v-model = 'disconnected' transition = 'scale-transition'>
                 <v-card class = 'disconnected-card'>
                     <v-card-title color = 'red'>Oh no! Someone disconnected!</v-card-title>
                     <v-card-text>
@@ -25,9 +40,16 @@
 <script setup lang = 'ts'>
 import messageBubble from '@/components/MessageBubble.vue'
 import chatFooter from '@/components/ChatFooter.vue'
-import { connectionRef, room } from '@/scripts/roomController'
+import { connectionRef, room, opponent } from '@/scripts/roomController'
+import { player } from '@/scripts/playerController'
+import PlayerCard from '@/components/PlayerCard.vue'
 import { ref } from 'vue'
 import router from '@/router'
+
+const versus = ref(true)
+// setTimeout(() => {
+//     versus.value = false
+// }, 4000)
 
 interface Message {
     class: string
@@ -99,5 +121,21 @@ body {
     align-items: center;
     text-align: center;
     padding: 1rem;
+}
+.versus-dialog {
+    width: 100%;
+}
+.versus-card {
+    display: flex;
+    flex-direction: row;
+    padding: 5rem;
+    place-items: center;
+    justify-content: space-between;
+}
+.versus-card div {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    place-items: center;
 }
 </style>

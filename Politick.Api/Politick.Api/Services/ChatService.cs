@@ -20,7 +20,7 @@ public class ChatService
         NextRoomId = 1;
     }
 
-    public string GetRoomId(int id, int topic, int side)
+    public string GetRoomId(int id, string avatar, string title, int topic, int side)
     {
         lock (_lock)
         {
@@ -30,12 +30,12 @@ public class ChatService
                 if (room.Side != side && room.PlayersWaiting < 2)
                 {
                     room.PlayersWaiting = 2;
-                    room.PlayerIds.Add(id);
+                    room.Opponents.Add(new Opponent(id, avatar, title));
                     return room.ChatRoomId;
                 }
             }
             string newRoomId = NextRoomId++.ToString();
-            availableRooms.Add(new Room(side, id, newRoomId));
+            availableRooms.Add(new Room(side, new Opponent(id, avatar, title), newRoomId));
             return newRoomId;
         }
     }
@@ -76,6 +76,18 @@ public class ChatService
             }
         }
         return false;
+    }
+
+    public Opponent GetOpponent(string chatRoomId, int id)
+    {
+        Room? room = RoomsInProgress.Find(r => r.ChatRoomId == chatRoomId);
+        if (room is not null && room.Opponents.Count() == 2)
+        {
+            if (room.Opponents[0].Id == id)
+                return room.Opponents[1];
+            return room.Opponents[0];
+        }
+        throw new NullReferenceException(nameof(room));
     }
 
     public bool EndGame(string chatRoomId)

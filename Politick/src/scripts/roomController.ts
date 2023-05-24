@@ -5,7 +5,7 @@ import router from '@/router'
 import * as signalR from '@microsoft/signalr'
 
 Axios.post("https://localhost:7060/Chat/DeleteRoom", {
-    id: player.id,
+    id: player.value.id,
 })
 
 const topics = ref()
@@ -33,8 +33,15 @@ export function selectSide(index: number, standing: string) {
 if (selectedTopic == -1)
     router.push("/dashboard/topics")
 
+interface Opponent {
+    avatar: string,
+    title: string,
+    color:string
+}
+
 const room = ref('')
 const connectionRef = ref<signalR.HubConnection>()
+const opponent = ref<Opponent>()
 export function startConnection(): boolean {
     connectionRef.value = new signalR.HubConnectionBuilder()
         .withUrl('https://localhost:7060/ChatHub')
@@ -42,9 +49,10 @@ export function startConnection(): boolean {
   
     connectionRef.value.start()
         .then(() => {
-            console.log("Topic: " + selectedTopic + " -- Side: " + selectedSide)
             Axios.post("https://localhost:7060/Chat/GetRoomId", {
-                id: player.id,
+                id: player.value.id,
+                avatar: player.value.avatar,
+                title: player.value.title,
                 topic: selectedTopic,
                 side: selectedSide
             })
@@ -61,10 +69,24 @@ export function startConnection(): boolean {
         })
         }).then(() => {
             connectionRef.value?.on('StartGame', () => {
-                router.push("/chat")
+                Axios.post("localhost:7060/Chat/GetOpponent", {
+                    chatRoomId: room.value,
+                    id: player.value.id
+                })
+                .then((response) => {
+                    opponent.value = {
+                        avatar: response.data.avatar,
+                        title: response.data.title,
+                        color: "white"
+                    }
+                    router.push("/chat")
+                })
+                .catch((error) => {
+                    console.log(error)
+                })
             })
         })
     return true
 }
 
-export { topics, selectedTopic, selectedSide, connectionRef, room }
+export { topics, selectedTopic, selectedSide, connectionRef, room, opponent }
