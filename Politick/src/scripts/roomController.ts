@@ -4,10 +4,6 @@ import { player } from './playerController'
 import router from '@/router'
 import * as signalR from '@microsoft/signalr'
 
-Axios.post("https://localhost:7060/Chat/DeleteRoom", {
-    id: player.value.id,
-})
-
 const topics = ref()
 Axios.get("https://localhost:7060/Topic/GetTopics")
     .then((response) => {
@@ -49,20 +45,21 @@ export function startConnection(): boolean {
   
     connectionRef.value.start()
         .then(() => {
-            Axios.post("https://localhost:7060/Chat/GetRoomId", {
-                id: player.value.id,
-                avatar: player.value.avatar,
-                title: player.value.title,
-                topic: selectedTopic,
-                side: selectedSide
+            Axios.post("https://localhost:7060/Chat/GetRoom", {
+                // id: player.value.id,
+                avatar: "avatar",
+                // title: player.value.title,
+                // topic: selectedTopic,
+                // side: selectedSide
             })
             .then((response) => {
-                room.value = response.data
-                room.value = room.value.toString()
-                console.log(room.value)
-                if (connectionRef.value)
-                    if (!connectionRef.value.invoke('JoinGroupAsync', room.value))
-                        return false
+                console.log(response.data)
+                // room.value = response.data
+                // room.value = room.value.toString()
+                // console.log(room.value)
+                // if (connectionRef.value)
+                //     if (!connectionRef.value.invoke('JoinGroupAsync', room.value))
+                //         return false
             })
             .catch((error) => {
                 console.log(error)
@@ -77,7 +74,7 @@ export function startConnection(): boolean {
                     opponent.value = {
                         avatar: response.data.avatar,
                         title: response.data.title,
-                        color: "white"
+                        color: response.data.color
                     }
                     router.push("/chat")
                 })
