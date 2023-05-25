@@ -114,24 +114,6 @@ public class ChatService
         return false;
     }
 
-    public bool DeleteRoom(int playerId)
-    {
-        Room? room = null;
-        lock (_lock)
-        {
-            foreach (List<Room> list in TopicRoomsLists)
-            {
-                room = list.Where(p => p.PlayerIds.Contains(playerId)).SingleOrDefault();
-                if (room is not null)
-                {
-                    list.Remove(room);
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
     public string DisconnectRoom(string connectionId)
     {
         Room? room;
