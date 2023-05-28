@@ -17,17 +17,13 @@ public class ChatController : ControllerBase
         _logger = logger;
     }
 
-    //[HttpPost("GetRoomId")]
-    //public string GetRoomId(int id, string avatar, string title, int topic, int side)
-    //    => _chatService.GetRoomId(id, avatar, title, topic, side);
-
-    [HttpPost("GetRoom")]
-    public string GetRoom(string avatar)
-        => "This Works!";
+    [HttpPost("AssignRoomId")]
+    public Opponent AssignRoomId([FromBody] Opponent thisPlayer)
+        => _chatService.AssignRoomId(thisPlayer);
 
     [HttpPost("GetOpponent")]
-    public Opponent GetOpponent(string chatRoomId, int id)
-        => _chatService.GetOpponent(chatRoomId, id);
+    public Opponent GetOpponent([FromBody] Opponent thisPlayer)
+        => _chatService.GetOpponent(thisPlayer);
 
     [HttpPost("EndGame")]
     public void EndGame(string chatRoomId)

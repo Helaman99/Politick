@@ -15,7 +15,7 @@
                     </div>
                     <h1>VS</h1>
                     <div>
-                        <PlayerCard :avatar-path = opponent?.avatar :title = opponent?.title color = 'white' />
+                        <PlayerCard :avatar-path = opponent?.Avatar :title = opponent?.Title color = 'white' />
                         <h3>Opponent</h3>
                     </div>
                 </v-card>
@@ -40,16 +40,16 @@
 <script setup lang = 'ts'>
 import messageBubble from '@/components/MessageBubble.vue'
 import chatFooter from '@/components/ChatFooter.vue'
-import { connectionRef, room, opponent } from '@/scripts/roomController'
+import { connectionRef, thisPlayer, opponent } from '@/scripts/roomController'
 import { player } from '@/scripts/playerController'
 import PlayerCard from '@/components/PlayerCard.vue'
 import { ref } from 'vue'
 import router from '@/router'
 
 const versus = ref(true)
-// setTimeout(() => {
-//     versus.value = false
-// }, 4000)
+setTimeout(() => {
+    versus.value = false
+}, 4000)
 
 interface Message {
     class: string
@@ -61,6 +61,7 @@ let justSent = ""
 
 const connection = connectionRef.value
 let disconnected = ref(false)
+const thisRoomId = thisPlayer.value?.ChatRoomId
 
 connection?.on('ReceiveMessage', (message: string) => {
     if (message != null && message != "" && message.trim() !== "") {
@@ -77,7 +78,7 @@ connection?.on('ReceiveMessage', (message: string) => {
 
 function SendMessage(message: any) {
     if (message != null && message != "" && message.trim() !== "") {
-        connection?.invoke('SendMessageToGroup', room.value, message)
+        connection?.invoke('SendMessageToGroup', thisRoomId, message)
         console.log("Sent message: " + message)
 
         messages.value.push({ class: "sent-message", text: message })
@@ -127,15 +128,25 @@ body {
 }
 .versus-card {
     display: flex;
-    flex-direction: row;
     padding: 5rem;
     place-items: center;
-    justify-content: space-between;
 }
 .versus-card div {
-    width: 60%;
+    width: 20rem;
     display: flex;
     flex-direction: column;
     place-items: center;
+}
+.versus-card h1 {
+    margin: 5rem;
+}
+
+@media (max-width: 870px) {
+    .versus-card {
+        flex-direction: column;
+    }
+    .versus-card h1 {
+        margin: 2rem;
+    }
 }
 </style>

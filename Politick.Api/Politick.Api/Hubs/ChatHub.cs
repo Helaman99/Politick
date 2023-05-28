@@ -13,15 +13,15 @@ public class ChatHub : Hub
         _chatService = chatService;
     }
 
-    public async Task<bool> JoinGroupAsync(string chatRoomId)
+    public async Task<bool> JoinGroupAsync(Opponent player)
     {
-        Console.WriteLine(chatRoomId);
+        Console.WriteLine(player.ChatRoomId);
         string connectionId = Context.ConnectionId;
-        int playersJoined = _chatService.AddPlayerToRoom(connectionId, chatRoomId);
+        int playersJoined = _chatService.AddPlayerToRoom(connectionId, player.ChatRoomId);
         if (playersJoined == 1 || playersJoined == 2)
         {
-            await Groups.AddToGroupAsync(connectionId, chatRoomId);
-            if (playersJoined == 2) await NotifyToStartGame(chatRoomId);
+            await Groups.AddToGroupAsync(connectionId, player.ChatRoomId);
+            if (playersJoined == 2) await NotifyToStartGame(player.ChatRoomId);
             return true;
         }
         return false;
