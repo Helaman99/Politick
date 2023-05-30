@@ -2,6 +2,8 @@
     <v-app>
         <div class = 'chat'>
 
+            <ChatHeader @timerEnd = endGame() ref = 'chatHeader' />
+
             <div class = "messages">
                 <messageBubble v-for = "message in messages" :class = message.class :text = message.text />
             </div>
@@ -21,27 +23,49 @@
                 </v-card>
             </v-dialog>
 
-            <v-dialog class = 'disconnected-dialog' v-model = 'disconnected' transition = 'scale-transition'>
+            <v-dialog class = 'game-over-dialog' v-model = 'gameOver' transition = 'scale-transition' persistent>
+                <v-card class = 'game-over-card'>
+                    <v-card-text>
+                        You're all out of time! Would you like to spend 1 coin to gain another 2 minutes?
+                    </v-card-text>
+                    <v-card-actions>
+                        <v-btn @click = 'extendTime'>Yes</v-btn>
+                        <v-btn @click = 'disconnect'>No</v-btn>
+                    </v-card-actions>
+                    <v-card-text id = 'failed'>
+
+                    </v-card-text>
+                </v-card>
+            </v-dialog>
+
+            <v-dialog class = 'time-added-dialog' v-model = 'timeAdded'>
+                <v-card id = 'time-added-card'>
+
+                </v-card>
+            </v-dialog>
+
+            <v-dialog class = 'disconnected-dialog' v-model = 'disconnected' transition = 'scale-transition' persistent>
                 <v-card class = 'disconnected-card'>
                     <v-card-title color = 'red'>Oh no! Someone disconnected!</v-card-title>
                     <v-card-text>
                         Don't worry, you won't be penalized for this and will still receive your coins.
-                        Maybe the other person just had bad internet...
+                        Maybe the other person just had a bad internet connection...
                     </v-card-text>
                     <v-btn @click = disconnect()>OK</v-btn>
                 </v-card>
             </v-dialog>
 
-            <chatFooter @send = SendMessage />
+            <ChatFooter @send = SendMessage />
         </div>
     </v-app>
 </template>
 
 <script setup lang = 'ts'>
 import messageBubble from '@/components/MessageBubble.vue'
-import chatFooter from '@/components/ChatFooter.vue'
+import ChatFooter from '@/components/ChatFooter.vue'
+import ChatHeader from '@/components/ChatHeader.vue'
 import { connectionRef, thisPlayer, opponent } from '@/scripts/roomController'
-import { player } from '@/scripts/playerController'
+import { player, removeCoins, addCoins } from '@/scripts/playerController'
 import PlayerCard from '@/components/PlayerCard.vue'
 import { ref } from 'vue'
 import router from '@/router'
@@ -61,12 +85,10 @@ let justSent = ""
 
 const connection = connectionRef.value
 let disconnected = ref(false)
-const thisRoomId = thisPlayer.value?.ChatRoomId
+const thisRoomId = opponent.value?.ChatRoomId
 
 connection?.on('ReceiveMessage', (message: string) => {
     if (message != null && message != "" && message.trim() !== "") {
-        console.log("Received message: " + message)
-
         if (message != justSent) {
             messages.value.push({ class: "received-message", text: message })
             
@@ -78,8 +100,8 @@ connection?.on('ReceiveMessage', (message: string) => {
 
 function SendMessage(message: any) {
     if (message != null && message != "" && message.trim() !== "") {
+        console.log(thisPlayer.value?.ChatRoomId)
         connection?.invoke('SendMessageToGroup', thisRoomId, message)
-        console.log("Sent message: " + message)
 
         messages.value.push({ class: "sent-message", text: message })
         console.log(htmlElement.value)
@@ -97,8 +119,41 @@ connectionRef.value?.on('PlayerDisconnected', () => {
     disconnected.value = true
 })
 
+const timeAdded = ref(false)
+const timeAddedCard = document.getElementById('time-added-card')
+connectionRef.value?.on('AddTime', (playerTitle) => {
+    if (timeAddedCard) {
+        timeAddedCard.textContent = playerTitle + " added 2 minutes to the time!"
+        setTimeout(() => {
+            timeAdded.value = false
+        }, 3000)
+    }
+    chatHeader.value.startTimer(2)
+})
+
+const gameOver = ref(false)
+const chatHeader = ref()
+let fullTimeUsed = false
+function endGame() {
+    fullTimeUsed = true
+    gameOver.value = true
+}
+function extendTime() {
+    if (removeCoins(1)) {
+        gameOver.value = false
+        connection?.invoke('AddTime', thisRoomId, player.value.title)
+    }
+    else {
+        let failed = document.getElementById('failed')
+        if (failed)
+            failed.innerHTML = "<p color = red>Not enough coins!</p>"
+    }
+}
 function disconnect() {
-    // Add coins to player
+    if (fullTimeUsed)
+        addCoins(5)
+    else
+        addCoins(5 - ChatHeader.minutesLeft)
     router.push('/dashboard/topics')
 }
 </script>

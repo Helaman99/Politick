@@ -71,7 +71,6 @@ export function startConnection(): boolean {
             connectionRef.value?.on('StartGame', () => {
                 Axios.post("https://localhost:7060/Chat/GetOpponent", thisPlayer.value)
                 .then((response) => {
-                    console.log(response.data)
                     opponent.value = {
                         Id: response.data.id,
                         Avatar: response.data.avatar,

@@ -42,6 +42,12 @@ public class ChatHub : Hub
         return Clients.Group(chatRoomId).SendAsync("StartGame");
     }
 
+    public async Task<string> AddTime(string chatRoomId, string playerTitle)
+    {
+        await Clients.Group(chatRoomId).SendAsync("StartGame");
+        return playerTitle;
+    }
+
     public override async Task OnDisconnectedAsync(Exception? exception)
     {
         string connectionId = Context.ConnectionId;
