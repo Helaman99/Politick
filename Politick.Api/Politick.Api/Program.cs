@@ -77,7 +77,12 @@ builder.Services.AddScoped<ShopService>();
 builder.Services.AddSingleton<ChatService>();
 
 //Identity Services
-builder.Services.AddIdentityCore<Player>(options => options.SignIn.RequireConfirmedAccount = false)
+builder.Services.AddIdentityCore<Player>(options =>
+    {
+        options.User.RequireUniqueEmail = true;
+        options.User.AllowedUserNameCharacters = string.Empty; // Usernames aren't required, nor asked for
+        options.SignIn.RequireConfirmedAccount = false;
+    })
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<AppDbContext>();
 

@@ -5,7 +5,7 @@
 namespace Politick.Api.Migrations
 {
     /// <inheritdoc />
-    public partial class PlayerUpdate : Migration
+    public partial class UserNameUpdate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

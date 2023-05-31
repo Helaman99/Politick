@@ -7,20 +7,6 @@ using System.Text.Json.Serialization;
 
 namespace Politick.Api.Data;
 
-public class MyString
-{
-    [Key]
-    public int Id { get; set; }
-    public string? Value { get; set; }
-
-    public MyString() { }
-    public MyString(int id, string value)
-    {
-        Id = id;
-        Value = value;
-    }
-}
-
 public class Player : IdentityUser
 {
     public string Title { get; set; }
@@ -33,16 +19,17 @@ public class Player : IdentityUser
     public int Left { get; set; }
     public int Libertarian { get; set; }
     public int Right { get; set; }
-    public List<MyString> UnlockedTitleFirstWords { get; }
-    public List<MyString> UnlockedTitleSecondWords { get; }
-    public List<MyString> UnlockedAvatars { get; }
+    public string UnlockedTitleFirstWords { get; set; }
+    public string UnlockedTitleSecondWords { get; set; }
+    public string UnlockedAvatars { get; set; }
     public int Strikes { get; set; }
     public string Theme { get; set; }
     public int Activation { get; set; }
     public string ActualStanding { get; set; }
 
-    public Player(string email)
+    public Player(string email) : base()
     {
+        UserName = email;
         Email = email;
         Title = "Scared Banana";
         Avatar = "starting_avatar_1.png";
@@ -54,15 +41,11 @@ public class Player : IdentityUser
         Left = 0;
         Libertarian = 0;
         Right = 0;
-        UnlockedTitleFirstWords = new List<MyString> { new MyString(1, "Angry"), new MyString(2, "Helpful"), new MyString(3, "Slimy"),
-                                                        new MyString(4, "Scared") };
-        UnlockedTitleSecondWords = new List<MyString> { new MyString(1, "Banana"), new MyString(2, "Explorer"), new MyString(3, "Marshmallow"), 
-                                                         new MyString(4, "Racer") }; ;
-        UnlockedAvatars = new List<MyString> { new MyString(1, "/Basic/starting_avatar_1.png"), new MyString(2, "/Basic/starting_avatar_2.png"), 
-                                                new MyString(3, "/Basic/starting_avatar_3.png"), new MyString(4, "/Basic/starting_avatar_4.png") };
+        UnlockedTitleFirstWords = "Angry+Helpful+Slimy+Scared";
+        UnlockedTitleSecondWords = "Banana+Explorer+Marshmallow+Racer";
+        UnlockedAvatars = "/Basic/starting_avatar_1.png+/Basic/starting_avatar_2.png+/Basic/starting_avatar_3.png+/Basic/starting_avatar_4.png";
         Strikes = 0;
         Theme = "light";
-        Activation = new Random().Next(10000, 99999);
         ActualStanding = "Unknown";
     }
 
@@ -80,21 +63,21 @@ public class Player : IdentityUser
     {
         if (!newWords.IsNullOrEmpty())
             foreach (string word in newWords)
-                UnlockedTitleFirstWords.Add(new MyString(UnlockedTitleFirstWords.Count + 1, word));
+                UnlockedTitleFirstWords += $"+{word}";
         else throw new ArgumentNullException(nameof(newWords));
     }
     public void AddTitleSecondWords(string[] newWords)
     {
         if (!newWords.IsNullOrEmpty())
             foreach (string word in newWords)
-                UnlockedTitleSecondWords.Add(new MyString(UnlockedTitleSecondWords.Count + 1, word));
+                UnlockedTitleSecondWords += $"+{word}";
         else throw new ArgumentNullException(nameof(newWords));
     }
 
     public void AddAvatar(string avatar)
     {
         if (avatar is not null)
-            UnlockedAvatars.Add(new MyString(UnlockedAvatars.Count + 1, avatar));
+            UnlockedAvatars += $"+{avatar}";
         else throw new ArgumentNullException(nameof(avatar));
     }
 

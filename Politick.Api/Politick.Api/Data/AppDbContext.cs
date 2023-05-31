@@ -17,5 +17,15 @@ public class AppDbContext : IdentityDbContext<Player>
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
+
+        modelBuilder.Entity<Player>()
+            .Property(p => p.UnlockedTitleFirstWords)
+            .HasMaxLength(4000);
+        modelBuilder.Entity<Player>()
+            .Property(p => p.UnlockedTitleSecondWords)
+            .HasMaxLength(4000);
+        modelBuilder.Entity<Player>()
+            .Property(p => p.UnlockedAvatars)
+            .HasMaxLength(4000);
     }
 }

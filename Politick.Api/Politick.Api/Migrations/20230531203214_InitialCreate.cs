@@ -6,53 +6,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Politick.Api.Migrations
 {
     /// <inheritdoc />
-    public partial class PlayerUpdateWithAuth : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_MyString_Players_PlayerId",
-                table: "MyString");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_MyString_Players_PlayerId1",
-                table: "MyString");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_MyString_Players_PlayerId2",
-                table: "MyString");
-
-            migrationBuilder.DropTable(
-                name: "Players");
-
-            migrationBuilder.AlterColumn<string>(
-                name: "PlayerId2",
-                table: "MyString",
-                type: "nvarchar(450)",
-                nullable: true,
-                oldClrType: typeof(int),
-                oldType: "int",
-                oldNullable: true);
-
-            migrationBuilder.AlterColumn<string>(
-                name: "PlayerId1",
-                table: "MyString",
-                type: "nvarchar(450)",
-                nullable: true,
-                oldClrType: typeof(int),
-                oldType: "int",
-                oldNullable: true);
-
-            migrationBuilder.AlterColumn<string>(
-                name: "PlayerId",
-                table: "MyString",
-                type: "nvarchar(450)",
-                nullable: true,
-                oldClrType: typeof(int),
-                oldType: "int",
-                oldNullable: true);
-
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -72,11 +30,10 @@ namespace Politick.Api.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    PlayerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Avatar = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CoinsTotal = table.Column<int>(type: "int", nullable: false),
-                    GudosTotal = table.Column<int>(type: "int", nullable: false),
+                    KudosTotal = table.Column<int>(type: "int", nullable: false),
                     GamesTotal = table.Column<int>(type: "int", nullable: false),
                     KudosOverall = table.Column<int>(type: "int", nullable: false),
                     Authoritarian = table.Column<int>(type: "int", nullable: false),
@@ -213,6 +170,37 @@ namespace Politick.Api.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "MyString",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Value = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PlayerId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    PlayerId1 = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    PlayerId2 = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MyString", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_MyString_AspNetUsers_PlayerId",
+                        column: x => x.PlayerId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_MyString_AspNetUsers_PlayerId1",
+                        column: x => x.PlayerId1,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_MyString_AspNetUsers_PlayerId2",
+                        column: x => x.PlayerId2,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -252,43 +240,25 @@ namespace Politick.Api.Migrations
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
 
-            migrationBuilder.AddForeignKey(
-                name: "FK_MyString_AspNetUsers_PlayerId",
+            migrationBuilder.CreateIndex(
+                name: "IX_MyString_PlayerId",
                 table: "MyString",
-                column: "PlayerId",
-                principalTable: "AspNetUsers",
-                principalColumn: "Id");
+                column: "PlayerId");
 
-            migrationBuilder.AddForeignKey(
-                name: "FK_MyString_AspNetUsers_PlayerId1",
+            migrationBuilder.CreateIndex(
+                name: "IX_MyString_PlayerId1",
                 table: "MyString",
-                column: "PlayerId1",
-                principalTable: "AspNetUsers",
-                principalColumn: "Id");
+                column: "PlayerId1");
 
-            migrationBuilder.AddForeignKey(
-                name: "FK_MyString_AspNetUsers_PlayerId2",
+            migrationBuilder.CreateIndex(
+                name: "IX_MyString_PlayerId2",
                 table: "MyString",
-                column: "PlayerId2",
-                principalTable: "AspNetUsers",
-                principalColumn: "Id");
+                column: "PlayerId2");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_MyString_AspNetUsers_PlayerId",
-                table: "MyString");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_MyString_AspNetUsers_PlayerId1",
-                table: "MyString");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_MyString_AspNetUsers_PlayerId2",
-                table: "MyString");
-
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -305,86 +275,13 @@ namespace Politick.Api.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "MyString");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.AlterColumn<int>(
-                name: "PlayerId2",
-                table: "MyString",
-                type: "int",
-                nullable: true,
-                oldClrType: typeof(string),
-                oldType: "nvarchar(450)",
-                oldNullable: true);
-
-            migrationBuilder.AlterColumn<int>(
-                name: "PlayerId1",
-                table: "MyString",
-                type: "int",
-                nullable: true,
-                oldClrType: typeof(string),
-                oldType: "nvarchar(450)",
-                oldNullable: true);
-
-            migrationBuilder.AlterColumn<int>(
-                name: "PlayerId",
-                table: "MyString",
-                type: "int",
-                nullable: true,
-                oldClrType: typeof(string),
-                oldType: "nvarchar(450)",
-                oldNullable: true);
-
-            migrationBuilder.CreateTable(
-                name: "Players",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Activation = table.Column<int>(type: "int", nullable: false),
-                    ActualStanding = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Authoritarian = table.Column<int>(type: "int", nullable: false),
-                    Avatar = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CoinsTotal = table.Column<int>(type: "int", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    GamesTotal = table.Column<int>(type: "int", nullable: false),
-                    GudosTotal = table.Column<int>(type: "int", nullable: false),
-                    KudosOverall = table.Column<int>(type: "int", nullable: false),
-                    Left = table.Column<int>(type: "int", nullable: false),
-                    Libertarian = table.Column<int>(type: "int", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Right = table.Column<int>(type: "int", nullable: false),
-                    Strikes = table.Column<int>(type: "int", nullable: false),
-                    Theme = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Players", x => x.Id);
-                });
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_MyString_Players_PlayerId",
-                table: "MyString",
-                column: "PlayerId",
-                principalTable: "Players",
-                principalColumn: "Id");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_MyString_Players_PlayerId1",
-                table: "MyString",
-                column: "PlayerId1",
-                principalTable: "Players",
-                principalColumn: "Id");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_MyString_Players_PlayerId2",
-                table: "MyString",
-                column: "PlayerId2",
-                principalTable: "Players",
-                principalColumn: "Id");
         }
     }
 }

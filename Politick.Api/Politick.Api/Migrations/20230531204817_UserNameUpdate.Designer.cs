@@ -12,8 +12,8 @@ using Politick.Api.Data;
 namespace Politick.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230531061529_PlayerUpdate")]
-    partial class PlayerUpdate
+    [Migration("20230531204817_UserNameUpdate")]
+    partial class UserNameUpdate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -228,10 +228,10 @@ namespace Politick.Api.Migrations
                     b.Property<int>("GamesTotal")
                         .HasColumnType("int");
 
-                    b.Property<int>("GudosTotal")
+                    b.Property<int>("KudosOverall")
                         .HasColumnType("int");
 
-                    b.Property<int>("KudosOverall")
+                    b.Property<int>("KudosTotal")
                         .HasColumnType("int");
 
                     b.Property<int>("Left")
@@ -262,9 +262,6 @@ namespace Politick.Api.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
-
-                    b.Property<Guid>("PlayerId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Right")
                         .HasColumnType("int");
