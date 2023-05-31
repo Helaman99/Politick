@@ -14,45 +14,22 @@ public class PlayerService
         _db = db;
     }
 
-    public async Task<Player?> GetPlayerAsync(string email) 
-        => await _db.Players.SingleOrDefaultAsync(p => p.Email == email);
-
-    public async Task<Player> GetPlayerAsync(int id) 
+    public async Task<Player> GetPlayerAsync(string id) 
         => await _db.Players.SingleAsync(p => p.Id == id);
 
-    public string GetPlayerData(int id) 
+    public string GetPlayerData(string id) 
         =>  GetPlayerAsync(id).Result.GetData();
 
-    public async Task<bool> SignUp(string email, string password)
-    {
-        if (GetPlayerAsync(email) == null)
-        {
-            Player newPlayer = new (email, password);
-            await _db.AddAsync(newPlayer);
-            await _db.SaveChangesAsync();
-            return true;
-        }
-        return false;
-    }
-
-    public int Login(string email, string password)
-    {
-        Player? player = GetPlayerAsync(email).Result;
-        if (player is not null && player.CheckPassword(password))
-            return player.Id;
-        return -1;
-    }
-
-    public bool IsActivated(int id) 
+    public bool IsActivated(string id) 
         => GetPlayerAsync(id).Result.Activation == 0;
 
-    public bool ActivatePlayer(int id, int code) 
+    public bool ActivatePlayer(string id, int code) 
         => GetPlayerAsync(id).Result.Activate(code);
 
     public string[] GetAvatarImages()
         => Directory.GetFiles("../Assets/Avatars");
 
-    public void UpdateCard(int id, string avatar, string title)
+    public void UpdateCard(string id, string avatar, string title)
     {
         Player player = GetPlayerAsync(id).Result;
         player.Avatar = avatar;
@@ -60,42 +37,35 @@ public class PlayerService
         _db.SaveChangesAsync();
     }
 
-    public void AddCoins(int id, int amount)
+    public void AddCoins(string id, int amount)
     {
         Player player = GetPlayerAsync(id).Result;
         player.CoinsTotal += amount;
         _db.SaveChangesAsync();
     }
 
-    public void RemoveCoins(int id, int amount)
+    public void RemoveCoins(string id, int amount)
     {
         Player player = GetPlayerAsync(id).Result;
         player.CoinsTotal -= amount;
         _db.SaveChangesAsync();
     }
 
-    public void UpdatePassword(int id, string password)
-    {
-        Player player = GetPlayerAsync(id).Result;
-        player.Password = password;
-        _db.SaveChangesAsync();
-    }
-
-    public void AddTitleFirstWords(int id, string[] newWords)
+    public void AddTitleFirstWords(string id, string[] newWords)
     {
         Player player = GetPlayerAsync(id).Result;
         player.AddTitleFirstWords(newWords);
         _db.SaveChangesAsync();
     }
 
-    public void AddTitleSecondWords(int id, string[] newWords)
+    public void AddTitleSecondWords(string id, string[] newWords)
     {
         Player player = GetPlayerAsync(id).Result;
         player.AddTitleSecondWords(newWords);
         _db.SaveChangesAsync();
     }
 
-    public void UpdateStanding(int id, string newStanding)
+    public void UpdateStanding(string id, string newStanding)
     {
         Player player = GetPlayerAsync(id).Result;
         switch (newStanding.ToLower())
@@ -112,7 +82,7 @@ public class PlayerService
         _db.SaveChangesAsync();
     }
 
-    public void AddAvatar(int id, string avatar)
+    public void AddAvatar(string id, string avatar)
     {
         Player player = GetPlayerAsync(id).Result;
         player.AddAvatar(avatar);

@@ -16,20 +16,12 @@ public class PlayerController : ControllerBase
         _logger = logger;
     }
 
-    [HttpGet("SignUp")]
-    public async Task<bool> SignUp(string email, string password)
-        => await _playerService.SignUp(email, password);
-
-    [HttpGet("Login")]
-    public int Login(string email, string password) 
-        => _playerService.Login(email, password);
-
     [HttpGet("GetPlayer")]
-    public string GetPlayerData(int id) 
+    public string GetPlayerData(string id) 
         => _playerService.GetPlayerData(id);
 
     [HttpGet("IsActivated")]
-    public bool IsActivated(int id) 
+    public bool IsActivated(string id) 
         => _playerService.IsActivated(id);
 
     [HttpPost("GetUnlockedAvatars")]
@@ -42,45 +34,42 @@ public class PlayerController : ControllerBase
         {
             string imageName = Path.GetFileName(imagePath);
             var imageUrl = Url.Action("GetAvatarImage", new { imageName });
-            imageUrls.Add(imageUrl);
+            if (imageUrl is not null)
+                imageUrls.Add(imageUrl);
         }
 
         return Ok(imageUrls);
     }
 
     [HttpPost("UpdateCard")]
-    public void UpdateCard(int id, string avatar, string title) 
+    public void UpdateCard(string id, string avatar, string title) 
         => _playerService.UpdateCard(id, avatar, title);
 
     [HttpPost("AddCoins")]
-    public void AddCoins(int id, int amount) 
+    public void AddCoins(string id, int amount) 
         => _playerService.AddCoins(id, amount);
 
     [HttpPost("RemoveCoins")]
-    public void RemoveCoins(int id, int amount) 
+    public void RemoveCoins(string id, int amount) 
         => _playerService.RemoveCoins(id, amount);
 
-    [HttpPost("Update")]
-    public void UpdatePassword(int id, string password) 
-        => _playerService.UpdatePassword(id, password);
-
     [HttpPost("Activate")]
-    public bool ActivatePlayer(int id, int code) 
+    public bool ActivatePlayer(string id, int code) 
         => _playerService.ActivatePlayer(id, code);
 
     [HttpPost("AddTitleFirstWords")]
-    public void AddTitleFirstWords(int id, string[] newWords)
+    public void AddTitleFirstWords(string id, string[] newWords)
         => _playerService.AddTitleFirstWords(id, newWords);
 
     [HttpPost("AddTitleSecondWords")]
-    public void AddTitleSecondWords(int id, string[] newWords)
+    public void AddTitleSecondWords(string id, string[] newWords)
         => _playerService.AddTitleSecondWords(id, newWords);
 
     [HttpPost("UpdateStanding")]
-    public void UpdateStanding(int id, string newStanding)
+    public void UpdateStanding(string id, string newStanding)
         => _playerService.UpdateStanding(id, newStanding);
 
     [HttpPost("AddAvatar")]
-    public void AddAvatar(int id, string newAvatar)
+    public void AddAvatar(string id, string newAvatar)
         => _playerService.AddAvatar(id, newAvatar);
 }

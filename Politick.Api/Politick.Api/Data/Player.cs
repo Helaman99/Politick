@@ -1,4 +1,5 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.IdentityModel.Tokens;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json;
@@ -20,13 +21,8 @@ public class MyString
     }
 }
 
-public class Player
+public class Player : IdentityUser
 {
-    [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int Id { get; set; }
-    [JsonIgnore]public string Email { get; set; }
-    [JsonIgnore]public string Password { get; set; }
     public string Title { get; set; }
     public string Avatar { get; set; }
     public int CoinsTotal { get; set; }
@@ -45,10 +41,9 @@ public class Player
     public int Activation { get; set; }
     public string ActualStanding { get; set; }
 
-    public Player(string email, string password)
+    public Player(string email)
     {
         Email = email;
-        Password = password;
         Title = "Scared Banana";
         Avatar = "starting_avatar_1.png";
         CoinsTotal = 0;
@@ -74,11 +69,6 @@ public class Player
     public string GetData()
     {
         return JsonSerializer.Serialize(this);
-    }
-
-    public bool CheckPassword(string password)
-    {
-        return Password.CompareTo(password) == 0;
     }
 
     public void IncAuthoritarian() { Authoritarian++; }
