@@ -26,7 +26,7 @@ public class Player : IdentityUser
     public string Title { get; set; }
     public string Avatar { get; set; }
     public int CoinsTotal { get; set; }
-    public int GudosTotal { get; set; }
+    public int KudosTotal { get; set; }
     public int GamesTotal { get; set; }
     public int KudosOverall { get; set; }
     public int Authoritarian { get; set; }
@@ -47,7 +47,7 @@ public class Player : IdentityUser
         Title = "Scared Banana";
         Avatar = "starting_avatar_1.png";
         CoinsTotal = 0;
-        GudosTotal = 0;
+        KudosTotal = 0;
         GamesTotal = 0;
         KudosOverall = 0;
         Authoritarian = 0;

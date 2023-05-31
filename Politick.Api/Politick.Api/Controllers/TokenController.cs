@@ -29,7 +29,7 @@ public class TokenController : Controller
     {
         if (string.IsNullOrEmpty(userCredentials.Email))
         {
-            return BadRequest("Username is required");
+            return BadRequest("Email is required");
         }
         if (string.IsNullOrEmpty(userCredentials.Password))
         {
@@ -48,11 +48,11 @@ public class TokenController : Controller
 
             var claims = new List<Claim>
             {
-                new Claim(JwtRegisteredClaimNames.Sub, user.UserName!),
+                new Claim(JwtRegisteredClaimNames.Sub, user.Email!),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim(Claims.UserId, user.Id.ToString()),
                 new Claim(Claims.Random, (new Random()).NextDouble().ToString()),
-                new Claim(Claims.UserName, user.UserName!.ToString().Substring(0,user.UserName.ToString().IndexOf("@"))),
+                new Claim(Claims.Email, user.Email!.ToString().Substring(0,user.Email.ToString().IndexOf("@"))),
             };
             var roles = await _userManager.GetRolesAsync(user);
             foreach (var role in roles)
@@ -70,7 +70,7 @@ public class TokenController : Controller
             var jwtToken = new JwtSecurityTokenHandler().WriteToken(token);
             return Ok(new { token = jwtToken });
         }
-        return Unauthorized("The username or password is incorrect");
+        return Unauthorized("The email or password is incorrect");
     }
 
     [HttpPost("CreateUser")]
@@ -78,7 +78,7 @@ public class TokenController : Controller
     {
         if (string.IsNullOrEmpty(createUser.Email))
         {
-            return BadRequest("Username is required");
+            return BadRequest("Email is required");
         }
         if (string.IsNullOrEmpty(createUser.Password))
         {
