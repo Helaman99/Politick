@@ -17,20 +17,13 @@ public class ChatController : ControllerBase
         _logger = logger;
     }
 
-    [HttpPost("GetRoomId")]
-    public string GetRoomId([FromBody] GetRoomIdModel model)
-        => _chatService.GetRoomId(model.Id, model.Topic, model.Side);
+    [HttpPost("AssignRoomId")]
+    public Opponent AssignRoomId([FromBody] Opponent thisPlayer)
+        => _chatService.AssignRoomId(thisPlayer);
 
-    public class GetRoomIdModel
-    {
-        public int Id { get; set; }
-        public int Topic { get; set; }
-        public int Side { get; set; }
-    }
-
-    [HttpPost("DeleteRoom")]
-    public bool DeleteRoom(int playerId)
-        => _chatService.DeleteRoom(playerId);
+    [HttpPost("GetOpponent")]
+    public Opponent GetOpponent([FromBody] Opponent thisPlayer)
+        => _chatService.GetOpponent(thisPlayer);
 
     [HttpPost("EndGame")]
     public void EndGame(string chatRoomId)

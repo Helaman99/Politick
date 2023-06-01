@@ -10,7 +10,7 @@ const player = ref<Player>(new Player(
     1,
     'Happy Banana',
     '/Premium/astronaut.jpg',
-    100,
+    5,
     0,
     0,
     0,

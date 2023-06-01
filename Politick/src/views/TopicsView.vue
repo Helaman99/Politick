@@ -2,7 +2,7 @@
     <div class = 'topics'>
         <div class = 'topic-cards'>
             <v-card class = 'topic-card' v-for = '(topic, index) in topics' :img = topic.image
-                @click = selectTopic(index) to = 'sides'>
+                @click = selectTopic(index) to = '/dashboard/sides'>
                 <v-card-title>{{ topic.title }}</v-card-title>
             </v-card>
         </div>

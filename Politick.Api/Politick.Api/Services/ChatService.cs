@@ -20,23 +20,25 @@ public class ChatService
         NextRoomId = 1;
     }
 
-    public string GetRoomId(int id, int topic, int side)
+    public Opponent AssignRoomId(Opponent player)
     {
         lock (_lock)
         {
-            List<Room> availableRooms = TopicRoomsLists[topic];
+            List<Room> availableRooms = TopicRoomsLists[player.Topic];
             foreach (Room room in availableRooms)
             {
-                if (room.Side != side && room.PlayersWaiting < 2)
+                if (room.Side != player.Side && room.PlayersWaiting < 2)
                 {
                     room.PlayersWaiting = 2;
-                    room.PlayerIds.Add(id);
-                    return room.ChatRoomId;
+                    player.ChatRoomId = room.ChatRoomId;
+                    room.Opponents.Add(player);
+                    return player;
                 }
             }
             string newRoomId = NextRoomId++.ToString();
-            availableRooms.Add(new Room(side, id, newRoomId));
-            return newRoomId;
+            player.ChatRoomId = newRoomId;
+            availableRooms.Add(new Room(player.Side, player, newRoomId));
+            return player;
         }
     }
 
@@ -78,6 +80,18 @@ public class ChatService
         return false;
     }
 
+    public Opponent GetOpponent(Opponent thisPlayer)
+    {
+        Room? room = RoomsInProgress.Find(r => r.ChatRoomId == thisPlayer.ChatRoomId);
+        if (room is not null && room.Opponents.Count() == 2)
+        {
+            if (room.Opponents[0].Id == thisPlayer.Id)
+                return room.Opponents[1];
+            return room.Opponents[0];
+        }
+        throw new NullReferenceException(nameof(room));
+    }
+
     public bool EndGame(string chatRoomId)
     {
         Room? room;
@@ -99,24 +113,6 @@ public class ChatService
         if (room is not null && room.ConnectionIds.Contains(connectionId))
             return true;
 
-        return false;
-    }
-
-    public bool DeleteRoom(int playerId)
-    {
-        Room? room = null;
-        lock (_lock)
-        {
-            foreach (List<Room> list in TopicRoomsLists)
-            {
-                room = list.Where(p => p.PlayerIds.Contains(playerId)).SingleOrDefault();
-                if (room is not null)
-                {
-                    list.Remove(room);
-                    return true;
-                }
-            }
-        }
         return false;
     }
 

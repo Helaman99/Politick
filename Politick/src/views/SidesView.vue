@@ -27,7 +27,7 @@
 
         <v-dialog id = 'loading-dialog' v-model = 'loading' persistent transition = 'scale-transition'>
             <v-card class = 'loading-card'>
-                <v-card-title>Creating room...</v-card-title>
+                <v-card-title>Finding opponent...</v-card-title>
                 <v-btn variant = 'text' loading />
             </v-card>
         </v-dialog>
