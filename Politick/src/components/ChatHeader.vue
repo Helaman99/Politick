@@ -15,7 +15,7 @@ import { onMounted } from 'vue'
 import { ref } from 'vue'
 const emit = defineEmits(['timerEnd'])
 
-let minutesLeft = ref(0)
+const minutesLeft = ref<number>(0)
 function startTimer(minutes: number) {
     const countdownElement = document.getElementById('countdown')
     if (countdownElement && minutes > 0) {
@@ -46,7 +46,7 @@ function startTimer(minutes: number) {
     }
 }
 onMounted( () => {
-    startTimer(2)
+    startTimer(1)
 })
-defineExpose({ startTimer });
+defineExpose({ startTimer, minutesLeft })
 </script>

@@ -42,10 +42,16 @@ public class ChatHub : Hub
         return Clients.Group(chatRoomId).SendAsync("StartGame");
     }
 
-    public async Task<string> AddTime(string chatRoomId, string playerTitle)
+    public async Task AddTime(string chatRoomId, string playerTitle)
     {
-        await Clients.Group(chatRoomId).SendAsync("StartGame");
-        return playerTitle;
+        if (_chatService.ValidateConnection(chatRoomId, Context.ConnectionId))
+            await Clients.Group(chatRoomId).SendAsync("AddTime", playerTitle);
+    }
+
+    public async Task LeaveRoom(string chatRoomId)
+    {
+        if (_chatService.ValidateConnection(chatRoomId, Context.ConnectionId))
+            await Clients.Group(chatRoomId).SendAsync("OpponentLeft");
     }
 
     public override async Task OnDisconnectedAsync(Exception? exception)

@@ -29,8 +29,8 @@
                         You're all out of time! Would you like to spend 1 coin to gain another 2 minutes?
                     </v-card-text>
                     <v-card-actions>
-                        <v-btn @click = 'extendTime'>Yes</v-btn>
-                        <v-btn @click = 'disconnect'>No</v-btn>
+                        <v-btn @click = 'extendTime()'>Yes</v-btn>
+                        <v-btn @click = 'leave()'>No</v-btn>
                     </v-card-actions>
                     <v-card-text id = 'failed'>
 
@@ -38,9 +38,23 @@
                 </v-card>
             </v-dialog>
 
+            <v-dialog class = 'opponent-left' v-model = 'opponentLeft' transition = 'scale-transition' persistent>
+                <v-card class = 'opponent-left'>
+                    <v-card-title>The other player left the chat room.</v-card-title>
+                    <v-card-text>
+                        Time to find another opponent!
+                    </v-card-text>
+                    <v-card-actions>
+                        <v-btn @click = leave()>OK</v-btn>
+                    </v-card-actions>
+                </v-card>
+            </v-dialog>
+
             <v-dialog class = 'time-added-dialog' v-model = 'timeAdded'>
                 <v-card id = 'time-added-card'>
-
+                    <v-card-text>
+                        {{ playerAddedTime }} added 2 minutes to the time!
+                    </v-card-text>
                 </v-card>
             </v-dialog>
 
@@ -51,7 +65,7 @@
                         Don't worry, you won't be penalized for this and will still receive your coins.
                         Maybe the other person just had a bad internet connection...
                     </v-card-text>
-                    <v-btn @click = disconnect()>OK</v-btn>
+                    <v-btn @click = leave()>OK</v-btn>
                 </v-card>
             </v-dialog>
 
@@ -119,18 +133,6 @@ connectionRef.value?.on('PlayerDisconnected', () => {
     disconnected.value = true
 })
 
-const timeAdded = ref(false)
-const timeAddedCard = document.getElementById('time-added-card')
-connectionRef.value?.on('AddTime', (playerTitle) => {
-    if (timeAddedCard) {
-        timeAddedCard.textContent = playerTitle + " added 2 minutes to the time!"
-        setTimeout(() => {
-            timeAdded.value = false
-        }, 3000)
-    }
-    chatHeader.value.startTimer(2)
-})
-
 const gameOver = ref(false)
 const chatHeader = ref()
 let fullTimeUsed = false
@@ -140,22 +142,42 @@ function endGame() {
 }
 function extendTime() {
     if (removeCoins(1)) {
-        gameOver.value = false
         connection?.invoke('AddTime', thisRoomId, player.value.title)
     }
     else {
         let failed = document.getElementById('failed')
         if (failed)
-            failed.innerHTML = "<p color = red>Not enough coins!</p>"
+            failed.innerHTML = "<p style='color:red;'>Not enough coins!</p>"
     }
 }
-function disconnect() {
+
+const timeAdded = ref(false)
+let playerAddedTime = ""
+connectionRef.value?.on('AddTime', (playerTitle) => {
+    playerAddedTime = playerTitle
+    timeAdded.value = true
+    setTimeout(() => {
+        timeAdded.value = false
+    }, 3000)
+    gameOver.value = false
+    chatHeader.value.startTimer(2)
+})
+
+function leave() {
     if (fullTimeUsed)
         addCoins(5)
-    else
-        addCoins(5 - ChatHeader.minutesLeft)
+    else {
+        console.log(chatHeader.value.minutesLeft)
+        addCoins(5 - chatHeader.value.minutesLeft)
+    }
+    connectionRef.value?.invoke('LeaveRoom', thisRoomId)
     router.push('/dashboard/topics')
 }
+const opponentLeft = ref(false)
+connectionRef.value?.on('OpponentLeft', () => {
+    gameOver.value = false
+    opponentLeft.value = true
+})
 </script>
 
 <style>
@@ -173,7 +195,7 @@ body {
 .v-dialog {
     width: 50%;
 }
-.disconnected-card {
+.v-dialog .v-card {
     align-items: center;
     text-align: center;
     padding: 1rem;
@@ -202,6 +224,16 @@ body {
     }
     .versus-card h1 {
         margin: 2rem;
+    }
+}
+@media (max-width: 620px) {
+    .v-dialog {
+        width: 80%;
+    }
+}
+@media (max-width: 360px) {
+    .v-dialog {
+        width: 90%;
     }
 }
 </style>
