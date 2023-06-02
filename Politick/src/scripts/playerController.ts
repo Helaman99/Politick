@@ -63,44 +63,6 @@ const pathToAvatars = '/src/assets/avatars/'
 
 export { player, pathToAvatars }
 
-export function login(email: string, password: string) {
-    /* 
-    let result: number
-    Axios.post("https://localhost:7060/Player/SignUp", {
-        email: email,
-        password: password
-    })
-    .then((response) => {
-        result = response.data
-    })
-    .catch((error) => {
-        console.log(error)
-    })
-
-    if (result != -1)
-        initializePlayer(result)
-    */
-}
-
-export function signUp(email: string, password: string) {
-    /*
-    let result: number
-    Axios.post("https://localhost:7060/Player/SignUp", {
-        email: email,
-        password: password
-    })
-    .then((response) => {
-        result = response.data
-    })
-    .catch((error) => {
-        console.log(error)
-    })
-
-    if (result != -1)
-        initializePlayer(result)
-    */
-}
-
 export function updateCard(newAvatar: string, newTitle: string) {
     player.value.avatar = newAvatar
     player.value.title = newTitle

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Politick.Api.Data;
 
@@ -11,9 +12,11 @@ using Politick.Api.Data;
 namespace Politick.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230531203214_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -155,6 +158,37 @@ namespace Politick.Api.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Politick.Api.Data.MyString", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("PlayerId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("PlayerId1")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("PlayerId2")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PlayerId");
+
+                    b.HasIndex("PlayerId1");
+
+                    b.HasIndex("PlayerId2");
+
+                    b.ToTable("MyString");
+                });
+
             modelBuilder.Entity("Politick.Api.Data.Player", b =>
                 {
                     b.Property<string>("Id")
@@ -249,21 +283,6 @@ namespace Politick.Api.Migrations
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
 
-                    b.Property<string>("UnlockedAvatars")
-                        .IsRequired()
-                        .HasMaxLength(4000)
-                        .HasColumnType("nvarchar(4000)");
-
-                    b.Property<string>("UnlockedTitleFirstWords")
-                        .IsRequired()
-                        .HasMaxLength(4000)
-                        .HasColumnType("nvarchar(4000)");
-
-                    b.Property<string>("UnlockedTitleSecondWords")
-                        .IsRequired()
-                        .HasMaxLength(4000)
-                        .HasColumnType("nvarchar(4000)");
-
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -330,6 +349,30 @@ namespace Politick.Api.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Politick.Api.Data.MyString", b =>
+                {
+                    b.HasOne("Politick.Api.Data.Player", null)
+                        .WithMany("UnlockedAvatars")
+                        .HasForeignKey("PlayerId");
+
+                    b.HasOne("Politick.Api.Data.Player", null)
+                        .WithMany("UnlockedTitleFirstWords")
+                        .HasForeignKey("PlayerId1");
+
+                    b.HasOne("Politick.Api.Data.Player", null)
+                        .WithMany("UnlockedTitleSecondWords")
+                        .HasForeignKey("PlayerId2");
+                });
+
+            modelBuilder.Entity("Politick.Api.Data.Player", b =>
+                {
+                    b.Navigation("UnlockedAvatars");
+
+                    b.Navigation("UnlockedTitleFirstWords");
+
+                    b.Navigation("UnlockedTitleSecondWords");
                 });
 #pragma warning restore 612, 618
         }

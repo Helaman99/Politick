@@ -55,6 +55,11 @@
                                 Terms of Service
                             </router-link>
                         </v-list-item>
+                        <v-list-item>
+                            <v-btn @click = 'logOut()' variant = 'text'>
+                                Log Out
+                            </v-btn>
+                        </v-list-item>
                     </v-list-item-group>
                 </v-navigation-drawer>
 
@@ -77,11 +82,18 @@
 </template>
 
 <script setup lang = 'ts'>
+import { SignInService } from '@/scripts/SignInService'
 import { player } from '../scripts/playerController'
 import { ref } from 'vue'
+import router from '@/router'
 
 const navigation = ref(false)
 const settings = ref(false)
+
+function logOut() {
+    SignInService.instance.signOut()
+    router.push('/login')
+}
 
 function setLight() {
     // Set the theme to light

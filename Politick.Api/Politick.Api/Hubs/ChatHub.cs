@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.SignalR;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.SignalR;
 using Politick.Api.Controllers;
 using Politick.Api.Data;
 using Politick.Api.Services;
@@ -11,6 +13,7 @@ public class ChatHub : Hub
     public ChatHub(ChatService chatService)
     {
         _chatService = chatService;
+
     }
 
     public async Task<bool> JoinGroupAsync(Opponent player)
