@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Politick.Api.Services;
 
 namespace Politick.Api.Controllers;
 
 [ApiController]
 [Route("[controller]")]
+[Authorize]
 public class PlayerController : ControllerBase
 {
     private readonly PlayerService _playerService;

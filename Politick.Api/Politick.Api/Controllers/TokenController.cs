@@ -26,22 +26,22 @@ public class TokenController : Controller
     }
 
     [HttpPost("GetToken")]
-    public async Task<IActionResult> GetToken([FromBody] UserCredentials userCredentials)
+    public async Task<IActionResult> GetToken([FromBody] PlayerCredentials playerCredentials)
     {
-        if (string.IsNullOrEmpty(userCredentials.Email))
+        if (string.IsNullOrEmpty(playerCredentials.Email))
         {
             return BadRequest("Email is required");
         }
-        if (string.IsNullOrEmpty(userCredentials.Password))
+        if (string.IsNullOrEmpty(playerCredentials.Password))
         {
             return BadRequest("Password is required");
         }
 
-        var user = _context.Players.FirstOrDefault(u => u.Email == userCredentials.Email);
+        var player = _context.Players.FirstOrDefault(u => u.Email == playerCredentials.Email);
 
-        if (user is null) { return Unauthorized("The user account was not found"); }
+        if (player is null) { return Unauthorized("The user account was not found"); }
 
-        bool results = await _userManager.CheckPasswordAsync(user, userCredentials.Password);
+        bool results = await _userManager.CheckPasswordAsync(player, playerCredentials.Password);
         if (results)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtConfiguration.Secret));
@@ -49,13 +49,13 @@ public class TokenController : Controller
 
             var claims = new List<Claim>
             {
-                new Claim(JwtRegisteredClaimNames.Sub, user.Email!),
+                new Claim(JwtRegisteredClaimNames.Sub, player.Email!),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim(Claims.UserId, user.Id.ToString()),
+                new Claim(Claims.UserId, player.Id.ToString()),
                 new Claim(Claims.Random, (new Random()).NextDouble().ToString()),
-                new Claim(Claims.Email, user.Email!.ToString().Substring(0,user.Email.ToString().IndexOf("@"))),
+                new Claim(Claims.Email, player.Email!.ToString().Substring(0,player.Email.ToString().IndexOf("@"))),
             };
-            var roles = await _userManager.GetRolesAsync(user);
+            var roles = await _userManager.GetRolesAsync(player);
             foreach (var role in roles)
             {
                 claims.Add(new Claim(ClaimTypes.Role, role));
@@ -74,19 +74,19 @@ public class TokenController : Controller
         return Unauthorized("The email or password is incorrect");
     }
 
-    [HttpPost("CreateUser")]
-    public async Task<IActionResult> CreateUser([FromBody] CreateUser createUser)
+    [HttpPost("CreatePlayer")]
+    public async Task<IActionResult> CreatePlayer([FromBody] CreatePlayer createPlayer)
     {
-        if (string.IsNullOrEmpty(createUser.Email))
+        if (string.IsNullOrEmpty(createPlayer.Email))
         {
             return BadRequest("Email is required");
         }
-        if (string.IsNullOrEmpty(createUser.Password))
+        if (string.IsNullOrEmpty(createPlayer.Password))
         {
             return BadRequest("Password is required");
         }
-        var user = new Player(createUser.Email);
-        var result = await _userManager.CreateAsync(user, createUser.Password);
+        var user = new Player(createPlayer.Email);
+        var result = await _userManager.CreateAsync(user, createPlayer.Password);
         if (result.Succeeded)
         {
             return Ok();
@@ -101,25 +101,11 @@ public class TokenController : Controller
         return "something";
     }
 
-    [HttpGet("testadmin")]
-    [Authorize(Roles = Roles.Admin)]
-    public string TestAdmin()
-    {
-        return "Authorized as Admin";
-    }
-
-    [HttpGet("testruleroftheuniverse")]
-    [Authorize(Roles = "RulerOfTheUniverse,Meg")]
-    public string TestRulerOfTheUniverseOrMeg()
-    {
-        return "Authorized as Ruler of the Universe or Meg";
-    }
-
-    [HttpGet("testrandomadmin")]
-    [Authorize(Policy = Policies.RandomAdmin)]
-    public string TestRandomAdmin()
-    {
-        return $"Authorized randomly as Random Admin with {User.Claims.First(c => c.Type == Claims.Random).Value}";
-    }
+    //[HttpGet("testadmin")]
+    //[Authorize(Roles = Roles.Admin)]
+    //public string TestAdmin()
+    //{
+    //    return "Authorized as Admin";
+    //}
 
 }

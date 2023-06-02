@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Politick.Api.Services;
 using Politick.Api.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Politick.Api.Controllers;
 
 [ApiController]
 [Route("[controller]")]
+[Authorize]
 public class ShopController : ControllerBase
 {
     private readonly ShopService _shopService;
