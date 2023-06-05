@@ -45,6 +45,13 @@ public class PlayerService
         await _db.SaveChangesAsync();
     }
 
+    public async Task AddGameAsync(string email)
+    {
+        Player player = await GetPlayerAsync(email);
+        player.GamesTotal++;
+        await _db.SaveChangesAsync();
+    }
+
     public async Task AddTitleFirstWordsAsync(string email, string[] newWords)
     {
         Player player = await GetPlayerAsync(email);

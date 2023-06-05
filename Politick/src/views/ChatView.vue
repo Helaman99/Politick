@@ -79,7 +79,7 @@ import messageBubble from '@/components/MessageBubble.vue'
 import ChatFooter from '@/components/ChatFooter.vue'
 import ChatHeader from '@/components/ChatHeader.vue'
 import { connectionRef, thisPlayer, opponent, room } from '@/scripts/roomController'
-import { player, removeCoins, addCoins } from '@/scripts/playerController'
+import { player, removeCoins, addCoins, addGame } from '@/scripts/playerController'
 import PlayerCard from '@/components/PlayerCard.vue'
 import { ref } from 'vue'
 import router from '@/router'
@@ -140,6 +140,7 @@ let fullTimeUsed = false
 function endGame() {
     fullTimeUsed = true
     gameOver.value = true
+    addGame()
 }
 function extendTime() {
     if (removeCoins(1)) {
@@ -165,8 +166,9 @@ connectionRef.value?.on('AddTime', (playerTitle) => {
 })
 
 function leave() {
-    if (fullTimeUsed)
+    if (fullTimeUsed) {
         addCoins(5)
+    }
     else {
         console.log(chatHeader.value.minutesLeft)
         addCoins(5 - chatHeader.value.minutesLeft)

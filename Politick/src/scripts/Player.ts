@@ -69,6 +69,10 @@ export class Player {
     incLibertarian() { this._libertarian++ }
     incRight() { this._right++ }
 
+    addGame() {
+        this._gamesTotal++;
+    }
+
     addTitleFirstWords(newWords: string[]) {
         if (newWords.length != 0)
             for (let i = 0; i < newWords.length; i++)

@@ -58,6 +58,10 @@ public class PlayerController : ControllerBase
     public async Task RemoveCoins(int amount) 
         => await _playerService.RemoveCoinsAsync(GetEmailFromClaims(), amount);
 
+    [HttpPost("AddGame")]
+    public async Task AddGameAsync()
+        => await _playerService.AddGameAsync(GetEmailFromClaims());
+
     [HttpPost("AddTitleFirstWords")]
     public async Task AddTitleFirstWords(string[] newWords)
         => await _playerService.AddTitleFirstWordsAsync(GetEmailFromClaims(), newWords);

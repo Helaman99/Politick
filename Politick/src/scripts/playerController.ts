@@ -140,6 +140,11 @@ export function addAvatar(newAvatar: string) {
     } 
 }
 
+export function addGame() {
+    player.value?.addGame()
+    Axios.post("https://localhost:7060/Player/AddGame").catch((error) => { console.log(error) })
+}
+
 export function changeTheme(newTheme: string) {
     if (player.value) {
         player.value.theme = newTheme
