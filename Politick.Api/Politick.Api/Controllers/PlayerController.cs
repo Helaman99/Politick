@@ -63,11 +63,11 @@ public class PlayerController : ControllerBase
         => await _playerService.AddGameAsync(GetEmailFromClaims());
 
     [HttpPost("AddTitleFirstWords")]
-    public async Task AddTitleFirstWordsAsync(string[] newWords)
+    public async Task AddTitleFirstWordsAsync([FromBody] string[] newWords)
         => await _playerService.AddTitleFirstWordsAsync(GetEmailFromClaims(), newWords);
 
     [HttpPost("AddTitleSecondWords")]
-    public async Task AddTitleSecondWordsAsync(string[] newWords)
+    public async Task AddTitleSecondWordsAsync([FromBody] string[] newWords)
         => await _playerService.AddTitleSecondWordsAsync(GetEmailFromClaims(), newWords);
 
     [HttpPost("UpdateStanding")]

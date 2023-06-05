@@ -111,7 +111,9 @@ export function updateStanding(standing: string) {
 export function addTitleFirstWords(newWords: string[]) {
     if (player.value) {
         player.value.addTitleFirstWords(newWords)
-        Axios.post(`https://localhost:7060/Player/AddTitleFirstWords?newWords=${newWords}`)
+        Axios.post('https://localhost:7060/Player/AddTitleFirstWords', 
+            newWords
+            )
             .catch((error) => {
                 console.log(error)
             })
@@ -122,7 +124,9 @@ export function addTitleFirstWords(newWords: string[]) {
 export function addTitleSecondWords(newWords: string[]) {
     if (player.value) {
         player.value.addTitleSecondWords(newWords)
-        Axios.post(`https://localhost:7060/Player/AddTitleSecondWords?newWords=${newWords}`)
+        Axios.post('https://localhost:7060/Player/AddTitleSecondWords', 
+            newWords
+            )
             .catch((error) => {
                 console.log(error)
             })
