@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Politick.Api.Services;
+using Politick.Api.Data;
+using System.Security.Claims;
 
 namespace Politick.Api.Controllers;
 
@@ -18,13 +20,14 @@ public class PlayerController : ControllerBase
         _logger = logger;
     }
 
-    [HttpGet("GetPlayer")]
-    public string GetPlayerData(string id) 
-        => _playerService.GetPlayerData(id);
+    private string GetEmailFromClaims()
+    {
+        return User.Claims.First(e => e.Type == ClaimTypes.Email).Value;
+    }
 
-    [HttpGet("IsActivated")]
-    public bool IsActivated(string id) 
-        => _playerService.IsActivated(id);
+    [HttpGet("GetPlayer")]
+    public async Task<Player> GetPlayerData() 
+        => await _playerService.GetPlayerDataAsync(GetEmailFromClaims());
 
     [HttpPost("GetUnlockedAvatars")]
     public IActionResult GetUnlockedAvatars()
@@ -44,34 +47,38 @@ public class PlayerController : ControllerBase
     }
 
     [HttpPost("UpdateCard")]
-    public void UpdateCard(string id, string avatar, string title) 
-        => _playerService.UpdateCard(id, avatar, title);
+    public async Task UpdateCard([FromBody] PlayerCard playerCard) 
+        => await _playerService.UpdateCardAsync(GetEmailFromClaims(), playerCard);
 
     [HttpPost("AddCoins")]
-    public void AddCoins(string id, int amount) 
-        => _playerService.AddCoins(id, amount);
+    public async Task AddCoinsAsync(int amount) 
+        => await _playerService.AddCoinsAsync(GetEmailFromClaims(), amount);
 
     [HttpPost("RemoveCoins")]
-    public void RemoveCoins(string id, int amount) 
-        => _playerService.RemoveCoins(id, amount);
+    public async Task RemoveCoins(int amount) 
+        => await _playerService.RemoveCoinsAsync(GetEmailFromClaims(), amount);
 
-    [HttpPost("Activate")]
-    public bool ActivatePlayer(string id, int code) 
-        => _playerService.ActivatePlayer(id, code);
+    [HttpPost("AddGame")]
+    public async Task AddGameAsync()
+        => await _playerService.AddGameAsync(GetEmailFromClaims());
 
     [HttpPost("AddTitleFirstWords")]
-    public void AddTitleFirstWords(string id, string[] newWords)
-        => _playerService.AddTitleFirstWords(id, newWords);
+    public async Task AddTitleFirstWordsAsync([FromBody] string[] newWords)
+        => await _playerService.AddTitleFirstWordsAsync(GetEmailFromClaims(), newWords);
 
     [HttpPost("AddTitleSecondWords")]
-    public void AddTitleSecondWords(string id, string[] newWords)
-        => _playerService.AddTitleSecondWords(id, newWords);
+    public async Task AddTitleSecondWordsAsync([FromBody] string[] newWords)
+        => await _playerService.AddTitleSecondWordsAsync(GetEmailFromClaims(), newWords);
 
     [HttpPost("UpdateStanding")]
-    public void UpdateStanding(string id, string newStanding)
-        => _playerService.UpdateStanding(id, newStanding);
+    public async Task UpdateStandingAsync(string newStanding)
+        => await _playerService.UpdateStandingAsync(GetEmailFromClaims(), newStanding);
 
     [HttpPost("AddAvatar")]
-    public void AddAvatar(string id, string newAvatar)
-        => _playerService.AddAvatar(id, newAvatar);
+    public async Task AddAvatarAsync(string newAvatar)
+        => await _playerService.AddAvatarAsync(GetEmailFromClaims(), newAvatar);
+
+    [HttpPost("ChangeTheme")]
+    public async Task ChangeThemeAsync(string newTheme)
+        => await _playerService.ChangeThemeAsync(GetEmailFromClaims(), newTheme);
 }

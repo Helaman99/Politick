@@ -29,6 +29,8 @@ export function purchaseAvatar(avatar: string, amount: number): boolean {
     return false
 }
 
+// ---------- Title Shop Stuff ---------- \\
+
 export function purchaseFirstWordPack(pack: string[], amount: number): boolean {
     if (removeCoins(amount)) {
         addTitleFirstWords(pack)

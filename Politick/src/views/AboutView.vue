@@ -11,7 +11,6 @@
 
 <script lang = 'ts'>
 import Axios from 'axios'
-import type { WeatherData } from '@/types/WeatherData'
 
 Axios.get('https://localhost:7060/WeatherForecast')
   .then((response) => {

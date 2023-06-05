@@ -40,10 +40,11 @@ namespace Politick.Api.Migrations
                     Left = table.Column<int>(type: "int", nullable: false),
                     Libertarian = table.Column<int>(type: "int", nullable: false),
                     Right = table.Column<int>(type: "int", nullable: false),
+                    UnlockedTitleFirstWords = table.Column<string>(type: "nvarchar(4000)", maxLength: 4000, nullable: false),
+                    UnlockedTitleSecondWords = table.Column<string>(type: "nvarchar(4000)", maxLength: 4000, nullable: false),
+                    UnlockedAvatars = table.Column<string>(type: "nvarchar(4000)", maxLength: 4000, nullable: false),
                     Strikes = table.Column<int>(type: "int", nullable: false),
                     Theme = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Activation = table.Column<int>(type: "int", nullable: false),
-                    ActualStanding = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -170,37 +171,6 @@ namespace Politick.Api.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "MyString",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Value = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PlayerId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    PlayerId1 = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    PlayerId2 = table.Column<string>(type: "nvarchar(450)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_MyString", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_MyString_AspNetUsers_PlayerId",
-                        column: x => x.PlayerId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_MyString_AspNetUsers_PlayerId1",
-                        column: x => x.PlayerId1,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_MyString_AspNetUsers_PlayerId2",
-                        column: x => x.PlayerId2,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -239,21 +209,6 @@ namespace Politick.Api.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_MyString_PlayerId",
-                table: "MyString",
-                column: "PlayerId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_MyString_PlayerId1",
-                table: "MyString",
-                column: "PlayerId1");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_MyString_PlayerId2",
-                table: "MyString",
-                column: "PlayerId2");
         }
 
         /// <inheritdoc />
@@ -273,9 +228,6 @@ namespace Politick.Api.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
-
-            migrationBuilder.DropTable(
-                name: "MyString");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

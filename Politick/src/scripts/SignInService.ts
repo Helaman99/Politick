@@ -1,5 +1,5 @@
-import router from '@/router'
 import Axios from 'axios'
+import { initializePlayer } from './playerController'
 
 class PolitickToken {
   random: string = ''
@@ -34,7 +34,7 @@ export class SignInService {
         console.log(this.token)
         console.log(this.token.roles)
         this._isSignedIn = true
-        router.push('/dashboard')
+        initializePlayer()
       })
       .catch((err) => {
         console.log(`Login failed: ${err}`)

@@ -78,8 +78,8 @@
 import messageBubble from '@/components/MessageBubble.vue'
 import ChatFooter from '@/components/ChatFooter.vue'
 import ChatHeader from '@/components/ChatHeader.vue'
-import { connectionRef, thisPlayer, opponent } from '@/scripts/roomController'
-import { player, removeCoins, addCoins } from '@/scripts/playerController'
+import { connectionRef, thisPlayer, opponent, room } from '@/scripts/roomController'
+import { player, removeCoins, addCoins, addGame } from '@/scripts/playerController'
 import PlayerCard from '@/components/PlayerCard.vue'
 import { ref } from 'vue'
 import router from '@/router'
@@ -99,7 +99,9 @@ let justSent = ""
 
 const connection = connectionRef.value
 let disconnected = ref(false)
-const thisRoomId = opponent.value?.ChatRoomId
+
+console.log("You: " + thisPlayer.value?.ChatRoomId)
+console.log("Opponent: " + thisPlayer.value?.ChatRoomId)
 
 connection?.on('ReceiveMessage', (message: string) => {
     if (message != null && message != "" && message.trim() !== "") {
@@ -114,8 +116,7 @@ connection?.on('ReceiveMessage', (message: string) => {
 
 function SendMessage(message: any) {
     if (message != null && message != "" && message.trim() !== "") {
-        console.log(thisPlayer.value?.ChatRoomId)
-        connection?.invoke('SendMessageToGroup', thisRoomId, message)
+        connection?.invoke('SendMessageToGroup', room.value, message)
 
         messages.value.push({ class: "sent-message", text: message })
         console.log(htmlElement.value)
@@ -139,10 +140,11 @@ let fullTimeUsed = false
 function endGame() {
     fullTimeUsed = true
     gameOver.value = true
+    addGame()
 }
 function extendTime() {
     if (removeCoins(1)) {
-        connection?.invoke('AddTime', thisRoomId, player.value.title)
+        connection?.invoke('AddTime', room.value, player.value?.title)
     }
     else {
         let failed = document.getElementById('failed')
@@ -164,13 +166,14 @@ connectionRef.value?.on('AddTime', (playerTitle) => {
 })
 
 function leave() {
-    if (fullTimeUsed)
+    if (fullTimeUsed) {
         addCoins(5)
+    }
     else {
         console.log(chatHeader.value.minutesLeft)
         addCoins(5 - chatHeader.value.minutesLeft)
     }
-    connectionRef.value?.invoke('LeaveRoom', thisRoomId)
+    connectionRef.value?.invoke('LeaveRoom', room.value)
     router.push('/dashboard/topics')
 }
 const opponentLeft = ref(false)

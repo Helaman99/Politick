@@ -9,6 +9,8 @@ using System.Text;
 using Politick.Api.Data;
 using Politick.Api.Identity;
 using Politick.Api.Models;
+using Azure.Core;
+using Microsoft.AspNetCore.Authentication;
 
 namespace Wordle.Api.Controllers;
 [Route("Token")]
@@ -51,9 +53,8 @@ public class TokenController : Controller
             {
                 new Claim(JwtRegisteredClaimNames.Sub, player.Email!),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim(Claims.UserId, player.Id.ToString()),
                 new Claim(Claims.Random, (new Random()).NextDouble().ToString()),
-                new Claim(Claims.Email, player.Email!.ToString().Substring(0,player.Email.ToString().IndexOf("@"))),
+                new Claim(Claims.Email, player.Email!),
             };
             var roles = await _userManager.GetRolesAsync(player);
             foreach (var role in roles)
@@ -96,9 +97,9 @@ public class TokenController : Controller
 
     [HttpGet("test")]
     [Authorize]
-    public string Test()
+    public IActionResult Test()
     {
-        return "something";
+        return Ok(User.Claims.FirstOrDefault(e => e.Type == ClaimTypes.Email)?.Value);
     }
 
     //[HttpGet("testadmin")]

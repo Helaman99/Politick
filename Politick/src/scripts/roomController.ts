@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 import Axios from 'axios'
-import { player } from './playerController'
+import { player, updateStanding } from './playerController'
 import router from '@/router'
 import * as signalR from '@microsoft/signalr'
 
@@ -30,7 +30,7 @@ if (selectedTopic == -1)
     router.push("/dashboard/topics")
 
 interface Opponent {
-    Id: number
+    Email: string
     Avatar: string
     Title: string
     Topic: number
@@ -41,6 +41,7 @@ interface Opponent {
 const connectionRef = ref<signalR.HubConnection>()
 const opponent = ref<Opponent>()
 const thisPlayer = ref<Opponent>()
+const room = ref(0)
 export function startConnection(): boolean {
     connectionRef.value = new signalR.HubConnectionBuilder()
         .withUrl('https://localhost:7060/ChatHub')
@@ -49,16 +50,17 @@ export function startConnection(): boolean {
     connectionRef.value.start()
         .then(() => {
             thisPlayer.value = {
-                Id: player.value.id,
-                Avatar: player.value.avatar,
-                Title: player.value.title,
+                Email: "",
+                Avatar: player.value?.avatar || "",
+                Title: player.value?.title || "",
                 Topic: selectedTopic,
                 Side: selectedSide,
                 ChatRoomId: ""
             }
             Axios.post("https://localhost:7060/Chat/AssignRoomId", thisPlayer.value)
             .then((response) => {
-                console.log(response.data)
+                console.log(response.data.chatRoomId)
+                room.value = response.data.chatRoomId
                 thisPlayer.value = response.data
                 if (connectionRef.value)
                     if (!connectionRef.value.invoke('JoinGroupAsync', thisPlayer.value))
@@ -72,7 +74,7 @@ export function startConnection(): boolean {
                 Axios.post("https://localhost:7060/Chat/GetOpponent", thisPlayer.value)
                 .then((response) => {
                     opponent.value = {
-                        Id: response.data.id,
+                        Email: response.data.name,
                         Avatar: response.data.avatar,
                         Title: response.data.title,
                         Topic: response.data.topic,
@@ -84,6 +86,7 @@ export function startConnection(): boolean {
                     console.log(error)
                 })
                 .then(() => {
+                    updateStanding(sideStanding)
                     router.push("/chat")
                 })
             })
@@ -91,4 +94,4 @@ export function startConnection(): boolean {
     return true
 }
 
-export { topics, selectedTopic, selectedSide, connectionRef, thisPlayer, opponent }
+export { topics, selectedTopic, selectedSide, connectionRef, thisPlayer, opponent, room }

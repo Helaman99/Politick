@@ -3,8 +3,8 @@
         
         <div class = 'details'>
             <div class = 'avatar'>
-                <playerCard :title = player.title color = 'white' 
-                    :avatarPath = player.avatar />
+                <playerCard :title = player?.title color = 'white' 
+                    :avatarPath = player?.avatar />
                 <br>
                 <v-btn to = 'customize'>Customize Card</v-btn>
             </div>
@@ -12,16 +12,16 @@
             <div class = 'accountStats'>
                 <table>
                     <tr>
-                        <td>Total Games Played:</td><td>{{ player.lifetimeGames }}</td>
+                        <td>Total Games Played:</td><td>{{ player?.lifetimeGames }}</td>
+                    </tr>
+                    <!-- <tr>
+                        <td>Typical Standing:</td><td>{{ player?.standingActual }}</td>
+                    </tr> -->
+                    <tr>
+                        <td>Lifetime Kudos Earned:</td><td>{{ player?.lifetimeKudos }}</td>
                     </tr>
                     <tr>
-                        <td>Typical Standing:</td><td>{{ player.standingActual }}</td>
-                    </tr>
-                    <tr>
-                        <td>Lifetime Kudos Earned:</td><td>{{ player.lifetimeKudos }}</td>
-                    </tr>
-                    <tr>
-                        <td>Account Strikes:</td><td>{{ player.strikes }}</td>
+                        <td>Account Strikes:</td><td>{{ player?.strikes }}</td>
                     </tr>
                 </table>
             </div>
@@ -35,7 +35,7 @@
 
 <script setup lang = 'ts'>
 import playerCard from '@/components/PlayerCard.vue'
-import { player, pathToAvatars } from '@/scripts/playerController'
+import { player } from '@/scripts/playerController'
 </script>
 
 <style scoped>

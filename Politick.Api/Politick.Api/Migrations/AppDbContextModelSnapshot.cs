@@ -163,13 +163,6 @@ namespace Politick.Api.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
-                    b.Property<int>("Activation")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ActualStanding")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("Authoritarian")
                         .HasColumnType("int");
 

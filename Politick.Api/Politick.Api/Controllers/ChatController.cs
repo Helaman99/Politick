@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Politick.Api.Data;
 using Politick.Api.Services;
+using System.Security.Claims;
 
 namespace Politick.Api.Controllers;
 
@@ -19,13 +20,28 @@ public class ChatController : ControllerBase
         _logger = logger;
     }
 
+    private string GetEmailFromClaims() // Maybe update this to be inherited?
+    {
+        return User.Claims.First(e => e.Type == ClaimTypes.Email).Value;
+    }
+
     [HttpPost("AssignRoomId")]
     public Opponent AssignRoomId([FromBody] Opponent thisPlayer)
-        => _chatService.AssignRoomId(thisPlayer);
+        => _chatService.AssignRoomId(new Opponent(GetEmailFromClaims(), // Opponent object comes in with an empty email to protect PII
+                                                    thisPlayer.Avatar, 
+                                                    thisPlayer.Title, 
+                                                    thisPlayer.Topic, 
+                                                    thisPlayer.Side, 
+                                                    thisPlayer.ChatRoomId));
 
     [HttpPost("GetOpponent")]
     public Opponent GetOpponent([FromBody] Opponent thisPlayer)
-        => _chatService.GetOpponent(thisPlayer);
+        => _chatService.GetOpponent(new Opponent(GetEmailFromClaims(),
+                                                    thisPlayer.Avatar,
+                                                    thisPlayer.Title,
+                                                    thisPlayer.Topic,
+                                                    thisPlayer.Side,
+                                                    thisPlayer.ChatRoomId));
 
     [HttpPost("EndGame")]
     public void EndGame(string chatRoomId)

@@ -24,15 +24,13 @@ public class Player : IdentityUser
     public string UnlockedAvatars { get; set; }
     public int Strikes { get; set; }
     public string Theme { get; set; }
-    public int Activation { get; set; }
-    public string ActualStanding { get; set; }
 
     public Player(string email) : base()
     {
         UserName = email;
         Email = email;
-        Title = "Scared Banana";
-        Avatar = "starting_avatar_1.png";
+        Title = "Angry Tortoise";
+        Avatar = "/Basic/starting_avatar_1.png";
         CoinsTotal = 0;
         KudosTotal = 0;
         GamesTotal = 0;
@@ -42,16 +40,10 @@ public class Player : IdentityUser
         Libertarian = 0;
         Right = 0;
         UnlockedTitleFirstWords = "Angry+Helpful+Slimy+Scared";
-        UnlockedTitleSecondWords = "Banana+Explorer+Marshmallow+Racer";
+        UnlockedTitleSecondWords = "Tortoise+Explorer+Marshmallow+Racer";
         UnlockedAvatars = "/Basic/starting_avatar_1.png+/Basic/starting_avatar_2.png+/Basic/starting_avatar_3.png+/Basic/starting_avatar_4.png";
         Strikes = 0;
         Theme = "light";
-        ActualStanding = "Unknown";
-    }
-
-    public string GetData()
-    {
-        return JsonSerializer.Serialize(this);
     }
 
     public void IncAuthoritarian() { Authoritarian++; }
@@ -79,15 +71,5 @@ public class Player : IdentityUser
         if (avatar is not null)
             UnlockedAvatars += $"+{avatar}";
         else throw new ArgumentNullException(nameof(avatar));
-    }
-
-    public bool Activate(int code)
-    {
-        if (code == Activation)
-        {
-            Activation = 0;
-            return true;
-        }
-        return false;
     }
 }

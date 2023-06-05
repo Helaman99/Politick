@@ -83,9 +83,10 @@
 
 <script setup lang = 'ts'>
 import { SignInService } from '@/scripts/SignInService'
-import { player } from '../scripts/playerController'
+import { player, changeTheme } from '../scripts/playerController'
 import { ref } from 'vue'
 import router from '@/router'
+import Axios from 'axios'
 
 const navigation = ref(false)
 const settings = ref(false)
@@ -96,12 +97,13 @@ function logOut() {
 }
 
 function setLight() {
-    // Set the theme to light
-    player.value.theme = 'light'
+    if (player.value.theme != 'light')
+        changeTheme('light')
+    
 }
 function setDark() {
-    // Set the theme to dark
-    player.value.theme = 'dark'
+    if (player.value.theme != 'dark')
+        changeTheme('dark')
 }
 </script>
 
