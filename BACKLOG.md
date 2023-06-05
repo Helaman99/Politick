@@ -1,6 +1,32 @@
 # Backlog
 
-* Ask professors for Player data solution... if we should request a person's data constantly or not
+* Fix formatting for chatroom when you see opponents card
+
+* Fix hidden messages issue (maybe just use padding on `html` element?)
+
+* Add chat filtering, with penalties
+  
+  * Need to add a `Disabled` property to the `Player` object.
+
+* Add actual topics with sides
+
+* Send the message when "Enter" button is hit
+
+* Add a "Login info incorrect" message to login page
+
+* Add messages to the sign up page to help the user know when they need to change something
+
+* "Not Enough Coins" dialog needed in some places.
+
+* About page
+
+* Make existing theme more colorful
+
+* a dark theme
+
+* set the theme of the app to the player's preference when they login
+
+* Find out how to limit certain properties from getting sent when obtaining player data after logging in.
 
 * Better sign-up experience, where you are presented with
   
@@ -10,26 +36,4 @@
   
   with explanations for each before you're sent to the dashboard.
 
-* An about page
-
-* a dark theme
-
 * Card backgrounds (could just be colors for now)
-
-* An item store
-
-* The chatting engine/functionality
-
-* Database for players' accounts
-
-* set the theme of the app to the player's preference when they login
-
-* Word shop view
-  
-  * Left side is where you can select a pack
-  
-  * right side is where you can see the words in that pack
-  
-  * A button at the bottom to purchase that activates a confirmation prompt
-  
-  * A button on the ;eft side to switch between first words and second words
