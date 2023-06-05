@@ -81,7 +81,7 @@ export function removeCoins(coinCount: number) {
 }
 
 export function updateStanding(standing: string) {
-    if (player.value) {
+    if (player.value && standing != "" && standing != null) {
         switch (standing.toLowerCase()) {
             case "authoritarian": {
                 player.value.incAuthoritarian()

@@ -63,22 +63,22 @@ public class PlayerController : ControllerBase
         => await _playerService.AddGameAsync(GetEmailFromClaims());
 
     [HttpPost("AddTitleFirstWords")]
-    public async Task AddTitleFirstWords(string[] newWords)
+    public async Task AddTitleFirstWordsAsync(string[] newWords)
         => await _playerService.AddTitleFirstWordsAsync(GetEmailFromClaims(), newWords);
 
     [HttpPost("AddTitleSecondWords")]
-    public async Task AddTitleSecondWords(string[] newWords)
+    public async Task AddTitleSecondWordsAsync(string[] newWords)
         => await _playerService.AddTitleSecondWordsAsync(GetEmailFromClaims(), newWords);
 
     [HttpPost("UpdateStanding")]
-    public async Task UpdateStanding(string newStanding)
+    public async Task UpdateStandingAsync(string newStanding)
         => await _playerService.UpdateStandingAsync(GetEmailFromClaims(), newStanding);
 
     [HttpPost("AddAvatar")]
-    public async Task AddAvatar(string newAvatar)
+    public async Task AddAvatarAsync(string newAvatar)
         => await _playerService.AddAvatarAsync(GetEmailFromClaims(), newAvatar);
 
     [HttpPost("ChangeTheme")]
-    public async Task ChangeTheme(string newTheme)
+    public async Task ChangeThemeAsync(string newTheme)
         => await _playerService.ChangeThemeAsync(GetEmailFromClaims(), newTheme);
 }

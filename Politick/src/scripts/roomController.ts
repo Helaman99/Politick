@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 import Axios from 'axios'
-import { player } from './playerController'
+import { player, updateStanding } from './playerController'
 import router from '@/router'
 import * as signalR from '@microsoft/signalr'
 
@@ -86,6 +86,7 @@ export function startConnection(): boolean {
                     console.log(error)
                 })
                 .then(() => {
+                    updateStanding(sideStanding)
                     router.push("/chat")
                 })
             })
