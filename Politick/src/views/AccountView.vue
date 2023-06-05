@@ -35,7 +35,7 @@
 
 <script setup lang = 'ts'>
 import playerCard from '@/components/PlayerCard.vue'
-import { player, pathToAvatars } from '@/scripts/playerController'
+import { player } from '@/scripts/playerController'
 </script>
 
 <style scoped>

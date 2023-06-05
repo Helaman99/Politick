@@ -38,7 +38,8 @@ public class ChatService
             string newRoomId = NextRoomId++.ToString();
             player.ChatRoomId = newRoomId;
             availableRooms.Add(new Room(player.Side, player, newRoomId));
-            return player;
+            return new Opponent("", player.Avatar, player.Title, player.Topic, player.Side, newRoomId);
+            // New Opponent object that is returned has an empty email to protect PII
         }
     }
 
@@ -85,9 +86,19 @@ public class ChatService
         Room? room = RoomsInProgress.Find(r => r.ChatRoomId == thisPlayer.ChatRoomId);
         if (room is not null && room.Opponents.Count() == 2)
         {
-            if (room.Opponents[0].Id == thisPlayer.Id)
-                return room.Opponents[1];
-            return room.Opponents[0];
+            if (room.Opponents[0].Email == thisPlayer.Email)
+            {
+                return new Opponent("", room.Opponents[1].Avatar, 
+                                        room.Opponents[1].Title, 
+                                        room.Opponents[1].Topic, 
+                                        room.Opponents[1].Side, 
+                                        room.Opponents[1].ChatRoomId);
+            }
+            return new Opponent("", room.Opponents[0].Avatar,
+                                        room.Opponents[0].Title,
+                                        room.Opponents[0].Topic,
+                                        room.Opponents[0].Side,
+                                        room.Opponents[0].ChatRoomId);
         }
         throw new NullReferenceException(nameof(room));
     }

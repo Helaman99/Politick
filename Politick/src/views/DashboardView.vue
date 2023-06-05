@@ -1,8 +1,7 @@
 <template>
     <div class = "dashboard">
 
-        <headerBar :coinsTotal = player.coins :kudosTotal = player.kudos
-            :standingActual = player.standingActual :avatarPath = pathToAvatars.concat(player.avatar) />
+        <headerBar />
         
         <div class = "dashboard-content">
             <Transition name = "fade">
@@ -33,6 +32,6 @@
 </style>
 
 <script setup lang = 'ts'>
-import { player, pathToAvatars } from '@/scripts/playerController'
+import { player } from '@/scripts/playerController'
 import headerBar from '@/components/HeaderBar.vue'
 </script>

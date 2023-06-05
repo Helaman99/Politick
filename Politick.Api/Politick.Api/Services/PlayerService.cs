@@ -14,60 +14,54 @@ public class PlayerService
         _db = db;
     }
 
-    public async Task<Player> GetPlayerAsync(string id) 
-        => await _db.Players.SingleAsync(p => p.Id == id);
+    public async Task<Player> GetPlayerAsync(string email) 
+        => await _db.Players.SingleAsync(p => p.Email == email);
 
-    public string GetPlayerData(string id) 
-        =>  GetPlayerAsync(id).Result.GetData();
-
-    public bool IsActivated(string id) 
-        => GetPlayerAsync(id).Result.Activation == 0;
-
-    public bool ActivatePlayer(string id, int code) 
-        => GetPlayerAsync(id).Result.Activate(code);
+    public async Task<Player> GetPlayerDataAsync(string email) 
+        =>  await GetPlayerAsync(email);
 
     public string[] GetAvatarImages()
         => Directory.GetFiles("../Assets/Avatars");
 
-    public void UpdateCard(string id, string avatar, string title)
+    public async Task UpdateCardAsync(string email, PlayerCard playerCard)
     {
-        Player player = GetPlayerAsync(id).Result;
-        player.Avatar = avatar;
-        player.Title = title;
-        _db.SaveChangesAsync();
+        Player player = await GetPlayerAsync(email);
+        player.Avatar = playerCard.Avatar;
+        player.Title = playerCard.Title;
+        await _db.SaveChangesAsync();
     }
 
-    public void AddCoins(string id, int amount)
+    public async Task AddCoinsAsync(string email, int amount)
     {
-        Player player = GetPlayerAsync(id).Result;
+        Player player = await GetPlayerAsync(email);
         player.CoinsTotal += amount;
-        _db.SaveChangesAsync();
+        await _db.SaveChangesAsync();
     }
 
-    public void RemoveCoins(string id, int amount)
+    public async Task RemoveCoinsAsync(string email, int amount)
     {
-        Player player = GetPlayerAsync(id).Result;
+        Player player = await GetPlayerAsync(email);
         player.CoinsTotal -= amount;
-        _db.SaveChangesAsync();
+        await _db.SaveChangesAsync();
     }
 
-    public void AddTitleFirstWords(string id, string[] newWords)
+    public async Task AddTitleFirstWordsAsync(string email, string[] newWords)
     {
-        Player player = GetPlayerAsync(id).Result;
+        Player player = await GetPlayerAsync(email);
         player.AddTitleFirstWords(newWords);
-        _db.SaveChangesAsync();
+        await _db.SaveChangesAsync();
     }
 
-    public void AddTitleSecondWords(string id, string[] newWords)
+    public async Task AddTitleSecondWordsAsync(string email, string[] newWords)
     {
-        Player player = GetPlayerAsync(id).Result;
+        Player player = await GetPlayerAsync(email);
         player.AddTitleSecondWords(newWords);
-        _db.SaveChangesAsync();
+        await _db.SaveChangesAsync();
     }
 
-    public void UpdateStanding(string id, string newStanding)
+    public async Task UpdateStandingAsync(string email, string newStanding)
     {
-        Player player = GetPlayerAsync(id).Result;
+        Player player = await GetPlayerAsync(email);
         switch (newStanding.ToLower())
         {
             case "authoritarian":
@@ -79,13 +73,20 @@ public class PlayerService
             case "right":
                     player.IncRight(); break;
         }
-        _db.SaveChangesAsync();
+        await _db.SaveChangesAsync();
     }
 
-    public void AddAvatar(string id, string avatar)
+    public async Task AddAvatarAsync(string email, string avatar)
     {
-        Player player = GetPlayerAsync(id).Result;
+        Player player = await GetPlayerAsync(email);
         player.AddAvatar(avatar);
-        _db.SaveChangesAsync();
+        await _db.SaveChangesAsync();
+    }
+
+    public async Task ChangeThemeAsync(string email, string newTheme)
+    {
+        Player player = await GetPlayerAsync(email);
+        player.Theme = newTheme;
+        await _db.SaveChangesAsync();
     }
 }

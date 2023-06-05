@@ -7,7 +7,6 @@ namespace Politick.Api.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-[Authorize]
 public class ShopController : ControllerBase
 {
     private readonly ShopService _shopService;
@@ -20,10 +19,12 @@ public class ShopController : ControllerBase
     }
 
     [HttpGet("BasicAvatars")]
+    [Authorize]
     public List<string> GetBasicAvatars()
         => _shopService.GetBasicAvatarImages();
 
     [HttpGet("PremiumAvatars")]
+    [Authorize]
     public List<string> GetPremiumAvatars()
         => _shopService.GetPremiumAvatarImages();
 
@@ -50,26 +51,32 @@ public class ShopController : ControllerBase
     }
 
     [HttpGet("AvatarMysteryBoxes")]
+    [Authorize]
     public List<Box> GetAvatarMysteryBoxes()
         => BoxService.AvatarMysteryBoxes;
 
     [HttpGet("WordMysteryBoxes")]
+    [Authorize]
     public List<Box> GetWordMysteryBoxes()
         => BoxService.WordMysteryBoxes;
 
     [HttpGet("FirstWordPacks")]
+    [Authorize]
     public List<Box> GetFirstWordPacks()
         => BoxService.FirstWordPacks;
 
     [HttpGet("SecondWordPacks")]
+    [Authorize]
     public List<Box> GetSecondWordPacks()
         => BoxService.SecondWordPacks;
 
     [HttpGet("RandomAvatar")]
+    [Authorize]
     public string GetRandomAvatar(string boxName)
         => BoxService.AvatarMysteryBoxes.Single(b => b.Name == boxName).GetRandomItem();
 
     [HttpGet("RandomWord")]
+    [Authorize]
     public string GetRandomWord(string boxName)
         => BoxService.WordMysteryBoxes.Single(b => b.Name == boxName).GetRandomItem();
 }

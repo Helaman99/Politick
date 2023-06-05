@@ -29,7 +29,7 @@ public static class BoxService
 
     public static readonly List<Box> SecondWordPacks = new()
     {
-        new("Fruit", new[] { "Orange", "Apple", "Grape", "Pineapple", "Strawberry", "Watermelon" }, 6),
+        new("Fruit", new[] { "Banana", "Orange", "Apple", "Grape", "Pineapple", "Strawberry", "Watermelon" }, 7),
         new("Nature", new[] { "Tree", "Bush", "Leaf", "Plant", "Rock", "Boulder" }, 6),
         new("Crawly Things", new[] { "Ant", "Bumblebee", "Ladybug", "Tarantula", "Stinkbug", "Butterfly", "Caterpillar" }, 7),
         new("Military Equipment", new[] { "M1A1 Abrams", "Battleship", "Destroyer", "Missile", "Drone", "A-10 Warthog", "AC-130" }, 7),

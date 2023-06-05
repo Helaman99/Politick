@@ -30,7 +30,7 @@ if (selectedTopic == -1)
     router.push("/dashboard/topics")
 
 interface Opponent {
-    Id: number
+    Email: string
     Avatar: string
     Title: string
     Topic: number
@@ -49,9 +49,9 @@ export function startConnection(): boolean {
     connectionRef.value.start()
         .then(() => {
             thisPlayer.value = {
-                Id: player.value.id,
-                Avatar: player.value.avatar,
-                Title: player.value.title,
+                Email: "",
+                Avatar: player.value?.avatar || "",
+                Title: player.value?.title || "",
                 Topic: selectedTopic,
                 Side: selectedSide,
                 ChatRoomId: ""
@@ -72,7 +72,7 @@ export function startConnection(): boolean {
                 Axios.post("https://localhost:7060/Chat/GetOpponent", thisPlayer.value)
                 .then((response) => {
                     opponent.value = {
-                        Id: response.data.id,
+                        Email: response.data.name,
                         Avatar: response.data.avatar,
                         Title: response.data.title,
                         Topic: response.data.topic,

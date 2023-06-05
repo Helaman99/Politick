@@ -1,13 +1,11 @@
 export class Player {
 
-    private _id: number
     private _title: string
     private _avatar: string
     private _coinsTotal: number
     private _kudosTotal: number
     private _gamesTotal: number
     private _kudosOverall: number
-    private _modeChoices: number[]
     private _authoritarian: number
     private _left: number
     private _libertarian: number
@@ -18,19 +16,17 @@ export class Player {
     private _strikes: number
     theme: string
 
-    constructor (id: number, title: string, avatar: string, coinsTotal: number, kudosTotal: number,
-                gamesTotal: number, kudosOverall: number, modeChoices: number[], authoritarian: number,
+    constructor (title: string, avatar: string, coinsTotal: number, kudosTotal: number,
+                gamesTotal: number, kudosOverall: number, authoritarian: number,
                 left: number, libertarian: number, right: number, unlockedTitleFirstWords: string[], 
                 unlockedTitleSecondWords: string[], unlockedAvatars: string[], strikes: number, 
                 theme: string) {
-        this._id = id
         this._title = title || ''
         this._avatar = avatar || ''
         this._coinsTotal = coinsTotal || 0
         this._kudosTotal = kudosTotal || 0
         this._gamesTotal = gamesTotal || 0
         this._kudosOverall = kudosOverall || 0
-        this._modeChoices = modeChoices || [0, 0, 0]
         this._authoritarian = authoritarian || 0
         this._left = left || 0
         this._libertarian = libertarian || 0
@@ -62,7 +58,9 @@ export class Player {
             standing += "Authoritarian";
         else if (y < 0.7)
             standing += "Libertarian";
-
+        if (standing = "")
+            standing = "Neutral"
+        
         return standing;
     }
 
@@ -70,24 +68,6 @@ export class Player {
     incLeft() { this._left++ }
     incLibertarian() { this._libertarian++ }
     incRight() { this._right++ }
-
-    /*
-        modeChoices[0] = the number of times the player has played 'Battle Royal'
-        modeChoices[1] = the number of times the player has played 'Debate'
-        modeChoices[2] = the number of times the player has played 'Jury'
-    */
-    get favoriteMode () {
-        if (this._gamesTotal == 0)
-            return "Play a game first!"
-        if (this._modeChoices[0] > this._modeChoices[1] &&
-            this._modeChoices[0] > this._modeChoices[2])
-            return "Battle Royal"
-        else if (this._modeChoices[1] > this._modeChoices[0] && 
-            this._modeChoices[1] > this._modeChoices[2])
-            return "Debate"
-        else
-            return "Jury"
-    }
 
     addTitleFirstWords(newWords: string[]) {
         if (newWords.length != 0)
@@ -117,8 +97,6 @@ export class Player {
         }
         return false
     }
-
-    get id() { return this._id; }
 
     get avatar() { return this._avatar }
 
