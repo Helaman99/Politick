@@ -36,7 +36,7 @@ public class ChatController : ControllerBase
 
     [HttpPost("GetOpponent")]
     public Opponent GetOpponent([FromBody] Opponent thisPlayer)
-        => _chatService.AssignRoomId(new Opponent(GetEmailFromClaims(),
+        => _chatService.GetOpponent(new Opponent(GetEmailFromClaims(),
                                                     thisPlayer.Avatar,
                                                     thisPlayer.Title,
                                                     thisPlayer.Topic,

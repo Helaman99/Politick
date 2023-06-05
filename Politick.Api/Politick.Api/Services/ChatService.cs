@@ -95,10 +95,10 @@ public class ChatService
                                         room.Opponents[1].ChatRoomId);
             }
             return new Opponent("", room.Opponents[0].Avatar,
-                                        room.Opponents[0].Title,
-                                        room.Opponents[0].Topic,
-                                        room.Opponents[0].Side,
-                                        room.Opponents[0].ChatRoomId);
+                                    room.Opponents[0].Title,
+                                    room.Opponents[0].Topic,
+                                    room.Opponents[0].Side,
+                                    room.Opponents[0].ChatRoomId);
         }
         throw new NullReferenceException(nameof(room));
     }
