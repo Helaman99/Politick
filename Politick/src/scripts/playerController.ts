@@ -158,3 +158,11 @@ export function changeTheme(newTheme: string) {
         })
     }
 }
+
+export function addStrike() {
+    player.value?.addStrike()
+    Axios.post("https://localhost:7060/Player/AddStrike")
+        .catch((error) => { console.log(error) })
+    if (player.value?.strikes == 3)
+        SignInService.instance.signOut()
+}

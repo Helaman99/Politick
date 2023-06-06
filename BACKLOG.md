@@ -18,6 +18,8 @@
 
 * "Not Enough Coins" dialog needed in some places.
 
+* Add "Kudos" system
+
 * About page
 
 * Make existing theme more colorful

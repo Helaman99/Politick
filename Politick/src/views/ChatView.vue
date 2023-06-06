@@ -69,6 +69,14 @@
                 </v-card>
             </v-dialog>
 
+            <v-dialog class = 'kicked-dialog' v-model = 'kicked'>
+                <v-card id = 'kicked-card'>
+                    <v-card-text>
+                        {{ playerAddedTime }} added 2 minutes to the time!
+                    </v-card-text>
+                </v-card>
+            </v-dialog>
+
             <ChatFooter @send = SendMessage />
         </div>
     </v-app>
@@ -79,10 +87,11 @@ import messageBubble from '@/components/MessageBubble.vue'
 import ChatFooter from '@/components/ChatFooter.vue'
 import ChatHeader from '@/components/ChatHeader.vue'
 import { connectionRef, thisPlayer, opponent, room } from '@/scripts/roomController'
-import { player, removeCoins, addCoins, addGame } from '@/scripts/playerController'
+import { player, removeCoins, addCoins, addGame, addStrike } from '@/scripts/playerController'
 import PlayerCard from '@/components/PlayerCard.vue'
 import { ref } from 'vue'
 import router from '@/router'
+import { FilterService, FilteredMessage } from '@/scripts/FilterService'
 
 const versus = ref(true)
 setTimeout(() => {
@@ -114,19 +123,37 @@ connection?.on('ReceiveMessage', (message: string) => {
     }
 })
 
+let totalDetections = 0
+const kicked = ref(false)
+const kickedPlayer = ref("")
 function SendMessage(message: any) {
     if (message != null && message != "" && message.trim() !== "") {
-        connection?.invoke('SendMessageToGroup', room.value, message)
 
-        messages.value.push({ class: "sent-message", text: message })
-        console.log(htmlElement.value)
+        let filteredMessage: FilteredMessage = FilterService.filterMessage(message)
+        totalDetections += filteredMessage.detections
+
+        if (totalDetections != 5) {
+            connection?.invoke('SendMessageToGroup', room.value, filteredMessage.message)
+
+            messages.value.push({ class: "sent-message", text: filteredMessage.message })
+            console.log(htmlElement.value)
         
-        if (htmlElement.value) {
-            htmlElement.value.scrollTop = (htmlElement.value.scrollHeight + 64)
-            console.log(htmlElement.value.scrollTop)
-        }
+            if (htmlElement.value) {
+                htmlElement.value.scrollTop = (htmlElement.value.scrollHeight + 64)
+                console.log(htmlElement.value.scrollTop)
+            }
 
-        justSent = message
+            justSent = filteredMessage.message
+        }
+        else {
+            addStrike()
+            kicked.value = true
+            setTimeout(() => {
+                kicked.value = false
+                router.push("/dashboard")
+            }, 4000)
+        }
+        
     }
 }
 

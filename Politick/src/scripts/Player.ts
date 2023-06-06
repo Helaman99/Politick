@@ -131,4 +131,8 @@ export class Player {
         if (newTitle != null && newTitle != '')
             this._title = newTitle
     }
+
+    addStrike() {
+        this._strikes++;
+    }
 }
