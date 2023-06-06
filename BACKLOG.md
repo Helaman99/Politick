@@ -1,9 +1,5 @@
 # Backlog
 
-* Fix formatting for chatroom when you see opponents card
-
-* Fix hidden messages issue (maybe just use padding on `html` element?)
-
 * Add actual topics with sides
 
 * Send the message when "Enter" button is hit
@@ -11,6 +7,8 @@
 * Add a "Login info incorrect" message to login page
 
 * Add messages to the sign up page to help the user know when they need to change something
+
+* Back button when looking for opponent
 
 * "Not Enough Coins" dialog needed in some places.
 

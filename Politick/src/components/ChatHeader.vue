@@ -46,7 +46,7 @@ function startTimer(minutes: number) {
     }
 }
 onMounted( () => {
-    startTimer(1)
+    startTimer(8)
 })
 defineExpose({ startTimer, minutesLeft })
 </script>
