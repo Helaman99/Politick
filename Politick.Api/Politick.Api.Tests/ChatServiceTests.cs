@@ -1,17 +1,22 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Politio.Api.Services;
+using Politick.Api.Data;
+using Politick.Api.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Politio.Api.Tests;
+namespace Politick.Api.Tests;
 
 [TestClass]
 public class ChatServiceTests
 {
     private ChatService? _chatService;
+    private int OpponentIds = 0;
+    private Opponent GenerateOpponent(int topic, int side)
+        => new Opponent("email" + OpponentIds++, "avatar", "title", topic, side, "");
+
     [TestMethod]
     public void Create_ChatService_Success()
     {
@@ -24,9 +29,9 @@ public class ChatServiceTests
     {
         _chatService = new();
 
-        string actual = _chatService.GetRoomId(1, 1, 1);
+        Opponent actual = _chatService.AssignRoomId(GenerateOpponent(1, 1));
 
-        Assert.AreEqual("1", actual);
+        Assert.AreEqual("1", actual.ChatRoomId);
     }
 
     [TestMethod]
@@ -34,10 +39,10 @@ public class ChatServiceTests
     {
         _chatService = new();
 
-        string player1Room = _chatService.GetRoomId(1, 1, 1);
-        string player2Room = _chatService.GetRoomId(2, 1, 0);
+        Opponent player1 = _chatService.AssignRoomId(GenerateOpponent(1, 1));
+        Opponent player2 = _chatService.AssignRoomId(GenerateOpponent(1, 0));
 
-        Assert.AreEqual(player1Room, player2Room);
+        Assert.AreEqual(player1.ChatRoomId, player2.ChatRoomId);
     }
 
     [TestMethod]
@@ -45,10 +50,10 @@ public class ChatServiceTests
     {
         _chatService = new();
 
-        string player1Room = _chatService.GetRoomId(1, 1, 1);
-        string player2Room = _chatService.GetRoomId(2, 1, 1);
+        Opponent player1 = _chatService.AssignRoomId(GenerateOpponent(1, 1));
+        Opponent player2 = _chatService.AssignRoomId(GenerateOpponent(1, 1));
 
-        Assert.AreNotEqual(player1Room, player2Room);
+        Assert.AreNotEqual(player1.ChatRoomId, player2.ChatRoomId);
     }
 
     [TestMethod]
@@ -56,10 +61,21 @@ public class ChatServiceTests
     {
         _chatService = new();
 
-        string player1Room = _chatService.GetRoomId(1, 0, 1);
-        string player2Room = _chatService.GetRoomId(2, 1, 1);
+        Opponent player1 = _chatService.AssignRoomId(GenerateOpponent(0, 1));
+        Opponent player2 = _chatService.AssignRoomId(GenerateOpponent(1, 1));
 
-        Assert.AreNotEqual(player1Room, player2Room);
+        Assert.AreNotEqual(player1.ChatRoomId, player2.ChatRoomId);
+    }
+
+    [TestMethod]
+    public void GetRoomId_TwoPlayers_DifferentTopicDifferentSide_ReturnsDifferentRoomId()
+    {
+        _chatService = new();
+
+        Opponent player1 = _chatService.AssignRoomId(GenerateOpponent(0, 1));
+        Opponent player2 = _chatService.AssignRoomId(GenerateOpponent(1, 0));
+
+        Assert.AreNotEqual(player1.ChatRoomId, player2.ChatRoomId);
     }
 
     [TestMethod]
@@ -67,13 +83,13 @@ public class ChatServiceTests
     {
         _chatService = new();
 
-        string player1Room = _chatService.GetRoomId(1, 0, 0);
-        string player2Room = _chatService.GetRoomId(2, 0, 1);
-        string player3Room = _chatService.GetRoomId(3, 0, 0);
+        Opponent player1 = _chatService.AssignRoomId(GenerateOpponent(0, 0));
+        Opponent player2 = _chatService.AssignRoomId(GenerateOpponent(0, 1));
+        Opponent player3 = _chatService.AssignRoomId(GenerateOpponent(0, 0));
 
-        Assert.AreEqual(player1Room, player2Room);
-        Assert.AreNotEqual(player1Room, player3Room);
-        Assert.AreNotEqual(player2Room, player3Room);
+        Assert.AreEqual(player1.ChatRoomId, player2.ChatRoomId);
+        Assert.AreNotEqual(player1.ChatRoomId, player3.ChatRoomId);
+        Assert.AreNotEqual(player2.ChatRoomId, player3.ChatRoomId);
     }
 
     [TestMethod]
@@ -81,45 +97,58 @@ public class ChatServiceTests
     {
         _chatService = new();
 
-        string player1Room = _chatService.GetRoomId(1, 0, 0);
-        Assert.AreEqual("1", player1Room);
+        Opponent player1 = _chatService.AssignRoomId(GenerateOpponent(0, 0));
+        Assert.AreEqual("1", player1.ChatRoomId);
 
-        string player2Room = _chatService.GetRoomId(2, 0, 0);
-        Assert.AreEqual("2", player2Room);
+        Opponent player2 = _chatService.AssignRoomId(GenerateOpponent(0, 0));
+        Assert.AreEqual("2", player2.ChatRoomId);
 
-        string player3Room = _chatService.GetRoomId(3, 0, 1);
-        Assert.AreEqual("1", player3Room);
+        Opponent player3 = _chatService.AssignRoomId(GenerateOpponent(0, 1));
+        Assert.AreEqual("1", player3.ChatRoomId);
 
-        string player4Room = _chatService.GetRoomId(4, 0, 0);
-        Assert.AreEqual("3", player4Room);
+        Opponent player4 = _chatService.AssignRoomId(GenerateOpponent(0, 0));
+        Assert.AreEqual("3", player4.ChatRoomId);
 
-        string player5Room = _chatService.GetRoomId(5, 0, 1);
-        Assert.AreEqual("2", player5Room);
+        Opponent player5 = _chatService.AssignRoomId(GenerateOpponent(0, 1));
+        Assert.AreEqual("2", player5.ChatRoomId);
 
-        string player6Room = _chatService.GetRoomId(6, 1, 0);
-        Assert.AreEqual("4", player6Room);
+        Opponent player6 = _chatService.AssignRoomId(GenerateOpponent(1, 0));
+        Assert.AreEqual("4", player6.ChatRoomId);
 
-        string player7Room = _chatService.GetRoomId(7, 1, 1);
-        Assert.AreEqual("4", player7Room);
+        Opponent player7 = _chatService.AssignRoomId(GenerateOpponent(1, 1));
+        Assert.AreEqual("4", player7.ChatRoomId);
 
-        string player8Room = _chatService.GetRoomId(8, 1, 1);
-        Assert.AreEqual("5", player8Room);
+        Opponent player8 = _chatService.AssignRoomId(GenerateOpponent(1, 1));
+        Assert.AreEqual("5", player8.ChatRoomId);
 
-        string player9Room = _chatService.GetRoomId(9, 0, 1);
-        Assert.AreEqual("3", player9Room);
+        Opponent player9 = _chatService.AssignRoomId(GenerateOpponent(0, 1));
+        Assert.AreEqual("3", player9.ChatRoomId);
 
-        string player10Room = _chatService.GetRoomId(10, 1, 0);
-        Assert.AreEqual("5", player10Room);
+        Opponent player10 = _chatService.AssignRoomId(GenerateOpponent(1, 0));
+        Assert.AreEqual("5", player10.ChatRoomId);
     }
 
     [TestMethod]
-    public void AddPlayerToRoom_GivenOneValidRoomId_Returns1()
+    public void AddPlayerToRoom_AddingOnePlayer_Returns1()
     {
         _chatService = new();
 
-        string player1Room = _chatService.GetRoomId(1, 0, 0);
+        Opponent player1 = _chatService.AssignRoomId(GenerateOpponent(0, 0));
         
-        Assert.IsTrue(_chatService.AddPlayerToRoom("ConnID", player1Room) == 1);
+        Assert.IsTrue(_chatService.AddPlayerToRoom("ConnID", player1.ChatRoomId) == 1);
+    }
+
+    [TestMethod]
+    public void AddPlayerToRoom_AddingTwoPlayers_Returns2()
+    {
+        _chatService = new();
+
+        Opponent player1 = _chatService.AssignRoomId(GenerateOpponent(0, 0));
+        Opponent player2 = _chatService.AssignRoomId(GenerateOpponent(0, 1));
+
+        _chatService.AddPlayerToRoom("ConnID", player1.ChatRoomId);
+        
+        Assert.IsTrue(_chatService.AddPlayerToRoom("ConnID", player2.ChatRoomId) == 2);
     }
 
     [TestMethod]
@@ -130,36 +159,19 @@ public class ChatServiceTests
         Assert.IsTrue(_chatService.AddPlayerToRoom("ConnID", "1") == 0);
     }
 
+
     [TestMethod]
-    public void AddPlayerToRoom_GivenFullRoom_CantAddPlayerToRoom()
+    public void AddPlayerToRoom_AddingPlayerToFullRoom_Returns0()
     {
         _chatService = new();
 
-        string player1Room = _chatService.GetRoomId(1, 0, 0);
-        string player2Room = _chatService.GetRoomId(2, 0, 1);
+        Opponent player1 = _chatService.AssignRoomId(GenerateOpponent(0, 0));
+        Opponent player2 = _chatService.AssignRoomId(GenerateOpponent(0, 1));
 
-        _chatService.AddPlayerToRoom("ConnID", player1Room);
-        _chatService.AddPlayerToRoom("ConnID", player2Room);
+        _chatService.AddPlayerToRoom("ConnID", player1.ChatRoomId);
+        _chatService.AddPlayerToRoom("ConnID", player2.ChatRoomId);
 
-        Assert.IsTrue(_chatService.AddPlayerToRoom("ConnID", (int.Parse(player2Room) - 1).ToString()) == 0);
-    }
-
-    [TestMethod]
-    public void DeleteRoom_GivenExistingRoom_ReturnsTrue()
-    {
-        _chatService = new();
-
-        _chatService.GetRoomId(1, 0, 0);
-
-        Assert.IsTrue(_chatService.DeleteRoom(1));
-    }
-
-    [TestMethod]
-    public void DeleteRoom_GivenNonexistentRoom_ReturnsFalse()
-    {
-        _chatService = new();
-
-        Assert.IsFalse(_chatService.DeleteRoom(1));
+        Assert.IsTrue(_chatService.AddPlayerToRoom("ConnID", (int.Parse(player2.ChatRoomId) - 1).ToString()) == 0);
     }
 
     [TestMethod]
@@ -167,17 +179,17 @@ public class ChatServiceTests
     {
         _chatService = new();
 
-        string player1RoomId = _chatService.GetRoomId(1, 0, 0);
-        string player2RoomId = _chatService.GetRoomId(2, 0, 1);
+        Opponent player1 = _chatService.AssignRoomId(GenerateOpponent(0, 0));
+        Opponent player2 = _chatService.AssignRoomId(GenerateOpponent(0, 1));
         string player1ConnId = "Player1ConnId";
         string player2ConnId = "Player2ConnId";
-        _chatService.AddPlayerToRoom(player1ConnId, player1RoomId);
-        _chatService.AddPlayerToRoom(player2ConnId, player2RoomId);
+        _chatService.AddPlayerToRoom(player1ConnId, player1.ChatRoomId);
+        _chatService.AddPlayerToRoom(player2ConnId, player2.ChatRoomId);
 
-        _chatService.StartRoom(player1RoomId);
+        _chatService.StartRoom(player1.ChatRoomId);
 
-        Assert.IsTrue(_chatService.ValidateConnection(player1RoomId, player1ConnId));
-        Assert.IsTrue(_chatService.ValidateConnection(player2RoomId, player2ConnId));
+        Assert.IsTrue(_chatService.ValidateConnection(player1.ChatRoomId, player1ConnId));
+        Assert.IsTrue(_chatService.ValidateConnection(player2.ChatRoomId, player2ConnId));
     }
 
     [TestMethod]
@@ -185,17 +197,17 @@ public class ChatServiceTests
     {
         _chatService = new();
 
-        string player1RoomId = _chatService.GetRoomId(1, 0, 0);
-        string player2RoomId = _chatService.GetRoomId(2, 0, 1);
+        Opponent player1 = _chatService.AssignRoomId(GenerateOpponent(0, 0));
+        Opponent player2 = _chatService.AssignRoomId(GenerateOpponent(0, 1));
         string player1ConnId = "Player1ConnId";
         string player2ConnId = "Player2ConnId";
-        _chatService.AddPlayerToRoom(player1ConnId, player1RoomId);
-        _chatService.AddPlayerToRoom(player2ConnId, player2RoomId);
+        _chatService.AddPlayerToRoom(player1ConnId, player1.ChatRoomId);
+        _chatService.AddPlayerToRoom(player2ConnId, player2.ChatRoomId);
 
-        _chatService.StartRoom(player1RoomId);
+        _chatService.StartRoom(player1.ChatRoomId);
 
-        Assert.IsFalse(_chatService.ValidateConnection("FakeConnId", player1RoomId));
-        Assert.IsFalse(_chatService.ValidateConnection("FakeConnId", player2RoomId));
+        Assert.IsFalse(_chatService.ValidateConnection("FakeConnId", player1.ChatRoomId));
+        Assert.IsFalse(_chatService.ValidateConnection("FakeConnId", player2.ChatRoomId));
     }
 
     [TestMethod]
@@ -203,14 +215,14 @@ public class ChatServiceTests
     {
         _chatService = new();
 
-        string player1RoomId = _chatService.GetRoomId(1, 0, 0);
-        string player2RoomId = _chatService.GetRoomId(2, 0, 1);
+        Opponent player1 = _chatService.AssignRoomId(GenerateOpponent(0, 0));
+        Opponent player2 = _chatService.AssignRoomId(GenerateOpponent(0, 1));
         string player1ConnId = "Player1ConnId";
         string player2ConnId = "Player2ConnId";
-        _chatService.AddPlayerToRoom(player1ConnId, player1RoomId);
-        _chatService.AddPlayerToRoom(player2ConnId, player2RoomId);
+        _chatService.AddPlayerToRoom(player1ConnId, player1.ChatRoomId);
+        _chatService.AddPlayerToRoom(player2ConnId, player2.ChatRoomId);
 
-        Assert.IsTrue(_chatService.StartRoom(player1RoomId));
+        Assert.IsTrue(_chatService.StartRoom(player1.ChatRoomId));
     }
 
     [TestMethod]
@@ -226,16 +238,16 @@ public class ChatServiceTests
     {
         _chatService = new();
 
-        string player1RoomId = _chatService.GetRoomId(1, 0, 0);
-        string player2RoomId = _chatService.GetRoomId(2, 0, 1);
+        Opponent player1 = _chatService.AssignRoomId(GenerateOpponent(0, 0));
+        Opponent player2 = _chatService.AssignRoomId(GenerateOpponent(0, 1));
         string player1ConnId = "Player1ConnId";
         string player2ConnId = "Player2ConnId";
-        _chatService.AddPlayerToRoom(player1ConnId, player1RoomId);
-        _chatService.AddPlayerToRoom(player2ConnId, player2RoomId);
+        _chatService.AddPlayerToRoom(player1ConnId, player1.ChatRoomId);
+        _chatService.AddPlayerToRoom(player2ConnId, player2.ChatRoomId);
 
-        _chatService.StartRoom(player1RoomId);
+        _chatService.StartRoom(player1.ChatRoomId);
 
-        Assert.IsTrue(_chatService.EndGame(player1RoomId));
+        Assert.IsTrue(_chatService.EndGame(player1.ChatRoomId));
     }
 
     [TestMethod]
@@ -251,14 +263,14 @@ public class ChatServiceTests
     {
         _chatService = new();
 
-        string player1RoomId = _chatService.GetRoomId(1, 0, 0);
-        string player2RoomId = _chatService.GetRoomId(2, 0, 1);
+        Opponent player1 = _chatService.AssignRoomId(GenerateOpponent(0, 0));
+        Opponent player2 = _chatService.AssignRoomId(GenerateOpponent(0, 1));
         string player1ConnId = "Player1ConnId";
         string player2ConnId = "Player2ConnId";
-        _chatService.AddPlayerToRoom(player1ConnId, player1RoomId);
-        _chatService.AddPlayerToRoom(player2ConnId, player2RoomId);
+        _chatService.AddPlayerToRoom(player1ConnId, player1.ChatRoomId);
+        _chatService.AddPlayerToRoom(player2ConnId, player2.ChatRoomId);
 
-        Assert.AreEqual(_chatService.DisconnectRoom(player1ConnId), player1RoomId);
+        Assert.AreEqual(_chatService.DisconnectRoom(player1ConnId), player1.ChatRoomId);
     }
 
     [TestMethod]
@@ -266,16 +278,16 @@ public class ChatServiceTests
     {
         _chatService = new();
 
-        string player1RoomId = _chatService.GetRoomId(1, 0, 0);
-        string player2RoomId = _chatService.GetRoomId(2, 0, 1);
+        Opponent player1 = _chatService.AssignRoomId(GenerateOpponent(0, 0));
+        Opponent player2 = _chatService.AssignRoomId(GenerateOpponent(0, 1));
         string player1ConnId = "Player1ConnId";
         string player2ConnId = "Player2ConnId";
-        _chatService.AddPlayerToRoom(player1ConnId, player1RoomId);
-        _chatService.AddPlayerToRoom(player2ConnId, player2RoomId);
+        _chatService.AddPlayerToRoom(player1ConnId, player1.ChatRoomId);
+        _chatService.AddPlayerToRoom(player2ConnId, player2.ChatRoomId);
 
-        _chatService.StartRoom(player1RoomId);
+        _chatService.StartRoom(player1.ChatRoomId);
 
-        Assert.AreEqual(_chatService.DisconnectRoom(player1ConnId), player1RoomId);
+        Assert.AreEqual(_chatService.DisconnectRoom(player1ConnId), player1.ChatRoomId);
     }
 
     [TestMethod]

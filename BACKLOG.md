@@ -14,6 +14,8 @@
 
 * Add "Kudos" system
 
+* Ability to save conversations
+
 * About page
 
 * Make existing theme more colorful
