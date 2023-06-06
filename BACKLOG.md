@@ -1,12 +1,10 @@
 # Backlog
 
+* Add "Agree to terms of service, etc." checkbox on signup page
+
 * Fix formatting for chatroom when you see opponents card
 
 * Fix hidden messages issue (maybe just use padding on `html` element?)
-
-* Add chat filtering, with penalties
-  
-  * Need to add a `Disabled` property to the `Player` object.
 
 * Add actual topics with sides
 
