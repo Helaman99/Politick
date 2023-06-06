@@ -66,19 +66,25 @@ public class PlayerService
         await _db.SaveChangesAsync();
     }
 
-    public async Task UpdateStandingAsync(string email, string newStanding)
+    public async Task UpdateStandingsAsync(string email, string[] newStandings)
     {
         Player player = await GetPlayerAsync(email);
-        switch (newStanding.ToLower())
+        if (!newStandings.IsNullOrEmpty())
         {
-            case "authoritarian":
-                    player.IncAuthoritarian(); break;
-            case "left":
-                    player.IncLeft(); break;
-            case "libertarian":
-                    player.IncLibertarian(); break;
-            case "right":
-                    player.IncRight(); break;
+            foreach (string standing in newStandings)
+            {
+                switch (standing.ToLower())
+                {
+                    case "authoritarian":
+                        player.IncAuthoritarian(); break;
+                    case "left":
+                        player.IncLeft(); break;
+                    case "libertarian":
+                        player.IncLibertarian(); break;
+                    case "right":
+                        player.IncRight(); break;
+                }
+            }
         }
         await _db.SaveChangesAsync();
     }
