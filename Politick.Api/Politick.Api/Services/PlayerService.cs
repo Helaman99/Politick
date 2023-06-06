@@ -96,4 +96,11 @@ public class PlayerService
         player.Theme = newTheme;
         await _db.SaveChangesAsync();
     }
+
+    public async Task AddStrikeAsync(string email)
+    {
+        Player player = await GetPlayerAsync(email);
+        player.Strikes++;
+        await _db.SaveChangesAsync();
+    }
 }

@@ -41,7 +41,8 @@ public class TokenController : Controller
 
         var player = _context.Players.FirstOrDefault(u => u.Email == playerCredentials.Email);
 
-        if (player is null) { return Unauthorized("The user account was not found"); }
+        if (player is null) { return Unauthorized("The player account was not found"); }
+        if (player.Strikes > 2) { return Unauthorized("The player account has been suspended");  }
 
         bool results = await _userManager.CheckPasswordAsync(player, playerCredentials.Password);
         if (results)

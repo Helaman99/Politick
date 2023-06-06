@@ -81,4 +81,8 @@ public class PlayerController : ControllerBase
     [HttpPost("ChangeTheme")]
     public async Task ChangeThemeAsync(string newTheme)
         => await _playerService.ChangeThemeAsync(GetEmailFromClaims(), newTheme);
+
+    [HttpPost("AddStrike")]
+    public async Task AddStrikeAsync()
+        => await _playerService.AddStrikeAsync(GetEmailFromClaims());
 }

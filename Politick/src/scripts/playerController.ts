@@ -58,7 +58,7 @@ export function updateCard(newAvatar: string, newTitle: string) {
 }
 
 export function addCoins(coinCount: number) {
-    if (player.value) {
+    if (player.value && coinCount > 0) {
         player.value.addCoins(coinCount)
         Axios.post(`https://localhost:7060/Player/AddCoins?amount=${coinCount}`)
             .catch((error) => {
@@ -68,7 +68,7 @@ export function addCoins(coinCount: number) {
 }
 
 export function removeCoins(coinCount: number) {
-    if (player.value) {
+    if (player.value && coinCount >= 0) {
         if (player.value.removeCoins(coinCount)) {
             Axios.post(`https://localhost:7060/Player/RemoveCoins?amount=${coinCount}`)
                 .catch((error) => {
@@ -157,4 +157,12 @@ export function changeTheme(newTheme: string) {
             console.log(error)
         })
     }
+}
+
+export function addStrike() {
+    player.value?.addStrike()
+    Axios.post("https://localhost:7060/Player/AddStrike")
+        .catch((error) => { console.log(error) })
+    if (player.value?.strikes == 3)
+        SignInService.instance.signOut()
 }
