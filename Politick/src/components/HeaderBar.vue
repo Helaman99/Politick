@@ -46,12 +46,12 @@
                             </router-link>
                         </v-list-item>
                         <v-list-item>
-                            <router-link to = '../privacy-policy' @click = 'navigation = false' target = '_blank'>
+                            <router-link to = '/privacy-policy' @click = 'navigation = false' target = '_blank'>
                                 Privacy Policy
                             </router-link>
                         </v-list-item>
                         <v-list-item>
-                            <router-link to = '../terms-of-service' @click = 'navigation = false' target = '_blank'>
+                            <router-link to = '/terms-of-service' @click = 'navigation = false' target = '_blank'>
                                 Terms of Service
                             </router-link>
                         </v-list-item>

@@ -10,6 +10,15 @@
         <v-text-field v-model = 'password' type = "password" id = "password" variant = "solo" placeholder = "Password" />
         <label for = "password2">Repeat Password</label>
         <v-text-field v-model = 'password2' type = "password" id = "password2" variant = "solo" placeholder = "Repeat Password" />
+        <div class = "agree">
+            <input type = "checkbox" id = "checkbox" v-model = "agreed" />
+            <label for = "checkbox" id = "message">
+                By clicking this checkbox, you agree to our 
+                <router-link to = "/terms-of-service" target = "_blank">Terms of Service</router-link>
+                and 
+                <router-link to = "/privacy-policy" target = "_blank">Privacy Policy</router-link>.
+            </label>
+        </div>
         <v-btn @click = 'signUp()'>Sign Up</v-btn>
 
         <br><br>
@@ -26,9 +35,10 @@ import router from '@/router'
 const email = ref('')
 const password = ref('')
 const password2 = ref('')
+const agreed = ref(false)
 
 function signUp() {
-    if (password.value === password2.value)
+    if (password.value === password2.value && agreed.value)
         SignInService.instance.createAccount(email.value, password.value)
     else
         console.log("Passwords don't match")
@@ -41,6 +51,17 @@ function signUp() {
 }
 .v-input {
     width: 60%;
+}
+.agree {
+    width: 50%;
+    display: flex;
+    margin: 1rem;
+}
+.agree #checkbox {
+    width: 4rem;
+}
+.agree #message {
+    padding: 1rem;
 }
 
 @media (max-width: 1024px) {
