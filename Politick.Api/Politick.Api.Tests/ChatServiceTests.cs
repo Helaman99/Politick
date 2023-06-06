@@ -15,7 +15,10 @@ public class ChatServiceTests
     private ChatService? _chatService;
     private int OpponentIds = 0;
     private Opponent GenerateOpponent(int topic, int side)
-        => new Opponent("email" + OpponentIds++, "avatar", "title", topic, side, "");
+    {
+        OpponentIds++;
+        return new Opponent($"email{OpponentIds}", $"avatar{OpponentIds}", $"title{OpponentIds}", topic, side, "");
+    }
 
     [TestMethod]
     public void Create_ChatService_Success()
@@ -24,8 +27,17 @@ public class ChatServiceTests
 
         Assert.IsNotNull(_chatService);
     }
+
     [TestMethod]
-    public void GetRoomId_OnePlayer_ReturnsNextRoomId()
+    public void AssignRoomId_GivenOpponent_ReturnsOpponentWithoutEmail()
+    {
+        _chatService = new();
+
+        Assert.AreEqual("", _chatService.AssignRoomId(GenerateOpponent(1, 1)).Email);
+    }
+
+    [TestMethod]
+    public void AssignRoomId_OnePlayer_ReturnsNextRoomId()
     {
         _chatService = new();
 
@@ -35,7 +47,7 @@ public class ChatServiceTests
     }
 
     [TestMethod]
-    public void GetRoomId_TwoPlayers_SameTopicDifferentSide_ReturnsSameRoomId()
+    public void AssignRoomId_TwoPlayers_SameTopicDifferentSide_ReturnsSameRoomId()
     {
         _chatService = new();
 
@@ -46,7 +58,7 @@ public class ChatServiceTests
     }
 
     [TestMethod]
-    public void GetRoomId_TwoPlayers_SameTopicAndSide_ReturnsDifferentRoomId()
+    public void AssignRoomId_TwoPlayers_SameTopicAndSide_ReturnsDifferentRoomId()
     {
         _chatService = new();
 
@@ -57,7 +69,7 @@ public class ChatServiceTests
     }
 
     [TestMethod]
-    public void GetRoomId_TwoPlayers_DifferentTopicSameSide_ReturnsDifferentRoomId()
+    public void AssignRoomId_TwoPlayers_DifferentTopicSameSide_ReturnsDifferentRoomId()
     {
         _chatService = new();
 
@@ -68,7 +80,7 @@ public class ChatServiceTests
     }
 
     [TestMethod]
-    public void GetRoomId_TwoPlayers_DifferentTopicDifferentSide_ReturnsDifferentRoomId()
+    public void AssignRoomId_TwoPlayers_DifferentTopicDifferentSide_ReturnsDifferentRoomId()
     {
         _chatService = new();
 
@@ -79,7 +91,7 @@ public class ChatServiceTests
     }
 
     [TestMethod]
-    public void GetRoomId_ThreePlayers_SameTopicDifferentSide_ReturnsDifferentRoomIdForLastPlayer()
+    public void AssignRoomId_ThreePlayers_SameTopicDifferentSide_ReturnsDifferentRoomIdForLastPlayer()
     {
         _chatService = new();
 
@@ -93,7 +105,7 @@ public class ChatServiceTests
     }
 
     [TestMethod]
-    public void GetRoomId_GivenManyPlayers_AssignsCorrectRooms()
+    public void AssignRoomId_GivenManyPlayers_AssignsCorrectRooms()
     {
         _chatService = new();
 
@@ -296,5 +308,69 @@ public class ChatServiceTests
         _chatService = new();
 
         Assert.AreEqual(_chatService.DisconnectRoom("InvalidConnId"), "-1");
+    }
+
+    [TestMethod]
+    public void GetOpponent_GivenOpponent_ReturnedOpponentHasNoEmail()
+    {
+        _chatService = new();
+
+        Opponent player1 = GenerateOpponent(0, 0);
+        Opponent player2 = GenerateOpponent(0, 1);
+        _chatService.AssignRoomId(player1);
+        _chatService.AssignRoomId(player2);
+        string player1ConnId = "Player1ConnId";
+        string player2ConnId = "Player2ConnId";
+        _chatService.AddPlayerToRoom(player1ConnId, player1.ChatRoomId);
+        _chatService.AddPlayerToRoom(player2ConnId, player2.ChatRoomId);
+
+        _chatService.StartRoom(player1.ChatRoomId);
+
+        Opponent opponent = _chatService.GetOpponent(player1);
+
+        Assert.AreEqual("", opponent.Email);
+    }
+
+    [TestMethod]
+    public void GetOpponent_GivenOnePlayer_ReturnsTheOtherPlayer()
+    {
+        _chatService = new();
+
+        Opponent player1 = GenerateOpponent(0, 0);
+        Opponent player2 = GenerateOpponent(0, 1);
+        _chatService.AssignRoomId(player1);
+        _chatService.AssignRoomId(player2);
+        string player1ConnId = "Player1ConnId";
+        string player2ConnId = "Player2ConnId";
+        _chatService.AddPlayerToRoom(player1ConnId, player1.ChatRoomId);
+        _chatService.AddPlayerToRoom(player2ConnId, player2.ChatRoomId);
+
+        _chatService.StartRoom(player1.ChatRoomId);
+
+        Opponent opponent = _chatService.GetOpponent(player1);
+
+        Assert.AreEqual(player2.Title, opponent.Title);
+    }
+
+    [TestMethod]
+    [ExpectedException(typeof(ArgumentNullException))]
+    public void GetOpponent_GivenNullPlayer_ThrowsException()
+    {
+        _chatService = new();
+
+        _chatService.GetOpponent(null!);
+    }
+
+    [TestMethod]
+    [ExpectedException(typeof(NullReferenceException))]
+    public void GetOpponent_GivenRoomNotStarted_ThrowsException()
+    {
+        _chatService = new();
+
+        Opponent player1 = _chatService.AssignRoomId(GenerateOpponent(0, 0));
+        string player1ConnId = "Player1ConnId";
+        _chatService.AddPlayerToRoom(player1ConnId, player1.ChatRoomId);
+
+        _chatService.GetOpponent(player1);
     }
 }
