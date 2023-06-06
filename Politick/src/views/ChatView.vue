@@ -12,7 +12,7 @@
                 transition = 'dialog-top-transition'>
                 <v-card class = 'versus-card'>
                     <div>
-                        <PlayerCard :avatar-path = player.avatar :title = player.title color = 'white' />
+                        <PlayerCard :avatar-path = player?.avatar :title = player?.title color = 'white' />
                         <h3>You</h3>
                     </div>
                     <h1>VS</h1>
@@ -69,10 +69,10 @@
                 </v-card>
             </v-dialog>
 
-            <v-dialog class = 'kicked-dialog' v-model = 'kicked'>
+            <v-dialog class = 'kicked-dialog' v-model = 'kicked' persistent>
                 <v-card id = 'kicked-card'>
                     <v-card-text>
-                        {{ playerAddedTime }} added 2 minutes to the time!
+                        You are getting kicked for bad behavior.
                     </v-card-text>
                 </v-card>
             </v-dialog>
@@ -91,7 +91,8 @@ import { player, removeCoins, addCoins, addGame, addStrike } from '@/scripts/pla
 import PlayerCard from '@/components/PlayerCard.vue'
 import { ref } from 'vue'
 import router from '@/router'
-import { FilterService, FilteredMessage } from '@/scripts/FilterService'
+import { FilterService } from '@/scripts/FilterService'
+import type { FilteredMessage } from '@/scripts/FilterService'
 
 const versus = ref(true)
 setTimeout(() => {
@@ -131,16 +132,16 @@ function SendMessage(message: any) {
 
         let filteredMessage: FilteredMessage = FilterService.filterMessage(message)
         totalDetections += filteredMessage.detections
+        console.log(totalDetections)
 
-        if (totalDetections != 5) {
+        if (totalDetections <= 4) {
             connection?.invoke('SendMessageToGroup', room.value, filteredMessage.message)
+            console.log(filteredMessage.detections)
 
             messages.value.push({ class: "sent-message", text: filteredMessage.message })
-            console.log(htmlElement.value)
         
             if (htmlElement.value) {
                 htmlElement.value.scrollTop = (htmlElement.value.scrollHeight + 64)
-                console.log(htmlElement.value.scrollTop)
             }
 
             justSent = filteredMessage.message
@@ -150,6 +151,8 @@ function SendMessage(message: any) {
             kicked.value = true
             setTimeout(() => {
                 kicked.value = false
+                totalDetections = 0
+                connectionRef.value?.stop()
                 router.push("/dashboard")
             }, 4000)
         }
@@ -194,11 +197,10 @@ connectionRef.value?.on('AddTime', (playerTitle) => {
 
 function leave() {
     if (fullTimeUsed) {
-        addCoins(5)
+        addCoins(5 - totalDetections)
     }
     else {
-        console.log(chatHeader.value.minutesLeft)
-        addCoins(5 - chatHeader.value.minutesLeft)
+        addCoins(5 - chatHeader.value.minutesLeft - totalDetections)
     }
     connectionRef.value?.invoke('LeaveRoom', room.value)
     router.push('/dashboard/topics')

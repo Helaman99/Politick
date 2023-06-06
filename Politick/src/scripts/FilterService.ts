@@ -11,14 +11,18 @@ export class FilterService {
         let messageArray = message.split(" ")
         let detections = 0
 
-        for (let i = 0; i < messageArray.length - 1; i++) {
-            if (this.#badWords.includes(messageArray[i])) {
-                detections++;
-                if (detections == 5) return { message: "DETECTION LIMIT MET", detections: 5 }
-                let letterCount = messageArray[i].split("").length
-                let blankedWord = ""
-                for (let j = 0; j < letterCount; j++) blankedWord += "_"
-                messageArray[i] = blankedWord
+        for (let i = 0; i < messageArray.length; i++) {
+            console.log(messageArray[i].replace(/[^a-zA-Z]/g, "").toLowerCase())
+            for (let word of this.#badWords) {
+                if (messageArray[i].replace(/[^a-zA-Z]/g, "").toLowerCase().includes(word)
+                    || message.includes(word)) {
+                    detections++;
+                    if (detections == 5) return { message: "DETECTION LIMIT MET", detections: 5 }
+                    let letterCount = messageArray[i].split("").length
+                    let blankedWord = ""
+                    for (let j = 0; j < letterCount; j++) blankedWord += "_"
+                    messageArray[i] = blankedWord
+                }
             }
         }
         let newMessage = messageArray.join(" ")
