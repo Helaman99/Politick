@@ -23,6 +23,7 @@ public class Player : IdentityUser
     public string UnlockedTitleSecondWords { get; set; }
     public string UnlockedAvatars { get; set; }
     public int Strikes { get; set; }
+    //public int BannedDay { get; set; }
     public string Theme { get; set; }
 
     public Player(string email) : base()
@@ -43,6 +44,7 @@ public class Player : IdentityUser
         UnlockedTitleSecondWords = "Tortoise+Explorer+Marshmallow+Racer";
         UnlockedAvatars = "/Basic/starting_avatar_1.png+/Basic/starting_avatar_2.png+/Basic/starting_avatar_3.png+/Basic/starting_avatar_4.png";
         Strikes = 0;
+        //BannedDay = 0;
         Theme = "light";
     }
 
