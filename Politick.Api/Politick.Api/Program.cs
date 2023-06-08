@@ -21,7 +21,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy(name: MyAllowAllOrigins,
                       policy =>
                       {
-                          policy.WithOrigins("http://localhost:5173")
+                          policy.WithOrigins("*")
                                 .AllowAnyHeader()
                                 .AllowAnyHeader()
                                 .AllowCredentials();
@@ -134,11 +134,11 @@ if (app.Environment.IsDevelopment())
 }
 
 // Add a redirect for the root URL
-//var redirectRootUrl = app.Configuration.GetValue<string>("RedirectRootUrl", "");
-//if (string.IsNullOrEmpty(redirectRootUrl)) redirectRootUrl = "https://purple-rock-0b124a41e.3.azurestaticapps.net/";
-//var options = new RewriteOptions()
-//        .AddRedirect("^$", redirectRootUrl, 302);
-//app.UseRewriter(options);
+var redirectRootUrl = app.Configuration.GetValue<string>("RedirectRootUrl", "");
+if (string.IsNullOrEmpty(redirectRootUrl)) redirectRootUrl = "https://politick.azurewebsites.net";
+var options = new RewriteOptions()
+        .AddRedirect("^$", redirectRootUrl, 302);
+app.UseRewriter(options);
 
 app.UseHttpsRedirection();
 
