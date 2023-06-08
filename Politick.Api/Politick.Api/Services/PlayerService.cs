@@ -108,10 +108,17 @@ public class PlayerService
         Player player = await GetPlayerAsync(email);
         player.Strikes++;
 
-        //if (player.Strikes > 2)
-        //{
-        //    player.BannedDay = // todays day
-        //}
+        if (player.Strikes > 2)
+        {
+            player.Suspended = true;
+            player.TimesSuspended++;
+            switch (player.TimesSuspended)
+            {
+                case 1: player.UnsuspendDay = DateTime.Now.Day + 1 % 31; break;
+                case 2: player.UnsuspendDay = DateTime.Now.Day + 7 % 31; break;
+                case 3: player.UnsuspendDay = 32; break;
+            }
+        }
 
         await _db.SaveChangesAsync();
     }

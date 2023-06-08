@@ -22,9 +22,11 @@ public class Player : IdentityUser
     public string UnlockedTitleFirstWords { get; set; }
     public string UnlockedTitleSecondWords { get; set; }
     public string UnlockedAvatars { get; set; }
-    public int Strikes { get; set; }
-    //public int BannedDay { get; set; }
     public string Theme { get; set; }
+    public int Strikes { get; set; }
+    public bool Suspended { get; set; }
+    public int TimesSuspended { get; set; }
+    public int UnsuspendDay { get; set; }
 
     public Player(string email) : base()
     {
@@ -43,9 +45,10 @@ public class Player : IdentityUser
         UnlockedTitleFirstWords = "Angry+Helpful+Slimy+Scared";
         UnlockedTitleSecondWords = "Tortoise+Explorer+Marshmallow+Racer";
         UnlockedAvatars = "/Basic/starting_avatar_1.png+/Basic/starting_avatar_2.png+/Basic/starting_avatar_3.png+/Basic/starting_avatar_4.png";
-        Strikes = 0;
-        //BannedDay = 0;
         Theme = "light";
+        Strikes = 0;
+        Suspended = false;
+        UnsuspendDay = 0;
     }
 
     public void IncAuthoritarian() { Authoritarian++; }
