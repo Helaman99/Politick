@@ -16,8 +16,8 @@
                 <div class = 'pack-buttons'>
                     <v-btn v-for = 'wordPack in selectedPackList'
                     @click = 'selectedPack = wordPack'
-                    :disabled = '(player.unlockedTitleFirstWords.includes(wordPack.contents[0])
-                                || player.unlockedTitleSecondWords.includes(wordPack.contents[0]))'>
+                    :disabled = '(player?.unlockedTitleFirstWords.includes(wordPack.contents[0])
+                                || player?.unlockedTitleSecondWords.includes(wordPack.contents[0]))'>
                         {{ wordPack.name }} 
                     </v-btn>
                 </div>

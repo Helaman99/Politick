@@ -50,16 +50,18 @@ export class Player {
         let y = this._authoritarian / this._libertarian;
         let standing = "";
 
-        if (x > 1.3)
-            standing += "Left ";
-        else if (x < 0.7)
-            standing += "Right ";
-        if (y > 1.3)
-            standing += "Authoritarian";
-        else if (y < 0.7)
-            standing += "Libertarian";
-        if (standing = "")
-            standing = "Neutral"
+        if (x > 1.3 || (this._left != 0 && this._right == 0))
+            standing += "Left "
+        else if (x < 0.7 || (this._right != 0 && this._left == 0))
+            standing += "Right "
+        else
+            standing = "Center "
+        if (y > 1.3 || (this._authoritarian != 0 && this._libertarian == 0))
+            standing += "Authoritarian"
+        else if (y < 0.7 || (this._libertarian != 0 && this._authoritarian == 0))
+            standing += "Libertarian"
+        else if (standing != "Center ")
+            standing = "Center " + standing
         
         return standing;
     }

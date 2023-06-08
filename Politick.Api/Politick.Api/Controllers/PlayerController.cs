@@ -70,9 +70,9 @@ public class PlayerController : ControllerBase
     public async Task AddTitleSecondWordsAsync([FromBody] string[] newWords)
         => await _playerService.AddTitleSecondWordsAsync(GetEmailFromClaims(), newWords);
 
-    [HttpPost("UpdateStanding")]
-    public async Task UpdateStandingAsync(string newStanding)
-        => await _playerService.UpdateStandingAsync(GetEmailFromClaims(), newStanding);
+    [HttpPost("UpdateStandings")]
+    public async Task UpdateStandingsAsync([FromBody] string[] newStandings)
+        => await _playerService.UpdateStandingsAsync(GetEmailFromClaims(), newStandings);
 
     [HttpPost("AddAvatar")]
     public async Task AddAvatarAsync(string newAvatar)

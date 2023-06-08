@@ -32,7 +32,7 @@ public class ChatService
                     room.PlayersWaiting = 2;
                     player.ChatRoomId = room.ChatRoomId;
                     room.Opponents.Add(player);
-                    return player;
+                    return new Opponent("", player.Avatar, player.Title, player.Topic, player.Side, player.ChatRoomId);
                 }
             }
             string newRoomId = NextRoomId++.ToString();
@@ -83,6 +83,8 @@ public class ChatService
 
     public Opponent GetOpponent(Opponent thisPlayer)
     {
+        if (thisPlayer is null) { throw new ArgumentNullException(nameof(thisPlayer)); }
+
         Room? room = RoomsInProgress.Find(r => r.ChatRoomId == thisPlayer.ChatRoomId);
         if (room is not null && room.Opponents.Count() == 2)
         {

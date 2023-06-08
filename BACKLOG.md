@@ -1,14 +1,6 @@
 # Backlog
 
-* Fix formatting for chatroom when you see opponents card
-
-* Fix hidden messages issue (maybe just use padding on `html` element?)
-
-* Add chat filtering, with penalties
-  
-  * Need to add a `Disabled` property to the `Player` object.
-
-* Add actual topics with sides
+* Fix timeout issue when looking for opponent
 
 * Send the message when "Enter" button is hit
 
@@ -16,11 +8,17 @@
 
 * Add messages to the sign up page to help the user know when they need to change something
 
+* Back button when looking for opponent
+
 * "Not Enough Coins" dialog needed in some places.
 
 * Add "Kudos" system
 
+* Ability to save conversations
+
 * About page
+
+* Update title shop to not have problems with duplicate words (first word and second word)
 
 * Make existing theme more colorful
 

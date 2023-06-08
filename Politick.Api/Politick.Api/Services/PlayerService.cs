@@ -66,19 +66,25 @@ public class PlayerService
         await _db.SaveChangesAsync();
     }
 
-    public async Task UpdateStandingAsync(string email, string newStanding)
+    public async Task UpdateStandingsAsync(string email, string[] newStandings)
     {
         Player player = await GetPlayerAsync(email);
-        switch (newStanding.ToLower())
+        if (!newStandings.IsNullOrEmpty())
         {
-            case "authoritarian":
-                    player.IncAuthoritarian(); break;
-            case "left":
-                    player.IncLeft(); break;
-            case "libertarian":
-                    player.IncLibertarian(); break;
-            case "right":
-                    player.IncRight(); break;
+            foreach (string standing in newStandings)
+            {
+                switch (standing.ToLower())
+                {
+                    case "authoritarian":
+                        player.IncAuthoritarian(); break;
+                    case "left":
+                        player.IncLeft(); break;
+                    case "libertarian":
+                        player.IncLibertarian(); break;
+                    case "right":
+                        player.IncRight(); break;
+                }
+            }
         }
         await _db.SaveChangesAsync();
     }
@@ -101,6 +107,20 @@ public class PlayerService
     {
         Player player = await GetPlayerAsync(email);
         player.Strikes++;
+
+        if (player.Strikes > 2)
+        {
+            player.Suspended = true;
+            player.TimesSuspended++;
+            switch (player.TimesSuspended)
+            {
+                case 1: player.UnsuspendDay = DateTime.Now.Day + 1 % 31; break;
+                case 2: player.UnsuspendDay = DateTime.Now.Day + 7 % 31; break;
+                case 3: player.UnsuspendDay = 32; break;
+            }
+            player.Strikes = 0;
+        }
+
         await _db.SaveChangesAsync();
     }
 }

@@ -80,27 +80,31 @@ export function removeCoins(coinCount: number) {
     }
 }
 
-export function updateStanding(standing: string) {
-    if (player.value && standing != "" && standing != null) {
-        switch (standing.toLowerCase()) {
-            case "authoritarian": {
-                player.value.incAuthoritarian()
-                break
-            }
-            case "left": {
-                player.value.incLeft()
-                break
-            }
-            case "libertarian": {
-                player.value.incLibertarian()
-                break
-            }
-            case "right": {
-                player.value.incRight()
-                break
+export function updateStandings(standings: string[]) {
+    if (player.value && standings != null && standings.length != 0) {
+        for (let standing in standings) {
+            switch (standing.toLowerCase()) {
+                case "authoritarian": {
+                    player.value.incAuthoritarian()
+                    break
+                }
+                case "left": {
+                    player.value.incLeft()
+                    break
+                }
+                case "libertarian": {
+                    player.value.incLibertarian()
+                    break
+                }
+                case "right": {
+                    player.value.incRight()
+                    break
+                }
             }
         }
-        Axios.post(`https://localhost:7060/Player/UpdateStanding?newStanding=${standing}`)
+        Axios.post('https://localhost:7060/Player/UpdateStandings',
+            standings
+            )
             .catch((error) => {
                 console.log(error)
             })

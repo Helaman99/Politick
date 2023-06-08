@@ -14,9 +14,9 @@
                     <tr>
                         <td>Total Games Played:</td><td>{{ player?.lifetimeGames }}</td>
                     </tr>
-                    <!-- <tr>
+                    <tr>
                         <td>Typical Standing:</td><td>{{ player?.standingActual }}</td>
-                    </tr> -->
+                    </tr>
                     <tr>
                         <td>Lifetime Kudos Earned:</td><td>{{ player?.lifetimeKudos }}</td>
                     </tr>

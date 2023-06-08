@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 import Axios from 'axios'
-import { player, updateStanding } from './playerController'
+import { player, updateStandings } from './playerController'
 import router from '@/router'
 import * as signalR from '@microsoft/signalr'
 
@@ -15,15 +15,16 @@ Axios.get("https://localhost:7060/Topic/GetTopics")
 
 let selectedTopic = -1
 let selectedSide = -1
-let sideStanding = ""
+let sideStandings = Array("")
 export function selectTopic(index: number) {
     selectedTopic = index
-    console.log(selectedTopic)
+    console.log("Topic: " + selectedTopic)
 }
-export function selectSide(index: number, standing: string) {
+export function selectSide(index: number, standings: string[]) {
     selectedSide = index
-    sideStanding = standing
-    console.log(selectedSide)
+    sideStandings = standings
+    console.log("Side: " + selectedSide)
+    console.log("Standings: " + sideStandings)
 }
 
 if (selectedTopic == -1)
@@ -59,7 +60,7 @@ export function startConnection(): boolean {
             }
             Axios.post("https://localhost:7060/Chat/AssignRoomId", thisPlayer.value)
             .then((response) => {
-                console.log(response.data.chatRoomId)
+                console.log("Room: " + response.data.chatRoomId)
                 room.value = response.data.chatRoomId
                 thisPlayer.value = response.data
                 if (connectionRef.value)
@@ -86,7 +87,7 @@ export function startConnection(): boolean {
                     console.log(error)
                 })
                 .then(() => {
-                    updateStanding(sideStanding)
+                    updateStandings(sideStandings)
                     router.push("/chat")
                 })
             })

@@ -10,15 +10,15 @@
 
             <v-dialog class = 'versus-dialog' v-model = 'versus' persistent fullscreen 
                 transition = 'dialog-top-transition'>
-                <v-card class = 'versus-card'>
+                <v-card id = 'versus-card'>
                     <div>
+                        <h3>You:</h3>
                         <PlayerCard :avatar-path = player?.avatar :title = player?.title color = 'white' />
-                        <h3>You</h3>
                     </div>
                     <h1>VS</h1>
                     <div>
+                        <h3>Opponent:</h3>
                         <PlayerCard :avatar-path = opponent?.Avatar :title = opponent?.Title color = 'white' />
-                        <h3>Opponent</h3>
                     </div>
                 </v-card>
             </v-dialog>
@@ -119,7 +119,7 @@ connection?.on('ReceiveMessage', (message: string) => {
             messages.value.push({ class: "received-message", text: message })
             
             if (htmlElement.value)
-                htmlElement.value.scrollTop = htmlElement.value.scrollHeight
+                htmlElement.value.scrollTop = htmlElement.value.scrollHeight + 64
         }
     }
 })
@@ -220,6 +220,10 @@ body {
     width: 100%;
     padding: 0;
 }
+.chat {
+    padding-top: 6rem;
+    padding-bottom: 10rem;
+}
 .messages {
     display: flex;
     flex-direction: column;
@@ -235,26 +239,27 @@ body {
 .versus-dialog {
     width: 100%;
 }
-.versus-card {
+#versus-card {
     display: flex;
+    flex-direction: row;
     padding: 5rem;
-    place-items: center;
+    justify-content: center;
 }
-.versus-card div {
+#versus-card div {
     width: 20rem;
     display: flex;
     flex-direction: column;
     place-items: center;
 }
-.versus-card h1 {
+#versus-card h1 {
     margin: 5rem;
 }
 
 @media (max-width: 870px) {
-    .versus-card {
+    #versus-card {
         flex-direction: column;
     }
-    .versus-card h1 {
+    #versus-card h1 {
         margin: 2rem;
     }
 }
