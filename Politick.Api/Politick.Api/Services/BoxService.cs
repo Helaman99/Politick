@@ -33,7 +33,6 @@ public static class BoxService
         new("Nature", new[] { "Tree", "Bush", "Leaf", "Plant", "Rock", "Boulder" }, 6),
         new("Crawly Things", new[] { "Ant", "Bumblebee", "Ladybug", "Tarantula", "Stinkbug", "Butterfly", "Caterpillar" }, 7),
         new("Military Equipment", new[] { "M1A1 Abrams", "Battleship", "Destroyer", "Missile", "Drone", "A-10 Warthog", "AC-130" }, 7),
-        new("Military Ranks", new[] { "Corporal", "Sergeant", "Lieutenant", "Captain", "Major", "Colonel", "Commander", "General" }, 8),
         new("Transportation", new[] { "Bus", "Car", "Train", "Truck", "Semi", "Sportscar", "ATV" }, 7),
     };
 }

@@ -1,10 +1,6 @@
 # Backlog
 
-* Fix spacing (pages too close to the top)
-
 * Fix timeout issue when looking for opponent
-
-* Make suspension time definite (exponential time after each suspension?)
 
 * Send the message when "Enter" button is hit
 
@@ -21,6 +17,8 @@
 * Ability to save conversations
 
 * About page
+
+* Update title shop to not have problems with duplicate words (first word and second word)
 
 * Make existing theme more colorful
 
