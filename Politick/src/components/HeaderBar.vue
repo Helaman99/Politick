@@ -7,11 +7,11 @@
                     
                     <template v-slot:prepend>
                         <v-app-bar-nav-icon @click.stop="navigation = !navigation" elevation = '2'>
-                            <img class = 'menu-icon' :src = '"https://localhost:7060/Shop/Avatar" + player.avatar'>
+                            <img class = 'menu-icon' :src = '"https://localhost:7060/Shop/Avatar" + player?.avatar'>
                         </v-app-bar-nav-icon>
                         <div id = "user-stats">
-                            <p>Coins: {{ player.coins }}</p>
-                            <p>Kudos: {{ player.kudos }}</p>
+                            <p>Coins: {{ player?.coins }}</p>
+                            <p>Kudos: {{ player?.kudos }}</p>
                         </div>
                     </template>
 
@@ -97,12 +97,12 @@ function logOut() {
 }
 
 function setLight() {
-    if (player.value.theme != 'light')
+    if (player.value?.theme != 'light')
         changeTheme('light')
     
 }
 function setDark() {
-    if (player.value.theme != 'dark')
+    if (player.value?.theme != 'dark')
         changeTheme('dark')
 }
 </script>

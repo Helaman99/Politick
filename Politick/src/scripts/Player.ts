@@ -54,12 +54,14 @@ export class Player {
             standing += "Left "
         else if (x < 0.7 || (this._right != 0 && this._left == 0))
             standing += "Right "
+        else
+            standing = "Center "
         if (y > 1.3 || (this._authoritarian != 0 && this._libertarian == 0))
             standing += "Authoritarian"
         else if (y < 0.7 || (this._libertarian != 0 && this._authoritarian == 0))
             standing += "Libertarian"
-        if (standing == "")
-            standing = "Center"
+        else if (standing != "Center ")
+            standing = "Center " + standing
         
         return standing;
     }

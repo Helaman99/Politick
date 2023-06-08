@@ -118,6 +118,7 @@ public class PlayerService
                 case 2: player.UnsuspendDay = DateTime.Now.Day + 7 % 31; break;
                 case 3: player.UnsuspendDay = 32; break;
             }
+            player.Strikes = 0;
         }
 
         await _db.SaveChangesAsync();
