@@ -92,7 +92,7 @@ JwtConfiguration jwtConfiguration = builder.Configuration
     throw new Exception("JWT configuration not specified");
 
 // Use "$env:JWT_SECRET = 'your-secret-value-so-it-works'" in the same powershell instance if running on localhost
-string? jwtSecret = Environment.GetEnvironmentVariable("JWT_SECRET");
+string? jwtSecret = Environment.GetEnvironmentVariable("JWT_SECRET", EnvironmentVariableTarget.Process);
 if (jwtSecret is null) throw new NullReferenceException(nameof(jwtSecret));
 jwtConfiguration.Secret = jwtSecret;
 
