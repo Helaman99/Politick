@@ -105,9 +105,15 @@ public class TokenController : Controller
         return BadRequest(result.Errors);
     }
 
-    [HttpGet("test")]
+    [HttpGet("Test")]
+    public string Test()
+    {
+        return "something";
+    }
+
+    [HttpGet("TestToken")]
     [Authorize]
-    public IActionResult Test()
+    public IActionResult TestToken()
     {
         return Ok(User.Claims.FirstOrDefault(e => e.Type == ClaimTypes.Email)?.Value);
     }
