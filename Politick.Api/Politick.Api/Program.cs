@@ -140,7 +140,7 @@ if (app.Environment.IsDevelopment())
 
 // Add a redirect for the root URL
 var redirectRootUrl = app.Configuration.GetValue<string>("RedirectRootUrl", "");
-if (string.IsNullOrEmpty(redirectRootUrl)) redirectRootUrl = "https://politick.azurewebsites.net";
+if (string.IsNullOrEmpty(redirectRootUrl)) redirectRootUrl = "https://politickgame.azurewebsites.net";
 var options = new RewriteOptions()
         .AddRedirect("^$", redirectRootUrl, 302);
 app.UseRewriter(options);
