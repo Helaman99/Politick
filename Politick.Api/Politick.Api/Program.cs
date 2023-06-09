@@ -92,7 +92,6 @@ JwtConfiguration jwtConfiguration = builder.Configuration
     throw new Exception("JWT configuration not specified");
 
 // Use "$env:JWT_SECRET = 'your-secret-value-so-it-works'" in the same powershell instance if running on localhost
-Console.WriteLine(Environment.GetEnvironmentVariable("JWT_SECRET", EnvironmentVariableTarget.Process));
 string? jwtSecret = Environment.GetEnvironmentVariable("JWT_SECRET", EnvironmentVariableTarget.Process);
 if (jwtSecret is null) throw new NullReferenceException(nameof(jwtSecret));
 jwtConfiguration.Secret = jwtSecret;
@@ -140,11 +139,11 @@ if (app.Environment.IsDevelopment())
 }
 
 // Add a redirect for the root URL
-var redirectRootUrl = app.Configuration.GetValue<string>("RedirectRootUrl", "");
-if (string.IsNullOrEmpty(redirectRootUrl)) redirectRootUrl = "https://politickgame.azurewebsites.net";
-var options = new RewriteOptions()
-        .AddRedirect("^$", redirectRootUrl, 302);
-app.UseRewriter(options);
+//var redirectRootUrl = app.Configuration.GetValue<string>("RedirectRootUrl", "");
+//if (string.IsNullOrEmpty(redirectRootUrl)) redirectRootUrl = "https://politickgame.azurewebsites.net";
+//var options = new RewriteOptions()
+//        .AddRedirect("^$", redirectRootUrl, 302);
+//app.UseRewriter(options);
 
 app.UseHttpsRedirection();
 
