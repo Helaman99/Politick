@@ -1,17 +1,16 @@
 <template>
   <main>
-    <img src = "@/assets/logos/politick.svg" />
+    <img src="@/assets/logos/politick.svg" />
 
-    <div class = 'nav-options'>
-      <router-link to = '/login'>Login</router-link>
-      <router-link to = '/signup'>Sign Up</router-link>
-      <router-link to = '/about'>What is Politick?</router-link>
+    <div class="nav-options">
+      <router-link to="/login">Login</router-link>
+      <router-link to="/signup">Sign Up</router-link>
+      <router-link to="/about">What is Politick?</router-link>
     </div>
   </main>
 </template>
 
-<script setup lang = 'ts'>
-</script>
+<script setup lang="ts"></script>
 
 <style scoped>
 main {

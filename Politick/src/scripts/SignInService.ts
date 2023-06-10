@@ -50,16 +50,16 @@ export class SignInService {
       email: email,
       password: password
     })
-    .then(() => {
-      this.signIn(email, password)
-    })
-    .catch((error) => {
-      console.log(`Sign up failed: ${error}`)
-      this.signOut()
-    })
-    .finally(() => {
-      console.log(`Player signed up: ${this.isSignedIn}`)
-    })
+      .then(() => {
+        this.signIn(email, password)
+      })
+      .catch((error) => {
+        console.log(`Sign up failed: ${error}`)
+        this.signOut()
+      })
+      .finally(() => {
+        console.log(`Player signed up: ${this.isSignedIn}`)
+      })
   }
 
   public signOut() {

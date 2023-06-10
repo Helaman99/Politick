@@ -4,7 +4,7 @@ import { RouterView } from 'vue-router'
 
 <template>
   <center>
-    <Transition name = "fade">
+    <Transition name="fade">
       <RouterView />
     </Transition>
   </center>

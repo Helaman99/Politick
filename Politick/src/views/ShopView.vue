@@ -1,12 +1,12 @@
 <template>
-    <div class = 'shop'>
-        <div class = 'shop-header'>
-          <h1>Shop</h1>
-        </div>
-        <Transition name = 'fade'>
-            <RouterView />
-        </Transition>
+  <div class="shop">
+    <div class="shop-header">
+      <h1>Shop</h1>
     </div>
+    <Transition name="fade">
+      <RouterView />
+    </Transition>
+  </div>
 </template>
 
 <style scoped>

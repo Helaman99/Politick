@@ -9,7 +9,7 @@
   </div>
 </template>
 
-<script lang = 'ts'>
+<script lang="ts">
 import Axios from 'axios'
 
 Axios.get('https://localhost:7060/WeatherForecast')

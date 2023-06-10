@@ -23,7 +23,7 @@ if (window.location.hostname === 'localhost' || window.location.hostname === '12
 const vuetify = createVuetify({
   components,
   directives,
-  icons : {
+  icons: {
     defaultSet: 'mdi',
     sets: {
       mdi
@@ -37,6 +37,4 @@ const app = createApp(App)
 const signInService = reactive(SignInService.instance)
 app.provide('SignInService', signInService)
 
-app.use(router)
-    .use(vuetify)
-    .mount('#app')
+app.use(router).use(vuetify).mount('#app')
