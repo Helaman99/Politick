@@ -46,8 +46,8 @@ export class Player {
     */
     get standingActual() {
 
-        let x = this._left / this._right;
-        let y = this._authoritarian / this._libertarian;
+        const x = this._left / this._right;
+        const y = this._authoritarian / this._libertarian;
         let standing = "";
 
         if (x > 1.3 || (this._left != 0 && this._right == 0))

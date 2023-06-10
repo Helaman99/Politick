@@ -5,21 +5,21 @@
         <h4>Basic Avatars</h4>
         <v-divider />
         <div class = 'Options'>
-            <v-btn class = "Option" v-for = 'avatar in basicAvatarFileNames' 
+            <v-btn class = "Option" v-for = 'avatar in basicAvatarFileNames' v-bind:key = 'avatar' 
                 @click = selectBasicAvatar(avatar) :disabled = 'player.unlockedAvatars.includes(avatar)'>
                 <img :src = '"https://localhost:7060/Shop/Avatar" + avatar' 
-                    :style = '{ opacity: player.unlockedAvatars.includes(avatar) ? 0.35 : 1 }' />
+                    :style = '{ opacity: player?.unlockedAvatars.includes(avatar) ? 0.35 : 1 }' />
             </v-btn>
         </div>
         <br><br>
         <h4>Premium Avatars</h4>
         <v-divider />
         <div class = 'Options'>
-            <v-btn class = "Option" v-for = 'avatar in premiumAvatarFileNames' 
-                @click = selectPremiumAvatar(avatar) :disabled = 'player.unlockedAvatars.includes(avatar)'
+            <v-btn class = "Option" v-for = 'avatar in premiumAvatarFileNames' v-bind:key = "avatar" 
+                @click = selectPremiumAvatar(avatar) :disabled = 'player?.unlockedAvatars.includes(avatar)'
                 :style='{ "background-color": avatar === "certainValue" ? "green" : "" }'>
                 <img :src = '"https://localhost:7060/Shop/Avatar" + avatar'
-                    :style = '{ opacity: player.unlockedAvatars.includes(avatar) ? 0.35 : 1 }' />
+                    :style = '{ opacity: player?.unlockedAvatars.includes(avatar) ? 0.35 : 1 }' />
             </v-btn>
         </div>
 
@@ -75,7 +75,6 @@ import { player } from '@/scripts/playerController'
 import { ref } from 'vue'
 import { basicAvatarFileNames, premiumAvatarFileNames, purchaseAvatar } from '@/scripts/shopController'
 
-const mysteryBoxes = ref()
 const basicPrompt = ref(false)
 const premiumPrompt = ref(false)
 const success = ref(false)

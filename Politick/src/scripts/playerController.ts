@@ -82,7 +82,7 @@ export function removeCoins(coinCount: number) {
 
 export function updateStandings(standings: string[]) {
     if (player.value && standings != null && standings.length != 0) {
-        for (let standing in standings) {
+        for (const standing in standings) {
             switch (standing.toLowerCase()) {
                 case "authoritarian": {
                     player.value.incAuthoritarian()

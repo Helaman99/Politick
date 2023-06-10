@@ -5,7 +5,8 @@
             <ChatHeader @timerEnd = endGame() ref = 'chatHeader' />
 
             <div class = "messages">
-                <messageBubble v-for = "message in messages" :class = message.class :text = message.text />
+                <messageBubble v-for = "message in messages" v-bind:key = "message" 
+                :class = message.messageClass :text = message.text />
             </div>
 
             <v-dialog class = 'versus-dialog' v-model = 'versus' persistent fullscreen 
@@ -100,7 +101,7 @@ setTimeout(() => {
 }, 4000)
 
 interface Message {
-    class: string
+    messageClass: string
     text: string
 }
 const messages = ref<Message[]>([])
@@ -116,7 +117,7 @@ console.log("Opponent: " + thisPlayer.value?.ChatRoomId)
 connection?.on('ReceiveMessage', (message: string) => {
     if (message != null && message != "" && message.trim() !== "") {
         if (message != justSent) {
-            messages.value.push({ class: "received-message", text: message })
+            messages.value.push({ messageClass: "received-message", text: message })
             
             if (htmlElement.value)
                 htmlElement.value.scrollTop = htmlElement.value.scrollHeight + 64
@@ -126,7 +127,6 @@ connection?.on('ReceiveMessage', (message: string) => {
 
 let totalDetections = 0
 const kicked = ref(false)
-const kickedPlayer = ref("")
 function SendMessage(message: any) {
     if (message != null && message != "" && message.trim() !== "") {
 
@@ -138,7 +138,7 @@ function SendMessage(message: any) {
             connection?.invoke('SendMessageToGroup', room.value, filteredMessage.message)
             console.log(filteredMessage.detections)
 
-            messages.value.push({ class: "sent-message", text: filteredMessage.message })
+            messages.value.push({ messageClass: "sent-message", text: filteredMessage.message })
         
             if (htmlElement.value) {
                 htmlElement.value.scrollTop = (htmlElement.value.scrollHeight + 64)

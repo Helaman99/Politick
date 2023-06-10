@@ -1,7 +1,7 @@
 <template>
     <div class = 'topics'>
         <div class = 'topic-cards'>
-            <v-card class = 'topic-card' v-for = '(topic, index) in topics' :img = topic.image
+            <v-card class = 'topic-card' v-for = '(topic, index) in topics' :img = topic.image v-bind:key = 'index'
                 @click = selectTopic(index) to = '/dashboard/sides'>
                 <v-card-title>{{ topic.title }}</v-card-title>
             </v-card>

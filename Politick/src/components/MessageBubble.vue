@@ -1,12 +1,12 @@
 <template>
-    <v-card :class = "class" elevation = '0'>
+    <v-card :class = "messageClass" elevation = '0'>
         <v-card-text>{{ text }}</v-card-text>
     </v-card>
 </template>
 
 <script lang = 'ts'>
 export default {
-    props: ["class", "text"]
+    props: ["messageClass", "text"]
 }
 </script>
 

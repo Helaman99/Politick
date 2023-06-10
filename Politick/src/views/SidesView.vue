@@ -1,7 +1,8 @@
 <template>
     <div class = 'sides'>
         <div class = 'sidesButtons'>
-            <v-card v-for = '(side, index) in topics[selectedTopic].sides' @click = 'disclaimer = true; selectSide(index, side.standings)'>
+            <v-card v-for = '(side, index) in topics[selectedTopic].sides' v-bind:key = 'index'
+            @click = 'disclaimer = true; selectSide(index, side.standings)'>
                 <v-card-title>{{ side.title }}</v-card-title>
                 <v-card-text>{{ side.description }}</v-card-text>
             </v-card>

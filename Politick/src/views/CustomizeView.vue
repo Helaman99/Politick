@@ -11,7 +11,7 @@
             <div class = 'customizeOptions'>
 
                 <div class = 'avatarOptions'>
-                    <div v-for = 'image in player.unlockedAvatars' class = 'avatarImage'>
+                    <div v-for = 'image in player?.unlockedAvatars' v-bind:key = "image" class = 'avatarImage'>
                         <img :src = '"https://localhost:7060/Shop/Avatar" + image' @click = 'currAvatar = image' />
                     </div>
                 </div>
@@ -41,7 +41,7 @@ import { player, updateCard } from '@/scripts/playerController'
 import { ref } from 'vue'
 
 let newTitle = player.value.title.split(" ")
-const currAvatar = ref(player.value.avatar)
+const currAvatar = ref(player.value?.avatar)
 const firstWord = ref(newTitle[0])
 const secondWord = ref(newTitle[1])
 

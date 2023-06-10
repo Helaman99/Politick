@@ -32,6 +32,5 @@
 </style>
 
 <script setup lang = 'ts'>
-import { player } from '@/scripts/playerController'
 import headerBar from '@/components/HeaderBar.vue'
 </script>

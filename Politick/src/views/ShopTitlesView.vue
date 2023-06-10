@@ -14,7 +14,7 @@
                     </v-btn>
                 </div>
                 <div class = 'pack-buttons'>
-                    <v-btn v-for = 'wordPack in selectedPackList'
+                    <v-btn v-for = 'wordPack in selectedPackList' v-bind:key = "wordPack"
                     @click = 'selectedPack = wordPack'
                     :disabled = '(player?.unlockedTitleFirstWords.includes(wordPack.contents[0])
                                 || player?.unlockedTitleSecondWords.includes(wordPack.contents[0]))'>
@@ -29,9 +29,11 @@
                 <div class = 'top'>
                     <p v-if = 'selectedPack'>"{{ selectedPack.name }}" Word Pack</p>
                 </div>
-                <p v-if = 'selectedPack' v-for = 'word in selectedPack.contents'>
-                    {{ word }}
-                </p>
+                <div v-if = 'selectedPack'>
+                    <p v-for = 'word in selectedPack.contents' v-bind:key = 'word'>
+                        {{ word }}
+                    </p>
+                </div> 
                 <div class = 'bottom'>
                     <v-btn :disabled = '!selectedPack' @click = 'buyPrompt = true'>Buy Pack</v-btn>
                 </div>
@@ -41,7 +43,7 @@
                 <v-card class = 'prompt-card'>
                     <div class = 'prompt-left'>
                         <h3>Words in this pack:</h3>
-                        <p v-for = 'word in selectedPack.contents'>
+                        <p v-for = 'word in selectedPack.contents' v-bind:key = 'word'>
                             {{ word }}
                         </p>
                     </div>
@@ -129,8 +131,10 @@ function attemptPurchase() {
                 }, 3000)
                 break
             }
-            else
+            else {
                 failed.value = true
+                break
+            }
         }
         case 1: {
             if (purchaseSecondWordPack(selectedPack.value.contents, selectedPack.value.price)) {
@@ -141,8 +145,10 @@ function attemptPurchase() {
                 }, 3000)
                 break
             }
-            else
+            else {
                 failed.value = true
+                break
+            }
         }
     }
 }

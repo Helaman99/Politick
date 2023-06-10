@@ -50,7 +50,7 @@ export class SignInService {
       email: email,
       password: password
     })
-    .then((response) => {
+    .then(() => {
       this.signIn(email, password)
     })
     .catch((error) => {

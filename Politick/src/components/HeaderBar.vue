@@ -86,7 +86,6 @@ import { SignInService } from '@/scripts/SignInService'
 import { player, changeTheme } from '../scripts/playerController'
 import { ref } from 'vue'
 import router from '@/router'
-import Axios from 'axios'
 
 const navigation = ref(false)
 const settings = ref(false)

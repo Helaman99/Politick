@@ -30,7 +30,6 @@
 <script setup lang = 'ts'>
 import { ref } from 'vue'
 import { SignInService } from '@/scripts/SignInService'
-import router from '@/router'
 
 const email = ref('')
 const password = ref('')

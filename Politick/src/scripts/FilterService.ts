@@ -1,5 +1,3 @@
-import { ref } from 'vue'
-
 export interface FilteredMessage {
     message: string
     detections: number
@@ -8,7 +6,7 @@ export interface FilteredMessage {
 export class FilterService {
 
     static filterMessage(message: string): FilteredMessage {
-        let messageArray = message.split(" ")
+        const messageArray = message.split(" ")
         let detections = 0
 
         for (let i = 0; i < messageArray.length; i++) {
@@ -16,13 +14,13 @@ export class FilterService {
             if (this.#badWords.includes(messageArray[i].replace(/[^a-zA-Z]/g, "").toLowerCase())) {
                 detections++;
                 if (detections == 5) return { message: "DETECTION LIMIT MET", detections: 5 }
-                let letterCount = messageArray[i].split("").length
+                const letterCount = messageArray[i].split("").length
                 let blankedWord = ""
                 for (let j = 0; j < letterCount; j++) blankedWord += "_"
                 messageArray[i] = blankedWord
             }
         }
-        let newMessage = messageArray.join(" ")
+        const newMessage = messageArray.join(" ")
         return { message: newMessage, detections: detections }
     }
 
