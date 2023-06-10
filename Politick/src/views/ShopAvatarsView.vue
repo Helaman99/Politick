@@ -10,7 +10,7 @@
         v-for="avatar in basicAvatarFileNames"
         v-bind:key="avatar"
         @click="selectBasicAvatar(avatar)"
-        :disabled="player.unlockedAvatars.includes(avatar)"
+        :disabled="player?.unlockedAvatars.includes(avatar)"
       >
         <img
           :src="'https://localhost:7060/Shop/Avatar' + avatar"

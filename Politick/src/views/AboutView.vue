@@ -9,17 +9,7 @@
   </div>
 </template>
 
-<script lang="ts">
-import Axios from 'axios'
-
-Axios.get('https://localhost:7060/WeatherForecast')
-  .then((response) => {
-    console.log(response.data)
-  })
-  .catch((err) => {
-    console.log(err)
-  })
-</script>
+<script setup lang="ts"></script>
 
 <style>
 .about {

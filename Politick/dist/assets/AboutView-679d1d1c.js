@@ -1,0 +1,1 @@
+import{h as s,a as c,o as n,c as a,g as t,e,b as _,w as r}from"./index-eab5ed3f.js";const i={},l={class:"about"},u=t("h1",null,"Politick",-1);function d(f,p){const o=c("strike");return n(),a("div",l,[u,t("h4",null,[e("A place for "),_(o,null,{default:r(()=>[e("arguing")]),_:1}),e(" discussion.")])])}const m=s(i,[["render",d]]);export{m as default};

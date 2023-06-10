@@ -2,21 +2,7 @@ import { describe, it, expect } from 'vitest'
 
 import { Player } from '../Player'
 
-const player = new Player(
-  'avatarPath',
-  'title',
-  0,
-  0,
-  0,
-  0,
-  [0, 0, 0],
-  [0, 0, 0, 0],
-  [],
-  [],
-  [],
-  0,
-  'light'
-)
+const player = new Player('avatarPath', 'avatar', 0, 0, 0, 0, 0, 0, 0, 0, [], [], [], 0, 'light')
 
 describe('Player', () => {
   it('is not null', () => {

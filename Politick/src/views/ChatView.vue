@@ -6,7 +6,7 @@
       <div class="messages">
         <messageBubble
           v-for="message in messages"
-          v-bind:key="message"
+          v-bind:key="message.messageClass"
           :class="message.messageClass"
           :text="message.text"
         />

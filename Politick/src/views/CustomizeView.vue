@@ -3,7 +3,7 @@
     <div class="content">
       <div class="cardPreview">
         <playerCard
-          :title="firstWord.concat(' ').concat(secondWord)"
+          :title="firstWord && secondWord ? firstWord.concat(' ').concat(secondWord) : ''"
           color="white"
           :avatarPath="currAvatar"
         />
@@ -19,12 +19,12 @@
         <div class="titleOptions">
           <v-select
             id="first-word"
-            :items="player.unlockedTitleFirstWords"
+            :items="player?.unlockedTitleFirstWords"
             v-model="firstWord"
           ></v-select>
           <v-select
             id="second-word"
-            :items="player.unlockedTitleSecondWords"
+            :items="player?.unlockedTitleSecondWords"
             v-model="secondWord"
           ></v-select>
         </div>
@@ -44,13 +44,13 @@ import playerCard from '@/components/PlayerCard.vue'
 import { player, updateCard } from '@/scripts/playerController'
 import { ref } from 'vue'
 
-let newTitle = player.value.title.split(' ')
 const currAvatar = ref(player.value?.avatar)
-const firstWord = ref(newTitle[0])
-const secondWord = ref(newTitle[1])
+const firstWord = ref(player.value?.title.split(' ')[0])
+const secondWord = ref(player.value?.title.split(' ')[1])
 
 function save() {
-  updateCard(currAvatar.value, firstWord.value.concat(' ').concat(secondWord.value))
+  if (firstWord.value && secondWord.value)
+    updateCard(currAvatar.value as string, firstWord.value.concat(' ').concat(secondWord.value))
   const prompt = document.querySelector('#save-prompt') as HTMLElement
   if (prompt != null) {
     prompt.style.opacity = '1'
