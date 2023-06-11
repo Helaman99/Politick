@@ -35,10 +35,13 @@ jobs:
         run: npm run test:unit
         working-directory: ./Politick
      
-      - name: Deploy to Azure Web App
-        uses: Azure/webapps-deploy@v2
-        with:
-          app-name: PolitickGame
-          slot-name: 'Production' # Optional
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_API }}
-          package: ./Politick/dist
+      - name: Install ncftp
+        run: sudo apt-get install ncftp
+
+      - name: Upload dist folder to Azure Web App
+        run: |
+          ncftpput -R -v -u $FTPS_USERNAME -p $FTPS_PASSWORD $FTPS_HOST /site/wwwroot/dist ./Politick/dist
+        env:
+          FTP_USERNAME: ${{ secrets.FTPS_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTPS_PASSWORD }}
+          FTP_HOST: ${{ secrets.FTPS_HOST }}
