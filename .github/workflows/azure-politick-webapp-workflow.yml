@@ -1,4 +1,4 @@
-name: PolitickGame 2023 Static Site CI/CD
+name: PolitickGame 2023 Front-End CI/CD
 
 on:
   workflow_dispatch:
