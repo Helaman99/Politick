@@ -1,1 +1,1 @@
-export const outputDir = '/site/wwwroot/dist';
+export const outputDir = './dist';
