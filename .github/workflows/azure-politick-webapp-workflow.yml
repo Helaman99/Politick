@@ -3,7 +3,7 @@ name: PolitickGame 2023 Front-End CI/CD
 on:
   workflow_dispatch:
   push:
-    paths: 
+    paths:
       - Politick/**
   pull_request:
     types: [opened, synchronize, reopened]
@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Build and Deploy Job
     steps:
-      - name: Checkout Code 
+      - name: Checkout Code
         uses: actions/checkout@v3
       - name: Setup Node
         uses: actions/setup-node@v3
@@ -28,20 +28,16 @@ jobs:
       - name: Prettier Check
         working-directory: ./Politick
         run: npm run format:check
-      - name: Build Vue App 
+      - name: Build Vue App
         working-directory: ./Politick
         run: npm run build
       - name: Run Vitest Unit Tests
         run: npm run test:unit
         working-directory: ./Politick
-     
-      - name: Install ncftp
-        run: sudo apt-get install ncftp
 
-      - name: Upload dist folder to Azure Web App
-        run: |
-          ncftpput -R -v -u $FTPS_USERNAME -p $FTPS_PASSWORD $FTPS_HOST /site/wwwroot/dist ./Politick/dist
-        env:
-          FTPS_USERNAME: ${{ secrets.FTPS_USERNAME }}
-          FTPS_PASSWORD: ${{ secrets.FTPS_PASSWORD }}
-          FTPS_HOST: ftps://waws-prod-bay-217.ftp.azurewebsites.windows.net/site/wwwroot
+      - name: Publish to Azure Web App
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: ${{ secrets.APP_NAME }}
+          publish-profile: ${{ secrets.PUBLISH_PROFILE }}
+          package: ./Politick/dist
