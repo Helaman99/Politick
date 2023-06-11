@@ -41,4 +41,4 @@ jobs:
           app-name: PolitickGame
           slot-name: 'Production' # Optional
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_API }}
-          package: /site/wwwroot/dist
+          package: /home/site/wwwroot/dist
