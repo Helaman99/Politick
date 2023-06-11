@@ -44,4 +44,4 @@ jobs:
         env:
           FTPS_USERNAME: ${{ secrets.FTPS_USERNAME }}
           FTPS_PASSWORD: ${{ secrets.FTPS_PASSWORD }}
-          FTPS_HOST: ${{ secrets.FTPS_HOST }}
+          FTPS_HOST: ftps://waws-prod-bay-217.ftp.azurewebsites.windows.net
