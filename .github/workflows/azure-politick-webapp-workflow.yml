@@ -42,6 +42,6 @@ jobs:
         run: |
           ncftpput -R -v -u $FTPS_USERNAME -p $FTPS_PASSWORD $FTPS_HOST /site/wwwroot/dist ./Politick/dist
         env:
-          FTP_USERNAME: ${{ secrets.FTPS_USERNAME }}
-          FTP_PASSWORD: ${{ secrets.FTPS_PASSWORD }}
-          FTP_HOST: ${{ secrets.FTPS_HOST }}
+          FTPS_USERNAME: ${{ secrets.FTPS_USERNAME }}
+          FTPS_PASSWORD: ${{ secrets.FTPS_PASSWORD }}
+          FTPS_HOST: ${{ secrets.FTPS_HOST }}
