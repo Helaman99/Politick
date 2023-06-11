@@ -30,7 +30,7 @@ jobs:
         run: npm run format:check
       - name: Build Vue App 
         working-directory: ./Politick
-        run: npm run build
+        run: npm run build -- --dest /site/wwwroot/dist
       - name: Run Vitest Unit Tests
         run: npm run test:unit
         working-directory: ./Politick
@@ -41,4 +41,4 @@ jobs:
           app-name: PolitickGame
           slot-name: 'Production' # Optional
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_API }}
-          package: /home/site/wwwroot/dist
+          package: /site/wwwroot/dist
