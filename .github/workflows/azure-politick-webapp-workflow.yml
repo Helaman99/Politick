@@ -30,7 +30,7 @@ jobs:
         run: npm run format:check
       - name: Build Vue App 
         working-directory: ./Politick
-        run: npm run build -- --dest /site/wwwroot/dist
+        run: npm run build
       - name: Run Vitest Unit Tests
         run: npm run test:unit
         working-directory: ./Politick
