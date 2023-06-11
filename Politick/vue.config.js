@@ -1,3 +1,1 @@
-module.exports = {
-    outputDir: '/site/wwwroot/dist'
-  }
+export const outputDir = '/site/wwwroot/dist';
