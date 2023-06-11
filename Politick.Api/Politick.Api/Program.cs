@@ -21,7 +21,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy(name: MyAllowAllOrigins,
                       policy =>
                       {
-                          policy.WithOrigins("politickgame.azurewebsites.net", "localhost")
+                          policy.WithOrigins("politickgame.azurewebsites.net", "http://localhost:5173")
                                 .AllowAnyHeader()
                                 .AllowAnyHeader()
                                 .AllowCredentials();

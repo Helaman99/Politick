@@ -14,7 +14,7 @@
           </template>
 
           <template v-slot:append>
-            <v-app-bar-nav-icon @click.stop="settings = !settings">
+            <v-app-bar-nav-icon @click.stop="settings = !settings" class="settings">
               <v-icon size="x-large">mdi-cog-outline</v-icon>
             </v-app-bar-nav-icon>
           </template>
@@ -101,6 +101,7 @@ function setDark() {
 .headerBar {
   margin-bottom: 5rem;
   z-index: 1;
+  font-size: 20px;
 }
 .v-app-bar-nav-icon {
   margin: 2.5rem;
@@ -118,5 +119,11 @@ function setDark() {
 
 #standing {
   margin-top: 1rem;
+}
+
+@media (max-width: 400px) {
+  .v-app-bar-nav-icon {
+    margin: 0.5rem;
+  }
 }
 </style>

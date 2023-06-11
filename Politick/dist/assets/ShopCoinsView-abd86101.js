@@ -1,1 +1,0 @@
-import{h as t,a as s,o as c,c as n,b as a,w as r,e}from"./index-eab5ed3f.js";const _={},i={class:"coins"};function d(l,p){const o=s("router-link");return c(),n("div",i,[a(o,{to:"/dashboard/shop/"},{default:r(()=>[e("Back")]),_:1}),e(" Coins ")])}const h=t(_,[["render",d]]);export{h as default};

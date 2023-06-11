@@ -4,10 +4,7 @@
       <v-card
         v-for="(side, index) in topics[selectedTopic].sides"
         v-bind:key="index"
-        @click="
-          disclaimer = true
-          selectSide(index, side.standings)
-        "
+        @click="chooseSide(index, side.standings)"
       >
         <v-card-title>{{ side.title }}</v-card-title>
         <v-card-text>{{ side.description }}</v-card-text>
@@ -60,6 +57,11 @@ import { startConnection } from '@/scripts/roomController'
 let disclaimer = ref(false)
 let loading = ref(false)
 let failed = ref(false)
+
+function chooseSide(index: number, sides: string[]) {
+  disclaimer.value = true
+  selectSide(index, sides)
+}
 
 function FindRoom() {
   disclaimer.value = false

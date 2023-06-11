@@ -65,6 +65,7 @@ function signUp() {
   width: 50%;
   display: flex;
   margin: 1rem;
+  font-size: 20px;
 }
 .agree #checkbox {
   width: 4rem;

@@ -2,7 +2,7 @@
   <div class="chat-header">
     <v-app-bar elevation="3" height="75" color="white">
       <v-app-bar-title>
-        <h1 id="countdown"></h1>
+        <h2 id="countdown"></h2>
       </v-app-bar-title>
     </v-app-bar>
   </div>
