@@ -73,7 +73,7 @@ jobs:
         with:
           name: app-build
           path: |
-            ./dist/*
+            dist/*
 
   deploy:
     runs-on: ubuntu-latest
