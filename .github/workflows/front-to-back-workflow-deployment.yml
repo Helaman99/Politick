@@ -94,4 +94,7 @@ jobs:
           app-name: ${{ secrets.APP_NAME }}
           slot-name: 'Production'
           publish-profile: ${{ secrets.PUBLISH_PROFILE }}
-          package: .
+          package: |
+            ./Politick.Api/bin/Release/**
+            ./dist/**
+
