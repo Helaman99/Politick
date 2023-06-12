@@ -60,7 +60,7 @@ jobs:
         working-directory: ./Politick
         
       - name: Copy Backend to root directory
-        run: cp -R Politick.Api/backend-publish/* .
+        run: cp -R ./backend-publish/* .
 
       - name: Create dist Directory
         run: mkdir dist
