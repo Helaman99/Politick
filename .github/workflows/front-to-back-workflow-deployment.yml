@@ -102,6 +102,6 @@ jobs:
           slot-name: 'Production'
           publish-profile: ${{ secrets.PUBLISH_PROFILE }}
           package: |
-            ./**/*
+            .
             ./dist/**
 
