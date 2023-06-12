@@ -58,9 +58,6 @@ jobs:
       - name: Create dist Directory
         run: mkdir dist
 
-      - name: Copy Backend to root directory
-        run: cp -R ${{env.DOTNET_ROOT}}/myapp/* .
-
       - name: Copy Frontend to dist
         run: cp -R Politick/dist/* dist/
 
@@ -69,7 +66,7 @@ jobs:
         with:
           name: app-build
           path: |
-            ./*
+            ${{env.DOTNET_ROOT}}/myapp
             ./dist/*
 
   deploy:
