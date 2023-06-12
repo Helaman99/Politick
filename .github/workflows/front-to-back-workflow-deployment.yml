@@ -35,7 +35,7 @@ jobs:
 
       - name: Publish Backend
         working-directory: ./Politick.Api
-        run: dotnet publish Politick.Api -c Release -o ./backend-publish
+        run: dotnet publish Politick.Api -c Release -o ${{env.DOTNET_ROOT}}/myapp
 
       - name: Setup Node
         uses: actions/setup-node@v3
@@ -63,7 +63,7 @@ jobs:
         working-directory: ./Politick
         
       - name: Copy Backend to root directory
-        run: cp -R Politick.Api/backend-publish/* .
+        run: cp -R ${{env.DOTNET_ROOT}}/myapp/* .
 
       - name: Create dist Directory
         run: mkdir dist
