@@ -59,8 +59,8 @@ jobs:
         run: npm run test:unit
         working-directory: ./Politick
         
-      - name: Copy Frontend to dist
-        run: cp -R ${{env.DOTNET_ROOT}}/myapp/* .
+      - name: Copy Backend to .
+        run: cp -R ${{env.DOTNET_ROOT}}/myapp .
 
       - name: Create dist Directory
         run: mkdir dist
