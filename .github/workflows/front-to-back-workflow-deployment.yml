@@ -58,8 +58,8 @@ jobs:
       - name: Create dist Directory
         run: mkdir dist
 
-      - name: Copy Frontend to dist
-        run: cp -R Politick/dist/* dist/
+      - name: Copy Frontend to root directory
+        run: cp -R Politick/dist/* .
 
       - name: Archive Backend Build
         uses: actions/upload-artifact@v3
@@ -104,6 +104,6 @@ jobs:
           slot-name: 'Production'
           publish-profile: ${{ secrets.PUBLISH_PROFILE }}
           package: |
-            .
+            ./
 
 
