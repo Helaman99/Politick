@@ -95,7 +95,7 @@ const firstWordPacks = ref()
 const secondWordPacks = ref()
 const selectedPackList = ref()
 const selectedPack = ref()
-Axios.get('https://localhost:7060/Shop/FirstWordPacks')
+Axios.get('/Shop/FirstWordPacks')
   .then((response) => {
     firstWordPacks.value = response.data
     selectedPackList.value = firstWordPacks.value
@@ -103,7 +103,7 @@ Axios.get('https://localhost:7060/Shop/FirstWordPacks')
   .catch((error) => {
     console.log(error)
   })
-Axios.get('https://localhost:7060/Shop/SecondWordPacks')
+Axios.get('/Shop/SecondWordPacks')
   .then((response) => {
     secondWordPacks.value = response.data
   })

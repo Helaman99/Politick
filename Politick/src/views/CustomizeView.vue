@@ -12,7 +12,10 @@
       <div class="customizeOptions">
         <div class="avatarOptions">
           <div v-for="image in player?.unlockedAvatars" v-bind:key="image" class="avatarImage">
-            <img :src="'https://localhost:7060/Shop/Avatar' + image" @click="currAvatar = image" />
+            <img
+              :src="Axios.defaults.baseURL + '/Shop/Avatar' + image"
+              @click="currAvatar = image"
+            />
           </div>
         </div>
 
@@ -43,6 +46,7 @@
 import playerCard from '@/components/PlayerCard.vue'
 import { player, updateCard } from '@/scripts/playerController'
 import { ref } from 'vue'
+import Axios from 'axios'
 
 const currAvatar = ref(player.value?.avatar)
 const firstWord = ref(player.value?.title.split(' ')[0])

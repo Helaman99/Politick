@@ -25,7 +25,7 @@ export class SignInService {
   private constructor() {}
 
   public async signIn(email: string, password: string) {
-    Axios.post('https://localhost:7060/Token/GetToken', {
+    Axios.post('/Token/GetToken', {
       email: email,
       password: password
     })
@@ -46,7 +46,7 @@ export class SignInService {
   }
 
   public createAccount(email: string, password: string) {
-    Axios.post('https://localhost:7060/Token/CreatePlayer', {
+    Axios.post('/Token/CreatePlayer', {
       email: email,
       password: password
     })

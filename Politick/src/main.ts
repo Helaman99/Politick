@@ -15,9 +15,9 @@ import * as directives from 'vuetify/directives'
 
 //Check if the app is running on localhost
 if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-  Axios.defaults.baseURL = 'https://localhost:7053/'
+  Axios.defaults.baseURL = 'https://localhost:7060'
 } else {
-  Axios.defaults.baseURL = 'https://wordle2023.azurewebsites.net/'
+  Axios.defaults.baseURL = 'https://politickgame.azurewebsites.net'
 }
 
 const vuetify = createVuetify({

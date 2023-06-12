@@ -5,7 +5,10 @@
         <v-app-bar elevation="3" height="75" color="white">
           <template v-slot:prepend>
             <v-app-bar-nav-icon @click.stop="navigation = !navigation" elevation="2">
-              <img class="menu-icon" :src="'https://localhost:7060/Shop/Avatar' + player?.avatar" />
+              <img
+                class="menu-icon"
+                :src="Axios.defaults.baseURL + '/Shop/Avatar' + player?.avatar"
+              />
             </v-app-bar-nav-icon>
             <div id="user-stats">
               <p>Coins: {{ player?.coins }}</p>
@@ -80,6 +83,7 @@ import { SignInService } from '@/scripts/SignInService'
 import { player, changeTheme } from '../scripts/playerController'
 import { ref } from 'vue'
 import router from '@/router'
+import Axios from 'axios'
 
 const navigation = ref(false)
 const settings = ref(false)

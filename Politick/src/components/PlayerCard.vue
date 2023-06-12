@@ -1,14 +1,13 @@
 <template>
   <v-card class="playerCard" elevation="5" :color="color">
-    <img :src="'https://localhost:7060/Shop/Avatar' + avatarPath" alt="avatar" />
+    <img :src="Axios.defaults.baseURL + '/Shop/Avatar' + avatarPath" alt="avatar" />
     <v-card-title>{{ title }}</v-card-title>
   </v-card>
 </template>
 
-<script lang="ts">
-export default {
-  props: ['avatarPath', 'title', 'color']
-}
+<script setup lang="ts">
+import Axios from 'axios'
+defineProps(['avatarPath', 'title', 'color'])
 </script>
 
 <style scoped>

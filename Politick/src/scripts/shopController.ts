@@ -11,14 +11,14 @@ import {
 
 const basicAvatarFileNames = ref([''])
 const premiumAvatarFileNames = ref([''])
-Axios.get('https://localhost:7060/Shop/BasicAvatars')
+Axios.get('/Shop/BasicAvatars')
   .then((response) => {
     basicAvatarFileNames.value = response.data
   })
   .catch((error) => {
     console.log(error)
   })
-Axios.get('https://localhost:7060/Shop/PremiumAvatars')
+Axios.get('/Shop/PremiumAvatars')
   .then((response) => {
     premiumAvatarFileNames.value = response.data
   })

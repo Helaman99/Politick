@@ -5,7 +5,7 @@ import router from '@/router'
 import * as signalR from '@microsoft/signalr'
 
 const topics = ref()
-Axios.get('https://localhost:7060/Topic/GetTopics')
+Axios.get('/Topic/GetTopics')
   .then((response) => {
     topics.value = response.data
   })
@@ -43,9 +43,7 @@ const opponent = ref<Opponent>()
 const thisPlayer = ref<Opponent>()
 const room = ref(0)
 export function startConnection(): boolean {
-  connectionRef.value = new signalR.HubConnectionBuilder()
-    .withUrl('https://localhost:7060/ChatHub')
-    .build()
+  connectionRef.value = new signalR.HubConnectionBuilder().withUrl('/ChatHub').build()
 
   connectionRef.value
     .start()
@@ -58,7 +56,7 @@ export function startConnection(): boolean {
         Side: selectedSide,
         ChatRoomId: ''
       }
-      Axios.post('https://localhost:7060/Chat/AssignRoomId', thisPlayer.value)
+      Axios.post('/Chat/AssignRoomId', thisPlayer.value)
         .then((response) => {
           console.log('Room: ' + response.data.chatRoomId)
           room.value = response.data.chatRoomId
@@ -72,7 +70,7 @@ export function startConnection(): boolean {
     })
     .then(() => {
       connectionRef.value?.on('StartGame', () => {
-        Axios.post('https://localhost:7060/Chat/GetOpponent', thisPlayer.value)
+        Axios.post('/Chat/GetOpponent', thisPlayer.value)
           .then((response) => {
             opponent.value = {
               Email: response.data.name,

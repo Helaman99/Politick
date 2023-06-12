@@ -13,7 +13,7 @@
         :disabled="player?.unlockedAvatars.includes(avatar)"
       >
         <img
-          :src="'https://localhost:7060/Shop/Avatar' + avatar"
+          :src="Axios.defaults.baseURL + '/Shop/Avatar' + avatar"
           :style="{ opacity: player?.unlockedAvatars.includes(avatar) ? 0.35 : 1 }"
         />
       </v-btn>
@@ -31,7 +31,7 @@
         :style="{ 'background-color': avatar === 'certainValue' ? 'green' : '' }"
       >
         <img
-          :src="'https://localhost:7060/Shop/Avatar' + avatar"
+          :src="Axios.defaults.baseURL + '/Shop/Avatar' + avatar"
           :style="{ opacity: player?.unlockedAvatars.includes(avatar) ? 0.35 : 1 }"
         />
       </v-btn>
@@ -40,7 +40,7 @@
     <v-dialog v-model="basicPrompt" class="prompt">
       <v-card class="prompt-card">
         <div class="prompt-left">
-          <img :src="'https://localhost:7060/Shop/Avatar' + selectedAvatar" />
+          <img :src="Axios.defaults.baseURL + '/Shop/Avatar' + selectedAvatar" />
         </div>
         <div class="prompt-right">
           <p>Are you sure you wish to buy this avatar for 10 coins?</p>
@@ -54,7 +54,7 @@
     <v-dialog v-model="premiumPrompt" class="prompt">
       <v-card class="prompt-card">
         <div class="prompt-left">
-          <img :src="'https://localhost:7060/Shop/Avatar' + selectedAvatar" />
+          <img :src="Axios.defaults.baseURL + '/Shop/Avatar' + selectedAvatar" />
         </div>
         <div class="prompt-right">
           <p>Are you sure you wish to buy this premium avatar for 20 coins?</p>
@@ -94,6 +94,7 @@ import {
   premiumAvatarFileNames,
   purchaseAvatar
 } from '@/scripts/shopController'
+import Axios from 'axios'
 
 const basicPrompt = ref(false)
 const premiumPrompt = ref(false)

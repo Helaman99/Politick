@@ -15,7 +15,7 @@ const player = ref<Player>()
 
 export function initializePlayer() {
   if (SignInService.instance.isSignedIn) {
-    Axios.get('https://localhost:7060/Player/GetPlayer')
+    Axios.get('/Player/GetPlayer')
       .then((response) => {
         player.value = new Player(
           response.data.title,
@@ -49,7 +49,7 @@ export function updateCard(newAvatar: string, newTitle: string) {
   if (player.value) {
     player.value.avatar = newAvatar
     player.value.title = newTitle
-    Axios.post('https://localhost:7060/Player/UpdateCard', {
+    Axios.post('/Player/UpdateCard', {
       Avatar: newAvatar,
       Title: newTitle
     } as PlayerCard).catch((error) => {
@@ -61,7 +61,7 @@ export function updateCard(newAvatar: string, newTitle: string) {
 export function addCoins(coinCount: number) {
   if (player.value && coinCount > 0) {
     player.value.addCoins(coinCount)
-    Axios.post(`https://localhost:7060/Player/AddCoins?amount=${coinCount}`).catch((error) => {
+    Axios.post(`/Player/AddCoins?amount=${coinCount}`).catch((error) => {
       console.log(error)
     })
   }
@@ -70,7 +70,7 @@ export function addCoins(coinCount: number) {
 export function removeCoins(coinCount: number) {
   if (player.value && coinCount >= 0) {
     if (player.value.removeCoins(coinCount)) {
-      Axios.post(`https://localhost:7060/Player/RemoveCoins?amount=${coinCount}`).catch((error) => {
+      Axios.post(`/Player/RemoveCoins?amount=${coinCount}`).catch((error) => {
         console.log(error)
       })
       return true
@@ -101,7 +101,7 @@ export function updateStandings(standings: string[]) {
         }
       }
     }
-    Axios.post('https://localhost:7060/Player/UpdateStandings', standings).catch((error) => {
+    Axios.post('/Player/UpdateStandings', standings).catch((error) => {
       console.log(error)
     })
   }
@@ -110,7 +110,7 @@ export function updateStandings(standings: string[]) {
 export function addTitleFirstWords(newWords: string[]) {
   if (player.value) {
     player.value.addTitleFirstWords(newWords)
-    Axios.post('https://localhost:7060/Player/AddTitleFirstWords', newWords).catch((error) => {
+    Axios.post('/Player/AddTitleFirstWords', newWords).catch((error) => {
       console.log(error)
     })
   }
@@ -119,7 +119,7 @@ export function addTitleFirstWords(newWords: string[]) {
 export function addTitleSecondWords(newWords: string[]) {
   if (player.value) {
     player.value.addTitleSecondWords(newWords)
-    Axios.post('https://localhost:7060/Player/AddTitleSecondWords', newWords).catch((error) => {
+    Axios.post('/Player/AddTitleSecondWords', newWords).catch((error) => {
       console.log(error)
     })
   }
@@ -128,7 +128,7 @@ export function addTitleSecondWords(newWords: string[]) {
 export function addAvatar(newAvatar: string) {
   if (player.value) {
     player.value.addAvatar(newAvatar)
-    Axios.post(`https://localhost:7060/Player/AddAvatar?newAvatar=${newAvatar}`).catch((error) => {
+    Axios.post(`/Player/AddAvatar?newAvatar=${newAvatar}`).catch((error) => {
       console.log(error)
     })
   }
@@ -136,7 +136,7 @@ export function addAvatar(newAvatar: string) {
 
 export function addGame() {
   player.value?.addGame()
-  Axios.post('https://localhost:7060/Player/AddGame').catch((error) => {
+  Axios.post('/Player/AddGame').catch((error) => {
     console.log(error)
   })
 }
@@ -144,7 +144,7 @@ export function addGame() {
 export function changeTheme(newTheme: string) {
   if (player.value) {
     player.value.theme = newTheme
-    Axios.post(`https://localhost:7060/Player/ChangeTheme?newTheme=${newTheme}`).catch((error) => {
+    Axios.post(`/Player/ChangeTheme?newTheme=${newTheme}`).catch((error) => {
       console.log(error)
     })
   }
@@ -152,7 +152,7 @@ export function changeTheme(newTheme: string) {
 
 export function addStrike() {
   player.value?.addStrike()
-  Axios.post('https://localhost:7060/Player/AddStrike').catch((error) => {
+  Axios.post('/Player/AddStrike').catch((error) => {
     console.log(error)
   })
   if (player.value?.strikes == 3) SignInService.instance.signOut()
