@@ -73,8 +73,8 @@ jobs:
         with:
           name: app-build
           path: |
-            .
-            ./dist/*
+            ${{env.DOTNET_ROOT}}/myapp
+            Politick/dist/*
 
   deploy:
     runs-on: ubuntu-latest
