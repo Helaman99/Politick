@@ -30,9 +30,12 @@ jobs:
         working-directory: ./Politick.Api
         run: dotnet test
 
-      - name: dotnet publish
+      - name: Create backend-publish Directory
+        run: mkdir backend-publish
+
+      - name: Publish Backend
         working-directory: ./Politick.Api
-        run: dotnet publish Politick.Api -c Release -o Politick.Api/backend-publish
+        run: dotnet publish Politick.Api -c Release -o ./backend-publish
 
       - name: Setup Node
         uses: actions/setup-node@v3
