@@ -59,7 +59,7 @@ jobs:
         run: mkdir dist
 
       - name: Copy Backend to root directory
-        run: cp -R Politick.Api/bin/Release/* .
+        run: cp -R ${{env.DOTNET_ROOT}}/myapp/* .
 
       - name: Copy Frontend to dist
         run: cp -R Politick/dist/* dist/
