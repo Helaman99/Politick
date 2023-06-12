@@ -59,20 +59,22 @@ jobs:
         run: npm run test:unit
         working-directory: ./Politick
 
+      - name: Copy Backend to root directory
+        run: cp -R ${{env.DOTNET_ROOT}}/myapp .
+
       - name: Create dist Directory
         run: mkdir dist
 
       - name: Copy Frontend to dist
-        run: cp -R Politick/dist/* dist
+        run: cp -R Politick/dist/* dist/
 
       - name: Archive Build
         uses: actions/upload-artifact@v3
         with:
           name: app-build
           path: |
-            Politick.Api/bin/Release/**
-            dist/**
-            ${{env.DOTNET_ROOT}}/myapp
+            ./*
+            ./dist/*
 
   deploy:
     runs-on: ubuntu-latest
