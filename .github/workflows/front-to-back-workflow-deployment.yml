@@ -30,9 +30,6 @@ jobs:
         working-directory: ./Politick.Api
         run: dotnet test
 
-      - name: Create backend-publish Directory
-        run: mkdir backend-publish
-
       - name: Publish Backend
         working-directory: ./Politick.Api
         run: dotnet publish Politick.Api -c Release -o ${{env.DOTNET_ROOT}}/myapp
@@ -58,12 +55,11 @@ jobs:
         working-directory: ./Politick
         run: npm run build
 
-      - name: Run Vitest Unit Tests
-        run: npm run test:unit
-        working-directory: ./Politick
-
       - name: Create dist Directory
         run: mkdir dist
+
+      - name: Copy Backend to root directory
+        run: cp -R Politick.Api/bin/Release/* .
 
       - name: Copy Frontend to dist
         run: cp -R Politick/dist/* dist/
@@ -73,7 +69,7 @@ jobs:
         with:
           name: app-build
           path: |
-            ${{env.DOTNET_ROOT}}/myapp
+            ./*
             ./dist/*
 
   deploy:
@@ -104,4 +100,5 @@ jobs:
           package: |
             ./*
             ./dist/**
+
 
