@@ -72,7 +72,7 @@ jobs:
           path: |
             Politick.Api/bin/Release/**
             dist/**
-            Politick.Api/myapp/**
+            ${{env.DOTNET_ROOT}}/myapp
 
   deploy:
     runs-on: ubuntu-latest
