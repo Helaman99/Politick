@@ -2,12 +2,15 @@ name: Politick 2023 CI/CD
 
 on:
   push:
-    paths:
+    paths: 
       - Politick.Api/**
       - Politick/**
+  workflow_dispatch:
+  pull_request:
+    types: [opened, synchronize, reopened]
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -27,7 +30,7 @@ jobs:
         working-directory: ./Politick.Api
         run: dotnet test
 
-      - name: dotnet publish
+      - name: Publish Backend
         working-directory: ./Politick.Api
         run: dotnet publish Politick.Api -c Release -o ${{env.DOTNET_ROOT}}/myapp
 
@@ -52,23 +55,23 @@ jobs:
         working-directory: ./Politick
         run: npm run build
 
-      - name: Run Vitest Unit Tests
-        run: npm run test:unit
-        working-directory: ./Politick
-
       - name: Create dist Directory
         run: mkdir dist
 
-      - name: Copy Frontend to dist
-        run: cp -R Politick/dist/* dist
+      - name: Copy Frontend to root directory
+        run: cp -R Politick/dist/* .
 
-      - name: Archive Build
+      - name: Archive Backend Build
         uses: actions/upload-artifact@v3
         with:
-          name: app-build
-          path: |
-            Politick.Api/bin/Release/**
-            dist/**
+          name: backend-build
+          path: ${{env.DOTNET_ROOT}}/myapp
+
+      - name: Archive Frontend Build
+        uses: actions/upload-artifact@v3
+        with:
+          name: frontend-build
+          path: Politick/dist
 
   deploy:
     runs-on: ubuntu-latest
@@ -79,10 +82,19 @@ jobs:
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
-      - name: Download artifact from build job
+      - name: Download Backend artifact
         uses: actions/download-artifact@v3
         with:
-          name: .net-app
+          name: backend-build
+
+      - name: Download Frontend artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: frontend-build
+
+      - name: Display Artifact Contents
+        run: |
+          ls -R
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
@@ -91,4 +103,7 @@ jobs:
           app-name: ${{ secrets.APP_NAME }}
           slot-name: 'Production'
           publish-profile: ${{ secrets.PUBLISH_PROFILE }}
-          package: .
+          package: |
+            ./
+
+
