@@ -32,7 +32,7 @@ jobs:
 
       - name: dotnet publish
         working-directory: ./Politick.Api
-        run: dotnet publish Politick.Api -c Release -o ${{env.DOTNET_ROOT}}/myapp
+        run: dotnet publish Politick.Api -c Release -o ./backend-publish
 
       - name: Setup Node
         uses: actions/setup-node@v3
@@ -59,8 +59,8 @@ jobs:
         run: npm run test:unit
         working-directory: ./Politick
         
-      - name: Copy Backend to .
-        run: cp -R ${{env.DOTNET_ROOT}}/myapp .
+      - name: Copy Backend to root directory
+        run: cp -R Politick.Api/backend-publish/. .
 
       - name: Create dist Directory
         run: mkdir dist
@@ -73,7 +73,8 @@ jobs:
         with:
           name: app-build
           path: |
-            ./dist/**
+            ./*
+            ./dist/*
 
   deploy:
     runs-on: ubuntu-latest
