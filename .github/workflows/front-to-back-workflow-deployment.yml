@@ -72,6 +72,7 @@ jobs:
           path: |
             Politick.Api/bin/Release/**
             dist/**
+            Politick.Api/myapp/**
 
   deploy:
     runs-on: ubuntu-latest
