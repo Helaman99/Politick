@@ -61,12 +61,17 @@ jobs:
       - name: Copy Frontend to dist
         run: cp -R Politick/dist/* dist/
 
-      - name: Archive Build
+      - name: Archive Backend Build
         uses: actions/upload-artifact@v3
         with:
-          name: app-build
-          path: |
-            ${{env.DOTNET_ROOT}}/myapp
+          name: backend-build
+          path: ${{env.DOTNET_ROOT}}/myapp
+
+      - name: Archive Frontend Build
+        uses: actions/upload-artifact@v3
+        with:
+          name: frontend-build
+          path: dist
 
   deploy:
     runs-on: ubuntu-latest
@@ -77,11 +82,16 @@ jobs:
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
-      - name: Download artifact from build job
+      - name: Download Backend artifact
         uses: actions/download-artifact@v3
         with:
-          name: app-build
-          
+          name: backend-build
+
+      - name: Download Frontend artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: frontend-build
+
       - name: Display Artifact Contents
         run: |
           ls -R
@@ -95,6 +105,5 @@ jobs:
           publish-profile: ${{ secrets.PUBLISH_PROFILE }}
           package: |
             ./*
-            ./dist/**
 
 
