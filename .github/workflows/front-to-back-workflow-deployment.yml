@@ -66,8 +66,7 @@ jobs:
         with:
           name: app-build
           path: |
-            Politick.Api/bin/**
-            dist/**
+            ${{env.DOTNET_ROOT}}/myapp
 
   deploy:
     runs-on: ubuntu-latest
