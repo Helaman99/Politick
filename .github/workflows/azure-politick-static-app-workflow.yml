@@ -28,20 +28,20 @@ jobs:
       - name: Prettier Check
         working-directory: ./Politick
         run: npm run format:check
+      - name: Build Vue App 
+        working-directory: ./Politick
+        run: npm run build
       - name: Run Vitest Unit Tests
         run: npm run test:unit
         working-directory: ./Politick
-        - name: Build Vue App 
-        working-directory: ./Politick
-        run: npm run build
-
-        - name: Deploy
+     
+      - name: Deploy
         if: ((github.event_name == 'push' && github.ref == 'refs/heads/master') || github.event_name == 'workflow_dispatch' )
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
         with:
           azure_static_web_apps_api_token: ${{ secrets.DEPLOY_TOKEN }}
-          # repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
+          #repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
           action: "upload"
           ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
           # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
