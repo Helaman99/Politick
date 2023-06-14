@@ -22,7 +22,7 @@ builder.Services.AddCors(options =>
                       policy =>
                       {
                           policy.WithOrigins("politick-api.azurewebsites.net",
-                                             "https://victorious-flower-0ddb7221e.3.azurestaticapps.net/",
+                                             "https://victorious-flower-0ddb7221e.3.azurestaticapps.net",
                                              "http://localhost:5173")
                                 .AllowAnyHeader()
                                 .AllowAnyHeader()
