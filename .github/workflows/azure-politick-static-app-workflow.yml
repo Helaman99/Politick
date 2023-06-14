@@ -1,9 +1,9 @@
-name: PolitickGame 2023 Front-End CI/CD
+name: Politick 2023 Static Site CI/CD
 
 on:
   workflow_dispatch:
   push:
-    paths:
+    paths: 
       - Politick/**
   pull_request:
     types: [opened, synchronize, reopened]
@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Build and Deploy Job
     steps:
-      - name: Checkout Code
+      - name: Checkout Code 
         uses: actions/checkout@v3
       - name: Setup Node
         uses: actions/setup-node@v3
@@ -28,7 +28,7 @@ jobs:
       - name: Prettier Check
         working-directory: ./Politick
         run: npm run format:check
-      - name: Build Vue App
+      - name: Build Vue App 
         working-directory: ./Politick
         run: npm run build
       - name: Run Vitest Unit Tests
