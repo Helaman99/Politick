@@ -18,13 +18,13 @@ let selectedSide = -1
 let sideStandings = Array('')
 export function selectTopic(index: number) {
   selectedTopic = index
-  console.log('Topic: ' + selectedTopic)
+  //console.log('Topic: ' + selectedTopic)
 }
 export function selectSide(index: number, standings: string[]) {
   selectedSide = index
   sideStandings = standings
-  console.log('Side: ' + selectedSide)
-  console.log('Standings: ' + sideStandings)
+  //console.log('Side: ' + selectedSide)
+  //console.log('Standings: ' + sideStandings)
 }
 
 if (selectedTopic == -1) router.push('/dashboard/topics')
@@ -58,7 +58,7 @@ export function startConnection(): boolean {
       }
       Axios.post('/Chat/AssignRoomId', thisPlayer.value)
         .then((response) => {
-          console.log('Room: ' + response.data.chatRoomId)
+          //console.log('Room: ' + response.data.chatRoomId)
           room.value = response.data.chatRoomId
           thisPlayer.value = response.data
           if (connectionRef.value)
