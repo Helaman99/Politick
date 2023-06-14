@@ -11,7 +11,8 @@
     "type-check": "vue-tsc --noEmit",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "format": "prettier --write src/",
-    "format:check": "prettier --check src/"
+    "format:check": "prettier --check src/",
+    "serve": "vue-cli-service serve"
   },
   "dependencies": {
     "@microsoft/signalr": "^7.0.5",

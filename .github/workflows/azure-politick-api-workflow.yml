@@ -1,17 +1,19 @@
-name: Politick 2023 CI/CD
+# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# More GitHub Actions for Azure: https://github.com/Azure/actions
+
+name: Politick 2023 API CI/CD
 
 on:
   push:
     paths: 
       - Politick.Api/**
-      - Politick/**
   workflow_dispatch:
   pull_request:
     types: [opened, synchronize, reopened]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
       - uses: actions/checkout@v3
@@ -30,48 +32,15 @@ jobs:
         working-directory: ./Politick.Api
         run: dotnet test
 
-      - name: Publish Backend
+      - name: dotnet publish
         working-directory: ./Politick.Api
         run: dotnet publish Politick.Api -c Release -o ${{env.DOTNET_ROOT}}/myapp
 
-      - name: Setup Node
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
-
-      - name: Install Packages
-        run: npm ci
-        working-directory: ./Politick
-
-      - name: Lint Code
-        working-directory: ./Politick
-        run: npm run lint
-
-      - name: Prettier Check
-        working-directory: ./Politick
-        run: npm run format:check
-
-      - name: Build Vue App 
-        working-directory: ./Politick
-        run: npm run build
-
-      - name: Create dist Directory
-        run: mkdir dist
-
-      - name: Copy Frontend to root directory
-        run: cp -R Politick/dist/* .
-
-      - name: Archive Backend Build
+      - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
-          name: backend-build
+          name: .net-app
           path: ${{env.DOTNET_ROOT}}/myapp
-
-      - name: Archive Frontend Build
-        uses: actions/upload-artifact@v3
-        with:
-          name: frontend-build
-          path: Politick/dist
 
   deploy:
     runs-on: ubuntu-latest
@@ -82,28 +51,16 @@ jobs:
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
-      - name: Download Backend artifact
+      - name: Download artifact from build job
         uses: actions/download-artifact@v3
         with:
-          name: backend-build
-
-      - name: Download Frontend artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: frontend-build
-
-      - name: Display Artifact Contents
-        run: |
-          ls -R
+          name: .net-app
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: ${{ secrets.APP_NAME }}
+          app-name: ${{secrets.APP_NAME}}
           slot-name: 'Production'
           publish-profile: ${{ secrets.PUBLISH_PROFILE }}
-          package: |
-            ./
-
-
+          package: .
