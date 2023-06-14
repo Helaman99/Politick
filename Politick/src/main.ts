@@ -17,7 +17,7 @@ import * as directives from 'vuetify/directives'
 if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
   Axios.defaults.baseURL = 'https://localhost:7060'
 } else {
-  Axios.defaults.baseURL = 'https://politickgame.azurewebsites.net'
+  Axios.defaults.baseURL = 'https://politick-api.azurewebsites.net'
 }
 
 const vuetify = createVuetify({
