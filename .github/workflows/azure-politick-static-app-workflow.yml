@@ -28,12 +28,12 @@ jobs:
       - name: Prettier Check
         working-directory: ./Politick
         run: npm run format:check
-      - name: Build Vue App 
-        working-directory: ./Politick
-        run: npm run build
       - name: Run Vitest Unit Tests
         run: npm run test:unit
         working-directory: ./Politick
+        - name: Build Vue App 
+        working-directory: ./Politick
+        run: npm run build
 
         - name: Deploy
         if: ((github.event_name == 'push' && github.ref == 'refs/heads/master') || github.event_name == 'workflow_dispatch' )
