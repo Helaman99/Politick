@@ -1,6 +1,7 @@
 # Politick
 
-This is the repository for the Politick web application.
+This is the repository for the Politick game.
+Link: https://victorious-flower-0ddb7221e.3.azurestaticapps.net
 
 ## To Run
 
