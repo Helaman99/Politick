@@ -43,7 +43,9 @@ const opponent = ref<Opponent>()
 const thisPlayer = ref<Opponent>()
 const room = ref(0)
 export function startConnection(): boolean {
-  connectionRef.value = new signalR.HubConnectionBuilder().withUrl('/ChatHub').build()
+  connectionRef.value = new signalR.HubConnectionBuilder()
+    .withUrl(Axios.defaults.baseURL + '/ChatHub')
+    .build()
 
   connectionRef.value
     .start()
