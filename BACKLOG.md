@@ -1,5 +1,7 @@
 # Backlog
 
+* "Special Thanks" page
+
 * Fix timeout issue when looking for opponent
 
 * Send the message when "Enter" button is hit
