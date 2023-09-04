@@ -36,16 +36,21 @@ export class SignInService {
         this._isSignedIn = true
         initializePlayer()
       })
-      .catch((err) => {
-        console.log(`Login failed: ${err}`)
+      .catch((error) => {
+        console.log(`Login failed: ${error.response.data}`)
+        let error_div = document.getElementById('error-message')
+        if (error_div) {
+          error_div.innerHTML = '<p>' + error.response.data + '</p>'
+        }
         this.signOut()
+        return error
       })
       .finally(() => {
         console.log(`Player logged in: ${this.isSignedIn}`)
       })
   }
 
-  public createAccount(email: string, password: string) {
+  public async createAccount(email: string, password: string) {
     Axios.post('/Token/CreatePlayer', {
       email: email,
       password: password
@@ -54,8 +59,17 @@ export class SignInService {
         this.signIn(email, password)
       })
       .catch((error) => {
-        console.log(`Sign up failed: ${error}`)
+        console.log(`Sign up failed: ${error.response.data}`)
+        let error_div = document.getElementById('error-message')
+        let messages = ''
+        if (error_div) {
+          for (let err of error.response.data) {
+            messages += err.description + '<br>'
+          }
+          error_div.innerHTML = '<p>' + messages + '</p>'
+        }
         this.signOut()
+        return error
       })
       .finally(() => {
         console.log(`Player signed up: ${this.isSignedIn}`)
