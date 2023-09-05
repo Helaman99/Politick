@@ -106,6 +106,7 @@
           <v-card-actions>
             <v-btn @click="leave()">Yes</v-btn>
             <v-btn @click="quit = false">No</v-btn>
+            <v-btn @click="saveChatAsImage()">Save Chat</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
