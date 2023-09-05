@@ -122,9 +122,19 @@ public class ChatService
 
     public bool ValidateConnection(string chatRoomId, string connectionId)
     {
-        Room? room = RoomsInProgress.Find(r => r.ChatRoomId == chatRoomId);
-        if (room is not null && room.ConnectionIds.Contains(connectionId))
-            return true;
+        lock (_lock)
+        {
+            Room? room = RoomsInProgress.Find(r => r.ChatRoomId == chatRoomId);
+            if (room is not null && room.ConnectionIds.Contains(connectionId))
+                return true;
+            foreach (List<Room> list in TopicRoomsLists)
+            {
+                room = list.Find(p => p.ChatRoomId == chatRoomId);
+                if (room is not null)
+                    return true;
+            }
+        }
+        
 
         return false;
     }

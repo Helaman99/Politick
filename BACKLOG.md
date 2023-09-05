@@ -4,8 +4,6 @@
 
 * Send the message when "Enter" button is hit
 
-* Back button when looking for opponent
-
 * "Not Enough Coins" dialog needed in some places.
 
 * Add "Kudos" system

@@ -33,6 +33,7 @@
       <v-card class="loading-card">
         <v-card-title>Finding opponent...</v-card-title>
         <v-btn variant="text" loading />
+        <v-btn @click="back()">Back</v-btn>
       </v-card>
     </v-dialog>
 
@@ -50,9 +51,9 @@
 </template>
 
 <script setup lang="ts">
-import { topics, selectedTopic, selectSide } from '@/scripts/roomController'
+import { topics, selectedTopic, selectSide, 
+          startConnection, room, connectionRef } from '@/scripts/roomController'
 import { ref } from 'vue'
-import { startConnection } from '@/scripts/roomController'
 
 let disclaimer = ref(false)
 let loading = ref(false)
@@ -67,6 +68,11 @@ function FindRoom() {
   disclaimer.value = false
   loading.value = true
   if (!startConnection()) failed.value = true
+}
+
+function back() {
+  connectionRef.value?.invoke('LeaveRoom', room.value)
+  loading.value = false
 }
 </script>
 
