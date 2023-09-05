@@ -7,6 +7,8 @@
       autocomplete
       rows="1"
       variant="outlined"
+      @keydown.enter.exact.prevent="sendMessage"
+      @keydown.enter.shift.exact.prevent="message += '\n'"
     >
       <template v-slot:append>
         <v-btn @click="sendMessage">Send</v-btn>

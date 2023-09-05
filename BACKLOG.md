@@ -2,7 +2,7 @@
 
 * Fix timeout issue when looking for opponent (still a thing? Need to test...)
 
-* Send the message when "Enter" button is hit
+* Exit button in chat room (with dialogue)
 
 * "Not Enough Coins" dialog needed in some places.
 
