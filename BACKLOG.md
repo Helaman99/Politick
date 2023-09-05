@@ -1,20 +1,10 @@
 # Backlog
 
-* Fix timeout issue when looking for opponent
-
-* Send the message when "Enter" button is hit
-
-* Add a "Login info incorrect" message to login page
-
-* Add messages to the sign up page to help the user know when they need to change something
-
-* Back button when looking for opponent
+* Fix timeout issue when looking for opponent (still a thing? Need to test...)
 
 * "Not Enough Coins" dialog needed in some places.
 
 * Add "Kudos" system
-
-* Ability to save conversations
 
 * About page
 

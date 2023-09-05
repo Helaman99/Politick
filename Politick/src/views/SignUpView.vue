@@ -31,8 +31,10 @@
       </label>
     </div>
     <v-btn @click="signUp()">Sign Up</v-btn>
-
     <br /><br />
+    <div id="error-message"></div>
+
+    <br />
     <p>Already have an account?</p>
     <router-link to="/login">Login</router-link>
   </div>
@@ -48,9 +50,12 @@ const password2 = ref('')
 const agreed = ref(false)
 
 function signUp() {
+  let error_div = document.getElementById('error-message') as HTMLElement
   if (password.value === password2.value && agreed.value)
     SignInService.instance.createAccount(email.value, password.value)
-  else console.log("Passwords don't match")
+  else if (!agreed.value)
+    error_div.innerHTML = '<p>Please accept the terms of service and privacy policy.</p>'
+  else if (password.value !== password2.value) error_div.innerHTML = "<p>Passwords don't match</p>"
 }
 </script>
 
@@ -72,6 +77,11 @@ function signUp() {
 }
 .agree #message {
   padding: 1rem;
+}
+
+#error-message {
+  font-size: large;
+  color: red;
 }
 
 @media (max-width: 1024px) {

@@ -1,6 +1,9 @@
 <template>
   <div class="chat-header">
     <v-app-bar elevation="3" height="75" color="white">
+      <template v-slot:prepend>
+        <v-btn @click="$emit('quit')">Quit</v-btn>
+      </template>
       <v-app-bar-title>
         <h2 id="countdown"></h2>
       </v-app-bar-title>
@@ -11,7 +14,7 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
 import { ref } from 'vue'
-const emit = defineEmits(['timerEnd'])
+const emit = defineEmits(['timerEnd', 'quit'])
 
 const minutesLeft = ref<number>(0)
 function startTimer(minutes: number) {

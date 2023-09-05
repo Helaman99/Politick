@@ -52,6 +52,11 @@
               </router-link>
             </v-list-item>
             <v-list-item>
+              <router-link to="/special-thanks" @click="navigation = false" target="_blank">
+                Special Thanks
+              </router-link>
+            </v-list-item>
+            <v-list-item>
               <v-btn @click="logOut()" variant="text"> Log Out </v-btn>
             </v-list-item>
           </v-list-item-group>

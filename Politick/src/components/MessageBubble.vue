@@ -17,6 +17,7 @@ export default {
 }
 .v-card-text {
   font-size: large;
+  white-space: pre-wrap;
 }
 .received-message {
   background-color: gainsboro;

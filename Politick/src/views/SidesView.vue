@@ -6,7 +6,7 @@
         v-bind:key="index"
         @click="chooseSide(index, side.standings)"
       >
-        <v-card-title>{{ side.title }}</v-card-title>
+        <v-card-title no-wrap>{{ side.title }}</v-card-title>
         <v-card-text>{{ side.description }}</v-card-text>
       </v-card>
     </div>
@@ -33,6 +33,7 @@
       <v-card class="loading-card">
         <v-card-title>Finding opponent...</v-card-title>
         <v-btn variant="text" loading />
+        <v-btn variant="text" @click="back()">Back</v-btn>
       </v-card>
     </v-dialog>
 
@@ -50,9 +51,15 @@
 </template>
 
 <script setup lang="ts">
-import { topics, selectedTopic, selectSide } from '@/scripts/roomController'
+import {
+  topics,
+  selectedTopic,
+  selectSide,
+  startConnection,
+  room,
+  connectionRef
+} from '@/scripts/roomController'
 import { ref } from 'vue'
-import { startConnection } from '@/scripts/roomController'
 
 let disclaimer = ref(false)
 let loading = ref(false)
@@ -68,6 +75,11 @@ function FindRoom() {
   loading.value = true
   if (!startConnection()) failed.value = true
 }
+
+function back() {
+  connectionRef.value?.invoke('LeaveRoom', room.value)
+  loading.value = false
+}
 </script>
 
 <style scoped>
@@ -76,6 +88,9 @@ function FindRoom() {
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 2rem;
   margin-bottom: 2rem;
+}
+.sidesButtons .v-card .v-card-title {
+  white-space: pre-wrap;
 }
 .sidesButtons .v-btn {
   font-size: larger;
@@ -91,6 +106,7 @@ function FindRoom() {
 }
 #loading-dialog {
   width: 25%;
+  align-items: center;
   text-align: center;
 }
 #failed-dialog {

@@ -12,6 +12,8 @@
       placeholder="Password"
     />
     <v-btn @click="login()">Login</v-btn>
+    <br /><br />
+    <div id="error-message"></div>
 
     <br /><br />
     <p>Don't have an account?</p>
@@ -25,6 +27,7 @@ import { SignInService } from '@/scripts/SignInService'
 
 const email = ref('')
 const password = ref('')
+let error_div = document.getElementById('error-message')
 
 function login() {
   SignInService.instance.signIn(email.value, password.value)
@@ -38,6 +41,11 @@ function login() {
 }
 .v-input {
   width: 60%;
+}
+
+#error-message {
+  font-size: large;
+  color: red;
 }
 
 @media (max-width: 1024px) {

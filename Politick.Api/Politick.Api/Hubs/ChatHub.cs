@@ -54,7 +54,10 @@ public class ChatHub : Hub
     public async Task LeaveRoom(string chatRoomId)
     {
         if (_chatService.ValidateConnection(chatRoomId, Context.ConnectionId))
+        {
             await Clients.Group(chatRoomId).SendAsync("OpponentLeft");
+            _chatService.DisconnectRoom(Context.ConnectionId);
+        }
     }
 
     public override async Task OnDisconnectedAsync(Exception? exception)
