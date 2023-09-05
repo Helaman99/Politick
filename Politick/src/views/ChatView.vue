@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <div class="chat">
-      <ChatHeader @timerEnd="endGame()" ref="chatHeader" />
+      <ChatHeader @timerEnd="endGame()" ref="chatHeader" @quit = "quit = true" />
 
       <div class="messages">
         <messageBubble
@@ -90,6 +90,23 @@
       <v-dialog class="kicked-dialog" v-model="kicked" persistent>
         <v-card id="kicked-card">
           <v-card-text> You are getting kicked for bad behavior. </v-card-text>
+        </v-card>
+      </v-dialog>
+
+      <v-dialog
+        class="game-over-dialog"
+        v-model="quit"
+        transition="scale-transition"
+        persistent
+      >
+        <v-card class="quit-card">
+          <v-card-text>
+            Are you sure you would like to quit? You will not receive any coins!
+          </v-card-text>
+          <v-card-actions>
+            <v-btn @click="leave()">Yes</v-btn>
+            <v-btn @click="quit=false">No</v-btn>
+          </v-card-actions>
         </v-card>
       </v-dialog>
 
@@ -204,11 +221,15 @@ connectionRef.value?.on('AddTime', (playerTitle) => {
   chatHeader.value.startTimer(2)
 })
 
+const quit = ref(false)
 function leave() {
-  if (fullTimeUsed) {
-    addCoins(5 - totalDetections)
-  } else {
-    addCoins(5 - chatHeader.value.minutesLeft - totalDetections)
+  if (!quit) {
+    if (fullTimeUsed) {
+        addCoins(5 - totalDetections)
+    }
+    else {
+        addCoins(5 - chatHeader.value.minutesLeft - totalDetections)
+    }
   }
   connectionRef.value?.invoke('LeaveRoom', room.value)
   router.push('/dashboard/topics')

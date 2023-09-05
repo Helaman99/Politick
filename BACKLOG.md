@@ -2,8 +2,6 @@
 
 * Fix timeout issue when looking for opponent (still a thing? Need to test...)
 
-* Exit button in chat room (with dialogue)
-
 * "Not Enough Coins" dialog needed in some places.
 
 * Add "Kudos" system
