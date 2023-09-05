@@ -33,7 +33,7 @@
       <v-card class="loading-card">
         <v-card-title>Finding opponent...</v-card-title>
         <v-btn variant="text" loading />
-        <v-btn @click="back()">Back</v-btn>
+        <v-btn variant="text" @click="back()">Back</v-btn>
       </v-card>
     </v-dialog>
 
@@ -51,8 +51,14 @@
 </template>
 
 <script setup lang="ts">
-import { topics, selectedTopic, selectSide, 
-          startConnection, room, connectionRef } from '@/scripts/roomController'
+import {
+  topics,
+  selectedTopic,
+  selectSide,
+  startConnection,
+  room,
+  connectionRef
+} from '@/scripts/roomController'
 import { ref } from 'vue'
 
 let disclaimer = ref(false)
@@ -97,6 +103,7 @@ function back() {
 }
 #loading-dialog {
   width: 25%;
+  align-items: center;
   text-align: center;
 }
 #failed-dialog {

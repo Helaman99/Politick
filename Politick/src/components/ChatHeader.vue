@@ -2,7 +2,7 @@
   <div class="chat-header">
     <v-app-bar elevation="3" height="75" color="white">
       <template v-slot:prepend>
-        <v-btn @click = "$emit('quit')">Quit</v-btn>
+        <v-btn @click="$emit('quit')">Quit</v-btn>
       </template>
       <v-app-bar-title>
         <h2 id="countdown"></h2>

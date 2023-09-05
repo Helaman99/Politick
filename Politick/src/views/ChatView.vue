@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <div class="chat">
-      <ChatHeader @timerEnd="endGame()" ref="chatHeader" @quit = "quit = true" />
+      <ChatHeader @timerEnd="endGame()" ref="chatHeader" @quit="quit = true" />
 
       <div class="messages">
         <messageBubble
@@ -45,6 +45,7 @@
           <v-card-actions>
             <v-btn @click="extendTime()">Yes</v-btn>
             <v-btn @click="leave()">No</v-btn>
+            <v-btn @click="saveChatAsImage()">Save Chat</v-btn>
           </v-card-actions>
           <v-card-text id="failed"> </v-card-text>
         </v-card>
@@ -61,6 +62,7 @@
           <v-card-text> Time to find another opponent! </v-card-text>
           <v-card-actions>
             <v-btn @click="leave()">OK</v-btn>
+            <v-btn @click="saveChatAsImage()">Save Chat</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -83,7 +85,10 @@
             Don't worry, you won't be penalized for this and will still receive your coins. Maybe
             the other person just had a bad internet connection...
           </v-card-text>
-          <v-btn @click="leave()">OK</v-btn>
+          <v-card-actions>
+            <v-btn @click="leave()">OK</v-btn>
+            <v-btn @click="saveChatAsImage()">Save Chat</v-btn>
+          </v-card-actions>
         </v-card>
       </v-dialog>
 
@@ -93,19 +98,14 @@
         </v-card>
       </v-dialog>
 
-      <v-dialog
-        class="game-over-dialog"
-        v-model="quit"
-        transition="scale-transition"
-        persistent
-      >
+      <v-dialog class="game-over-dialog" v-model="quit" transition="scale-transition" persistent>
         <v-card class="quit-card">
           <v-card-text>
             Are you sure you would like to quit? You will not receive any coins!
           </v-card-text>
           <v-card-actions>
             <v-btn @click="leave()">Yes</v-btn>
-            <v-btn @click="quit=false">No</v-btn>
+            <v-btn @click="quit = false">No</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -126,6 +126,7 @@ import { ref } from 'vue'
 import router from '@/router'
 import { FilterService } from '@/scripts/FilterService'
 import type { FilteredMessage } from '@/scripts/FilterService'
+import html2canvas from 'html2canvas'
 
 const versus = ref(true)
 setTimeout(() => {
@@ -225,10 +226,9 @@ const quit = ref(false)
 function leave() {
   if (!quit) {
     if (fullTimeUsed) {
-        addCoins(5 - totalDetections)
-    }
-    else {
-        addCoins(5 - chatHeader.value.minutesLeft - totalDetections)
+      addCoins(5 - totalDetections)
+    } else {
+      addCoins(5 - chatHeader.value.minutesLeft - totalDetections)
     }
   }
   connectionRef.value?.invoke('LeaveRoom', room.value)
@@ -239,6 +239,16 @@ connectionRef.value?.on('OpponentLeft', () => {
   gameOver.value = false
   opponentLeft.value = true
 })
+
+function saveChatAsImage() {
+  const chatElement = document.querySelector('.messages') as HTMLElement
+  html2canvas(chatElement).then((canvas) => {
+    const link = document.createElement('a')
+    link.download = 'chat.png'
+    link.href = canvas.toDataURL()
+    link.click()
+  })
+}
 </script>
 
 <style>
