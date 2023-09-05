@@ -9,7 +9,8 @@
       <ul>
         <li>
           Intellitect - For taking the initiative to better the upcoming generation of software
-          engineers, and providing me with the knowledge and guidance to make this game a reality!
+          engineers, and for providing me with the knowledge and guidance to make this game a
+          reality!
         </li>
         <li>
           DALL-E 2 by Open AI and Dream by WOMBO - I used these <i>amazing</i>

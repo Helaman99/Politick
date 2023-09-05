@@ -6,7 +6,7 @@
         v-bind:key="index"
         @click="chooseSide(index, side.standings)"
       >
-        <v-card-title>{{ side.title }}</v-card-title>
+        <v-card-title no-wrap>{{ side.title }}</v-card-title>
         <v-card-text>{{ side.description }}</v-card-text>
       </v-card>
     </div>
@@ -88,6 +88,9 @@ function back() {
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 2rem;
   margin-bottom: 2rem;
+}
+.sidesButtons .v-card .v-card-title {
+  white-space: pre-wrap;
 }
 .sidesButtons .v-btn {
   font-size: larger;
