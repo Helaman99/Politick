@@ -12,6 +12,7 @@ using Politick.Api.Identity;
 using Politick.Api.Services;
 using Politick.Api.Hubs;
 
+
 var MyAllowAllOrigins = "_myAllowAllOrigins";
 
 var builder = WebApplication.CreateBuilder(args);
@@ -86,7 +87,14 @@ builder.Services.AddIdentityCore<Player>(options =>
         options.SignIn.RequireConfirmedAccount = false;
     })
     .AddRoles<IdentityRole>()
-    .AddEntityFrameworkStores<AppDbContext>();
+    .AddEntityFrameworkStores<AppDbContext>()
+    .AddDefaultTokenProviders();
+
+builder.Services.Configure<DataProtectionTokenProviderOptions>(o =>
+{
+    o.Name = "Default";
+    o.TokenLifespan = TimeSpan.FromHours(1);
+});
 
 //JWT Token setup
 JwtConfiguration jwtConfiguration = builder.Configuration
@@ -97,6 +105,7 @@ JwtConfiguration jwtConfiguration = builder.Configuration
 //string? jwtSecret = Environment.GetEnvironmentVariable("JWT_SECRET", EnvironmentVariableTarget.Process);
 //if (jwtSecret is null) throw new NullReferenceException(nameof(jwtSecret));
 //jwtConfiguration.Secret = jwtSecret;
+
 
 builder.Services.AddSingleton(jwtConfiguration);
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

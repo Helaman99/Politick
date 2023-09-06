@@ -1,6 +1,18 @@
 # Backlog
 
+* Let users set a security question and answer for recovering their accounts
+  
+  * Add this to the signup page
+  
+  * Also add a password change page
+  
+  * Make sure new password still abides by password rules
+  
+  * Allow users to be able to change security question and answer later
+
 * Fix timeout issue when looking for opponent (still a thing? Need to test...)
+
+* Set new avatars to "Copy Always"
 
 * "Not Enough Coins" dialog needed in some places.
 

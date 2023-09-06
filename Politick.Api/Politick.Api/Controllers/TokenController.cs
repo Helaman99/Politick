@@ -11,24 +11,32 @@ using Politick.Api.Identity;
 using Politick.Api.Models;
 using Azure.Core;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.EntityFrameworkCore;
+using Politick.Api.Services;
 
-namespace Wordle.Api.Controllers;
+namespace Politick.Api.Controllers;
 [Route("Token")]
 [ApiController]
 public class TokenController : Controller
 {
-    public AppDbContext _context;
+    public AppDbContext _db;
     public UserManager<Player> _userManager;
     public JwtConfiguration _jwtConfiguration;
-    public TokenController(AppDbContext context, UserManager<Player> userManager, JwtConfiguration jwtConfiguration)
+    public TokenController(AppDbContext db, UserManager<Player> userManager, JwtConfiguration jwtConfiguration)
     {
-        _context = context;
+        _db = db;
         _userManager = userManager;
         _jwtConfiguration = jwtConfiguration;
     }
 
+    private async Task<Player> GetPlayerAsync()
+    {
+        string email = User.Claims.First(e => e.Type == ClaimTypes.Email).Value;
+        return await _db.Players.SingleAsync(p => p.Email == email);
+    }
+
     [HttpPost("GetToken")]
-    public async Task<IActionResult> GetToken([FromBody] PlayerCredentials playerCredentials)
+    public async Task<IActionResult> GetTokenAsync([FromBody] PlayerCredentials playerCredentials)
     {
         if (string.IsNullOrEmpty(playerCredentials.Email))
         {
@@ -39,7 +47,7 @@ public class TokenController : Controller
             return BadRequest("Password is required");
         }
 
-        var player = _context.Players.FirstOrDefault(u => u.Email == playerCredentials.Email);
+        var player = _db.Players.FirstOrDefault(u => u.Email == playerCredentials.Email);
 
         if (player is null) { return Unauthorized("The player account was not found"); }
 
@@ -86,7 +94,7 @@ public class TokenController : Controller
     }
 
     [HttpPost("CreatePlayer")]
-    public async Task<IActionResult> CreatePlayer([FromBody] CreatePlayer createPlayer)
+    public async Task<IActionResult> CreatePlayerAsync([FromBody] CreatePlayer createPlayer)
     {
         if (string.IsNullOrEmpty(createPlayer.Email))
         {
@@ -96,14 +104,105 @@ public class TokenController : Controller
         {
             return BadRequest("Password is required");
         }
-        var user = new Player(createPlayer.Email);
-        var result = await _userManager.CreateAsync(user, createPlayer.Password);
+
+        var player = new Player(createPlayer.Email, createPlayer.SecurityQuestion, createPlayer.SecurityAnswer);
+        player.SecurityAnswer = _userManager.PasswordHasher.HashPassword(player, createPlayer.SecurityAnswer);
+        var result = await _userManager.CreateAsync(player, createPlayer.Password);
+
         if (result.Succeeded)
         {
             return Ok();
         }
         return BadRequest(result.Errors);
     }
+
+    [HttpPost("ValidateAnswer")]
+    public async Task<IActionResult> ValidateAnswer([FromBody] string answer)
+    {
+        if (string.IsNullOrEmpty(answer))
+        {
+            return BadRequest("Answer is required");
+        }
+
+        Player player = await GetPlayerAsync();
+
+        if (player != null)
+        {
+            var answerVerificationResult = _userManager.PasswordHasher.VerifyHashedPassword(player, player.SecurityAnswer, answer);
+
+            if (answerVerificationResult == PasswordVerificationResult.Success)
+            {
+                return Ok();
+            }
+            else
+            {
+                return BadRequest($"Failed to verify {answerVerificationResult}");
+            }
+        }
+        return BadRequest("There was an error with finding the user");
+
+    }
+
+    [HttpPost("UpdatePassword")]
+    [Authorize]
+    public async Task<IActionResult> UpdatePasswordAsync([FromBody] string newPassword)
+    {
+        if (string.IsNullOrEmpty(newPassword))
+        {
+            return BadRequest("Password is required");
+        }
+
+        Player player = await GetPlayerAsync();
+
+        if (player == null)
+        {
+            return NotFound("User not found");
+        }
+
+        var passwordValidator = new PasswordValidator<Player>();
+        var validationResult = await passwordValidator.ValidateAsync(_userManager, player, newPassword);
+
+        if (validationResult.Succeeded)
+        {
+            var token = await _userManager.GeneratePasswordResetTokenAsync(player);
+            var result = await _userManager.ResetPasswordAsync(player, token, newPassword);
+
+            if (result.Succeeded)
+            {
+                return Ok("Password updated successfully");
+            }
+            else
+            {
+                return BadRequest($"{result} - Password reset failed. Please try again.");
+            }
+        }
+        else
+        {
+            var errorMessages = validationResult.Errors.Select(e => e.Description);
+            return BadRequest(errorMessages);
+        }
+    }
+
+    [HttpPost("ChangeSecurityQuestion")]
+    [Authorize]
+    public async Task<IActionResult> UpdateSecurityQuestionAsync([FromBody] SecurityQuestion sc)
+    {
+        if (string.IsNullOrWhiteSpace(sc.Question))
+        {
+            return BadRequest("Question is required");
+        }
+        if (string.IsNullOrWhiteSpace(sc.Answer))
+        {
+            return BadRequest("Answer is required");
+        }
+
+        Player player = await GetPlayerAsync();
+        player.SecurityQuestion = sc.Question;
+        player.SecurityAnswer = _userManager.PasswordHasher.HashPassword(player, sc.Answer);
+        await _db.SaveChangesAsync();
+        return Ok();
+    }
+
 
     [HttpGet("Test")]
     public string Test()
