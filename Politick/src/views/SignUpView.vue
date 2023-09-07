@@ -4,7 +4,13 @@
     <br /><br /><br />
 
     <label for="email">Email</label>
-    <v-text-field v-model="email" type="email" id="email" variant="solo" placeholder="Email" />
+    <v-text-field 
+      v-model="email" 
+      type="email" 
+      id="email" 
+      variant="solo" 
+      placeholder="Email"
+    />
     <label for="password">Password</label>
     <v-text-field
       v-model="password"
@@ -21,6 +27,23 @@
       variant="solo"
       placeholder="Repeat Password"
     />
+    <label for="question">Security Question</label>
+    <v-text-field
+      v-model="question"
+      type="text"
+      id="question"
+      variant="solo"
+      placeholder="Put your question here"
+    />
+    <label for="answer">Answer</label>
+    <v-text-field
+      v-model="answer"
+      type="text"
+      id="question"
+      variant="solo"
+      placeholder="Put your answer here"
+    />
+    <p style = "font-size: medium;">Remember your security question and answer! They can be used if you forget your password.</p>
     <div class="agree">
       <input type="checkbox" id="checkbox" v-model="agreed" />
       <label for="checkbox" id="message">
@@ -47,15 +70,28 @@ import { SignInService } from '@/scripts/SignInService'
 const email = ref('')
 const password = ref('')
 const password2 = ref('')
+const question = ref('')
+const answer = ref('')
 const agreed = ref(false)
 
 function signUp() {
   let error_div = document.getElementById('error-message') as HTMLElement
-  if (password.value === password2.value && agreed.value)
-    SignInService.instance.createAccount(email.value, password.value)
+  if (email.value.trim().length === 0)
+    error_div.innerHTML = '<p>Please enter your email</p>'
+  else if (password.value.trim().length === 0)
+    error_div.innerHTML = '<p>Please enter your password</p>'
+  else if (password2.value.trim().length === 0)
+    error_div.innerHTML = '<p>Please repeat your password</p>'
+  else if (password.value !== password2.value)
+    error_div.innerHTML = "<p>Passwords don't match</p>"
+  else if (question.value.trim().length === 0)
+    error_div.innerHTML = "<p>Please enter a security question</p>"
+  else if (answer.value.trim().length === 0)
+    error_div.innerHTML = "<p>Please enter the security question answer</p>"
   else if (!agreed.value)
-    error_div.innerHTML = '<p>Please accept the terms of service and privacy policy.</p>'
-  else if (password.value !== password2.value) error_div.innerHTML = "<p>Passwords don't match</p>"
+    error_div.innerHTML = '<p>Please accept the terms of service and privacy policy</p>'
+  else if (password.value === password2.value && agreed.value)
+    SignInService.instance.createAccount(email.value, password.value, question.value, answer.value)
 }
 </script>
 
@@ -82,6 +118,10 @@ function signUp() {
 #error-message {
   font-size: large;
   color: red;
+}
+
+label {
+  font-size: medium;
 }
 
 @media (max-width: 1024px) {
