@@ -12,8 +12,6 @@
 
 * Fix timeout issue when looking for opponent (still a thing? Need to test...)
 
-* Set new avatars to "Copy Always"
-
 * "Not Enough Coins" dialog needed in some places.
 
 * Add "Kudos" system

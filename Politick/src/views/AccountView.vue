@@ -17,10 +17,10 @@
             <td>Typical Standing:</td>
             <td>{{ player?.standingActual }}</td>
           </tr>
-          <tr>
+          <!-- <tr>
             <td>Lifetime Kudos Earned:</td>
             <td>{{ player?.lifetimeKudos }}</td>
-          </tr>
+          </tr> -->
           <tr>
             <td>Account Strikes:</td>
             <td>{{ player?.strikes }}</td>
@@ -30,6 +30,8 @@
     </div>
 
     <br />
+    <v-btn to="/dashboard/change-security-question">Change Security Question</v-btn>
+    <br /><br />
     <v-btn color="red">Delete Account</v-btn>
   </div>
 </template>

@@ -105,6 +105,11 @@ const router = createRouter({
           component: () => import('../views/AccountView.vue')
         },
         {
+          path: 'change-security-question',
+          name: 'change security question',
+          component: () => import('../views/ChangeQuestionView.vue')
+        },
+        {
           path: 'customize',
           name: 'customize',
           component: () => import('../views/CustomizeView.vue')

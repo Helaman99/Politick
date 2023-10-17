@@ -68,6 +68,24 @@ export class ForgotPasswordService {
                 error_div.innerHTML = '<p>' + messages + '</p>'
             })
     }
+
+    public async changeQuestion(newQuestion:string, newAnswer:string) {
+        let error_div = document.getElementById('error-message') as HTMLElement
+        Axios.post("/Token/ChangeSecurityQuestion", { Question: newQuestion, Answer: newAnswer })
+            .then((response) => {
+                if (response.status === 200) {
+                    error_div.innerHTML = '<p color="green">Question and answer has been changed!</p>'
+                }
+            })
+            .catch((error) => {
+                console.log(error)
+                let messages = ''
+                for (let err of error.response.data) {
+                       messages += err.description + '<br>'
+                }
+                error_div.innerHTML = '<p>' + messages + '</p>'
+            })
+    }
   
     public get hasEmail(): boolean {
         return this._hasEmail

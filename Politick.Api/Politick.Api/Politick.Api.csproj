@@ -53,4 +53,19 @@
     <Folder Include="Migrations\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Assets\Avatars\Basic\angry_marshmallow.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\Avatars\Basic\friendly_marshmallow.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\Avatars\Basic\optimistic_marshmallow.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\Avatars\Basic\unimpressed_marshmallow.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

@@ -8,6 +8,7 @@
         variant="solo" 
         placeholder="Answer"
         />
+        <p style="font-size:medium;">(Answers are case sensitive)</p>
         <v-btn @click="submitAnswer()">Next</v-btn>
         <br><br>
         <div id="error-message"></div>
