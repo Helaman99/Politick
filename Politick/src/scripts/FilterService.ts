@@ -24,6 +24,21 @@ export class FilterService {
   }
 
   static readonly #badWords: string[] = [
+    '.com',
+    '.net',
+    '.org',
+    '.info',
+    '.biz',
+    '.io',
+    '.gov',
+    '.buzz',
+    '.fit',
+    '.eg',
+    '.mx',
+    '.ly',
+    '.online',
+    '.shop',
+    '.tech',
     '1 man 1 jar',
     '1m1j1',
     '1man1jar',
