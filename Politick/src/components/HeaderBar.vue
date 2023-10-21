@@ -12,7 +12,7 @@
             </v-app-bar-nav-icon>
             <div id="user-stats">
               <p>Coins: {{ player?.coins }}</p>
-              <p>Kudos: {{ player?.kudos }}</p>
+              <!-- <p>Kudos: {{ player?.kudos }}</p> -->
             </div>
           </template>
 
