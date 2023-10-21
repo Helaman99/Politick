@@ -29,6 +29,6 @@ export default {
   background-color: lightskyblue;
   color: black;
   align-self: flex-end;
-  text-align: end;
+  text-align: start;
 }
 </style>

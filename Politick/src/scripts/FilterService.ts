@@ -10,7 +10,7 @@ export class FilterService {
 
     for (let i = 0; i < messageArray.length; i++) {
       console.log(messageArray[i].replace(/[^a-zA-Z]/g, '').toLowerCase())
-      for (let extension of this.#extensions) {
+      for (const extension of this.#extensions) {
         if (messageArray[i].includes(extension)) {
           detections++
           if (detections == 5) return { message: 'DETECTION LIMIT MET', detections: 5 }

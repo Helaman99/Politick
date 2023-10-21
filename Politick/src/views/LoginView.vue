@@ -29,7 +29,6 @@ import { SignInService } from '@/scripts/SignInService'
 
 const email = ref('')
 const password = ref('')
-let error_div = document.getElementById('error-message')
 
 function login() {
   SignInService.instance.signIn(email.value, password.value)

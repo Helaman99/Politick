@@ -59,27 +59,28 @@ const messages = ref<string[]>([
 ])
 const displayMessages = ref<Message[]>([])
 let left = true
+let i = 0
+
+function displayNextMessage() {
+  if (i < messages.value.length) {
+    let message = messages.value[i]
+    if (left) {
+      displayMessages.value.push({ messageClass: 'message-left', text: message })
+    } else {
+      displayMessages.value.push({ messageClass: 'message-right', text: message })
+    }
+    left = !left
+    i++
+    setTimeout(displayNextMessage, 5000)
+  } else {
+    let playNowButton = document.getElementById('playnow')
+    if (playNowButton !== null) playNowButton.style.opacity = '1'
+  }
+}
 
 onMounted(() => {
   const messageDisplay = document.getElementById('messages')
   if (messageDisplay !== null) {
-    let i = 0
-    function displayNextMessage() {
-      if (i < messages.value.length) {
-        let message = messages.value[i]
-        if (left) {
-          displayMessages.value.push({ messageClass: 'message-left', text: message })
-        } else {
-          displayMessages.value.push({ messageClass: 'message-right', text: message })
-        }
-        left = !left
-        i++
-        setTimeout(displayNextMessage, 5000)
-      } else {
-        let playNowButton = document.getElementById('playnow')
-        if (playNowButton !== null) playNowButton.style.opacity = '1'
-      }
-    }
     displayNextMessage()
   } else console.log('it was nulll')
 })
@@ -118,7 +119,7 @@ img {
 }
 .message-right {
   align-self: flex-end;
-  text-align: end;
+  text-align: start;
 }
 
 #playnow {

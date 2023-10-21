@@ -38,7 +38,7 @@ export class SignInService {
       })
       .catch((error) => {
         console.log(`Login failed: ${error.response.data}`)
-        let error_div = document.getElementById('error-message')
+        const error_div = document.getElementById('error-message')
         if (error_div) {
           error_div.innerHTML = '<p>' + error.response.data + '</p>'
         }
@@ -62,9 +62,9 @@ export class SignInService {
       })
       .catch((error) => {
         console.log(`Sign up failed: ${error.response.data}`)
-        let error_div = document.getElementById('error-message') as HTMLElement
+        const error_div = document.getElementById('error-message') as HTMLElement
         let messages = ''
-        for (let err of error.response.data) {
+        for (const err of error.response.data) {
           messages += err.description + '<br>'
         }
         error_div.innerHTML = '<p>' + messages + '</p>'

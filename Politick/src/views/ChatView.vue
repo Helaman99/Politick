@@ -225,7 +225,7 @@ connectionRef.value?.on('AddTime', (playerTitle) => {
 
 const quit = ref(false)
 function leave() {
-  if (!quit) {
+  if (!quit.value) {
     if (fullTimeUsed) {
       addCoins(5 - totalDetections)
     } else {

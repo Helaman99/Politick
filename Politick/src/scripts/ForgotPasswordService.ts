@@ -24,7 +24,7 @@ export class ForgotPasswordService {
       })
       .catch((error) => {
         console.log(error)
-        let error_div = document.getElementById('error-message')
+        const error_div = document.getElementById('error-message')
         if (error_div) {
           error_div.innerHTML = '<p>' + error.response.data + '</p>'
         }
@@ -33,7 +33,7 @@ export class ForgotPasswordService {
 
   public async verifyAnswer(answer: string) {
     this._givenAnswer = answer
-    let emailAndAnswer = [this._email, this._givenAnswer]
+    const emailAndAnswer = [this._email, this._givenAnswer]
     Axios.post('/Token/ValidateAnswer', emailAndAnswer)
       .then((response) => {
         if (response.status === 200) {
@@ -43,7 +43,7 @@ export class ForgotPasswordService {
       })
       .catch((error) => {
         console.log(error)
-        let error_div = document.getElementById('error-message')
+        const error_div = document.getElementById('error-message')
         if (error_div) {
           error_div.innerHTML = '<p>' + error.response.data + '</p>'
         }
@@ -51,7 +51,7 @@ export class ForgotPasswordService {
   }
 
   public async resetPassword(newPassword: string) {
-    let args = [this._email, this._givenAnswer, newPassword]
+    const args = [this._email, this._givenAnswer, newPassword]
     Axios.post('/Token/UpdatePassword', args)
       .then((response) => {
         if (response.status === 200) {
@@ -60,9 +60,9 @@ export class ForgotPasswordService {
       })
       .catch((error) => {
         console.log(error)
-        let error_div = document.getElementById('error-message') as HTMLElement
+        const error_div = document.getElementById('error-message') as HTMLElement
         let messages = ''
-        for (let err of error.response.data) {
+        for (const err of error.response.data) {
           messages += err.description + '<br>'
         }
         error_div.innerHTML = '<p>' + messages + '</p>'
@@ -70,7 +70,7 @@ export class ForgotPasswordService {
   }
 
   public async changeQuestion(newQuestion: string, newAnswer: string) {
-    let error_div = document.getElementById('error-message') as HTMLElement
+    const error_div = document.getElementById('error-message') as HTMLElement
     Axios.post('/Token/ChangeSecurityQuestion', { Question: newQuestion, Answer: newAnswer })
       .then((response) => {
         if (response.status === 200) {
@@ -80,7 +80,7 @@ export class ForgotPasswordService {
       .catch((error) => {
         console.log(error)
         let messages = ''
-        for (let err of error.response.data) {
+        for (const err of error.response.data) {
           messages += err.description + '<br>'
         }
         error_div.innerHTML = '<p>' + messages + '</p>'
