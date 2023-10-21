@@ -10,6 +10,17 @@ export class FilterService {
 
     for (let i = 0; i < messageArray.length; i++) {
       console.log(messageArray[i].replace(/[^a-zA-Z]/g, '').toLowerCase())
+      for (let extension of this.#extensions) {
+        if (messageArray[i].includes(extension)) {
+          detections++
+          if (detections == 5) return { message: 'DETECTION LIMIT MET', detections: 5 }
+          const letterCount = messageArray[i].split('').length
+          let blankedWord = ''
+          for (let j = 0; j < letterCount; j++) blankedWord += '_'
+          messageArray[i] = blankedWord
+        }
+      }
+
       if (this.#badWords.includes(messageArray[i].replace(/[^a-zA-Z]/g, '').toLowerCase())) {
         detections++
         if (detections == 5) return { message: 'DETECTION LIMIT MET', detections: 5 }
@@ -23,7 +34,7 @@ export class FilterService {
     return { message: newMessage, detections: detections }
   }
 
-  static readonly #badWords: string[] = [
+  static readonly #extensions: string[] = [
     '.com',
     '.net',
     '.org',
@@ -38,7 +49,10 @@ export class FilterService {
     '.ly',
     '.online',
     '.shop',
-    '.tech',
+    '.tech'
+  ]
+
+  static readonly #badWords: string[] = [
     '1 man 1 jar',
     '1m1j1',
     '1man1jar',
