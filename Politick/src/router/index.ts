@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import { SignInService } from '@/scripts/SignInService'
+import { ForgotPasswordService } from '@/scripts/ForgotPasswordService'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -54,6 +55,36 @@ const router = createRouter({
       component: () => import('../views/PrivacyPolicyView.vue')
     },
     {
+      path: '/forgot-password',
+      name: 'forgot password',
+      component: () => import('../views/ForgotPasswordView.vue'),
+      children: [
+        {
+          path: '',
+          name: 'email',
+          component: () => import('../views/ForgotPasswordEmailView.vue')
+        },
+        {
+          path: 'question',
+          name: 'question',
+          component: () => import('../views/ForgotPasswordQuestionView.vue'),
+          beforeEnter: (to, from, next) => {
+            if (ForgotPasswordService.instance.hasEmail) next()
+            else next({ name: 'forgot password' })
+          },
+        },
+        {
+          path: 'reset-password',
+          name: 'reset password',
+          component: () => import('../views/ForgotPasswordResetView.vue'),
+          beforeEnter: (to, from, next) => {
+            if (ForgotPasswordService.instance.hasEmail) next()
+            else next({ name: 'forgot password' })
+          },
+        },
+      ]
+    },
+    {
       path: '/dashboard',
       name: 'dashboard',
       component: () => import('../views/DashboardView.vue'),
@@ -72,6 +103,11 @@ const router = createRouter({
           path: 'account',
           name: 'account',
           component: () => import('../views/AccountView.vue')
+        },
+        {
+          path: 'change-security-question',
+          name: 'change security question',
+          component: () => import('../views/ChangeQuestionView.vue')
         },
         {
           path: 'customize',

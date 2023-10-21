@@ -23,12 +23,18 @@ public class Player : IdentityUser
     public string UnlockedTitleSecondWords { get; set; }
     public string UnlockedAvatars { get; set; }
     public string Theme { get; set; }
+    public string SecurityQuestion { get; set; }
+    public string SecurityAnswer { get; set; }
     public int Strikes { get; set; }
     public bool Suspended { get; set; }
     public int TimesSuspended { get; set; }
     public int UnsuspendDay { get; set; }
 
-    public Player(string email) : base()
+    public Player() // Parameterless constructor
+    {
+    }
+
+    public Player(string email, string question, string answer) : base()
     {
         UserName = email;
         Email = email;
@@ -46,6 +52,8 @@ public class Player : IdentityUser
         UnlockedTitleSecondWords = "Tortoise+Explorer+Marshmallow+Racer";
         UnlockedAvatars = "/Basic/starting_avatar_1.png+/Basic/starting_avatar_2.png+/Basic/starting_avatar_3.png+/Basic/starting_avatar_4.png";
         Theme = "light";
+        SecurityQuestion = question;
+        SecurityAnswer = answer;
         Strikes = 0;
         Suspended = false;
         UnsuspendDay = 0;

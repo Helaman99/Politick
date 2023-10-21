@@ -6,8 +6,6 @@
 
 * Add "Kudos" system
 
-* About page
-
 * Update title shop to not have problems with duplicate words (first word and second word)
 
 * Make existing theme more colorful

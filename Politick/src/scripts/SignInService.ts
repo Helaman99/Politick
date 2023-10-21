@@ -50,24 +50,24 @@ export class SignInService {
       })
   }
 
-  public async createAccount(email: string, password: string) {
+  public async createAccount(email: string, password: string, question: string, answer: string) {
     Axios.post('/Token/CreatePlayer', {
       email: email,
-      password: password
+      password: password,
+      securityQuestion: question,
+      securityAnswer: answer
     })
       .then(() => {
         this.signIn(email, password)
       })
       .catch((error) => {
         console.log(`Sign up failed: ${error.response.data}`)
-        let error_div = document.getElementById('error-message')
+        let error_div = document.getElementById('error-message') as HTMLElement
         let messages = ''
-        if (error_div) {
-          for (let err of error.response.data) {
-            messages += err.description + '<br>'
-          }
-          error_div.innerHTML = '<p>' + messages + '</p>'
+        for (let err of error.response.data) {
+          messages += err.description + '<br>'
         }
+        error_div.innerHTML = '<p>' + messages + '</p>'
         this.signOut()
         return error
       })

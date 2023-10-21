@@ -40,6 +40,16 @@ public static class TopicService
             new("No private insurance (\"Single-Payer\")", "You believe that the government should provide universal health care, and that private insurance companies should not be allowed.", new string[] { "Left", "Authoritarian" }),
             new("Free market", "You believe that the free market, through competition and consumer choice, is a better health care option than a government-run health care system.", new string[] { "Right", "Libertarian" }),
             new("Other", "You have an opinion that is not listed", new string[] { "Other" })
+        }),
+        new Topic("Israel-Hamas War", "Debate with someone about the Israel-Hamas War", "", new Side[]
+        {
+            new("Israel is right", "You believe that Israel has the right to defend itself from Hamas attacks and that its military actions are justified.", new string[] { "Right" }),
+            new("Hamas is right", "You believe that Hamas is fighting for the liberation of Palestine and that its resistance is legitimate.", new string[] { "Left" }),
+            new("Both sides are wrong", "You believe that both Israel and Hamas are responsible for the violence and the suffering of civilians, and that they should stop fighting and negotiate a peaceful solution.", new string[] { "" }),
+            new("Both sides are right", "You believe that both Israel and Hamas have valid claims and grievances, and that they should respect each other's rights and interests.", new string[] { "" }),
+            new("It's none of our business", "You believe that the conflict between Israel and Hamas is a regional issue that does not concern the rest of the world, and that other countries should not interfere or take sides.", new string[] { "Libertarian" }),
+            new("It's a global issue", "You believe that the conflict between Israel and Hamas has implications for the stability and security of the world, and that other countries should play an active role in resolving it.", new string[] { "" }),
+            new("Other", "You have an opinion that is not listed", new string[] { "Other" })
         })
     };
 }

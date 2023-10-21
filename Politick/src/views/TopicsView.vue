@@ -10,6 +10,7 @@
         to="/dashboard/sides"
       >
         <v-card-title>{{ topic.title }}</v-card-title>
+        <v-card-text>{{ topic.description }}</v-card-text>
       </v-card>
     </div>
   </div>

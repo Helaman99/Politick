@@ -14,6 +14,8 @@
     <v-btn @click="login()">Login</v-btn>
     <br /><br />
     <div id="error-message"></div>
+    <br>
+    <router-link to="/forgot-password">Forgot Password?</router-link>
 
     <br /><br />
     <p>Don't have an account?</p>

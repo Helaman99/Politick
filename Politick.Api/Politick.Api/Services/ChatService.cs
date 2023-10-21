@@ -8,7 +8,7 @@ public class ChatService
     private List<List<Room>> TopicRoomsLists { get; }
     private List<Room> RoomsInProgress { get; }
     private int NextRoomId { get; set; }
-    private static readonly object _lock = new object();
+    private static readonly object _lock = new();
 
     public ChatService()
     {
@@ -86,7 +86,7 @@ public class ChatService
         if (thisPlayer is null) { throw new ArgumentNullException(nameof(thisPlayer)); }
 
         Room? room = RoomsInProgress.Find(r => r.ChatRoomId == thisPlayer.ChatRoomId);
-        if (room is not null && room.Opponents.Count() == 2)
+        if (room is not null && room.Opponents.Count == 2)
         {
             if (room.Opponents[0].Email == thisPlayer.Email)
             {

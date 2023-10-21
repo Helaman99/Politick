@@ -32,7 +32,7 @@ public static class IdentitySeed
         // Seed Admin User
         if (await userManager.FindByEmailAsync("Admin@intellitect.com") == null)
         {
-            Player user = new("Admin@politick.com");
+            Player user = new("Admin@politick.com", "Question", "Answer");
 
             IdentityResult result = userManager.CreateAsync(user, "SECRET").Result;
 
