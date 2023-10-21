@@ -71,7 +71,7 @@ const router = createRouter({
           beforeEnter: (to, from, next) => {
             if (ForgotPasswordService.instance.hasEmail) next()
             else next({ name: 'forgot password' })
-          },
+          }
         },
         {
           path: 'reset-password',
@@ -80,8 +80,8 @@ const router = createRouter({
           beforeEnter: (to, from, next) => {
             if (ForgotPasswordService.instance.hasEmail) next()
             else next({ name: 'forgot password' })
-          },
-        },
+          }
+        }
       ]
     },
     {

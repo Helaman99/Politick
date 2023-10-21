@@ -1,14 +1,13 @@
 <template>
-    <div class="forgot-password">
-        <img src="@/assets/logos/politick.svg" />
-        <br /><br /><br />
-        
-        <p>Forgot Password</p>
-        <RouterView />
+  <div class="forgot-password">
+    <img src="@/assets/logos/politick.svg" />
+    <br /><br /><br />
 
-        <router-link to="/">Home</router-link>
+    <p>Forgot Password</p>
+    <RouterView />
 
-    </div>
+    <router-link to="/">Home</router-link>
+  </div>
 </template>
 
 <style>
