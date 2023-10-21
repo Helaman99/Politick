@@ -6,6 +6,8 @@
         <p>Forgot Password</p>
         <RouterView />
 
+        <router-link to="/">Home</router-link>
+
     </div>
 </template>
 
@@ -25,11 +27,11 @@ label {
 }
 
 @media (max-width: 1024px) {
-  .signup {
+  .forgot-password {
     width: 100%;
   }
   .v-input {
-    width: 75%;
+    width: 80%;
   }
 }
 </style>
