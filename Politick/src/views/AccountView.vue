@@ -32,7 +32,7 @@
     <br />
     <v-btn to="/dashboard/change-security-question">Change Security Question</v-btn>
     <br /><br />
-    <v-btn color="red">Delete Account</v-btn>
+    <!-- <v-btn color="red">Delete Account</v-btn> -->
   </div>
 </template>
 
