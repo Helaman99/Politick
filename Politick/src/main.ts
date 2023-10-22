@@ -6,7 +6,6 @@ import { SignInService } from '@/scripts/SignInService'
 import './assets/css/main.css'
 import '@mdi/font/css/materialdesignicons.css'
 import Axios from 'axios'
-import VueMeta from 'vue-meta'
 
 // Vuetify
 import 'vuetify/styles'
@@ -38,19 +37,4 @@ const app = createApp(App)
 const signInService = reactive(SignInService.instance)
 app.provide('SignInService', signInService)
 
-app.use(router).use(vuetify).use(VueMeta)
-
-app.mount('#app')
-
-// Add Google AdSense script to the head of your site
-app.component('App', {
-  metaInfo: {
-    script: [
-      {
-        src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3282272675447500',
-        async: true,
-        crossorigin: 'anonymous'
-      }
-    ]
-  }
-})
+app.use(router).use(vuetify).mount('#app')
