@@ -3,6 +3,11 @@
     <img src="@/assets/logos/politick.svg" />
 
     <div class="nav-options">
+      <br />
+      <v-btn color="blue" @click="AdSenseLogin()"
+        >Login with Test Account (for Google AdSense Review)</v-btn
+      >
+      <br />
       <router-link to="/login">Login</router-link>
       <router-link to="/signup">Sign Up</router-link>
       <router-link to="/about">What is Politick?</router-link>
@@ -10,7 +15,13 @@
   </main>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { SignInService } from '@/scripts/SignInService'
+
+function AdSenseLogin() {
+  SignInService.instance.signIn('test1@test.com', 'P@$$w0rd!@#')
+}
+</script>
 
 <style scoped>
 main {
