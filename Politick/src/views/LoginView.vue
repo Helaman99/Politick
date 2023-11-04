@@ -11,7 +11,7 @@
       variant="solo"
       placeholder="Password"
     />
-    <v-btn @click="login()">Login</v-btn>
+    <v-btn :loading="loading" @click="login()">Login</v-btn>
     <br /><br />
     <div id="error-message"></div>
     <br />
@@ -29,9 +29,12 @@ import { SignInService } from '@/scripts/SignInService'
 
 const email = ref('')
 const password = ref('')
+const loading = ref(false)
 
-function login() {
-  SignInService.instance.signIn(email.value, password.value)
+async function login() {
+  loading.value = true
+  await SignInService.instance.signIn(email.value, password.value)
+  loading.value = false
 }
 </script>
 
