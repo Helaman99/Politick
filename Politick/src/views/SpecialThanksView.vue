@@ -32,9 +32,6 @@ h4 {
 ul {
   margin-left: 2rem;
 }
-.terms-of-service {
-  width: 75%;
-}
 .content {
   text-align: left;
   padding: 2rem;
@@ -45,5 +42,22 @@ ul {
 }
 .logo img {
   width: 60%;
+}
+
+@media (max-width: 840px) {
+  .special-thanks {
+    width: 90%;
+  }
+}
+@media (max-width: 650px) {
+  .special-thanks {
+    width: 100%;
+  }
+  .content {
+    padding: 0;
+  }
+  .logo img {
+  width: 100%;
+  }
 }
 </style>

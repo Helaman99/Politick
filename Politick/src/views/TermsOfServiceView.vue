@@ -139,4 +139,21 @@ ul {
 .logo img {
   width: 60%;
 }
+
+@media (max-width: 840px) {
+  .terms-of-service {
+    width: 90%;
+  }
+}
+@media (max-width: 650px) {
+  .terms-of-service {
+    width: 100%;
+  }
+  .content {
+    padding: 0;
+  }
+  .logo img {
+  width: 100%;
+  }
+}
 </style>

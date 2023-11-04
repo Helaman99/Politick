@@ -101,4 +101,21 @@ ul {
 .logo img {
   width: 60%;
 }
+
+@media (max-width: 840px) {
+  .privacy-policy {
+    width: 90%;
+  }
+}
+@media (max-width: 650px) {
+  .privacy-policy {
+    width: 100%;
+  }
+  .content {
+    padding: 0;
+  }
+  .logo img {
+  width: 100%;
+  }
+}
 </style>
