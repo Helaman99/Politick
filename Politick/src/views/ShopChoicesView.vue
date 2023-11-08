@@ -7,8 +7,8 @@
       <v-card elevation="3" class="shop-choice" to="/dashboard/shop/titles">
         <v-card-title>Title Packs</v-card-title>
       </v-card>
-      <v-card elevation="3" class="shop-choice" to="/dashboard/shop/coins" disabled>
-        <v-card-title>Coins (COMING SOON)</v-card-title>
+      <v-card elevation="3" class="shop-choice" to="/dashboard/shop/coins">
+        <v-card-title>Coins</v-card-title>
       </v-card>
     </div>
   </div>

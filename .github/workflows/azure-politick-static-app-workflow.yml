@@ -32,6 +32,8 @@ jobs:
       - name: Build Vue App 
         working-directory: ./Politick
         run: npm run build
+        env:
+          PAYPAL_CLIENT_ID: ${{ secrets.PAYPAL_CLIENT_ID }}
       - name: Run Vitest Unit Tests
         run: npm run test:unit
         working-directory: ./Politick

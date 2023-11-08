@@ -55,6 +55,17 @@
         to request that we update or delete your information.
       </p>
 
+      <h2>Payments and Other Services</h2>
+      <p>
+        We use PayPal for payments and other services. If you wish to use one of these services and
+        pay on our website, PayPal may collect the personal data you provide, such as payment and
+        other identifying information. PayPal uses this information to operate and improve the
+        services it provides to us and others, including for fraud detection, harm and loss
+        prevention, authentication, analytics related to the performance of its services, and to
+        comply with applicable legal requirements. The processing of this information will be
+        subject to the PayPal Privacy Statement available at PayPal.com.
+      </p>
+
       <h2>Contact Us</h2>
       <p>
         If you have any questions or concerns about our Privacy Policy or our data practices, please
@@ -115,7 +126,7 @@ ul {
     padding: 0;
   }
   .logo img {
-  width: 100%;
+    width: 100%;
   }
 }
 </style>

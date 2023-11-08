@@ -88,8 +88,13 @@ async function signUp() {
   else if (!agreed.value)
     error_div.innerHTML = '<p>Please accept the terms of service and privacy policy</p>'
   else if (password.value === password2.value && agreed.value)
-    await SignInService.instance.createAccount(email.value, password.value, question.value, answer.value)
-  
+    await SignInService.instance.createAccount(
+      email.value,
+      password.value,
+      question.value,
+      answer.value
+    )
+
   loading.value = false
 }
 </script>

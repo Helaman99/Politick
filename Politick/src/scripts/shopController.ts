@@ -53,3 +53,31 @@ export function purchaseSecondWordPack(pack: string[], amount: number): boolean 
 }
 
 export { basicAvatarFileNames, premiumAvatarFileNames }
+
+// ---------- Coin Shop Stuff ---------- \\
+export interface CoinPack {
+  coinCount: number
+  price: number
+}
+
+const coinPacks = ref(Array<CoinPack>())
+Axios.get('/Shop/CoinPacks')
+  .then((response) => {
+    coinPacks.value = response.data
+  })
+  .catch((error) => {
+    console.log(error)
+  })
+
+export async function verifyPackAsync(coinPack: CoinPack): Promise<boolean> {
+  return Axios.post('/Shop/VerifyCoinPack', coinPack)
+    .then((response) => {
+      return response.data
+    })
+    .catch((error) => {
+      console.log(error)
+      return false
+    })
+}
+
+export { coinPacks }
