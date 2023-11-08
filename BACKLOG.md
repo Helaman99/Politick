@@ -6,8 +6,6 @@
 
 * Fix logic for minutes vs coins rewarded (people getting all five coins from first 5 minutes vs last 5 minutes)
 
-* PayPal API for coins store page
-
 * reCaptcha for SignUp page (needs a custom domain first so Politick can be registered with Google Search Console)
 
 * Add "Kudos" system

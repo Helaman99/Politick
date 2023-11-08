@@ -108,7 +108,7 @@
       <h4>Contact Information</h4>
       <p>
         If you have any questions or concerns about these terms and conditions, please contact us at
-        si-support@protonmail.com
+        politickgame@protonmail.com
       </p>
     </div>
   </div>
