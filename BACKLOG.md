@@ -1,10 +1,10 @@
 # Backlog
 
-* Fix timeout issue when looking for opponent (still a thing? Need to test...)
+* 
 
 * "Not Enough Coins" dialog needed in some places.
 
-* Fix logic for minutes vs coins rewarded (people getting all five coins from first 5 minutes vs last 5 minutes)
+* Fix logic for minutes vs coins rewarded (people getting all five coins from first 5 minutes vs last 5 minutes) (may not do this)
 
 * reCaptcha for SignUp page (needs a custom domain first so Politick can be registered with Google Search Console)
 

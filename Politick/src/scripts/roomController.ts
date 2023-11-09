@@ -46,6 +46,8 @@ export function startConnection(): boolean {
   connectionRef.value = new signalR.HubConnectionBuilder()
     .withUrl(Axios.defaults.baseURL + '/ChatHub')
     .build()
+    
+  connectionRef.value.serverTimeoutInMilliseconds = 120000
 
   connectionRef.value
     .start()
