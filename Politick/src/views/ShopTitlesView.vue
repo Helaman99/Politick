@@ -73,10 +73,22 @@
           >
         </v-card>
       </v-dialog>
+      
       <v-dialog class="confirmation" v-model="failed" width="fit-content">
         <v-card>
           <v-card-title>Huh, something went wrong...</v-card-title>
           <v-card-text>If this issue persists, please contact support.</v-card-text>
+        </v-card>
+      </v-dialog>
+
+      <v-dialog class="confirmation" v-model="notEnoughCoins" width="fit-content">
+        <v-card>
+          <v-card-title>
+            <span style="color:red;">You need more coins to buy this!</span>
+          </v-card-title>
+          <v-card-actions>
+            <v-btn @click="notEnoughCoins=!notEnoughCoins">OK</v-btn>
+          </v-card-actions>
         </v-card>
       </v-dialog>
     </div>
@@ -124,32 +136,43 @@ function changePacks(value: number) {
 
 const buyPrompt = ref(false)
 const success = ref(false)
+const notEnoughCoins = ref(false)
 const failed = ref(false)
 function attemptPurchase() {
   switch (whichDisplay.value) {
     case 0: {
-      if (purchaseFirstWordPack(selectedPack.value.contents, selectedPack.value.price)) {
-        success.value = true
-        buyPrompt.value = false
-        setTimeout(() => {
-          success.value = false
-        }, 3000)
-        break
+      if (player.value && player.value.coins >= selectedPack.value.price) {
+        if (purchaseFirstWordPack(selectedPack.value.contents, selectedPack.value.price)) {
+          success.value = true
+          buyPrompt.value = false
+          setTimeout(() => {
+            success.value = false
+          }, 3000)
+          break
+        } else {
+          failed.value = true
+          break
+        }
       } else {
-        failed.value = true
+        notEnoughCoins.value = true
         break
       }
     }
     case 1: {
-      if (purchaseSecondWordPack(selectedPack.value.contents, selectedPack.value.price)) {
-        success.value = true
-        buyPrompt.value = false
-        setTimeout(() => {
-          success.value = false
-        }, 3000)
-        break
+      if (player.value && player.value.coins >= selectedPack.value.price) {
+        if (purchaseSecondWordPack(selectedPack.value.contents, selectedPack.value.price)) {
+          success.value = true
+          buyPrompt.value = false
+          setTimeout(() => {
+            success.value = false
+          }, 3000)
+          break
+        } else {
+          failed.value = true
+          break
+        }
       } else {
-        failed.value = true
+        notEnoughCoins.value = true
         break
       }
     }
@@ -207,6 +230,9 @@ function attemptPurchase() {
 }
 .confirmation {
   text-align: center;
+}
+.confirmation .v-card-actions {
+  justify-content: center;
 }
 
 @media (max-width: 920px) {

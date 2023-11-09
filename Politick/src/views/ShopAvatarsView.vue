@@ -74,10 +74,22 @@
         >
       </v-card>
     </v-dialog>
+    
     <v-dialog class="confirmation" v-model="failed" width="fit-content">
       <v-card>
         <v-card-title>Huh, something went wrong...</v-card-title>
-        <v-card-text>If this issue persists, please contact support.</v-card-text>
+        <v-card-text>If this issue persists, please contact us at politickgame@protonmail.com</v-card-text>
+      </v-card>
+    </v-dialog>
+
+    <v-dialog class="confirmation" v-model="notEnoughCoins" width="fit-content">
+      <v-card>
+        <v-card-title>
+          <span style="color:red;">You need more coins to buy this!</span>
+        </v-card-title>
+        <v-card-actions>
+          <v-btn @click="notEnoughCoins=!notEnoughCoins">OK</v-btn>
+        </v-card-actions>
       </v-card>
     </v-dialog>
 
@@ -99,6 +111,7 @@ import Axios from 'axios'
 const basicPrompt = ref(false)
 const premiumPrompt = ref(false)
 const success = ref(false)
+const notEnoughCoins = ref(false)
 const failed = ref(false)
 const selectedAvatar = ref('')
 
@@ -111,14 +124,16 @@ function selectPremiumAvatar(avatar: string) {
   premiumPrompt.value = true
 }
 function attemptPurchase(amount: number) {
-  if (purchaseAvatar(selectedAvatar.value, amount)) {
-    success.value = true
-    basicPrompt.value = false
-    premiumPrompt.value = false
-    setTimeout(() => {
-      success.value = false
-    }, 3000)
-  } else failed.value = true
+  if (player.value?.coins && player.value?.coins >= amount) {
+    if (purchaseAvatar(selectedAvatar.value, amount)) {
+      success.value = true
+      basicPrompt.value = false
+      premiumPrompt.value = false
+      setTimeout(() => {
+        success.value = false
+      }, 3000)
+    } else failed.value = true
+  }else notEnoughCoins.value = true
 }
 </script>
 
@@ -171,6 +186,10 @@ function attemptPurchase(amount: number) {
 
 .confirmation {
   text-align: center;
+  place-items: center;
+}
+.confirmation .v-card-actions {
+  justify-content: center;
 }
 
 @media (max-width: 940px) {
