@@ -47,6 +47,7 @@
         <router-link to="/terms-of-service" target="_blank">Terms of Service</router-link>
         and
         <router-link to="/privacy-policy" target="_blank">Privacy Policy</router-link>.
+        (Updated on 11/17/2023)
       </label>
     </div>
     <v-btn :loading="loading" @click="signUp()">Sign Up</v-btn>
