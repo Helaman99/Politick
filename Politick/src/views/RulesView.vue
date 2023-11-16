@@ -4,6 +4,18 @@
     <img src="@/assets/logos/politick.svg" />
     <br /><br />
 
+    <h3>
+      This game is a work in progress! It may be difficult to find other players to chat with if
+      there aren't many people online. If you encounter any issues, please contact us at
+      politickgame@protonmail.com
+    </h3>
+    <br />
+    <h2>Thank you for playing Politick!</h2>
+
+    <br />
+    <hr />
+    <br />
+
     <p>
       This is a place for <b>debate</b>, and not just arguing... well, maybe a little bit of
       arguing. In any case, this game was built to encourage people of all kinds to come together to
@@ -37,7 +49,7 @@
     <p>
       Other than that, all I ask is that you show respect to the other person in the chat room.
       Everyone you come across is real, with actual emotions, and are just as dynamic, vibrant, and
-      flawed as you. Please show the <i>respect</i> that you wish to be treated with.
+      flawed as you. Please show the respect that you wish to be treated with.
     </p>
 
     <br />
