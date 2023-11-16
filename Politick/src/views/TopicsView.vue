@@ -1,5 +1,6 @@
 <template>
   <div class="topics">
+
     <div class="topic-cards">
       <v-card
         class="topic-card"
@@ -13,11 +14,27 @@
         <v-card-text>{{ topic.description }}</v-card-text>
       </v-card>
     </div>
+
+    <div id="rooms-in-progress">
+      {{ currDebates }} debates in progress
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { topics, selectTopic } from '@/scripts/roomController'
+import { ref } from 'vue'
+import Axios from 'axios'
+
+const currDebates = ref(0)
+Axios.get('/Chat/DebatesInProgress')
+  .then((response) => {
+    currDebates.value = response.data
+    console.log("Rooms: " + currDebates.value)
+  })
+  .catch((error) => {
+    console.log(error)
+  })
 </script>
 
 <style scoped>
