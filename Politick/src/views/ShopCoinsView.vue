@@ -42,8 +42,8 @@ import { coinPacks, verifyPackAsync } from '@/scripts/shopController'
 import { addCoins } from '@/scripts/playerController'
 import type { CoinPack } from '@/scripts/shopController'
 
-declare let paypal: any
-declare var process: {
+let paypal: any
+var process: {
   env: {
     [key: string]: string | undefined
   }
