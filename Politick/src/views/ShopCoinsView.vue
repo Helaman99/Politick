@@ -49,7 +49,7 @@ var process: {
   }
 }
 
-// const ID = ref('')
+const ID = ref('ARxpPnUd2JuVWgDpMn9mRj5-OgA_x6ftNn4SDj9_RirVF6MVWsDWGqRYHOJii7fF6rvwc-hv2Z2VNPCy')
 const coins = ref(0)
 const price = ref(0)
 
@@ -66,7 +66,7 @@ async function buyCoins(coinPack: CoinPack) {
     try {
       await loadScript(
         'https://www.paypal.com/sdk/js?client-id=' +
-          process.env['VUE_APP_PAYPAL_CLIENT_ID'] +
+          ID.value +
           '&currency=USD'
       )
 
