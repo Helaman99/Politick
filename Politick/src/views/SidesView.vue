@@ -77,8 +77,7 @@ function FindRoom() {
 }
 
 function back() {
-  connectionRef.value?.invoke('LeaveRoom', room.value)
-  .then(() => {
+  connectionRef.value?.invoke('LeaveRoom', room.value).then(() => {
     connectionRef.value?.stop()
     loading.value = false
   })

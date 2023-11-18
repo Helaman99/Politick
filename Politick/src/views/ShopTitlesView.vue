@@ -73,7 +73,7 @@
           >
         </v-card>
       </v-dialog>
-      
+
       <v-dialog class="confirmation" v-model="failed" width="fit-content">
         <v-card>
           <v-card-title>Huh, something went wrong...</v-card-title>
@@ -84,10 +84,10 @@
       <v-dialog class="confirmation" v-model="notEnoughCoins" width="fit-content">
         <v-card>
           <v-card-title>
-            <span style="color:red;">You need more coins to buy this!</span>
+            <span style="color: red">You need more coins to buy this!</span>
           </v-card-title>
           <v-card-actions>
-            <v-btn @click="notEnoughCoins=!notEnoughCoins">OK</v-btn>
+            <v-btn @click="notEnoughCoins = !notEnoughCoins">OK</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>

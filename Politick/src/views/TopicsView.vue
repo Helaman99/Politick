@@ -1,6 +1,5 @@
 <template>
   <div class="topics">
-
     <div class="topic-cards">
       <v-card
         class="topic-card"
@@ -15,9 +14,7 @@
       </v-card>
     </div>
 
-    <div id="rooms-in-progress">
-      {{ currDebates }} debates in progress
-    </div>
+    <div id="rooms-in-progress">{{ currDebates }} debates in progress</div>
   </div>
 </template>
 
@@ -30,7 +27,7 @@ const currDebates = ref(0)
 Axios.get('/Chat/DebatesInProgress')
   .then((response) => {
     currDebates.value = response.data
-    console.log("Rooms: " + currDebates.value)
+    console.log('Rooms: ' + currDebates.value)
   })
   .catch((error) => {
     console.log(error)
