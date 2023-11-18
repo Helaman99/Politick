@@ -65,7 +65,9 @@ async function buyCoins(coinPack: CoinPack) {
 
     try {
       await loadScript(
-        'https://www.paypal.com/sdk/js?client-id=' + process.env.PAYPAL_CLIENT_ID + '&currency=USD'
+        'https://www.paypal.com/sdk/js?client-id=' +
+          process.env.VUE_APP_PAYPAL_CLIENT_ID +
+          '&currency=USD'
       )
 
       // Render PayPal button
