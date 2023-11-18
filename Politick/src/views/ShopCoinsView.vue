@@ -25,7 +25,6 @@
       <div id="paypal-buttons"></div>
     </div>
 
-    <br />
     <p style="font-size: medium">
       We use PayPal (cuz security). By paying with your card, you acknowledge that your data will be
       processed by PayPal subject to the PayPal Privacy Statement available at PayPal.com.
@@ -37,10 +36,10 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { loadScript } from 'vue-plugin-load-script'
 import { coinPacks, verifyPackAsync } from '@/scripts/shopController'
 import { addCoins } from '@/scripts/playerController'
 import type { CoinPack } from '@/scripts/shopController'
+import { loadScript } from '@paypal/paypal-js'
 
 let paypal: any
 
@@ -59,32 +58,34 @@ async function buyCoins(coinPack: CoinPack) {
     if (paypalContainer != null) paypalContainer.innerHTML = ''
 
     try {
-      await loadScript('https://www.paypal.com/sdk/js?client-id=' + ID.value + '&currency=USD')
+      paypal = await loadScript({ clientId: ID.value })
 
       // Render PayPal button
-      paypal
-        .Buttons({
-          createOrder: function (data: any, actions: any) {
-            // Set up the transaction
-            return actions.order.create({
-              purchase_units: [
-                {
-                  amount: {
-                    value: price.value
+      if (paypal) {
+        paypal
+          .Buttons({
+            createOrder: function (data: any, actions: any) {
+              // Set up the transaction
+              return actions.order.create({
+                purchase_units: [
+                  {
+                    amount: {
+                      value: price.value
+                    }
                   }
-                }
-              ]
-            })
-          },
-          onApprove: function (data: any, actions: any) {
-            // Capture the funds from the transaction
-            return actions.order.capture().then(function () {
-              alert('Transaction complete! Thank you 💙')
-              addCoins(coins.value)
-            })
-          }
-        })
-        .render('#paypal-buttons')
+                ]
+              })
+            },
+            onApprove: function (data: any, actions: any) {
+              // Capture the funds from the transaction
+              return actions.order.capture().then(function () {
+                alert('Transaction complete! Thank you 💙')
+                addCoins(coins.value)
+              })
+            }
+          })
+          .render('#paypal-buttons')
+      }
     } catch (error) {
       console.error(error)
     }
@@ -116,6 +117,7 @@ async function buyCoins(coinPack: CoinPack) {
 #paypal-container {
   display: flex;
   justify-content: center;
+  margin: 2rem 0;
 }
 #paypal-buttons {
   width: 60%;

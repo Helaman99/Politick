@@ -6,7 +6,6 @@ import { SignInService } from '@/scripts/SignInService'
 import './assets/css/main.css'
 import '@mdi/font/css/materialdesignicons.css'
 import Axios from 'axios'
-import LoadScript from 'vue-plugin-load-script'
 
 // Vuetify
 import 'vuetify/styles'
@@ -38,4 +37,4 @@ const app = createApp(App)
 const signInService = reactive(SignInService.instance)
 app.provide('SignInService', signInService)
 
-app.use(router).use(vuetify).use(LoadScript).mount('#app')
+app.use(router).use(vuetify).mount('#app')
