@@ -4,7 +4,11 @@
 
 * reCaptcha for SignUp page (needs a custom domain first so Politick can be registered with Google Search Console)
 
-* Add "Kudos" system
+* Verify ALL purchases on the backend (avatars and word packs)
+
+* More avatars and avatar types (common, rare, epic, and legendary)
+
+* Mystery boxes (maybe) (coin mystery box??)
 
 * Make existing theme more colorful
 
