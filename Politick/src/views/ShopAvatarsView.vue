@@ -57,9 +57,9 @@
           <img :src="Axios.defaults.baseURL + '/Shop/Avatar' + selectedAvatar" />
         </div>
         <div class="prompt-right">
-          <p>Are you sure you wish to buy this premium avatar for 20 coins?</p>
+          <p>Are you sure you wish to buy this premium avatar for 25 coins?</p>
           <v-card-actions>
-            <v-btn @click="attemptPurchase(20)">Yes</v-btn>
+            <v-btn @click="attemptPurchase(25)">Yes</v-btn>
             <v-btn @click="premiumPrompt = !premiumPrompt">No</v-btn>
           </v-card-actions>
         </div>
@@ -74,21 +74,23 @@
         >
       </v-card>
     </v-dialog>
-    
+
     <v-dialog class="confirmation" v-model="failed" width="fit-content">
       <v-card>
         <v-card-title>Huh, something went wrong...</v-card-title>
-        <v-card-text>If this issue persists, please contact us at politickgame@protonmail.com</v-card-text>
+        <v-card-text
+          >If this issue persists, please contact us at politickgame@protonmail.com</v-card-text
+        >
       </v-card>
     </v-dialog>
 
     <v-dialog class="confirmation" v-model="notEnoughCoins" width="fit-content">
       <v-card>
         <v-card-title>
-          <span style="color:red;">You need more coins to buy this!</span>
+          <span style="color: red">You need more coins to buy this!</span>
         </v-card-title>
         <v-card-actions>
-          <v-btn @click="notEnoughCoins=!notEnoughCoins">OK</v-btn>
+          <v-btn @click="notEnoughCoins = !notEnoughCoins">OK</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -133,7 +135,7 @@ function attemptPurchase(amount: number) {
         success.value = false
       }, 3000)
     } else failed.value = true
-  }else notEnoughCoins.value = true
+  } else notEnoughCoins.value = true
 }
 </script>
 
