@@ -68,6 +68,8 @@ builder.Services.AddSwaggerGen(
 builder.Services.AddSignalR().AddHubOptions<ChatHub>(options =>
 {
     options.EnableDetailedErrors = true;
+    options.ClientTimeoutInterval = TimeSpan.FromMinutes(2);
+    options.KeepAliveInterval = TimeSpan.FromMinutes(1);
 });
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");

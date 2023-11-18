@@ -16,11 +16,11 @@
             </div>
           </template>
 
-          <template v-slot:append>
+          <!-- <template v-slot:append>
             <v-app-bar-nav-icon @click.stop="settings = !settings" class="settings">
               <v-icon size="x-large">mdi-cog-outline</v-icon>
             </v-app-bar-nav-icon>
-          </template>
+          </template> -->
         </v-app-bar>
 
         <v-navigation-drawer style="padding-top: 0.5rem" v-model="navigation" elevation="1">
@@ -62,7 +62,7 @@
           </v-list-item-group>
         </v-navigation-drawer>
 
-        <v-navigation-drawer
+        <!-- <v-navigation-drawer
           location="right"
           style="padding-top: 0.5rem"
           v-model="settings"
@@ -77,7 +77,7 @@
               </div>
             </v-list-item>
           </v-list-item-group>
-        </v-navigation-drawer>
+        </v-navigation-drawer> -->
       </v-layout>
     </v-card>
   </div>
@@ -91,19 +91,19 @@ import router from '@/router'
 import Axios from 'axios'
 
 const navigation = ref(false)
-const settings = ref(false)
+// const settings = ref(false)
 
 function logOut() {
   SignInService.instance.signOut()
   router.push('/login')
 }
 
-function setLight() {
-  if (player.value?.theme != 'light') changeTheme('light')
-}
-function setDark() {
-  if (player.value?.theme != 'dark') changeTheme('dark')
-}
+// function setLight() {
+//   if (player.value?.theme != 'light') changeTheme('light')
+// }
+// function setDark() {
+//   if (player.value?.theme != 'dark') changeTheme('dark')
+// }
 </script>
 
 <style scoped>

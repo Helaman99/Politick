@@ -162,4 +162,7 @@ public class ChatService
             return "-1";
         }
     }
+
+    public int GetRoomsInProgress()
+        => RoomsInProgress.Count;
 }

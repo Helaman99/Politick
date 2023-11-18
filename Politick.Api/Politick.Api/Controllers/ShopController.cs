@@ -2,6 +2,7 @@
 using Politick.Api.Services;
 using Politick.Api.Data;
 using Microsoft.AspNetCore.Authorization;
+using Politick.Api.Models;
 
 namespace Politick.Api.Controllers;
 
@@ -79,4 +80,14 @@ public class ShopController : ControllerBase
     [Authorize]
     public string GetRandomWord(string boxName)
         => BoxService.WordMysteryBoxes.Single(b => b.Name == boxName).GetRandomItem();
+
+    [HttpGet("CoinPacks")]
+    [Authorize]
+    public List<CoinPack> GetCoinPacks()
+        => ShopService.CoinPacks;
+
+    [HttpPost("VerifyCoinPack")]
+    [Authorize]
+    public bool VerifyCoinPack(CoinPack coinPack)
+        => _shopService.VerifyCoinPack(coinPack);
 }

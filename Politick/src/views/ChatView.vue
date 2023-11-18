@@ -233,6 +233,7 @@ function leave() {
     }
   }
   connectionRef.value?.invoke('LeaveRoom', room.value)
+  connectionRef.value?.stop()
   router.push('/dashboard/topics')
 }
 const opponentLeft = ref(false)

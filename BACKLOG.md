@@ -1,12 +1,14 @@
 # Backlog
 
-* Fix timeout issue when looking for opponent (still a thing? Need to test...)
+* Fix logic for minutes vs coins rewarded (people getting all five coins from first 5 minutes vs last 5 minutes) (may not do this)
 
-* "Not Enough Coins" dialog needed in some places.
+* reCaptcha for SignUp page (needs a custom domain first so Politick can be registered with Google Search Console)
 
-* Add "Kudos" system
+* Verify ALL purchases on the backend (avatars and word packs)
 
-* Update title shop to not have problems with duplicate words (first word and second word)
+* More avatars and avatar types (common, rare, epic, and legendary)
+
+* Mystery boxes (maybe) (coin mystery box??)
 
 * Make existing theme more colorful
 

@@ -46,10 +46,11 @@
         By clicking this checkbox, you agree to our
         <router-link to="/terms-of-service" target="_blank">Terms of Service</router-link>
         and
-        <router-link to="/privacy-policy" target="_blank">Privacy Policy</router-link>.
+        <router-link to="/privacy-policy" target="_blank">Privacy Policy</router-link>. (Updated on
+        11/18/2023)
       </label>
     </div>
-    <v-btn @click="signUp()">Sign Up</v-btn>
+    <v-btn :loading="loading" @click="signUp()">Sign Up</v-btn>
     <br /><br />
     <div id="error-message"></div>
 
@@ -69,8 +70,11 @@ const password2 = ref('')
 const question = ref('')
 const answer = ref('')
 const agreed = ref(false)
+const loading = ref(false)
 
-function signUp() {
+async function signUp() {
+  loading.value = true
+
   let error_div = document.getElementById('error-message') as HTMLElement
   if (email.value.trim().length === 0) error_div.innerHTML = '<p>Please enter your email</p>'
   else if (password.value.trim().length === 0)
@@ -85,7 +89,14 @@ function signUp() {
   else if (!agreed.value)
     error_div.innerHTML = '<p>Please accept the terms of service and privacy policy</p>'
   else if (password.value === password2.value && agreed.value)
-    SignInService.instance.createAccount(email.value, password.value, question.value, answer.value)
+    await SignInService.instance.createAccount(
+      email.value,
+      password.value,
+      question.value,
+      answer.value
+    )
+
+  loading.value = false
 }
 </script>
 

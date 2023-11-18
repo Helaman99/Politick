@@ -47,6 +47,8 @@ export function startConnection(): boolean {
     .withUrl(Axios.defaults.baseURL + '/ChatHub')
     .build()
 
+  connectionRef.value.serverTimeoutInMilliseconds = 120000
+
   connectionRef.value
     .start()
     .then(() => {

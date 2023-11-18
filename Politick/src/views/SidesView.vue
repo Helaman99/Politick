@@ -20,7 +20,7 @@
           can to filter out inappropriate or offensive language. However, we are not perfect and
           can't catch everything. By participating in this game, you may encounter things that are
           offensive. If this happens,
-          <i>please</i> let us know at si-support@protonmail.com.
+          <i>please</i> let us know at politickgame@protonmail.com.
         </v-card-text>
         <v-card-actions>
           <v-btn elevation="1" @click="FindRoom()">I Understand</v-btn>
@@ -77,8 +77,10 @@ function FindRoom() {
 }
 
 function back() {
-  connectionRef.value?.invoke('LeaveRoom', room.value)
-  loading.value = false
+  connectionRef.value?.invoke('LeaveRoom', room.value).then(() => {
+    connectionRef.value?.stop()
+    loading.value = false
+  })
 }
 </script>
 

@@ -46,4 +46,8 @@ public class ChatController : ControllerBase
     [HttpPost("EndGame")]
     public void EndGame(string chatRoomId)
         => _chatService.EndGame(chatRoomId);
+
+    [HttpGet("DebatesInProgress")]
+    public int GetDebatesInProgress()
+        => _chatService.GetRoomsInProgress();
 }

@@ -108,7 +108,7 @@
       <h4>Contact Information</h4>
       <p>
         If you have any questions or concerns about these terms and conditions, please contact us at
-        si-support@protonmail.com
+        politickgame@protonmail.com
       </p>
     </div>
   </div>
@@ -138,5 +138,22 @@ ul {
 }
 .logo img {
   width: 60%;
+}
+
+@media (max-width: 840px) {
+  .terms-of-service {
+    width: 90%;
+  }
+}
+@media (max-width: 650px) {
+  .terms-of-service {
+    width: 100%;
+  }
+  .content {
+    padding: 0;
+  }
+  .logo img {
+    width: 100%;
+  }
 }
 </style>
