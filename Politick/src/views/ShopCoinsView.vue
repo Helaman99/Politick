@@ -43,11 +43,6 @@ import { addCoins } from '@/scripts/playerController'
 import type { CoinPack } from '@/scripts/shopController'
 
 let paypal: any
-var process: {
-  env: {
-    [key: string]: string | undefined
-  }
-}
 
 const ID = ref('ARxpPnUd2JuVWgDpMn9mRj5-OgA_x6ftNn4SDj9_RirVF6MVWsDWGqRYHOJii7fF6rvwc-hv2Z2VNPCy')
 const coins = ref(0)
@@ -64,11 +59,7 @@ async function buyCoins(coinPack: CoinPack) {
     if (paypalContainer != null) paypalContainer.innerHTML = ''
 
     try {
-      await loadScript(
-        'https://www.paypal.com/sdk/js?client-id=' +
-          ID.value +
-          '&currency=USD'
-      )
+      await loadScript('https://www.paypal.com/sdk/js?client-id=' + ID.value + '&currency=USD')
 
       // Render PayPal button
       paypal
