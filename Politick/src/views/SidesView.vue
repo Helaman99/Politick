@@ -106,6 +106,9 @@ function back() {
 .v-dialog {
   width: 50%;
 }
+.v-dialog .v-card {
+  place-self: center;
+}
 #loading-dialog {
   width: 25%;
   align-items: center;

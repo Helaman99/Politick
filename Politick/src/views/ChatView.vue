@@ -308,10 +308,16 @@ body {
   .v-dialog {
     width: 80%;
   }
+  .versus-dialog {
+    width: 100%;
+  }
 }
 @media (max-width: 360px) {
   .v-dialog {
     width: 90%;
+  }
+  .versus-dialog {
+    width: 100%;
   }
 }
 </style>

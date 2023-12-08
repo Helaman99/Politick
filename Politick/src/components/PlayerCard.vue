@@ -20,4 +20,8 @@ img {
 .playerCard {
   padding: 1rem 0;
 }
+
+.v-card .v-card-title {
+  white-space: pre-wrap;
+}
 </style>

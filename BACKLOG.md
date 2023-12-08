@@ -1,6 +1,12 @@
 # Backlog
 
-* Fix logic for minutes vs coins rewarded (people getting all five coins from first 5 minutes vs last 5 minutes) (may not do this)
+* 
+
+* My little brothers phone has weird text font issues (showed up as a cursive font)
+
+* Little brother also made it into a chatroom after leaving ours... I don't think anyone else was online. He clicked "ok" to leave our chatroom after I left, but then got put back into a chatroom.
+
+* Put topic and side at the top of chat room.
 
 * reCaptcha for SignUp page (needs a custom domain first so Politick can be registered with Google Search Console)
 
@@ -13,6 +19,10 @@
 * Make existing theme more colorful
 
 * a dark theme
+
+* Make chatroom scroll down as far as the height of the new message
+
+* Maybe display a small player card below the most recent text (or some other way of displaying the other card)
 
 * set the theme of the app to the player's preference when they login
 

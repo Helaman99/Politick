@@ -78,7 +78,7 @@ p {
 
 @media (max-width: 600px) {
   .rules {
-    width: 85%;
+    width: 100%;
   }
 }
 </style>

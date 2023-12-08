@@ -23,4 +23,16 @@
   width: 30%;
   height: 500px;
 }
+
+@media (max-width: 870px) {
+  .shop-choices {
+    flex-direction: column;
+    place-items: center;
+  }
+  .shop-choice {
+    width: 80%;
+    height: 7.5rem;
+    margin-top: 1rem;
+  }
+}
 </style>

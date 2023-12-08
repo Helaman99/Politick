@@ -127,4 +127,16 @@ async function buyCoins(coinPack: CoinPack) {
 #paypal-buttons {
   width: 60%;
 }
+
+@media (max-width: 870px) {
+  #coin-buttons {
+    flex-direction: column;
+    place-items: center;
+  }
+  .coin-button {
+    width: 85%;
+    height: 3rem;
+    margin-bottom: 1rem;
+  }
+}
 </style>

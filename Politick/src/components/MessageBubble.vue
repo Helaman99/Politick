@@ -31,4 +31,10 @@ export default {
   align-self: flex-end;
   text-align: start;
 }
+
+@media (max-width: 870px) {
+  .v-card {
+    max-width: 80%;
+  }
+}
 </style>
