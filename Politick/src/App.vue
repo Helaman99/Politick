@@ -3,6 +3,9 @@ import { RouterView } from 'vue-router'
 </script>
 
 <template>
+  <div id="background">
+
+  </div>
   <center>
     <Transition name="fade">
       <RouterView />
@@ -14,6 +17,12 @@ import { RouterView } from 'vue-router'
 header {
   line-height: 1.5;
   max-height: 100vh;
+}
+
+#background {
+  position: fixed;
+  height: 1000px;
+  background: linear-gradient(white, skyblue);
 }
 
 .logo {

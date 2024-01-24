@@ -75,6 +75,7 @@ const loading = ref(false)
 async function signUp() {
   loading.value = true
 
+  let response = null
   let error_div = document.getElementById('error-message') as HTMLElement
   if (email.value.trim().length === 0) error_div.innerHTML = '<p>Please enter your email</p>'
   else if (password.value.trim().length === 0)
@@ -89,14 +90,17 @@ async function signUp() {
   else if (!agreed.value)
     error_div.innerHTML = '<p>Please accept the terms of service and privacy policy</p>'
   else if (password.value === password2.value && agreed.value)
-    await SignInService.instance.createAccount(
+    response = SignInService.instance.createAccount(
       email.value,
       password.value,
       question.value,
       answer.value
     )
 
-  loading.value = false
+  if (response != null || 
+      (response == null && error_div.innerHTML != '')) {
+    loading.value = false
+  }
 }
 </script>
 

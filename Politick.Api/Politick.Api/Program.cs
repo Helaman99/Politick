@@ -26,7 +26,6 @@ builder.Services.AddCors(options =>
                                              "https://victorious-flower-0ddb7221e.3.azurestaticapps.net",
                                              "http://localhost:5173")
                                 .AllowAnyHeader()
-                                .AllowAnyHeader()
                                 .AllowCredentials();
                       });
 });

@@ -1,9 +1,5 @@
 # Backlog
 
-* 
-
-* My little brothers phone has weird text font issues (showed up as a cursive font)
-
 * Little brother also made it into a chatroom after leaving ours... I don't think anyone else was online. He clicked "ok" to leave our chatroom after I left, but then got put back into a chatroom.
 
 * Put topic and side at the top of chat room.
@@ -17,8 +13,6 @@
 * Mystery boxes (maybe) (coin mystery box??)
 
 * Make existing theme more colorful
-
-* a dark theme
 
 * Make chatroom scroll down as far as the height of the new message
 

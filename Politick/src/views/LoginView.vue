@@ -33,8 +33,22 @@ const loading = ref(false)
 
 async function login() {
   loading.value = true
-  await SignInService.instance.signIn(email.value, password.value)
-  loading.value = false
+
+  let response = null
+  let error_div = document.getElementById('error-message') as HTMLElement
+  if (email.value.trim().length === 0) {
+    error_div.innerHTML = '<p>Please enter your email</p>'
+  }
+  else if (password.value.trim().length === 0) {
+    error_div.innerHTML = '<p>Please enter your password</p>'
+  }
+  else {
+    response = SignInService.instance.signIn(email.value, password.value)
+  }
+  if (response != null || 
+      (response == null && error_div.innerHTML != '')) {
+    loading.value = false
+  }
 }
 </script>
 
