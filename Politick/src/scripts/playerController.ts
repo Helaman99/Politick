@@ -4,8 +4,6 @@ import Axios from 'axios'
 import { SignInService } from './SignInService'
 import router from '@/router'
 
-// Eventually I want to replace this with a service, similar to the `SignInService`
-
 interface PlayerCard {
   Avatar: string
   Title: string
